@@ -12,12 +12,15 @@ import { loginSchema, type LoginFormValues } from "@/schemas/auth.schemas";
 import { useLogin } from "@/hooks/useAuth";
 import { ROUTES } from "@/constants/routes";
 import axios from "axios";
+import { useState } from "react";
 
 // Presentation + form-wiring only. Navigation-on-success and error mapping
 // live in the mutation hook / page, not here.
 export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   const { t } = useTranslation();
   const login = useLogin();
+  const [apiErrors, setApiErrors] = useState([])
+
   const {
     register,
     handleSubmit,
@@ -27,12 +30,13 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
     defaultValues: { rememberMe: false },
   });
 
+
   const onSubmit = (values: LoginFormValues) => {
     login.mutate(values, {
       onSuccess,
       onError: (error) => {
         if (axios.isAxiosError(error)) {
-          console.log(error.response?.data);
+          setApiErrors(error.response?.data.errors);
         } else {
           console.log(error);
         }
@@ -59,8 +63,12 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
         <Link to={ROUTES.FORGOT_PASSWORD}>{t("auth.login.forgotPassword")}</Link>
       </div>
 
-      {login.isError ? <Alert variant="error">{t("auth.login.genericError")}</Alert> : null}
-
+      {login.isError &&
+        apiErrors?.slice(1)?.map((ele, index) => (
+          <Alert key={index} variant="error">
+            {ele}
+          </Alert>
+        ))}
       <Button type="submit" fullWidth isLoading={login.isPending}>
         {t("auth.login.submit")}
       </Button>

@@ -33,6 +33,7 @@ export function RegisterForm() {
   const resend = useResendVerification();
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
+  const [apiErrors, setApiErrors] = useState([])
 
   const {
     register,
@@ -61,7 +62,7 @@ export function RegisterForm() {
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
-          console.log(error.response?.data);
+          setApiErrors(error.response?.data.errors);
         } else {
           console.log(error);
         }
@@ -143,7 +144,11 @@ export function RegisterForm() {
             <PasswordStrengthMeter score={score} value={passwordValue} />
           </div>
 
-          {register_.isError ? <Alert variant="error">{t("auth.register.genericError")}</Alert> : null}
+          {register_.isError && apiErrors?.slice(1)?.map((ele, index) => (
+            <Alert key={index} variant="error">
+              {ele}
+            </Alert>
+          ))}
 
           <Button type="submit" fullWidth disabled={!isValid} isLoading={register_.isPending}>
             {t("auth.register.submit")}

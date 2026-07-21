@@ -10,6 +10,8 @@ import { Link } from "@/components/common/Link";
 import { forgotPasswordSchema, type ForgotPasswordFormValues } from "@/schemas/auth.schemas";
 import { useForgotPassword } from "@/hooks/useAuth";
 import { ROUTES } from "@/constants/routes";
+import axios from "axios";
+import { Alert } from "@/components/common/Alert";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 
@@ -24,6 +26,7 @@ export function ForgotPasswordForm() {
   const forgotPassword = useForgotPassword();
   const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const [cooldown, setCooldown] = useState(0);
+  const [apiErrors, setApiErrors] = useState([])
 
   const {
     register,
@@ -38,11 +41,19 @@ export function ForgotPasswordForm() {
   }, [cooldown]);
 
   const submit = (values: ForgotPasswordFormValues) => {
+    console.log(values)
     forgotPassword.mutate(values, {
       onSuccess: () => {
         setSubmittedEmail(values.email);
         setCooldown(RESEND_COOLDOWN_SECONDS);
       },
+      onError: (error) => {
+        if (axios.isAxiosError(error)) {
+          setApiErrors(error.response?.data.errors);
+        } else {
+          console.log(error);
+        }
+      }
     });
   };
 
@@ -69,7 +80,7 @@ export function ForgotPasswordForm() {
             <Button
               variant="secondary"
               disabled={cooldown > 0}
-              onClick={() => submit({ email: submittedEmail })}
+            onClick={() => submit({ email: submittedEmail })}
             >
               {cooldown > 0
                 ? t("auth.forgotPassword.resendIn", { seconds: cooldown })
@@ -95,7 +106,13 @@ export function ForgotPasswordForm() {
             error={errors.email && t(errors.email.message as string)}
             {...register("email")}
           />
-          <Button type="submit" fullWidth isLoading={forgotPassword.isPending}>
+          {forgotPassword.isError &&
+            apiErrors?.slice(1)?.map((ele, index) => (
+              <Alert key={index} variant="error">
+                {ele}
+              </Alert>
+            ))}
+          <Button type="submit" onClick={() => submit({ email: submittedEmail || "" })} fullWidth isLoading={forgotPassword.isPending}>
             {t("auth.forgotPassword.submit")}
           </Button>
           <div className="text-center">

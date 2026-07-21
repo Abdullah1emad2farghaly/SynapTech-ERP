@@ -23,7 +23,7 @@ export function Alert({ variant, children, onDismiss }: AlertProps) {
       role={isSevere ? "alert" : "status"}
       className={`flex items-start gap-2 rounded-md px-3.5 py-3 text-[0.8125rem] ${classes}`}
     >
-      <Icon className="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true" />
+      <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
       <span className="flex-1">{children}</span>
       {onDismiss ? (
         <button

@@ -29,9 +29,6 @@ export default function EmailConfirmationPage() {
   const code = searchParams.get("code");
   const currentEmail: string = window.localStorage.getItem("curentEmail") || "";
 
-  if(!currentEmail)
-    Navigate({to: "/login"})
-
   useEffect(() => {
     if (cooldown <= 0) return;
     const id = setTimeout(() => setCooldown((s) => s - 1), 1000);
