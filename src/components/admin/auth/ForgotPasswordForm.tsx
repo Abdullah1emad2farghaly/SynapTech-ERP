@@ -41,7 +41,6 @@ export function ForgotPasswordForm() {
   }, [cooldown]);
 
   const submit = (values: ForgotPasswordFormValues) => {
-    console.log(values)
     forgotPassword.mutate(values, {
       onSuccess: () => {
         setSubmittedEmail(values.email);
