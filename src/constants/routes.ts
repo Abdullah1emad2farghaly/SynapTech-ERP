@@ -3,7 +3,7 @@ export const ROUTES = {
   REGISTER: "/register",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
-  EMAIL_CONFIRMATION: "/emailConfirmation",
+  EMAIL_CONFIRMATION: "/auth/emailConfirmation",
   DASHBOARD: "/dashboard",
   HR_DASHBOARD: "/hr",
   HR_EMPLOYEES: "/hr/employees",

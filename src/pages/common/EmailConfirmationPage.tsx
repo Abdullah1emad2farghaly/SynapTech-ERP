@@ -32,6 +32,7 @@ export default function EmailConfirmationPage() {
 
   const userId = searchParams.get("userId");
   const code = searchParams.get("code");
+  
   const storedUser = localStorage.getItem("currentUser");
   const currentUser: User | null = storedUser
     ? JSON.parse(storedUser)
