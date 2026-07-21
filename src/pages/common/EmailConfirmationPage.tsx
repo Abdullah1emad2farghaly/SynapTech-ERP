@@ -15,6 +15,11 @@ import { Button } from "@/components/common/Button";
 // Reads ?token= from the verification link sent on Register, confirms it
 // against the backend, then shows one of three states in place — no
 // separate loading page, no flash of the wrong state.
+interface User {
+  userId: string;
+  email: string;
+  message: string;
+}
 
 const RESEND_COOLDOWN_SECONDS = 30;
 export default function EmailConfirmationPage() {
@@ -27,8 +32,12 @@ export default function EmailConfirmationPage() {
 
   const userId = searchParams.get("userId");
   const code = searchParams.get("code");
-  const currentEmail: string = window.localStorage.getItem("curentEmail") || "";
+  const storedUser = localStorage.getItem("currentUser");
+  const currentUser: User | null = storedUser
+    ? JSON.parse(storedUser)
+    : null;
 
+  console.log(currentUser?.email)
   useEffect(() => {
     if (cooldown <= 0) return;
     const id = setTimeout(() => setCooldown((s) => s - 1), 1000);
@@ -78,7 +87,7 @@ export default function EmailConfirmationPage() {
                   disabled={cooldown > 0}
                   isLoading={resend.isPending}
                   onClick={() => {
-                    resend.mutate(currentEmail, {
+                    resend.mutate(currentUser?.email || "", {
                       onError: () => setState("expired")
                     });
                     setCooldown(RESEND_COOLDOWN_SECONDS);

@@ -15,7 +15,7 @@ export const authApi = {
     apiClient.post<AuthSession>("/Auth/login", payload).then((res) => res.data),
 
   register: (payload: RegisterPayload) =>
-    apiClient.post<{ success: true }>("/Auth/register", payload).then((res) => res.data),
+    apiClient.post<{ userId: string, email: string, message: string }>("/Auth/register", payload).then((res) => res.data),
 
   resendVerificationEmail: (email: string) =>
     apiClient.post<{ success: true }>("Auth/resend-confirmation-email", { email }).then((res) => res.data),

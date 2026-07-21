@@ -56,7 +56,8 @@ export function RegisterForm() {
 
   const submit = (values: RegisterFormValues) => {
     register_.mutate(values, {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        window.localStorage.setItem('currentUser', JSON.stringify(response))
         setSubmittedEmail(values.email);
         setCooldown(RESEND_COOLDOWN_SECONDS);
         
