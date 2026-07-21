@@ -1,0 +1,99 @@
+{
+  "auth": {
+    "tagline": "Intelligent ERP for modern teams.",
+    "login": {
+      "heading": "Welcome back",
+      "subtitle": "Sign in to your Synaptech workspace",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "genericError": "We couldn't sign you in. Check your email and password and try again.",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    },
+    "register": {
+      "heading": "Create your workspace",
+      "subtitle": "Set up your Synaptech ERP account",
+      "fullNameLabel": "Full name",
+      "companyNameLabel": "Company name",
+      "emailLabel": "Work email",
+      "passwordLabel": "Password",
+      "submit": "Create account",
+      "genericError": "We couldn't create your account. Please try again.",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "backToLogin": "Back to login",
+      "successHeading": "Verify your email",
+      "successBody": "We sent a verification link to {{email}}"
+    },
+    "emailConfirmation": {
+      "heading": "Confirming your email",
+      "subtitle": "Hang tight while we verify your account.",
+      "confirming": "Verifying your link...",
+      "successHeading": "Email confirmed",
+      "successBody": "Your email has been verified. You can now sign in.",
+      "continueToLogin": "Continue to login",
+      "expiredHeading": "This link has expired",
+      "expiredBody": "Verification links are only valid for a limited time.",
+      "resend": "Request a new link",
+      "backToLogin": "Back to login"
+    },
+    "forgotPassword": {
+      "heading": "Reset your password",
+      "subtitle": "Enter the email on your account and we'll send a reset link.",
+      "emailLabel": "Email",
+      "submit": "Send reset link",
+      "backToLogin": "Back to login",
+      "successHeading": "Check your inbox",
+      "successBody": "We sent a reset link to {{email}}",
+      "resend": "Resend",
+      "resendIn": "Resend in {{seconds}}s"
+    },
+    "resetPassword": {
+      "heading": "Set a new password",
+      "subtitle": "Choose something you haven't used before.",
+      "passwordLabel": "New password",
+      "confirmPasswordLabel": "Confirm password",
+      "submit": "Reset password",
+      "successHeading": "Password updated",
+      "successBody": "Redirecting you to login in {{seconds}}s",
+      "continueToLogin": "Continue to login",
+      "expiredHeading": "This link has expired",
+      "expiredBody": "Reset links are only valid for a limited time.",
+      "requestNewLink": "Request a new link",
+      "strength": { "weak": "Weak", "fair": "Fair", "good": "Good", "strong": "Strong" },
+      "requirements": {
+        "minLength": "At least 8 characters",
+        "hasUpperLower": "Upper and lowercase letters",
+        "hasNumber": "At least one number",
+        "hasSymbol": "At least one symbol"
+      }
+    }
+  },
+  "validation": {
+    "emailRequired": "Enter your email",
+    "emailInvalid": "Enter a valid email address",
+    "passwordRequired": "Enter your password",
+    "confirmPasswordRequired": "Confirm your password",
+    "passwordsDoNotMatch": "Passwords don't match",
+    "fullNameRequired": "Enter your full name",
+    "fullNameMinLength": "Enter at least 2 characters",
+    "companyNameRequired": "Enter your company name",
+    "passwordMinLength": "Use at least 8 characters",
+    "passwordLowercase": "Add a lowercase letter",
+    "passwordUppercase": "Add an uppercase letter",
+    "passwordNumber": "Add a number",
+    "passwordSymbol": "Add a symbol"
+  },
+  "common": {
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "copyright": "© {{year}} Synaptech"
+  }
+}

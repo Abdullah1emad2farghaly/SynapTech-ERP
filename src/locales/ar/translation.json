@@ -1,0 +1,99 @@
+{
+  "auth": {
+    "tagline": "نظام تخطيط موارد ذكي للفرق الحديثة.",
+    "login": {
+      "heading": "مرحبًا بعودتك",
+      "subtitle": "سجّل الدخول إلى مساحة عمل Synaptech",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "rememberMe": "تذكرني",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "submit": "تسجيل الدخول",
+      "genericError": "تعذّر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور وحاول مرة أخرى.",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب"
+    },
+    "register": {
+      "heading": "إنشاء مساحة عملك",
+      "subtitle": "أنشئ حساب Synaptech ERP الخاص بك",
+      "fullNameLabel": "الاسم الكامل",
+      "companyNameLabel": "اسم الشركة",
+      "emailLabel": "البريد الإلكتروني للعمل",
+      "passwordLabel": "كلمة المرور",
+      "submit": "إنشاء حساب",
+      "genericError": "تعذّر إنشاء حسابك. حاول مرة أخرى.",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "successHeading": "تحقق من بريدك الإلكتروني",
+      "successBody": "أرسلنا رابط التحقق إلى {{email}}"
+    },
+    "emailConfirmation": {
+      "heading": "تأكيد بريدك الإلكتروني",
+      "subtitle": "يرجى الانتظار بينما نتحقق من حسابك.",
+      "confirming": "جارٍ التحقق من الرابط...",
+      "successHeading": "تم تأكيد البريد الإلكتروني",
+      "successBody": "تم التحقق من بريدك الإلكتروني. يمكنك الآن تسجيل الدخول.",
+      "continueToLogin": "المتابعة لتسجيل الدخول",
+      "expiredHeading": "انتهت صلاحية هذا الرابط",
+      "expiredBody": "روابط التحقق صالحة لفترة محدودة فقط.",
+      "resend": "طلب رابط جديد",
+      "backToLogin": "العودة لتسجيل الدخول"
+    },
+    "forgotPassword": {
+      "heading": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل البريد الإلكتروني المرتبط بحسابك وسنرسل لك رابط إعادة التعيين.",
+      "emailLabel": "البريد الإلكتروني",
+      "submit": "إرسال رابط إعادة التعيين",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "successHeading": "تحقق من بريدك الوارد",
+      "successBody": "أرسلنا رابط إعادة التعيين إلى {{email}}",
+      "resend": "إعادة الإرسال",
+      "resendIn": "إعادة الإرسال خلال {{seconds}} ثانية"
+    },
+    "resetPassword": {
+      "heading": "تعيين كلمة مرور جديدة",
+      "subtitle": "اختر كلمة مرور لم تستخدمها من قبل.",
+      "passwordLabel": "كلمة المرور الجديدة",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "submit": "إعادة تعيين كلمة المرور",
+      "successHeading": "تم تحديث كلمة المرور",
+      "successBody": "جارٍ تحويلك لتسجيل الدخول خلال {{seconds}} ثانية",
+      "continueToLogin": "المتابعة لتسجيل الدخول",
+      "expiredHeading": "انتهت صلاحية هذا الرابط",
+      "expiredBody": "روابط إعادة التعيين صالحة لفترة محدودة فقط.",
+      "requestNewLink": "طلب رابط جديد",
+      "strength": { "weak": "ضعيفة", "fair": "مقبولة", "good": "جيدة", "strong": "قوية" },
+      "requirements": {
+        "minLength": "8 أحرف على الأقل",
+        "hasUpperLower": "أحرف كبيرة وصغيرة",
+        "hasNumber": "رقم واحد على الأقل",
+        "hasSymbol": "رمز واحد على الأقل"
+      }
+    }
+  },
+  "validation": {
+    "emailRequired": "أدخل بريدك الإلكتروني",
+    "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+    "passwordRequired": "أدخل كلمة المرور",
+    "confirmPasswordRequired": "أكّد كلمة المرور",
+    "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
+    "fullNameRequired": "أدخل اسمك الكامل",
+    "fullNameMinLength": "أدخل حرفين على الأقل",
+    "companyNameRequired": "أدخل اسم شركتك",
+    "passwordMinLength": "استخدم 8 أحرف على الأقل",
+    "passwordLowercase": "أضف حرفًا صغيرًا",
+    "passwordUppercase": "أضف حرفًا كبيرًا",
+    "passwordNumber": "أضف رقمًا",
+    "passwordSymbol": "أضف رمزًا"
+  },
+  "common": {
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "light": "فاتح",
+    "dark": "داكن",
+    "copyright": "© {{year}} Synaptech"
+  }
+}

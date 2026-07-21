@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode tokens — see theme/tokens.ts for the typed source of truth */
+  --color-canvas: 246 247 251;
+  --color-panel: 255 255 255;
+  --color-sunken: 238 240 246;
+  --color-ink-primary: 18 22 42;
+  --color-ink-secondary: 86 92 121;
+  --color-ink-tertiary: 144 152 184;
+  --color-signal: 67 56 202;
+  --color-signal-hover: 55 48 163;
+  --color-synapse: 34 211 238;
+  --color-success: 15 157 104;
+  --color-error: 220 38 38;
+  --color-warning: 217 119 6;
+  --color-hairline: 226 228 240;
+}
+
+.dark {
+  --color-canvas: 10 14 26;
+  --color-panel: 16 21 42;
+  --color-sunken: 22 28 54;
+  --color-ink-primary: 242 243 249;
+  --color-ink-secondary: 168 174 201;
+  --color-ink-tertiary: 102 110 147;
+  --color-signal: 129 140 248;
+  --color-signal-hover: 165 176 251;
+  --color-synapse: 103 232 249;
+  --color-success: 52 211 153;
+  --color-error: 248 113 113;
+  --color-warning: 251 191 36;
+  --color-hairline: 35 42 74;
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+body {
+  @apply bg-canvas text-ink-primary font-body antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
