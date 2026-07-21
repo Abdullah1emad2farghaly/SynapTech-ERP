@@ -59,6 +59,7 @@ export function RegisterForm() {
       onSuccess: () => {
         setSubmittedEmail(values.email);
         setCooldown(RESEND_COOLDOWN_SECONDS);
+        
       },
       onError: (error) => {
         if (axios.isAxiosError(error)) {
