@@ -1,4 +1,5 @@
-import { Users, CalendarClock, CalendarCheck, Cake, FileWarning, Plus, PlayCircle, Send } from "lucide-react";
+import { Users, CalendarCheck, Cake, FileWarning, Plus, PlayCircle, Send } from "lucide-react";
+// CalendarClock
 import { KPICard } from "@/components/admin/hr/KPICard";
 import { StatusBadge } from "@/components/admin/hr/StatusBadge";
 import { Avatar } from "@/components/admin/hr/Avatar";
