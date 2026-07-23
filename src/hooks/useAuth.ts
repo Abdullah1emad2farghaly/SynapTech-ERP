@@ -7,7 +7,10 @@ export function useLogin() {
   const setSession = useAuthStore((s) => s.setSession);
   return useMutation({
     mutationFn: (credentials: LoginCredentials) => authApi.login(credentials),
-    onSuccess: (session) => {setSession(session); console.log(session)},
+    onSuccess: (session) => {
+      setSession(session); 
+      window.localStorage.setItem('currentUser', JSON.stringify(session))
+    },
   });
 }
 

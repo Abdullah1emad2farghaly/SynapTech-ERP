@@ -72,6 +72,7 @@
       }
     }
   },
+  
   "validation": {
     "emailRequired": "أدخل بريدك الإلكتروني",
     "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
@@ -87,7 +88,17 @@
     "passwordNumber": "أضف رقمًا",
     "passwordSymbol": "أضف رمزًا"
   },
+
   "common": {
+    "errors": {
+      "loadFailed": "تعذر تحميل البيانات",
+      "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    },
+
+    "actions": {
+      "retry": "إعادة المحاولة"
+    },
+
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "language": "اللغة",
@@ -95,5 +106,121 @@
     "light": "فاتح",
     "dark": "داكن",
     "copyright": "© {{year}} Synaptech"
+  },
+
+  
+  "users": {
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "toast": {
+      "activated": "تم تفعيل {{name}}",
+      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "deleted": "تم حذف {{name}}"
+    },
+    
+    "list": {
+      "title": "المستخدمون",
+      "subtitleCount": "مستخدم واحد",
+      "subtitleCount_other": "{{count}} مستخدم",
+      "createUser": "إنشاء مستخدم",
+      "columnVisibility": "إظهار/إخفاء الأعمدة",
+      "search": {
+        "placeholder": "ابحث بالاسم أو البريد الإلكتروني"
+      },
+      "filters": {
+        "branch": "الفرع",
+        "department": "القسم",
+        "role": "الدور",
+        "status": "الحالة",
+        "trigger": "الفلاتر",
+        "apply": "تطبيق"
+      },
+      "empty": {
+        "noUsers": "لا يوجد مستخدمون بعد",
+        "noMatches": "لا يوجد مستخدمون مطابقون لعوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      },
+      "column": {
+        "user": "المستخدم",
+        "branch": "الفرع",
+        "department": "القسم",
+        "roles": "الأدوار",
+        "status": "الحالة"
+      },
+      "rolesOverflow": "+{{count}}"
+    },
+    "actions": {
+      "moreActions": "المزيد من الإجراءات",
+      "assignRoles": "تعيين الأدوار",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف",
+      "edit": "تعديل",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "details": {
+      "sections": {
+        "basicInfo": "المعلومات الأساسية",
+        "contactInfo": "معلومات التواصل",
+        "organization": "الهيكل التنظيمي",
+        "roles": "الأدوار",
+        "status": "الحالة"
+      },
+      "emailNotEditable": "لا يمكن تغيير البريد الإلكتروني",
+      "notFound": "المستخدم غير موجود",
+      "backToList": "العودة إلى المستخدمين"
+    },
+    "create": {
+      "title": "إنشاء مستخدم",
+      "fields": {
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "branch": "الفرع",
+        "department": "القسم",
+        "roles": "الأدوار"
+      },
+      "submitting": "جارٍ الإنشاء...",
+      "success": "تم إنشاء المستخدم بنجاح",
+      "errors": {
+        "required": "هذا الحقل مطلوب",
+        "invalidEmail": "أدخل بريدًا إلكترونيًا صالحًا",
+        "emailTaken": "هذا البريد الإلكتروني مستخدم بالفعل"
+      }
+    },
+    "roles": {
+      "assignTitle": "تعيين الأدوار",
+      "searchPlaceholder": "ابحث عن الأدوار",
+      "selectedSummary": "تم تحديد دور واحد",
+      "selectedSummary_other": "تم تحديد {{count}} أدوار",
+      "saveDisabledEmpty": "اختر دورًا واحدًا على الأقل",
+      "saving": "جارٍ الحفظ..."
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "هل تريد إلغاء تفعيل هذا المستخدم؟",
+        "body": "سيفقد الوصول إلى النظام فورًا."
+      },
+      "activate": {
+        "title": "هل تريد تفعيل هذا المستخدم؟",
+        "body": "ستسمح بالوصول إلى النظام فورًا."
+      },
+      "delete": {
+        "title": "حذف المستخدم",
+        "body": "سيؤدي هذا إلى إزالة وصول {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "confirmLabel": "حذف المستخدم"
+      }
+    },
+    "bulk": {
+      "deactivateSelected": "إلغاء تفعيل المحدد",
+      "selectedCount": "تم تحديد {{count}}",
+      "deactivateSuccess": "تم إلغاء تفعيل مستخدم واحد",
+      "deactivateSuccess_other": "تم إلغاء تفعيل {{count}} مستخدمين",
+      "deactivateTitle": "إلغاء تفعيل مستخدم واحد؟",
+      "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
+    }
   }
+
 }

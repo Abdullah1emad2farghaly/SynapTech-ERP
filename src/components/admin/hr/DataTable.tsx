@@ -3,20 +3,20 @@ import type { ReactNode } from "react";
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 
-export interface DataTableColumn<T> {
+export interface DataTableColumn<User> {
   id: string;
   header: string;
-  accessor: (row: T) => ReactNode;
-  sortValue?: (row: T) => string | number;
+  accessor: (row: User) => ReactNode;
+  sortValue?: (row: User) => string | number;
 }
 
-interface DataTableProps<T> {
-  columns: DataTableColumn<T>[];
-  rows: T[];
-  getRowId: (row: T) => string;
+interface DataTableProps<User> {
+  columns: DataTableColumn<User>[];
+  rows: User[];
+  getRowId: (row: User) => string;
   isLoading?: boolean;
   emptyState?: ReactNode;
-  onRowClick?: (row: T) => void;
+  onRowClick?: (row: User) => void;
   pageSize?: number;
 }
 
@@ -24,7 +24,7 @@ interface DataTableProps<T> {
 // toolbars are intentionally left as a follow-up extension point (see the
 // `selectable` prop shape noted in the module design doc) — this covers the
 // read/browse case every HR list needs first.
-export function DataTable<T>({
+export function DataTable<User>({
   columns,
   rows,
   getRowId,
@@ -32,7 +32,7 @@ export function DataTable<T>({
   emptyState,
   onRowClick,
   pageSize = 10,
-}: DataTableProps<T>) {
+}: DataTableProps<User>) {
   const [sort, setSort] = useState<{ columnId: string; direction: "asc" | "desc" } | null>(null);
   const [page, setPage] = useState(1);
 

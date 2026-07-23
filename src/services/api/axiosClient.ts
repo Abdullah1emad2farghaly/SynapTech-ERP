@@ -9,7 +9,13 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().accessToken;
+  const storedUser = window.localStorage.getItem('currentUser');
+  let currentUser;
+
+  if(storedUser)
+    currentUser = JSON.parse(storedUser);
+
+  const token = currentUser.accessToken;
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -24,10 +30,52 @@ apiClient.interceptors.request.use((config) => {
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      useAuthStore.getState().clearSession();
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+
+      const storedUser = localStorage.getItem("currentUser");
+
+      if (!storedUser) {
+        useAuthStore.getState().clearSession();
+        return Promise.reject(error);
+      }
+
+      const currentUser = JSON.parse(storedUser);
+
+      try {
+        const response = await apiClient.post(
+          `/refresh-token`,
+          {
+            refreshToken: currentUser.refreshToken,
+          }
+        );
+
+        currentUser.accessToken = response.data.accessToken;
+
+        if (response.data.refreshToken) {
+          currentUser.refreshToken = response.data.refreshToken;
+        }
+
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify(currentUser)
+        );
+
+        originalRequest.headers.Authorization =
+          `Bearer ${currentUser.accessToken}`;
+
+        return apiClient(originalRequest);
+      } catch {
+        useAuthStore.getState().clearSession();
+      }
     }
+
     return Promise.reject(error);
   }
 );

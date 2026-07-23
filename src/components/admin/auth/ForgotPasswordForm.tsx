@@ -40,6 +40,7 @@ export function ForgotPasswordForm() {
     return () => clearTimeout(id);
   }, [cooldown]);
 
+  
   const submit = (values: ForgotPasswordFormValues) => {
     forgotPassword.mutate(values, {
       onSuccess: () => {
@@ -79,7 +80,7 @@ export function ForgotPasswordForm() {
             <Button
               variant="secondary"
               disabled={cooldown > 0}
-            onClick={() => submit({ email: submittedEmail })}
+              onClick={() => submit({ email: submittedEmail })}
             >
               {cooldown > 0
                 ? t("auth.forgotPassword.resendIn", { seconds: cooldown })
@@ -111,7 +112,7 @@ export function ForgotPasswordForm() {
                 {ele}
               </Alert>
             ))}
-          <Button type="submit" onClick={() => submit({ email: submittedEmail || "" })} fullWidth isLoading={forgotPassword.isPending}>
+          <Button type="submit" fullWidth isLoading={forgotPassword.isPending}>
             {t("auth.forgotPassword.submit")}
           </Button>
           <div className="text-center">

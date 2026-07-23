@@ -50,3 +50,79 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+
+:root {
+  /* Surfaces */
+  --canvas: #F6F7FB;
+  --panel: #FFFFFF;
+  --sunken: #EEF0F6;
+
+  /* Text */
+  --ink-primary: #12162A;
+  --ink-secondary: #565C79;
+  --ink-tertiary: #9098B8;
+
+  /* Brand */
+  --signal: #4338CA;
+  --signal-hover: #3730A3;
+  --synapse: #22D3EE;
+
+  /* Semantic */
+  --success: #0F9D68;
+  --error: #DC2626;
+  --warning: #D97706;
+
+  /* Structure */
+  --hairline: #E2E4F0;
+
+  /* Elevation (cards/panels only — nothing else casts a shadow) */
+  --elevation-1: 0 4px 16px rgba(18, 22, 42, 0.08);
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Motion timing */
+  --motion-control: 160ms ease-out;
+  --motion-transition: 280ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Typography */
+  --font-display: "Cabinet Grotesk", "General Sans", system-ui, sans-serif;
+  --font-body: "Inter", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+.dark {
+  --canvas: #0A0E1A;
+  --panel: #10152A;
+  --sunken: #161C36;
+
+  --ink-primary: #F2F3F9;
+  --ink-secondary: #A8AEC9;
+  --ink-tertiary: #666E93;
+
+  --signal: #818CF8;
+  --signal-hover: #A5B0FB;
+  --synapse: #67E8F9;
+
+  --success: #34D399;
+  --error: #F87171;
+  --warning: #FBBF24;
+
+  --hairline: #232A4A;
+
+  /* Slightly stronger shadow in dark mode so elevation still reads against a darker canvas */
+  --elevation-1: 0 4px 20px rgba(0, 0, 0, 0.35);
+}

@@ -24,7 +24,7 @@ export const authApi = {
     apiClient.post<{ success: true }>("/Auth/confirm-email", payload).then((res) => res.data),
 
   forgotPassword: (payload: ForgotPasswordPayload) => 
-    apiClient.post<{ success: true }>("/Auth/forgot-password", payload).then((res) => res.data),    
+    apiClient.post<{ email: string }>("/Auth/forgot-password", payload).then((res) => res.data),    
 
   verifyResetToken: (token: string) =>
     apiClient

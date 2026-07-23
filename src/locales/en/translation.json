@@ -1,4 +1,5 @@
 {
+
   "auth": {
     "tagline": "Intelligent ERP for modern teams.",
     "login": {
@@ -72,6 +73,7 @@
       }
     }
   },
+
   "validation": {
     "emailRequired": "Enter your email",
     "emailInvalid": "Enter a valid email address",
@@ -87,6 +89,7 @@
     "passwordNumber": "Add a number",
     "passwordSymbol": "Add a symbol"
   },
+
   "common": {
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -94,6 +97,128 @@
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
-    "copyright": "© {{year}} Synaptech"
+    "copyright": "© {{year}} Synaptech",
+    "errors": {
+      "loadFailed": "Couldn't load the data",
+      "actionFailed": "Something went wrong. Please try again."
+    },
+    "actions": {
+      "retry": "Retry"
+    }
+
+  },
+
+  "users": {
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "toast": {
+      "activated": "{{name}} activated",
+      "deactivated": "{{name}} deactivated",
+      "deleted": "{{name}} deleted"
+    },
+    "list": {
+      "columnVisibility": "Toggle columns",
+      "title": "Users",
+      "subtitleCount": "{{count}} user",
+      "subtitleCount_other": "{{count}} users",
+      "createUser": "Create User",
+      "search": {
+        "placeholder": "Search by name or email"
+      },
+      "filters": {
+        "branch": "Branch",
+        "department": "Department",
+        "role": "Role",
+        "status": "Status",
+        "trigger": "Filters",
+        "apply": "Apply"
+      },
+      "empty": {
+        "noUsers": "No users yet",
+        "noMatches": "No users match your filters",
+        "clearFilters": "Clear filters"
+      },
+      "column": {
+        "user": "User",
+        "branch": "Branch",
+        "department": "Department",
+        "roles": "Roles",
+        "status": "Status"
+      },
+      "rolesOverflow": "+{{count}}"
+    },
+    "actions": {
+      "moreActions": "More actions",
+      "assignRoles": "Assign Roles",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "details": {
+      "sections": {
+        "basicInfo": "Basic Information",
+        "contactInfo": "Contact Information",
+        "organization": "Organization",
+        "roles": "Roles",
+        "status": "Status"
+      },
+      "emailNotEditable": "Email cannot be changed",
+      "notFound": "User not found",
+      "backToList": "Back to Users"
+    },
+    "create": {
+      "submitting": "Creating...",
+      "title": "Create User",
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "branch": "Branch",
+        "department": "Department",
+        "roles": "Roles"
+      },
+      "success": "User created successfully",
+      "errors": {
+        "required": "This field is required",
+        "invalidEmail": "Enter a valid email address",
+        "emailTaken": "This email is already in use"
+      }
+    },
+    "roles": {
+      "assignTitle": "Assign Roles",
+      "searchPlaceholder": "Search roles",
+      "selectedSummary": "{{count}} role selected",
+      "selectedSummary_other": "{{count}} roles selected",
+      "saveDisabledEmpty": "Select at least one role",
+      "saving": "Saving..."
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "Deactivate this user?",
+        "body": "They'll immediately lose access to the system."
+      },
+      "activate": {
+        "title": "activate this user?",
+        "body": "They'll immediately allow access to the system."
+      },
+      "delete": {
+        "title": "Delete user",
+        "body": "This permanently removes {{name}}'s access. This can't be undone.",
+        "confirmLabel": "Delete User"
+      }
+    },
+    "bulk": {
+      "deactivateSelected": "Deactivate Selected",
+      "selectedCount": "{{count}} selected",
+      "deactivateSuccess": "{{count}} user deactivated",
+      "deactivateSuccess_other": "{{count}} users deactivated",
+      "deactivateTitle": "Deactivate {{count}} user?",
+      "deactivateTitle_other": "Deactivate {{count}} users?"
+    }
   }
+
 }
