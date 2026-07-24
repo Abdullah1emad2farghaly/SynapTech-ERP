@@ -1,5 +1,4 @@
 {
-
   "auth": {
     "tagline": "Intelligent ERP for modern teams.",
     "login": {
@@ -64,7 +63,12 @@
       "expiredHeading": "This link has expired",
       "expiredBody": "Reset links are only valid for a limited time.",
       "requestNewLink": "Request a new link",
-      "strength": { "weak": "Weak", "fair": "Fair", "good": "Good", "strong": "Strong" },
+      "strength": {
+        "weak": "Weak",
+        "fair": "Fair",
+        "good": "Good",
+        "strong": "Strong"
+      },
       "requirements": {
         "minLength": "At least 8 characters",
         "hasUpperLower": "Upper and lowercase letters",
@@ -73,7 +77,6 @@
       }
     }
   },
-
   "validation": {
     "emailRequired": "Enter your email",
     "emailInvalid": "Enter a valid email address",
@@ -89,7 +92,6 @@
     "passwordNumber": "Add a number",
     "passwordSymbol": "Add a symbol"
   },
-
   "common": {
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -105,9 +107,7 @@
     "actions": {
       "retry": "Retry"
     }
-
   },
-
   "users": {
     "status": {
       "active": "Active",
@@ -219,6 +219,100 @@
       "deactivateTitle": "Deactivate {{count}} user?",
       "deactivateTitle_other": "Deactivate {{count}} users?"
     }
+  },
+  "departments": {
+    "list": {
+      "title": "Departments",
+      "subtitleCount": "{{count}} department",
+      "subtitleCount_other": "{{count}} departments",
+      "createDepartment": "Create Department",
+      "search": {
+        "placeholder": "Search by department name"
+      },
+      "filters": {
+        "branch": "Branch",
+        "status": "Status"
+      },
+      "viewToggle": {
+        "tree": "Tree",
+        "flat": "Flat"
+      },
+      "empty": {
+        "noDepartments": "No departments yet",
+        "noMatches": "No departments match your filters",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "kpi": {
+      "total": "Total Departments",
+      "active": "Active Departments",
+      "inactive": "Inactive Departments",
+      "root": "Root Departments"
+    },
+    "column": {
+      "department": "Department",
+      "branch": "Branch",
+      "parentDepartment": "Parent Department",
+      "status": "Status"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "move": "Move",
+      "duplicate": "Duplicate",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "moreActions": "More actions"
+    },
+    "create": {
+      "title": "Create Department",
+      "editTitle": "Edit Department",
+      "fields": {
+        "name": "Department Name",
+        "branch": "Branch",
+        "parentDepartment": "Parent Department",
+        "parentDepartmentNone": "No parent (top-level)"
+      },
+      "errors": {
+        "required": "This field is required"
+      },
+      "submitting": "Saving...",
+      "success": "Department created successfully"
+    },
+    "move": {
+      "title": "Move Department",
+      "searchPlaceholder": "Search departments"
+    },
+    "duplicate": {
+      "copySuffix": "{{name}} (Copy)"
+    },
+    "details": {
+      "sections": {
+        "overview": "Overview",
+        "children": "Sub-Departments"
+      },
+      "noChildren": "No sub-departments"
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "Deactivate this department?",
+        "body": "It will no longer appear in active department pickers elsewhere in the product."
+      },
+      "delete": {
+        "title": "Delete department",
+        "body": "This permanently removes {{name}}. This can't be undone.",
+        "blockedHasChildren": "This department has sub-departments. Move or delete them first.",
+        "blockedHasUsers": "Users are still assigned to this department. Reassign them first."
+      }
+    },
+    "toast": {
+      "created": "{{name}} created",
+      "updated": "{{name}} updated",
+      "deactivated": "{{name}} deactivated",
+      "activated": "{{name}} activated",
+      "deleted": "{{name}} deleted",
+      "moved": "{{name}} moved"
+    }
   }
-
 }

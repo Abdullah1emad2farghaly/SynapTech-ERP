@@ -221,6 +221,103 @@
       "deactivateTitle": "إلغاء تفعيل مستخدم واحد؟",
       "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
     }
+  },
+  
+  "departments": {
+    "list": {
+      "title": "الأقسام",
+      "subtitleCount": "قسم واحد",
+      "subtitleCount_other": "{{count}} قسم",
+      "createDepartment": "إنشاء قسم",
+      "search": {
+        "placeholder": "ابحث باسم القسم"
+      },
+      "filters": {
+        "branch": "الفرع",
+        "status": "الحالة"
+      },
+      "viewToggle": {
+        "tree": "شجري",
+        "flat": "قائمة"
+      },
+      "empty": {
+        "noDepartments": "لا توجد أقسام بعد",
+        "noMatches": "لا توجد أقسام مطابقة لعوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      }
+    },
+    "kpi": {
+      "total": "إجمالي الأقسام",
+      "active": "الأقسام النشطة",
+      "inactive": "الأقسام غير النشطة",
+      "root": "الأقسام الرئيسية"
+    },
+    "column": {
+      "department": "القسم",
+      "branch": "الفرع",
+      "parentDepartment": "القسم الرئيسي",
+      "status": "الحالة"
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل",
+      "move": "نقل",
+      "duplicate": "تكرار",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف",
+      "moreActions": "المزيد من الإجراءات"
+    },
+    "create": {
+      "title": "إنشاء قسم",
+      "editTitle": "تعديل القسم",
+      "fields": {
+        "name": "اسم القسم",
+        "branch": "الفرع",
+        "parentDepartment": "القسم الرئيسي",
+        "parentDepartmentNone": "بدون قسم رئيسي (مستوى أعلى)"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "submitting": "جارٍ الحفظ...",
+      "success": "تم إنشاء القسم بنجاح"
+    },
+    "move": {
+      "title": "نقل القسم",
+      "searchPlaceholder": "ابحث عن الأقسام"
+    },
+    "duplicate": {
+      "copySuffix": "{{name}} (نسخة)"
+    },
+    "details": {
+      "sections": {
+        "overview": "نظرة عامة",
+        "children": "الأقسام الفرعية"
+      },
+      "noChildren": "لا توجد أقسام فرعية"
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "هل تريد إلغاء تفعيل هذا القسم؟",
+        "body": "لن يظهر بعد الآن في قوائم اختيار الأقسام النشطة في باقي أجزاء المنتج."
+      },
+      "delete": {
+        "title": "حذف القسم",
+        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "blockedHasChildren": "يحتوي هذا القسم على أقسام فرعية. يرجى نقلها أو حذفها أولاً.",
+        "blockedHasUsers": "لا يزال هناك مستخدمون مرتبطون بهذا القسم. يرجى إعادة تعيينهم أولاً."
+      }
+    },
+    "toast": {
+      "created": "تم إنشاء {{name}}",
+      "updated": "تم تحديث {{name}}",
+      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "activated": "تم تفعيل {{name}}",
+      "deleted": "تم حذف {{name}}",
+      "moved": "تم نقل {{name}}"
+    }
   }
+
 
 }

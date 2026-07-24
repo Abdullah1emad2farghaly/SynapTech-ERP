@@ -1,65 +1,99 @@
-import axios from "axios";
+import axios, {
+  AxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { useAuthStore } from "@/store/authStore";
 
-
+interface RetryRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
 
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "https://synaptecherp.runasp.net/api",
-  withCredentials: true, // refresh token travels as an httpOnly cookie
+  baseURL:
+    import.meta.env.VITE_API_BASE_URL ??
+    "https://synaptecherp.runasp.net/api",
+  withCredentials: true,
 });
 
-apiClient.interceptors.request.use((config) => {
-  const storedUser = window.localStorage.getItem('currentUser');
-  let currentUser;
+// Safely get the current user from localStorage
+const getCurrentUser = () => {
+  const storedUser = localStorage.getItem("currentUser");
 
-  if(storedUser)
-    currentUser = JSON.parse(storedUser);
+  if (!storedUser) return null;
 
-  const token = currentUser.accessToken;
-
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  try {
+    return JSON.parse(storedUser);
+  } catch {
+    localStorage.removeItem("currentUser");
+    return null;
   }
+};
 
-  const language = localStorage.getItem("i18nextLng") || "en";
+// ---------------------------
+// Request Interceptor
+// ---------------------------
+apiClient.interceptors.request.use(
+  (config) => {
+    const currentUser = getCurrentUser();
 
-  config.headers["Accept-Language"] = language;
+    const token = currentUser?.accessToken;
 
-  return config;
-});
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
+    const language =
+      localStorage.getItem("i18nextLng") || "en";
+
+    config.headers["Accept-Language"] = language;
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// ---------------------------
+// Response Interceptor
+// ---------------------------
 apiClient.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
+
+  async (error: AxiosError) => {
+    const originalRequest =
+      error.config as RetryRequestConfig | undefined;
+
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
+
+    const isUnauthorized = error.response?.status === 401;
+    const isRefreshRequest =
+      originalRequest.url?.includes("/Auth/refresh-token");
 
     if (
-      error.response?.status === 401 &&
-      !originalRequest._retry
+      isUnauthorized &&
+      !originalRequest._retry &&
+      !isRefreshRequest
     ) {
       originalRequest._retry = true;
 
-      const storedUser = localStorage.getItem("currentUser");
+      const currentUser = getCurrentUser();
 
-      if (!storedUser) {
+      if (!currentUser?.refreshToken) {
         useAuthStore.getState().clearSession();
         return Promise.reject(error);
       }
 
-      const currentUser = JSON.parse(storedUser);
-
       try {
-        const response = await apiClient.post(
-          `/refresh-token`,
-          {
-            refreshToken: currentUser.refreshToken,
-          }
-        );
+        const response = await apiClient.post("/Auth/refresh-token", {
+          refreshToken: currentUser.refreshToken,
+        });
 
         currentUser.accessToken = response.data.accessToken;
 
         if (response.data.refreshToken) {
-          currentUser.refreshToken = response.data.refreshToken;
+          currentUser.refreshToken =
+            response.data.refreshToken;
         }
 
         localStorage.setItem(
@@ -67,12 +101,12 @@ apiClient.interceptors.response.use(
           JSON.stringify(currentUser)
         );
 
-        originalRequest.headers.Authorization =
-          `Bearer ${currentUser.accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${currentUser.accessToken}`;
 
         return apiClient(originalRequest);
-      } catch {
+      } catch (refreshError) {
         useAuthStore.getState().clearSession();
+        return Promise.reject(refreshError);
       }
     }
 
