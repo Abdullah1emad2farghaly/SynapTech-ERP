@@ -15,7 +15,9 @@ export const apiClient = axios.create({
   withCredentials: true,
 });
 
-// Safely get the current user from localStorage
+// ---------------------------
+// Helper
+// ---------------------------
 const getCurrentUser = () => {
   const storedUser = localStorage.getItem("currentUser");
 
@@ -36,16 +38,12 @@ apiClient.interceptors.request.use(
   (config) => {
     const currentUser = getCurrentUser();
 
-    const token = currentUser?.accessToken;
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (currentUser?.accessToken) {
+      config.headers.Authorization = `Bearer ${currentUser.accessToken}`;
     }
 
-    const language =
+    config.headers["Accept-Language"] =
       localStorage.getItem("i18nextLng") || "en";
-
-    config.headers["Accept-Language"] = language;
 
     return config;
   },
@@ -67,6 +65,7 @@ apiClient.interceptors.response.use(
     }
 
     const isUnauthorized = error.response?.status === 401;
+
     const isRefreshRequest =
       originalRequest.url?.includes("/Auth/refresh-token");
 
@@ -85,15 +84,20 @@ apiClient.interceptors.response.use(
       }
 
       try {
-        const response = await apiClient.post("/Auth/refresh-token", {
-          refreshToken: currentUser.refreshToken,
-        });
+        const response = await apiClient.post(
+          "/Auth/refresh-token",
+          JSON.stringify(currentUser.refreshToken),
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         currentUser.accessToken = response.data.accessToken;
 
         if (response.data.refreshToken) {
-          currentUser.refreshToken =
-            response.data.refreshToken;
+          currentUser.refreshToken = response.data.refreshToken;
         }
 
         localStorage.setItem(
