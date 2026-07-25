@@ -16,6 +16,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
 import { MultiSelectSearchable, type MultiSelectOption } from "../../common/MultiSelectSearchable";
+import { RoleResponse } from "@/types/roles.types";
+import axios from "axios";
 
 export interface RoleAssignmentDrawerProps {
   open: boolean;
@@ -24,7 +26,7 @@ export interface RoleAssignmentDrawerProps {
   userName: string;
   /** Role ids the user currently holds, used to pre-check the list. */
   currentRoleIds: string[];
-  roleOptions: MultiSelectOption[];
+  roleOptions: RoleResponse[];
   onSubmit: (userId: string, roleIds: string[]) => Promise<void>;
 }
 
@@ -53,6 +55,7 @@ export function RoleAssignmentDrawer({
     if (open) setSelected(currentRoleIds);
   }, [open, currentRoleIds]);
 
+  // console.log(currentRoleIds)
   const isUnchanged = useMemo(() => sameSet(selected, currentRoleIds), [selected, currentRoleIds]);
   const isEmpty = selected.length === 0;
   const saveDisabled = isUnchanged || isEmpty || isSubmitting;
@@ -67,6 +70,15 @@ export function RoleAssignmentDrawer({
     try {
       await onSubmit(userId, selected);
       onClose();
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        console.log("Response:", err.response);
+        console.log("Status:", err.response?.status);
+        console.log("Data:", err.response?.data);
+        console.log("Message:", err.message);
+      } else {
+        console.log(err);
+      }
     } finally {
       setIsSubmitting(false);
     }

@@ -98,7 +98,11 @@
       "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
     },
     "actions": {
-      "retry": "إعادة المحاولة"
+      "retry": "إعادة المحاولة",
+      "refresh": "تحديث",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "saveChanges": "حفظ التغييرات"
     },
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
@@ -411,6 +415,96 @@
       "deactivated": "تم إلغاء تفعيل {{name}}",
       "activated": "تم تفعيل {{name}}",
       "deleted": "تم حذف {{name}}"
+    }
+  },
+  "roles": {
+    "page": {
+      "title": "الأدوار",
+      "description": "إدارة الأدوار والصلاحيات الممنوحة لكل دور."
+    },
+    "stats": {
+      "totalRoles": "إجمالي الأدوار",
+      "availablePermissions": "الصلاحيات المتاحة",
+      "totalAssignedPermissions": "إجمالي الصلاحيات الممنوحة"
+    },
+    "toolbar": {
+      "searchPlaceholder": "ابحث عن الأدوار...",
+      "sort": {
+        "nameAsc": "الاسم (أ–ي)",
+        "nameDesc": "الاسم (ي–أ)",
+        "permissionsDesc": "الأكثر صلاحيات"
+      }
+    },
+    "table": {
+      "role": "الدور",
+      "description": "الوصف",
+      "permissions": "الصلاحيات",
+      "permissionsCount": "صلاحية واحدة",
+      "permissionsCount_other": "{{count}} صلاحية",
+      "noPermissions": "لا توجد صلاحيات ممنوحة",
+      "more": "المزيد"
+    },
+    "actions": {
+      "createRole": "إنشاء دور",
+      "view": "عرض",
+      "edit": "تعديل",
+      "managePermissions": "إدارة الصلاحيات",
+      "duplicate": "نسخ",
+      "delete": "حذف"
+    },
+    "empty": {
+      "title": "لا توجد أدوار",
+      "description": "أنشئ أول دور لبدء منح الصلاحيات لفريقك."
+    },
+    "create": {
+      "title": "إنشاء دور",
+      "duplicateTitle": "نسخ الدور",
+      "subtitle": "حدد الدور والصلاحيات التي يمنحها.",
+      "generalInfo": "معلومات عامة",
+      "permissions": "الصلاحيات"
+    },
+    "edit": {
+      "title": "تعديل الدور"
+    },
+    "managePermissions": {
+      "title": "إدارة الصلاحيات"
+    },
+    "fields": {
+      "name": "اسم الدور",
+      "description": "الوصف"
+    },
+    "permissions": {
+      "selectAll": "تحديد الكل",
+      "clearAll": "إلغاء التحديد",
+      "searchPlaceholder": "ابحث عن الصلاحيات...",
+      "selectedCount": "تم تحديد صلاحية واحدة",
+      "selectedCount_other": "تم تحديد {{count}} صلاحية",
+      "noResults": "لا توجد صلاحيات مطابقة لبحثك."
+    },
+    "delete": {
+      "title": "حذف الدور",
+      "body": "سيتم حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "details": {
+      "back": "العودة إلى الأدوار",
+      "notFound": "الدور غير موجود.",
+      "permissionsCount": "صلاحية واحدة ممنوحة",
+      "permissionsCount_other": "{{count}} صلاحية ممنوحة",
+      "assignedPermissions": "الصلاحيات الممنوحة",
+      "activityComingSoon": "سجل النشاط غير متاح بعد."
+    },
+    "validation": {
+      "nameMin": "يجب أن يتكون اسم الدور من حرفين على الأقل.",
+      "nameMax": "يجب ألا يتجاوز اسم الدور 60 حرفًا.",
+      "descriptionRequired": "الوصف مطلوب.",
+      "descriptionMax": "يجب ألا يتجاوز الوصف 240 حرفًا.",
+      "permissionsMin": "اختر صلاحية واحدة على الأقل."
+    },
+    "toasts": {
+      "created": "تم إنشاء الدور.",
+      "updated": "تم تحديث الدور.",
+      "deleted": "تم حذف الدور.",
+      "permissionsUpdated": "تم تحديث الصلاحيات."
     }
   }
 }

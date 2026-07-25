@@ -20,13 +20,14 @@ import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
 import { MultiSelectSearchable, type MultiSelectOption } from "../../common/MultiSelectSearchable";
+import { RoleResponse } from "@/types/roles.types";
 
 const createUserSchema = z.object({
   fullName: z.string().min(2, "required"),
   email: z.string().email("invalidEmail"),
   branchId: z.string().min(1, "required"),
   departmentId: z.string().min(1, "required"),
-  roleIds: z.array(z.string()).min(1, "atLeastOneRole"),
+  roleNames: z.array(z.string()).min(1, "atLeastOneRole"),
 });
 
 export type CreateUserFormValues = z.infer<typeof createUserSchema>;
@@ -37,7 +38,7 @@ export interface CreateUserDrawerProps {
   onSubmit: (values: CreateUserFormValues) => Promise<void>;
   branchOptions: MultiSelectOption[];
   departmentOptions: MultiSelectOption[];
-  roleOptions: MultiSelectOption[];
+  roleOptions: RoleResponse[];
   /** Surfaces a field-level error, e.g. email already taken, after a failed submit. */
   serverError?: { field?: keyof CreateUserFormValues; messageKey: string } | null;
 }
@@ -53,6 +54,7 @@ export function CreateUserDrawer({
 }: CreateUserDrawerProps) {
   const { t } = useTranslation();
 
+  console.log(roleOptions)
   const {
     register,
     handleSubmit,
@@ -62,7 +64,7 @@ export function CreateUserDrawer({
   } = useForm<CreateUserFormValues>({
     resolver: zodResolver(createUserSchema),
     mode: "onBlur",
-    defaultValues: { fullName: "", email: "", branchId: "", departmentId: "", roleIds: [] },
+    defaultValues: { fullName: "", email: "", branchId: "", departmentId: "", roleNames: [] },
   });
 
   function handleClose() {
@@ -71,6 +73,8 @@ export function CreateUserDrawer({
   }
 
   async function submitHandler(values: CreateUserFormValues) {
+    // console.log(values)
+    // return;
     await onSubmit(values);
   }
 
@@ -168,7 +172,7 @@ export function CreateUserDrawer({
           </legend>
 
           <Controller
-            name="roleIds"
+            name="roleNames"
             control={control}
             render={({ field }) => (
               <MultiSelectSearchable
@@ -179,7 +183,7 @@ export function CreateUserDrawer({
               />
             )}
           />
-          {errors.roleIds && (
+          {errors.roleNames && (
             <p className="mt-1 text-xs text-[var(--error)]">{t("users.roles.saveDisabledEmpty")}</p>
           )}
         </fieldset>

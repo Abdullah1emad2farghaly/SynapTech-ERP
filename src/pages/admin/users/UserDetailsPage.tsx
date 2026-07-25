@@ -42,7 +42,7 @@ export function UserDetailsPage() {
   const { data: branchOptions = [] } = useBranches();
   const { data: departmentOptions = [] } = useDepartments();
   const { data: roleOptions = [] } = useRoles();
-
+  // console.log(user)
   const updateUserMutation = useUpdateUser();
   const deleteUserMutation = useDeleteUser();
   const assignRolesMutation = useAssignRoles();
@@ -295,8 +295,8 @@ export function UserDetailsPage() {
         userName={user.fullName}
         currentRoleIds={user.roles}
         roleOptions={roleOptions}
-        onSubmit={async (userId, roleIds) => {
-          await assignRolesMutation.mutateAsync({ id: userId, roleIds });
+        onSubmit={async (userId, roleNames) => {
+          await assignRolesMutation.mutateAsync({ id: userId, roleNames });
           setRoleDrawerOpen(false);
           refetch();
         }}

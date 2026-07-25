@@ -20,6 +20,7 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "branches", label: "Branches", to: "/organization/branches" },
       { id: "departments", label: "Departments", to: "/organization/departments" },
       { id: "users", label: "Users", to: "/organization/users" },
+      { id: "roles", label: "Roles", to: "/organization/roles" },
     ],
   },
   {

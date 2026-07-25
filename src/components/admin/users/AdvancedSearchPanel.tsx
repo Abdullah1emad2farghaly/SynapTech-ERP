@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SlidersHorizontal } from "lucide-react";
 import type { MultiSelectOption } from "../../common/MultiSelectSearchable";
+import { RoleResponse } from "@/types/roles.types";
 
 export interface UsersFilters {
   branchId: string | null;
@@ -31,7 +32,7 @@ export interface AdvancedSearchPanelProps {
   onApply: (filters: UsersFilters) => void;
   branchOptions: MultiSelectOption[];
   departmentOptions: MultiSelectOption[];
-  roleOptions: MultiSelectOption[];
+  roleOptions: RoleResponse[];
 }
 
 function countActive(filters: UsersFilters): number {
@@ -140,8 +141,8 @@ export function AdvancedSearchPanel({
                 >
                   <option value="">—</option>
                   {roleOptions.map((o) => (
-                    <option key={o.value} value={o.value}>
-                      {o.label}
+                    <option key={o.id} value={o.id}>
+                      {o.name}
                     </option>
                   ))}
                 </select>

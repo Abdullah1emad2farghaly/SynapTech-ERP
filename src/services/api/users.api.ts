@@ -31,7 +31,8 @@ export const usersApi = {
   createUser: (payload: CreateUserPayload) =>
     apiClient
       .post<User>("/Users", payload)
-      .then((res) => res.data),
+      .then((res) => res.data)
+  ,
 
   /**
    * PUT /api/Users/{id}
@@ -52,8 +53,8 @@ export const usersApi = {
   /**
    * PUT /api/Users/{id}/roles
    */
-  assignRoles: ({ id, roleIds }: AssignRolesPayload) =>
+  assignRoles: ({ id, roleNames }: AssignRolesPayload) =>
     apiClient
-      .put<User>(`/Users/${id}/roles`, { roleIds })
+      .put<User>(`/Users/${id}/roles`, { roleNames })
       .then((res) => res.data),
 };

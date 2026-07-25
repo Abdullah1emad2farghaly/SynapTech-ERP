@@ -146,8 +146,7 @@ export function useCreateUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: CreateUserPayload) =>
-      usersApi.createUser(payload),
+    mutationFn: (payload: CreateUserPayload) => usersApi.createUser(payload),
 
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -180,7 +179,7 @@ export function useDeleteUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) =>usersApi.deleteUser(id),
+    mutationFn: (id: string) => usersApi.deleteUser(id),
 
     onSuccess: () => {
       queryClient.invalidateQueries({

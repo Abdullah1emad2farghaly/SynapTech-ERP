@@ -100,7 +100,7 @@ export function UsersListPage() {
     email: string;
     branchId: string;
     departmentId: string;
-    roleIds: string[];
+    roleNames: string[];
   }) {
     await createUserMutation.mutateAsync(values);
     setCreateOpen(false);
@@ -108,7 +108,7 @@ export function UsersListPage() {
   }
 
   async function handleSetActive(user: User) {
-    await updateUserMutation.mutateAsync({ ...user });
+    await updateUserMutation.mutateAsync({ ...user, isActive: !user.isActive });
     refetch();
   }
 
@@ -126,8 +126,8 @@ export function UsersListPage() {
     refetch();
   }
 
-  async function handleAssignRoles(userId: string, roleIds: string[]) {
-    await assignRolesMutation.mutateAsync({ id: userId, roleIds });
+  async function handleAssignRoles(userId: string, roleNames: string[]) {
+    await assignRolesMutation.mutateAsync({ id: userId, roleNames });
     refetch();
   }
 

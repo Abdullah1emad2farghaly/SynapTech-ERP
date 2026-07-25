@@ -8,15 +8,15 @@
 
 import { useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
+import { RoleResponse } from "@/types/roles.types";
 
 export interface MultiSelectOption {
   value: string;
-  /** Already-translated label. */
   label: string;
 }
 
 export interface MultiSelectSearchableProps {
-  options: MultiSelectOption[];
+  options: RoleResponse[];
   selected: string[];
   onChange: (selected: string[]) => void;
   searchPlaceholder: string;
@@ -40,11 +40,11 @@ export function MultiSelectSearchable({
   const filteredOptions = useMemo(() => {
     if (!query.trim()) return options;
     const q = query.trim().toLowerCase();
-    return options.filter((o) => o.label.toLowerCase().includes(q));
+    return options.filter((o) => o.name.toLowerCase().includes(q));
   }, [options, query]);
 
   const selectedOptions = useMemo(
-    () => options.filter((o) => selected.includes(o.value)),
+    () => options.filter((o) => selected.includes(o.name)),
     [options, selected],
   );
 
@@ -66,14 +66,14 @@ export function MultiSelectSearchable({
         <div className="mb-3 flex flex-wrap gap-1.5">
           {selectedOptions.map((option) => (
             <span
-              key={option.value}
+              key={option.id}
               className="inline-flex items-center gap-1 rounded-[6px] bg-[var(--sunken)] px-2 py-1 text-xs font-medium text-[var(--ink-primary)]"
             >
-              {option.label}
+              {option.name}
               <button
                 type="button"
-                onClick={() => remove(option.value)}
-                aria-label={`Remove ${option.label}`}
+                onClick={() => remove(option.name)}
+                aria-label={`Remove ${option.name}`}
                 className="text-[var(--ink-tertiary)] hover:text-[var(--error)]"
               >
                 <X size={12} />
@@ -108,10 +108,11 @@ export function MultiSelectSearchable({
           </p>
         ) : (
           filteredOptions.map((option) => {
-            const isChecked = selected.includes(option.value);
+            
+            const isChecked = selected.includes(option.name);
             return (
               <label
-                key={option.value}
+                key={option.id}
                 role="option"
                 aria-selected={isChecked}
                 className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
@@ -119,10 +120,10 @@ export function MultiSelectSearchable({
                 <input
                   type="checkbox"
                   checked={isChecked}
-                  onChange={() => toggle(option.value)}
+                  onChange={() => toggle(option.name)}
                   className="h-4 w-4 rounded-[4px] border-[var(--hairline)]"
                 />
-                {option.label}
+                {option.name}
               </label>
             );
           })

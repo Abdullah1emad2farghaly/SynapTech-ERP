@@ -105,7 +105,11 @@
       "actionFailed": "Something went wrong. Please try again."
     },
     "actions": {
-      "retry": "Retry"
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "saveChanges": "Save Changes"
     }
   },
   "users": {
@@ -411,6 +415,97 @@
       "deactivated": "{{name}} deactivated",
       "activated": "{{name}} activated",
       "deleted": "{{name}} deleted"
+    }
+  },
+
+  "roles": {
+    "page": {
+      "title": "Roles",
+      "description": "Manage roles and the permissions assigned to each one."
+    },
+    "stats": {
+      "totalRoles": "Total Roles",
+      "availablePermissions": "Available Permissions",
+      "totalAssignedPermissions": "Total Assigned Permissions"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search roles...",
+      "sort": {
+        "nameAsc": "Name (A–Z)",
+        "nameDesc": "Name (Z–A)",
+        "permissionsDesc": "Most permissions"
+      }
+    },
+    "table": {
+      "role": "Role",
+      "description": "Description",
+      "permissions": "Permissions",
+      "permissionsCount": "{{count}} permission",
+      "permissionsCount_other": "{{count}} permissions",
+      "noPermissions": "No permissions assigned",
+      "more": "more"
+    },
+    "actions": {
+      "createRole": "Create Role",
+      "view": "View",
+      "edit": "Edit",
+      "managePermissions": "Manage Permissions",
+      "duplicate": "Duplicate",
+      "delete": "Delete"
+    },
+    "empty": {
+      "title": "No roles found",
+      "description": "Create your first role to start assigning permissions to your team."
+    },
+    "create": {
+      "title": "Create Role",
+      "duplicateTitle": "Duplicate Role",
+      "subtitle": "Define a role and the permissions it grants.",
+      "generalInfo": "General Information",
+      "permissions": "Permissions"
+    },
+    "edit": {
+      "title": "Edit Role"
+    },
+    "managePermissions": {
+      "title": "Manage Permissions"
+    },
+    "fields": {
+      "name": "Role Name",
+      "description": "Description"
+    },
+    "permissions": {
+      "selectAll": "Select all",
+      "clearAll": "Clear all",
+      "searchPlaceholder": "Search permissions...",
+      "selectedCount": "{{count}} permission selected",
+      "selectedCount_other": "{{count}} permissions selected",
+      "noResults": "No permissions match your search."
+    },
+    "delete": {
+      "title": "Delete role",
+      "body": "This will permanently delete \"{{name}}\". This action cannot be undone."
+    },
+    "details": {
+      "back": "Back to Roles",
+      "notFound": "Role not found.",
+      "permissionsCount": "{{count}} permission assigned",
+      "permissionsCount_other": "{{count}} permissions assigned",
+      "assignedPermissions": "Assigned Permissions",
+      "activityComingSoon": "Activity history isn't available yet."
+    },
+    "validation": {
+      "nameMin": "Role name must be at least 2 characters.",
+      "nameMax": "Role name must be 60 characters or fewer.",
+      "descriptionRequired": "Description is required.",
+      "descriptionMax": "Description must be 240 characters or fewer.",
+      "permissionsMin": "Select at least one permission."
+    },
+    "toasts": {
+      "created": "Role created.",
+      "updated": "Role updated.",
+      "deleted": "Role deleted.",
+      "permissionsUpdated": "Permissions updated."
     }
   }
 }
