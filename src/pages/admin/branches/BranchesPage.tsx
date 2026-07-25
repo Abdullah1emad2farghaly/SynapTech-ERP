@@ -14,12 +14,16 @@
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { RefreshCw } from "lucide-react";
 import { BranchesKpiRow } from "../../../components/admin/branches/BranchesKpiRow";
 import { BranchesTable, type BranchRow } from "../../../components/admin/branches/BranchesTable";
 import { BranchActionMenu } from "../../../components/admin/branches/BranchActionMenu";
 import { BranchDrawer, type BranchFormValues } from "../../../components/admin/branches/BranchDrawer";
-import { BranchDetailsDrawer } from "../../../components/admin/branches/BranchDetailsDrawer";
+// BranchDetailsDrawer removed — Branch Details is now a dedicated page
+// at /organization/branches/:id (see BranchDetailsPage.tsx). Row click
+// and the "View Details" row action both navigate there instead of
+// opening a drawer.
 
 // Replace with the project's actual hooks.
 import {
@@ -35,11 +39,11 @@ type DrawerTarget =
   | { kind: "create" }
   | { kind: "edit"; id: string }
   | { kind: "duplicate"; id: string }
-  | { kind: "details"; id: string }
   | null;
 
 export function BranchesPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<"active" | "inactive" | null>(null);
@@ -174,7 +178,7 @@ export function BranchesPage() {
         isMain={row.isMain}
         hasDepartments={hasDepartments}
         hasUsers={hasUsers}
-        onViewDetails={(id) => setDrawerTarget({ kind: "details", id })}
+        onViewDetails={(id) => navigate(`/organization/branches/${id}`)}
         onEdit={(id) => setDrawerTarget({ kind: "edit", id })}
         onDuplicate={(id) => setDrawerTarget({ kind: "duplicate", id })}
         onSetActive={handleSetActive}
@@ -187,8 +191,6 @@ export function BranchesPage() {
     drawerTarget?.kind === "edit" ? branches.find((b) => b.id === drawerTarget.id) : undefined;
   const duplicatingBranch =
     drawerTarget?.kind === "duplicate" ? branches.find((b) => b.id === drawerTarget.id) : undefined;
-  const detailsBranch =
-    drawerTarget?.kind === "details" ? branches.find((b) => b.id === drawerTarget.id) : undefined;
 
   return (
     <div className="flex flex-col gap-4 p-6">
@@ -263,7 +265,7 @@ export function BranchesPage() {
           setSortColumnId(direction ? columnId : null);
           setSortDirection(direction);
         }}
-        onRowClick={(row) => setDrawerTarget({ kind: "details", id: row.id })}
+        onRowClick={(row) => navigate(`/organization/branches/${row.id}`)}
         renderRowActions={renderRowActions}
       />
 
@@ -305,16 +307,6 @@ export function BranchesPage() {
             : null
         }
         onSubmit={handleDrawerSubmit}
-      />
-
-      <BranchDetailsDrawer
-        open={drawerTarget?.kind === "details"}
-        onClose={() => setDrawerTarget(null)}
-        branch={detailsBranch ?? null}
-        departmentsCount={detailsBranch ? (departmentCountByBranch.get(detailsBranch.id) ?? 0) : 0}
-        usersCount={detailsBranch ? (userCountByBranch.get(detailsBranch.id) ?? 0) : 0}
-        onEdit={(id) => setDrawerTarget({ kind: "edit", id })}
-        onDuplicate={(id) => setDrawerTarget({ kind: "duplicate", id })}
       />
     </div>
   );

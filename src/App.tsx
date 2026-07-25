@@ -16,6 +16,7 @@ import { UsersListPage } from "./pages/admin/users/UsersListPage";
 import { UserDetailsPage } from "./pages/admin/users/UserDetailsPage";
 import { DepartmentsPage } from "./pages/admin/departments/DepartmentsPage";
 import { BranchesPage } from "./pages/admin/branches/BranchesPage";
+import { BranchDetailsPage } from "./pages/admin/branches/BranchDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ export default function App() {
             <Route path="/organization">
 
               <Route path="branches" element={<BranchesPage/>} />
+              <Route path="branches/:id" element={<BranchDetailsPage/>} />
               <Route path="departments" element={<DepartmentsPage/>} />
               <Route path="users" element={<UsersListPage />} />
               <Route path="users/:id" element={<UserDetailsPage />} />

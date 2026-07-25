@@ -378,7 +378,13 @@
       "copySuffix": "{{name}} (نسخة)"
     },
     "details": {
+      "back": "رجوع",
+      "notFound": "الفرع غير موجود",
+      "backToList": "العودة إلى الفروع",
+      "noDepartments": "لا توجد أقسام في هذا الفرع",
+      "noUsersInDepartment": "لا يوجد مستخدمون مرتبطون بهذا القسم.",
       "sections": {
+        "departments": "الأقسام",
         "overview": "نظرة عامة",
         "contact": "معلومات التواصل",
         "relatedData": "البيانات المرتبطة"

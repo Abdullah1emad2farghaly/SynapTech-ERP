@@ -377,7 +377,14 @@
       "copySuffix": "{{name}} (Copy)"
     },
     "details": {
+      "back": "Back",
+      "notFound": "Branch not found",
+      "backToList": "Back to Branches",
+    
+      "noDepartments": "No departments in this branch",
+      "noUsersInDepartment": "No users assigned to this department.",
       "sections": {
+        "departments": "Departments",
         "overview": "Overview",
         "contact": "Contact Information",
         "relatedData": "Related Data"
