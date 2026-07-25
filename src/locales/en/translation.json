@@ -314,5 +314,96 @@
       "deleted": "{{name}} deleted",
       "moved": "{{name}} moved"
     }
+  },
+  "branches": {
+    "list": {
+      "title": "Branches",
+      "subtitleCount": "{{count}} branch",
+      "subtitleCount_other": "{{count}} branches",
+      "createBranch": "Create Branch",
+      "search": {
+        "placeholder": "Search by name or code"
+      },
+      "filters": {
+        "status": "Status"
+      },
+      "empty": {
+        "noBranches": "No branches yet",
+        "noMatches": "No branches match your filters",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "kpi": {
+      "total": "Total Branches",
+      "active": "Active Branches",
+      "inactive": "Inactive Branches",
+      "main": "Main Branch"
+    },
+    "column": {
+      "branch": "Branch",
+      "address": "Address",
+      "phone": "Phone",
+      "status": "Status"
+    },
+    "badge": {
+      "main": "Main"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "duplicate": "Duplicate",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "moreActions": "More actions"
+    },
+    "create": {
+      "title": "Create Branch",
+      "editTitle": "Edit Branch",
+      "fields": {
+        "name": "Branch Name",
+        "code": "Branch Code",
+        "address": "Address",
+        "phone": "Phone",
+        "isMain": "Set as Main Branch",
+        "isMainHint": "{{name}} is currently set as Main Branch"
+      },
+      "errors": {
+        "required": "This field is required"
+      },
+      "submitting": "Saving..."
+    },
+    "duplicate": {
+      "copySuffix": "{{name}} (Copy)"
+    },
+    "details": {
+      "sections": {
+        "overview": "Overview",
+        "contact": "Contact Information",
+        "relatedData": "Related Data"
+      },
+      "departmentsCount": "Departments",
+      "usersCount": "Users"
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "Deactivate this branch?",
+        "body": "It will no longer appear in active branch pickers elsewhere in the product."
+      },
+      "delete": {
+        "title": "Delete branch",
+        "body": "This permanently removes {{name}}. This can't be undone.",
+        "mainBranchWarning": "This is currently the Main Branch — deleting it may affect other parts of the product that rely on a main branch being set.",
+        "blockedHasDepartments": "This branch has departments assigned to it. Reassign or remove them first.",
+        "blockedHasUsers": "Users are still assigned to this branch. Reassign them first."
+      }
+    },
+    "toast": {
+      "created": "{{name}} created",
+      "updated": "{{name}} updated",
+      "deactivated": "{{name}} deactivated",
+      "activated": "{{name}} activated",
+      "deleted": "{{name}} deleted"
+    }
   }
 }

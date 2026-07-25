@@ -63,7 +63,12 @@
       "expiredHeading": "انتهت صلاحية هذا الرابط",
       "expiredBody": "روابط إعادة التعيين صالحة لفترة محدودة فقط.",
       "requestNewLink": "طلب رابط جديد",
-      "strength": { "weak": "ضعيفة", "fair": "مقبولة", "good": "جيدة", "strong": "قوية" },
+      "strength": {
+        "weak": "ضعيفة",
+        "fair": "مقبولة",
+        "good": "جيدة",
+        "strong": "قوية"
+      },
       "requirements": {
         "minLength": "8 أحرف على الأقل",
         "hasUpperLower": "أحرف كبيرة وصغيرة",
@@ -72,7 +77,6 @@
       }
     }
   },
-  
   "validation": {
     "emailRequired": "أدخل بريدك الإلكتروني",
     "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
@@ -88,17 +92,14 @@
     "passwordNumber": "أضف رقمًا",
     "passwordSymbol": "أضف رمزًا"
   },
-
   "common": {
     "errors": {
       "loadFailed": "تعذر تحميل البيانات",
       "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
     },
-
     "actions": {
       "retry": "إعادة المحاولة"
     },
-
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "language": "اللغة",
@@ -107,8 +108,6 @@
     "dark": "داكن",
     "copyright": "© {{year}} Synaptech"
   },
-
-  
   "users": {
     "status": {
       "active": "نشط",
@@ -119,7 +118,6 @@
       "deactivated": "تم إلغاء تفعيل {{name}}",
       "deleted": "تم حذف {{name}}"
     },
-    
     "list": {
       "title": "المستخدمون",
       "subtitleCount": "مستخدم واحد",
@@ -222,7 +220,6 @@
       "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
     }
   },
-  
   "departments": {
     "list": {
       "title": "الأقسام",
@@ -317,7 +314,97 @@
       "deleted": "تم حذف {{name}}",
       "moved": "تم نقل {{name}}"
     }
+  },
+  
+  "branches": {
+    "list": {
+      "title": "الفروع",
+      "subtitleCount": "فرع واحد",
+      "subtitleCount_other": "{{count}} فروع",
+      "createBranch": "إنشاء فرع",
+      "search": {
+        "placeholder": "ابحث بالاسم أو الرمز"
+      },
+      "filters": {
+        "status": "الحالة"
+      },
+      "empty": {
+        "noBranches": "لا توجد فروع بعد",
+        "noMatches": "لا توجد فروع مطابقة لعوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      }
+    },
+    "kpi": {
+      "total": "إجمالي الفروع",
+      "active": "الفروع النشطة",
+      "inactive": "الفروع غير النشطة",
+      "main": "الفرع الرئيسي"
+    },
+    "column": {
+      "branch": "الفرع",
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "status": "الحالة"
+    },
+    "badge": {
+      "main": "رئيسي"
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل",
+      "duplicate": "تكرار",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف",
+      "moreActions": "المزيد من الإجراءات"
+    },
+    "create": {
+      "title": "إنشاء فرع",
+      "editTitle": "تعديل الفرع",
+      "fields": {
+        "name": "اسم الفرع",
+        "code": "رمز الفرع",
+        "address": "العنوان",
+        "phone": "الهاتف",
+        "isMain": "تعيين كفرع رئيسي",
+        "isMainHint": "{{name}} معيّن حاليًا كفرع رئيسي"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "submitting": "جارٍ الحفظ..."
+    },
+    "duplicate": {
+      "copySuffix": "{{name}} (نسخة)"
+    },
+    "details": {
+      "sections": {
+        "overview": "نظرة عامة",
+        "contact": "معلومات التواصل",
+        "relatedData": "البيانات المرتبطة"
+      },
+      "departmentsCount": "الأقسام",
+      "usersCount": "المستخدمون"
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "هل تريد إلغاء تفعيل هذا الفرع؟",
+        "body": "لن يظهر بعد الآن في قوائم اختيار الفروع النشطة في باقي أجزاء المنتج."
+      },
+      "delete": {
+        "title": "حذف الفرع",
+        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "mainBranchWarning": "هذا هو الفرع الرئيسي حاليًا — قد يؤثر حذفه على أجزاء أخرى من المنتج تعتمد على وجود فرع رئيسي محدد.",
+        "blockedHasDepartments": "يحتوي هذا الفرع على أقسام مرتبطة به. يرجى إعادة تعيينها أو إزالتها أولاً.",
+        "blockedHasUsers": "لا يزال هناك مستخدمون مرتبطون بهذا الفرع. يرجى إعادة تعيينهم أولاً."
+      }
+    },
+    "toast": {
+      "created": "تم إنشاء {{name}}",
+      "updated": "تم تحديث {{name}}",
+      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "activated": "تم تفعيل {{name}}",
+      "deleted": "تم حذف {{name}}"
+    }
   }
-
-
 }

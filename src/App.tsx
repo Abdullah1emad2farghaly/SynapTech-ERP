@@ -15,6 +15,7 @@ import { AppShell } from "./components/admin/shell/AppShell";
 import { UsersListPage } from "./pages/admin/users/UsersListPage";
 import { UserDetailsPage } from "./pages/admin/users/UserDetailsPage";
 import { DepartmentsPage } from "./pages/admin/departments/DepartmentsPage";
+import { BranchesPage } from "./pages/admin/branches/BranchesPage";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +52,7 @@ export default function App() {
             <Route path={ROUTES.HR_EMPLOYEE_DETAIL} element={<EmployeeProfilePage />} />
             <Route path="/organization">
 
-              <Route path="branches" />
+              <Route path="branches" element={<BranchesPage/>} />
               <Route path="departments" element={<DepartmentsPage/>} />
               <Route path="users" element={<UsersListPage />} />
               <Route path="users/:id" element={<UserDetailsPage />} />
