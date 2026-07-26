@@ -2,10 +2,15 @@
 //
 // Wires AccountsTree + AccountPreviewPanel + AccountsKpiRow + toolbar
 // together. Two-column desktop layout (tree left, preview right),
-// stacks on mobile. No Drawer anywhere, per the module's explicit
-// brief instruction — Create navigates to /accounting/accounts/new,
-// Edit navigates to /accounting/accounts/:id (inline edit mode there),
-// per the design doc's recommendation.
+// stacks on mobile.
+//
+// UPDATED: Create is now an AccountDrawer opened from this page, not a
+// navigation to /accounting/accounts/new — reversing the module design
+// doc's original "pages, not drawers" call for Create specifically, per
+// later direction. Edit still navigates to /accounting/accounts/:id
+// (inline edit mode there) — that part is unchanged, since Edit's field
+// set (code/name/isActive) is small enough that inline-on-Details still
+// makes more sense than either a drawer or a route.
 //
 // Delete-blocked (has children) is computed client-side from the full
 // loaded list, same technique as Departments' childIdsByParent. The
@@ -20,7 +25,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { RefreshCw, Search } from "lucide-react";
-import { Breadcrumb } from "../../../components/common/Breadcrumb";
 import { AccountsKpiRow, type TypeCount } from "../../../components/admin/accounts/AccountsKpiRow";
 import { AccountsTree, type AccountRow } from "../../../components/admin/accounts/AccountsTree";
 import {
@@ -28,13 +32,17 @@ import {
   type AccountPreviewData,
 } from "../../../components/admin/accounts/AccountPreviewPanel";
 import { AccountDeleteDialog } from "../../../components/admin/accounts/AccountDeleteDialog";
+import { AccountDrawer } from "../../../components/admin/accounts/AccountDrawer";
 
 import {
   useAccountsList,
+  useCreateAccount,
   useUpdateAccount,
   useDeleteAccount,
   useAccountBalance,
+  useAccountTypes,
 } from "../../../hooks/useAccounts.crud";
+import { AccountTypes } from "@/services/api/accounts.crud.api";
 
 export function AccountsListPage() {
   const { t } = useTranslation();
@@ -47,10 +55,13 @@ export function AccountsListPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const { data: accounts = [], isLoading, isError, refetch } = useAccountsList();
+  const createMutation = useCreateAccount();
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
+  const { data: accountTypes = [] } = useAccountTypes();
 
   const accountById = useMemo(() => {
     const map = new Map<string, (typeof accounts)[number]>();
@@ -67,18 +78,15 @@ export function AccountsListPage() {
     return map;
   }, [accounts]);
 
-  const distinctTypes = useMemo(() => {
-    const set = new Set<string>();
-    accounts.forEach((a) => set.add(a.accountType));
-    return Array.from(set).sort();
-  }, [accounts]);
 
   const typeCounts: TypeCount[] = useMemo(() => {
     const counts = new Map<string, number>();
+    accountTypes?.forEach((type) => counts.set(type.value, 0)); // ensure every known type shows a card, even at 0
     accounts.forEach((a) => counts.set(a.accountType, (counts.get(a.accountType) ?? 0) + 1));
-    return Array.from(counts.entries())
-      .map(([accountType, count]) => ({ accountType, count }))
-      .sort((a, b) => b.count - a.count);
+    // Fixed order (matches ACCOUNT_TYPES) rather than sorted by frequency —
+    // now that the type set is known and stable, a stable KPI order reads
+    // better than one that reshuffles as data changes.
+    return accountTypes.map((type) => ({ accountType: type.value, count: counts.get(type.value) ?? 0 }));
   }, [accounts]);
 
   const filteredRows: AccountRow[] = useMemo(() => {
@@ -104,7 +112,7 @@ export function AccountsListPage() {
     () => ({
       total: accounts.length,
       active: accounts.filter((a) => a.isActive).length,
-      inactive: accounts.filter((a) => !a.isActive).length,
+      inactive: accounts.filter((a) => !a.isActive).length, 
       root: accounts.filter((a) => !a.parentAccountId).length,
       child: accounts.filter((a) => !!a.parentAccountId).length,
     }),
@@ -167,15 +175,19 @@ export function AccountsListPage() {
     setDeleteTargetId(id);
   }
 
+  async function handleCreateSubmit(values: {
+    code: string;
+    name: string;
+    accountType: string;
+    parentAccountId: string | null;
+  }) {
+    await createMutation.mutateAsync(values);
+    setIsCreateOpen(false);
+    refetch();
+  }
+
   return (
     <div className="flex flex-col gap-4 p-6">
-      <Breadcrumb
-        items={[
-          { label: t("accounts.breadcrumb.dashboard"), to: "/" },
-          { label: t("accounts.list.title") },
-        ]}
-      />
-
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">
@@ -187,7 +199,7 @@ export function AccountsListPage() {
         </div>
         <button
           type="button"
-          onClick={() => navigate("/accounting/accounts/new")}
+          onClick={() => setIsCreateOpen(true)}
           className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
         >
           {t("accounts.list.createAccount")}
@@ -225,9 +237,9 @@ export function AccountsListPage() {
             className="rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)]"
           >
             <option value="">{t("accounts.list.filters.type")}</option>
-            {distinctTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
+            {accountTypes.map((type) => (
+              <option key={type.value} value={type.value}>
+                {type.value}
               </option>
             ))}
           </select>
@@ -265,7 +277,7 @@ export function AccountsListPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.2fr)_1fr]">
         <AccountsTree
           rows={filteredRows}
           isLoading={isLoading}
@@ -293,6 +305,19 @@ export function AccountsListPage() {
         isSubmitting={isDeleting}
         onConfirm={handleDeleteConfirm}
         onCancel={() => setDeleteTargetId(null)}
+      />
+
+      <AccountDrawer
+        open={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        allAccounts={accounts.map((a) => ({
+          id: a.id,
+          code: a.code,
+          name: a.name,
+          accountType: a.accountType,
+          parentAccountId: a.parentAccountId,
+        }))}
+        onSubmit={handleCreateSubmit}
       />
     </div>
   );

@@ -17,7 +17,7 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-export type ConfirmationDialogTone = "neutral" | "destructive";
+export type ConfirmationDialogTone = "neutral" | "destructive" | "default";
 
 export interface ConfirmationDialogProps {
   open: boolean;

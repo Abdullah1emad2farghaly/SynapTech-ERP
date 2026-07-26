@@ -43,10 +43,11 @@ export function AccountDetailsPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
-  const { data: account, isLoading, isError, refetch } = useAccount(id);
+  let { data: account, isLoading, isError, refetch } = useAccount(id);
   const { data: allAccounts = [] } = useAccountsList(); // for parent lookup + children
   const { data: balance, isLoading: isBalanceLoading } = useAccountBalance(id, !!id);
 
+  // console.log(allAccounts)
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
 
@@ -54,6 +55,7 @@ export function AccountDetailsPage() {
   const [form, setForm] = useState<EditFormState | null>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (account && !isEditing) {
@@ -88,8 +90,13 @@ export function AccountDetailsPage() {
 
   async function handleSetActive(active: boolean) {
     if (!account) return;
-    await updateMutation.mutateAsync({ id: account.id, code: account.code, name: account.name, isActive: active });
-    refetch();
+    setLoading(true)
+    try{
+      await updateMutation.mutateAsync({ id: account.id, code: account.code, name: account.name, isActive: active });
+      refetch();
+    }finally{
+      setLoading(false)
+    }
   }
 
   function handleCancelEdit() {
@@ -99,15 +106,22 @@ export function AccountDetailsPage() {
 
   async function handleSaveEdit() {
     if (!account || !form) return;
-    await updateMutation.mutateAsync({ id: account.id, ...form });
-    setIsEditing(false);
-    refetch();
+    setLoading(true)
+    try{
+      await updateMutation.mutateAsync({ id: account.id, ...form });
+      setIsEditing(false);
+      refetch();
+    }finally{
+      setLoading(false);
+    }
   }
 
   if (isLoading || !form) {
     return (
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 p-6">
         <div className="h-16 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
+        <div className="h-16 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
+        <div className="h-48 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
         <div className="h-48 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
       </div>
     );
@@ -130,14 +144,6 @@ export function AccountDetailsPage() {
 
   return (
     <div className="flex flex-col gap-6 p-6">
-      <Breadcrumb
-        items={[
-          { label: t("accounts.breadcrumb.dashboard"), to: "/" },
-          { label: t("accounts.list.title"), to: "/accounting/accounts" },
-          { label: account.name },
-        ]}
-      />
-
       {/* Hero header */}
       <div className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
         <button
@@ -180,17 +186,19 @@ export function AccountDetailsPage() {
               <button
                 type="button"
                 onClick={() => handleSetActive(false)}
-                className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                disabled={loading}
+                className="rounded-[10px] disabled:cursor-not-allowed border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
               >
-                {t("accounts.actions.deactivate")}
+                {loading? t("users.roles.saving"): t("accounts.actions.activate")}
               </button>
             ) : (
               <button
                 type="button"
                 onClick={() => handleSetActive(true)}
-                className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                disabled={loading}
+                className="rounded-[10px] border disabled:cursor-not-allowed border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
               >
-                {t("accounts.actions.activate")}
+                {loading? t("users.roles.saving"): t("accounts.actions.activate")}
               </button>
             )}
             <button
@@ -295,9 +303,10 @@ export function AccountDetailsPage() {
             <button
               type="button"
               onClick={handleSaveEdit}
-              className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
+              disabled={loading}
+              className="rounded-[10px] disabled:cursor-not-allowed bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
             >
-              {t("users.actions.save")}
+              {loading ? t("users.roles.saving") : t("users.actions.save")}
             </button>
           </div>
         )}
@@ -345,12 +354,12 @@ export function AccountDetailsPage() {
       </section>
 
       {/* Section 5 — Activity Timeline (placeholder) */}
-      <section>
+      {/* <section>
         <h2 className="mb-3 text-base font-semibold text-[var(--ink-primary)]">
           {t("accounts.details.sections.activity")}
         </h2>
         <ActivityTimelinePlaceholder />
-      </section>
+      </section> */}
 
       <AccountDeleteDialog
         open={isDeleteOpen}

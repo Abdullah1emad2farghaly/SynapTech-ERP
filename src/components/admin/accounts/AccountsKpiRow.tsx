@@ -56,11 +56,11 @@ export function AccountsKpiRow({
   root,
   child,
   typeCounts,
-  maxTypeCards = 4,
+  maxTypeCards = 5,
 }: AccountsKpiRowProps) {
   const { t } = useTranslation();
   const visibleTypeCounts = typeCounts.slice(0, maxTypeCards);
-
+  console.log(typeCounts)
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       <KpiCard icon={<Landmark size={18} />} label={t("accounts.kpi.total")} value={total} />

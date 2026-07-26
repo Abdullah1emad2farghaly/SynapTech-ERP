@@ -48,8 +48,18 @@ export interface UpdateAccountPayload {
   isActive: boolean;
 }
 
+export interface AccountTypes {
+  value: string;
+  normalBalance: string
+}
+
 export async function getAllAccounts(): Promise<Account[]> {
   const { data } = await apiClient.get<Account[]>("/Accounts");
+  return data;
+}
+
+export async function getAccountTypes(): Promise<AccountTypes[]> {
+  const { data } = await apiClient.get<AccountTypes[]>(`/Accounts/account-types`);
   return data;
 }
 
@@ -58,7 +68,7 @@ export async function getAccountById(id: string): Promise<Account> {
   return data;
 }
 
-export async function createAccount(payload: CreateAccountPayload): Promise<Account> {
+export async function createAccount(payload: CreateAccountPayload) {  
   const { data } = await apiClient.post<Account>("/Accounts", payload);
   return data;
 }

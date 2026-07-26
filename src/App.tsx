@@ -22,6 +22,9 @@ import { RoleDetailsPage } from "./pages/admin/roles/RoleDetailsPage";
 import { AccountsListPage } from "./pages/admin/accounts/AccountsListPage";
 import { AccountFormPage } from "./pages/admin/accounts/AccountFormPage";
 import { AccountDetailsPage } from "./pages/admin/accounts/AccountDetailsPage";
+import { JournalEntriesListPage } from "./pages/admin/journal-entries/JournalEntriesListPage";
+import { CreateJournalEntryPage } from "./pages/admin/journal-entries/CreateJournalEntryPage";
+import { JournalEntryDetailsPage } from "./pages/admin/journal-entries/JournalEntryDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -68,9 +71,12 @@ export default function App() {
 
             <Route path="/accounting">
               <Route path="accounts" element={<AccountsListPage />} />
-              <Route path="journal-entries"/>
               <Route path="accounts/new" element={<AccountFormPage />} />
               <Route path="accounts/:id" element={<AccountDetailsPage />} />
+
+              <Route path="journal-entries" element={<JournalEntriesListPage />} />
+              <Route path="journal-entries/create" element={<CreateJournalEntryPage />} />
+              <Route path="journal-entries/:id" element={<JournalEntryDetailsPage />} />
             </Route>
           </Route>
 

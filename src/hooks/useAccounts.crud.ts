@@ -20,18 +20,28 @@ import {
   getAccountBalance,
   type CreateAccountPayload,
   type UpdateAccountPayload,
+  getAccountTypes,
+  AccountTypes,
 } from "../services/api/accounts.crud.api";
 
 export const accountsQueryKeys = {
   all: ["accounts-crud"] as const,
   detail: (id: string) => ["accounts-crud", "detail", id] as const,
   balance: (id: string) => ["accounts-crud", "balance", id] as const,
+  types: () => [...accountsQueryKeys.all, "types"] as const,
 };
 
 export function useAccountsList() {
   return useQuery({
     queryKey: accountsQueryKeys.all,
     queryFn: getAllAccounts,
+  });
+}
+
+export function useAccountTypes() {
+  return useQuery<AccountTypes[]>({
+    queryKey: accountsQueryKeys.types(),
+    queryFn: getAccountTypes,
   });
 }
 
@@ -61,7 +71,7 @@ export function useCreateAccount() {
     mutationFn: (payload: CreateAccountPayload) => createAccount(payload),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: accountsQueryKeys.all });
-    },
+    }
   });
 }
 

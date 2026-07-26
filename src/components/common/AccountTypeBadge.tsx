@@ -1,13 +1,16 @@
 // src/components/common/AccountTypeBadge.tsx
 //
-// Badge for an account's accountType. Same deterministic-color-from-
-// string pattern as RoleBadge, deliberately NOT a fixed color-per-known-
-// category (Assets=blue, Liabilities=red, etc.) — accountType is a
-// free-form string on the confirmed API, not a documented enum, so a
-// hardcoded category→color map would silently break (or just render a
-// default/no color) the moment a real Chart of Accounts uses a type
-// string this map didn't anticipate. Dot + label always paired, never
-// color-only, per the system-wide badge rule.
+// Badge for an account's accountType. Now that the actual type set is
+// confirmed (see constants/accountTypes.ts — Assests, Expensis,
+// Invistments), each known type gets a deliberate, meaningful color
+// (Assets=success green, Expenses=warning amber, Investments=signal
+// indigo) rather than a purely hash-derived one. An unrecognized value
+// (something outside the known set — e.g. if the backend adds a type
+// this project hasn't been told about yet) still falls back to the
+// deterministic hash-based color so the badge never breaks, it just
+// won't carry the same intentional meaning until the mapping is updated.
+// Dot + label always paired, never color-only, per the system-wide
+// badge rule.
 
 import { useMemo } from "react";
 
@@ -21,24 +24,34 @@ export interface AccountTypeBadgeProps {
   className?: string;
 }
 
-// Same palette-by-hash approach as RoleBadge, kept as a separate constant
-// so the two badges' color assignments are independent of each other
-// (an account type and a role happening to hash to the same palette
-// index shouldn't visually imply any relationship between them).
-const TYPE_PALETTE = [
-  { bg: "var(--signal)", bgSoft: "color-mix(in srgb, var(--signal) 14%, transparent)" },
-  { bg: "var(--synapse)", bgSoft: "color-mix(in srgb, var(--synapse) 16%, transparent)" },
-  { bg: "var(--success)", bgSoft: "color-mix(in srgb, var(--success) 14%, transparent)" },
-  { bg: "var(--warning)", bgSoft: "color-mix(in srgb, var(--warning) 14%, transparent)" },
-  { bg: "var(--error)", bgSoft: "color-mix(in srgb, var(--error) 12%, transparent)" },
-] as const;
+interface TypeColor {
+  bg: string;
+  bgSoft: string;
+}
 
-function getTypeColor(value: string) {
+// Deliberate mapping for the confirmed known types — spelled exactly as
+// the backend/data uses them (not "corrected" to Assets/Expenses/
+// Investments), since this has to match real values to ever match.
+const KNOWN_TYPE_COLORS: Record<string, TypeColor> = {
+  Assests: { bg: "var(--success)", bgSoft: "color-mix(in srgb, var(--success) 14%, transparent)" },
+  Expensis: { bg: "var(--warning)", bgSoft: "color-mix(in srgb, var(--warning) 14%, transparent)" },
+  Invistments: { bg: "var(--signal)", bgSoft: "color-mix(in srgb, var(--signal) 14%, transparent)" },
+};
+
+// Fallback palette for anything outside the known set, so a future,
+// not-yet-mapped type still renders consistently rather than breaking.
+const FALLBACK_PALETTE: TypeColor[] = [
+  { bg: "var(--synapse)", bgSoft: "color-mix(in srgb, var(--synapse) 16%, transparent)" },
+  { bg: "var(--error)", bgSoft: "color-mix(in srgb, var(--error) 12%, transparent)" },
+];
+
+function getTypeColor(value: string): TypeColor {
+  if (KNOWN_TYPE_COLORS[value]) return KNOWN_TYPE_COLORS[value];
   let hash = 0;
-  for (let i = 0; i < value.length; i++) {
+  for (let i = 0; i < value?.length; i++) {
     hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
   }
-  return TYPE_PALETTE[hash % TYPE_PALETTE.length]!;
+  return FALLBACK_PALETTE[hash % FALLBACK_PALETTE.length]!;
 }
 
 const SIZE_MAP: Record<AccountTypeBadgeSize, string> = {
