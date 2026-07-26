@@ -24,6 +24,16 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
+    id: "accounting",
+    label: "Accounting",
+    to: "/accounting",
+    icon: Users2,
+    children: [
+      { id: "accounts", label: "Chart Of Accounts", to: "accounting/accounts" },
+      { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
+    ],
+  },
+  {
     id: "hr",
     label: "HR & Payroll",
     to: "/hr",

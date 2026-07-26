@@ -77,6 +77,7 @@
       }
     }
   },
+  
   "validation": {
     "emailRequired": "Enter your email",
     "emailInvalid": "Enter a valid email address",
@@ -92,6 +93,7 @@
     "passwordNumber": "Add a number",
     "passwordSymbol": "Add a symbol"
   },
+
   "common": {
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -112,6 +114,7 @@
       "saveChanges": "Save Changes"
     }
   },
+
   "users": {
     "status": {
       "active": "Active",
@@ -224,6 +227,7 @@
       "deactivateTitle_other": "Deactivate {{count}} users?"
     }
   },
+
   "departments": {
     "list": {
       "title": "Departments",
@@ -319,6 +323,7 @@
       "moved": "{{name}} moved"
     }
   },
+
   "branches": {
     "list": {
       "title": "Branches",
@@ -507,5 +512,103 @@
       "deleted": "Role deleted.",
       "permissionsUpdated": "Permissions updated."
     }
+  },
+
+  "accounts": {
+    "breadcrumb": {
+      "dashboard": "Dashboard"
+    },
+    "list": {
+      "title": "Chart of Accounts",
+      "subtitleCount": "{{count}} account",
+      "subtitleCount_other": "{{count}} accounts",
+      "createAccount": "Create Account",
+      "search": {
+        "placeholder": "Search by code or name"
+      },
+      "filters": {
+        "type": "Account Type",
+        "status": "Status",
+        "rootOnly": "Root accounts only"
+      }
+    },
+    "kpi": {
+      "total": "Total Accounts",
+      "active": "Active Accounts",
+      "inactive": "Inactive Accounts",
+      "root": "Root Accounts",
+      "child": "Child Accounts"
+    },
+    "column": {
+      "account": "Account",
+      "type": "Type",
+      "status": "Status"
+    },
+    "tree": {
+      "empty": "No accounts yet",
+      "noMatches": "No accounts match your search"
+    },
+    "preview": {
+      "emptySelection": "Select an account to see its details",
+      "balanceSummary": "Balance Summary",
+      "openDetails": "Open Details"
+    },
+    "actions": {
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete"
+    },
+    "create": {
+      "title": "Create Account",
+      "fields": {
+        "code": "Code",
+        "name": "Name",
+        "type": "Account Type",
+        "parentAccount": "Parent Account"
+      },
+      "errors": {
+        "required": "This field is required"
+      },
+      "submitting": "Creating...",
+      "parentSearchPlaceholder": "Search accounts",
+      "parentWarning": "Parent account can't be changed after creation — choose carefully."
+    },
+    "details": {
+      "back": "Back",
+      "notFound": "Account not found",
+      "backToList": "Back to Accounts",
+      "parent": "Parent",
+      "sections": {
+        "general": "General Information",
+        "financial": "Financial Summary",
+        "hierarchy": "Hierarchy",
+        "children": "Child Accounts",
+        "activity": "Activity Timeline"
+      },
+      "noParent": "No parent account",
+      "childrenCount": "{{count}} child account",
+      "childrenCount_other": "{{count}} child accounts",
+      "noChildAccounts": "No child accounts",
+      "typeCannotChange": "Account type can't be changed after creation",
+      "parentCannotChange": "Parent account can't be changed after creation",
+      "activityPlaceholderTitle": "Activity history isn't available yet",
+      "activityPlaceholderBody": "This section is ready for when activity tracking is added to the backend.",
+      "totalDebit": "Total Debit",
+      "totalCredit": "Total Credit",
+      "currentBalance": "Current Balance"
+    },
+    "dialogs": {
+      "delete": {
+        "title": "Delete account",
+        "body": "This permanently removes {{name}}. This can't be undone.",
+        "hasBalanceWarning": "This account has financial activity recorded against it.",
+        "typedConfirmLabel": "Type {{code}} to confirm",
+        "typedConfirmPlaceholder": "Account code",
+        "typedConfirmMismatch": "Doesn't match the account code",
+        "blockedHasChildren": "This account has child accounts. Remove or reassign them first."
+      }
+    }
   }
+
 }

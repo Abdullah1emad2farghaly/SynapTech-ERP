@@ -77,6 +77,7 @@
       }
     }
   },
+
   "validation": {
     "emailRequired": "أدخل بريدك الإلكتروني",
     "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
@@ -92,6 +93,7 @@
     "passwordNumber": "أضف رقمًا",
     "passwordSymbol": "أضف رمزًا"
   },
+
   "common": {
     "errors": {
       "loadFailed": "تعذر تحميل البيانات",
@@ -112,6 +114,7 @@
     "dark": "داكن",
     "copyright": "© {{year}} Synaptech"
   },
+
   "users": {
     "status": {
       "active": "نشط",
@@ -224,6 +227,7 @@
       "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
     }
   },
+
   "departments": {
     "list": {
       "title": "الأقسام",
@@ -417,6 +421,7 @@
       "deleted": "تم حذف {{name}}"
     }
   },
+
   "roles": {
     "page": {
       "title": "الأدوار",
@@ -506,5 +511,103 @@
       "deleted": "تم حذف الدور.",
       "permissionsUpdated": "تم تحديث الصلاحيات."
     }
+  },
+
+  "accounts": {
+    "breadcrumb": {
+      "dashboard": "لوحة التحكم"
+    },
+    "list": {
+      "title": "دليل الحسابات",
+      "subtitleCount": "حساب واحد",
+      "subtitleCount_other": "{{count}} حسابات",
+      "createAccount": "إنشاء حساب",
+      "search": {
+        "placeholder": "ابحث بالرمز أو الاسم"
+      },
+      "filters": {
+        "type": "نوع الحساب",
+        "status": "الحالة",
+        "rootOnly": "الحسابات الرئيسية فقط"
+      }
+    },
+    "kpi": {
+      "total": "إجمالي الحسابات",
+      "active": "الحسابات النشطة",
+      "inactive": "الحسابات غير النشطة",
+      "root": "الحسابات الرئيسية",
+      "child": "الحسابات الفرعية"
+    },
+    "column": {
+      "account": "الحساب",
+      "type": "النوع",
+      "status": "الحالة"
+    },
+    "tree": {
+      "empty": "لا توجد حسابات بعد",
+      "noMatches": "لا توجد حسابات مطابقة لبحثك"
+    },
+    "preview": {
+      "emptySelection": "اختر حسابًا لعرض تفاصيله",
+      "balanceSummary": "ملخص الرصيد",
+      "openDetails": "فتح التفاصيل"
+    },
+    "actions": {
+      "edit": "تعديل",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف"
+    },
+    "create": {
+      "title": "إنشاء حساب",
+      "fields": {
+        "code": "الرمز",
+        "name": "الاسم",
+        "type": "نوع الحساب",
+        "parentAccount": "الحساب الرئيسي"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "submitting": "جارٍ الإنشاء...",
+      "parentSearchPlaceholder": "ابحث عن الحسابات",
+      "parentWarning": "لا يمكن تغيير الحساب الرئيسي بعد الإنشاء — اختر بعناية."
+    },
+    "details": {
+      "back": "رجوع",
+      "notFound": "الحساب غير موجود",
+      "backToList": "العودة إلى الحسابات",
+      "parent": "الحساب الرئيسي",
+      "sections": {
+        "general": "المعلومات العامة",
+        "financial": "الملخص المالي",
+        "hierarchy": "التسلسل الهرمي",
+        "children": "الحسابات الفرعية",
+        "activity": "سجل النشاط"
+      },
+      "noParent": "لا يوجد حساب رئيسي",
+      "childrenCount": "حساب فرعي واحد",
+      "childrenCount_other": "{{count}} حسابات فرعية",
+      "noChildAccounts": "لا توجد حسابات فرعية",
+      "typeCannotChange": "لا يمكن تغيير نوع الحساب بعد إنشائه",
+      "parentCannotChange": "لا يمكن تغيير الحساب الرئيسي بعد إنشائه",
+      "activityPlaceholderTitle": "سجل النشاط غير متاح بعد",
+      "activityPlaceholderBody": "هذا القسم جاهز لعرض النشاط عند إضافته إلى الواجهة الخلفية مستقبلاً.",
+      "totalDebit": "إجمالي المدين",
+      "totalCredit": "إجمالي الدائن",
+      "currentBalance": "الرصيد الحالي"
+    },
+    "dialogs": {
+      "delete": {
+        "title": "حذف الحساب",
+        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "hasBalanceWarning": "يحتوي هذا الحساب على نشاط مالي مسجل.",
+        "typedConfirmLabel": "اكتب {{code}} للتأكيد",
+        "typedConfirmPlaceholder": "رمز الحساب",
+        "typedConfirmMismatch": "لا يطابق رمز الحساب",
+        "blockedHasChildren": "يحتوي هذا الحساب على حسابات فرعية. يرجى إزالتها أو إعادة تعيينها أولاً."
+      }
+    }
   }
+  
 }

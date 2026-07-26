@@ -20,13 +20,11 @@ const BASE_URL = '/Roles'
 
 export async function getRoles(): Promise<RoleResponse[]> {
   const { data } = await apiClient.get<RoleResponse[]>(BASE_URL);
-  console.log(data)
   return data;
 }
 
 export async function getRoleById(id: string): Promise<RoleResponse> {
   const { data } = await apiClient.get<RoleResponse>(`${BASE_URL}/${id}`);
-  
   return data;
 }
 
@@ -56,7 +54,6 @@ export async function getPermissionsCatalog(): Promise<PermissionResponse[]> {
   const { data } = await apiClient.get<PermissionResponse[]>(
     `${BASE_URL}/permissions-catalog`
   );
-  console.log(data)
   return data;
 }
 

@@ -19,6 +19,9 @@ import { BranchesPage } from "./pages/admin/branches/BranchesPage";
 import { BranchDetailsPage } from "./pages/admin/branches/BranchDetailsPage";
 import { RolesListPage } from "./pages/admin/roles/RolesListPage";
 import { RoleDetailsPage } from "./pages/admin/roles/RoleDetailsPage";
+import { AccountsListPage } from "./pages/admin/accounts/AccountsListPage";
+import { AccountFormPage } from "./pages/admin/accounts/AccountFormPage";
+import { AccountDetailsPage } from "./pages/admin/accounts/AccountDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -54,7 +57,6 @@ export default function App() {
             <Route path={ROUTES.HR_EMPLOYEES} element={<EmployeeDirectoryPage />} />
             <Route path={ROUTES.HR_EMPLOYEE_DETAIL} element={<EmployeeProfilePage />} />
             <Route path="/organization">
-
               <Route path="branches" element={<BranchesPage/>} />
               <Route path="branches/:id" element={<BranchDetailsPage/>} />
               <Route path="departments" element={<DepartmentsPage/>} />
@@ -62,6 +64,13 @@ export default function App() {
               <Route path="users/:id" element={<UserDetailsPage />} />
               <Route path="roles" element={<RolesListPage/>}/>
               <Route path="roles/:id" element={<RoleDetailsPage/>}/>
+            </Route>
+
+            <Route path="/accounting">
+              <Route path="accounts" element={<AccountsListPage />} />
+              <Route path="journal-entries"/>
+              <Route path="accounts/new" element={<AccountFormPage />} />
+              <Route path="accounts/:id" element={<AccountDetailsPage />} />
             </Route>
           </Route>
 
