@@ -7,6 +7,7 @@ import type { NavItem } from "@/types/nav.types";
 
 function isItemActive(item: NavItem, pathname: string) {
   if (pathname === item.to || pathname.startsWith(`${item.to}/`)) return true;
+
   return item.children?.some((child) => pathname.startsWith(child.to)) ?? false;
 }
 
@@ -20,6 +21,10 @@ export function Sidebar() {
 
   const mobileSidebarOpen = useShellStore((s) => s.mobileSidebarOpen);
   const closeMobileSidebar = useShellStore((s) => s.closeMobileSidebar);
+
+  // Desktop respects collapse state
+  // Mobile is always expanded
+  const isCollapsed = collapsed && window.innerWidth >= 1024;
 
   return (
     <>
@@ -40,10 +45,10 @@ export function Sidebar() {
           "lg:static lg:translate-x-0 lg:shadow-none",
 
           // Width
-          collapsed ? "lg:w-16" : "lg:w-64",
+          isCollapsed ? "lg:w-16" : "lg:w-64",
           "w-72",
 
-          // Mobile animation
+          // Mobile drawer
           mobileSidebarOpen
             ? "translate-x-0"
             : "-translate-x-full lg:translate-x-0",
@@ -53,7 +58,7 @@ export function Sidebar() {
         <div className="flex h-16 items-center gap-2 border-b border-hairline px-4">
           <Logo size="sm" />
 
-          {!collapsed && (
+          {!isCollapsed && (
             <span className="font-display text-sm font-semibold text-ink-primary">
               Synaptech
             </span>
@@ -86,12 +91,12 @@ export function Sidebar() {
                   >
                     <Icon className="h-4 w-4 shrink-0" />
 
-                    {!collapsed && (
+                    {!isCollapsed && (
                       <span className="truncate">{item.label}</span>
                     )}
                   </NavLink>
 
-                  {!collapsed && item.children && (
+                  {!isCollapsed && item.children && (
                     <button
                       type="button"
                       aria-expanded={expanded}
@@ -102,15 +107,16 @@ export function Sidebar() {
                       className="me-1 rounded p-1 text-ink-tertiary hover:text-ink-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-synapse"
                     >
                       <ChevronDown
-                        className={`h-3.5 w-3.5 transition-transform duration-control ${
-                          expanded ? "rotate-180" : ""
-                        }`}
+                        className={[
+                          "h-3.5 w-3.5 transition-transform duration-control",
+                          expanded ? "rotate-180" : "",
+                        ].join(" ")}
                       />
                     </button>
                   )}
                 </div>
 
-                {!collapsed &&
+                {!isCollapsed &&
                   item.children &&
                   (expanded || active) && (
                     <div className="ms-7 mt-1 space-y-0.5 border-s border-hairline ps-3">
