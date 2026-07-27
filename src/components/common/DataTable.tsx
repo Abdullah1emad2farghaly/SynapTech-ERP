@@ -57,6 +57,7 @@ function SkeletonRow({ columnCount }: { columnCount: number }) {
   );
 }
 
+
 export function DataTable<User>({
   columns,
   rows,
@@ -76,7 +77,6 @@ export function DataTable<User>({
   const visibleColumns = columns.filter((c) => !c.hidden);
   const hasSelection = selectedIds !== undefined && onSelectionChange !== undefined;
   const columnCount = visibleColumns.length + (hasSelection ? 1 : 0);
-
   const allSelected =
     hasSelection && rows.length > 0 && rows.every((r) => selectedIds!.has(getRowId(r)));
 
@@ -112,7 +112,7 @@ export function DataTable<User>({
 
   return (
     <div className={`overflow-x-auto rounded-[16px] border border-[var(--hairline)] ${className}`}>
-      <table className="w-full border-collapse text-sm">
+      <table className="w-full border-collapse min-w-max text-sm">
         <thead className="sticky top-0 z-10 bg-[var(--sunken)]">
           <tr>
             {hasSelection && (
@@ -197,11 +197,14 @@ export function DataTable<User>({
                       />
                     </td>
                   )}
-                  {visibleColumns.map((column) => (
+                  {visibleColumns.map((column) => {
+                    // console.log(column.cell(row))
+                    return (
                     <td key={column.id} className="px-4 py-3 text-[var(--ink-primary)]">
                       {column.cell(row)}
                     </td>
-                  ))}
+                  )
+                  })}
                 </tr>
               );
             })

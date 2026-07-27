@@ -9,16 +9,26 @@ interface AppShellProps {
   onSearchFocus?: () => void;
 }
 
-// The one layout every module page renders inside — Sidebar + Navbar +
-// scrollable content region. Pages compose their own content; this owns
-// only the frame around it.
-export function AppShell({ children, notifications = [], onSearchFocus }: AppShellProps) {
+export function AppShell({
+  children,
+  notifications = [],
+  onSearchFocus,
+}: AppShellProps) {
   return (
-    <div className="flex h-screen w-full bg-canvas">
+    <div className="flex h-screen w-full overflow-hidden bg-canvas">
+      {/* Sidebar (Desktop + Mobile Drawer) */}
       <Sidebar />
+
+      {/* Main Content */}
       <div className="flex min-w-0 flex-1 flex-col">
-        <Navbar notifications={notifications} onSearchFocus={onSearchFocus} />
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <Navbar
+          notifications={notifications}
+          onSearchFocus={onSearchFocus}
+        />
+
+        <main className="flex-1 overflow-x-hidden overflow-y-auto">
+          {children}
+        </main>
       </div>
     </div>
   );

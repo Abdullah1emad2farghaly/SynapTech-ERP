@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users2 } from "lucide-react";
+import { LayoutDashboard, Users2, Building2, Wallet, Package } from "lucide-react";
 import type { NavItem } from "@/types/nav.types";
 
 // The single source of truth for the sidebar tree. Add a module's entry
@@ -14,7 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
     id: "organization",
     label: "Organization",
     to: "/Organization",
-    icon: Users2,
+    icon: Building2,
     children: [
       
       { id: "branches", label: "Branches", to: "/organization/branches" },
@@ -27,10 +27,20 @@ export const NAV_ITEMS: NavItem[] = [
     id: "accounting",
     label: "Accounting",
     to: "/accounting",
-    icon: Users2,
+    icon: Wallet,
     children: [
       { id: "accounts", label: "Chart Of Accounts", to: "accounting/accounts" },
       { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
+    ],
+  },
+  {
+    id: "inventory",
+    label: "Inventory",
+    to: "/inventory",
+    icon: Package,
+    children: [
+      { id: "warehouses", label: "Warehouses", to: "inventory/warehouses" },
+      // { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
     ],
   },
   {

@@ -99,12 +99,18 @@
       "loadFailed": "تعذر تحميل البيانات",
       "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
     },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "updating": "جارٍ التحديث..."
+    },
     "actions": {
       "retry": "إعادة المحاولة",
       "refresh": "تحديث",
       "cancel": "إلغاء",
       "delete": "حذف",
-      "saveChanges": "حفظ التغييرات"
+      "saveChanges": "حفظ التغييرات",
+      "export": "تصدير"
     },
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
@@ -736,6 +742,150 @@
       "posted": "تم ترحيل القيد.",
       "reversed": "تم عكس القيد.",
       "deleted": "تم حذف القيد."
+    }
+  },
+
+  "company": {
+    "breadcrumb": {
+      "organization": "المؤسسة",
+      "company": "الشركة"
+    },
+    "actions": {
+      "edit": "تعديل بيانات الشركة",
+      "refresh": "تحديث"
+    },
+    "fields": {
+      "name": "اسم الشركة",
+      "legalName": "الاسم القانوني",
+      "taxNumber": "الرقم الضريبي",
+      "country": "الدولة",
+      "currency": "العملة",
+      "status": "الحالة"
+    },
+    "status": {
+      "active": "نشطة",
+      "inactive": "غير نشطة",
+      "activeDescription": "الشركة تعمل حاليًا.",
+      "inactiveDescription": "الشركة غير مفعّلة حاليًا."
+    },
+    "sections": {
+      "info": {
+        "title": "بيانات الشركة",
+        "description": "التفاصيل الأساسية لهوية مؤسستك."
+      },
+      "business": {
+        "title": "التفاصيل التجارية",
+        "description": "معلومات التسجيل والبيانات المالية."
+      }
+    },
+    "edit": {
+      "title": "تعديل بيانات الشركة",
+      "save": "حفظ",
+      "saving": "جارٍ الحفظ...",
+      "cancel": "إلغاء"
+    },
+    "empty": {
+      "title": "لا توجد بيانات للشركة",
+      "description": "لم نتمكن من العثور على بيانات شركة مرتبطة بحسابك.",
+      "retry": "إعادة المحاولة"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "description": "تعذّر تحميل بيانات الشركة. حاول مرة أخرى.",
+      "retry": "إعادة المحاولة"
+    },
+    "toast": {
+      "updateSuccess": "تم تحديث بيانات الشركة بنجاح",
+      "updateError": "فشل تحديث بيانات الشركة"
+    }
+  },
+
+  "warehouses": {
+    "page": {
+      "title": "المستودعات",
+      "description": "إدارة مستودعات الشركة عبر جميع الفروع."
+    },
+    "stats": {
+      "total": "إجمالي المستودعات",
+      "totalDescription": "عبر جميع الفروع",
+      "active": "نشط",
+      "activeDescription": "قيد التشغيل حاليًا",
+      "inactive": "غير نشط",
+      "inactiveDescription": "معطّل حاليًا",
+      "branchesWithWarehouses": "الفروع التي لها مستودعات",
+      "branchesWithWarehousesDescription": "عدد الفروع المستخدمة"
+    },
+    "toolbar": {
+      "searchPlaceholder": "ابحث بالاسم أو الرمز...",
+      "allBranches": "جميع الفروع",
+      "allStatuses": "جميع الحالات",
+      "sortNameAsc": "الاسم (أ–ي)",
+      "sortNameDesc": "الاسم (ي–أ)",
+      "sortCode": "الرمز",
+      "reset": "إعادة تعيين الفلاتر",
+      "exportNotAvailable": "التصدير غير متاح حاليًا."
+    },
+    "table": {
+      "name": "اسم المستودع",
+      "code": "الرمز",
+      "branch": "الفرع",
+      "status": "الحالة",
+      "unknownBranch": "فرع غير معروف"
+    },
+    "actions": {
+      "create": "مستودع جديد",
+      "view": "عرض",
+      "edit": "تعديل",
+      "activate": "تفعيل",
+      "deactivate": "تعطيل",
+      "delete": "حذف"
+    },
+    "empty": {
+      "title": "لا توجد مستودعات بعد",
+      "description": "أنشئ أول مستودع لبدء إدارة المخزون.",
+      "filteredTitle": "لا توجد مستودعات مطابقة لفلاترك"
+    },
+    "drawer": {
+      "createTitle": "مستودع جديد",
+      "editTitle": "تعديل المستودع",
+      "viewTitle": "تفاصيل المستودع",
+      "generalInfo": "معلومات عامة",
+      "unsavedChangesTitle": "تجاهل التغييرات غير المحفوظة؟",
+      "unsavedChangesBody": "لديك تغييرات غير محفوظة. إذا أغلقت الآن، ستُفقد.",
+      "discardChanges": "تجاهل",
+      "keepEditing": "الاستمرار في التعديل"
+    },
+    "fields": {
+      "name": "اسم المستودع",
+      "code": "رمز المستودع",
+      "branch": "الفرع",
+      "status": "الحالة",
+      "statusSwitchToDeactivate": "نشط، بدّل للتعطيل",
+      "statusSwitchToActivate": "غير نشط، بدّل للتفعيل"
+    },
+    "form": {
+      "selectBranch": "اختر فرعًا",
+      "loadingBranches": "جارٍ تحميل الفروع...",
+      "searchBranches": "ابحث عن الفروع...",
+      "noBranchesFound": "لا توجد فروع"
+    },
+    "validation": {
+      "nameMin": "يجب أن يتكون اسم المستودع من حرفين على الأقل.",
+      "nameMax": "يجب ألا يتجاوز اسم المستودع 80 حرفًا.",
+      "codeRequired": "رمز المستودع مطلوب.",
+      "codeMax": "يجب ألا يتجاوز رمز المستودع 20 حرفًا.",
+      "branchRequired": "اختر فرعًا."
+    },
+    "deleteDialog": {
+      "title": "حذف المستودع",
+      "body": "سيتم حذف \"{{name}}\" ({{code}}) نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "toasts": {
+      "created": "تم إنشاء المستودع.",
+      "updated": "تم تحديث المستودع.",
+      "deleted": "تم حذف المستودع.",
+      "activated": "تم تفعيل المستودع.",
+      "deactivated": "تم تعطيل المستودع."
     }
   }
   

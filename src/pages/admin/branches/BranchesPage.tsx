@@ -193,7 +193,7 @@ export function BranchesPage() {
     drawerTarget?.kind === "duplicate" ? branches.find((b) => b.id === drawerTarget.id) : undefined;
 
   return (
-    <div className="flex flex-col gap-4 p-6">
+    <div className="flex flex-col gap-4 md:p-6 py-6 px-2">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">

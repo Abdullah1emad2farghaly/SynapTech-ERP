@@ -63,7 +63,7 @@ export function UserDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 md:p-6 py-6 px-2">
         <div className="h-20 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
         <div className="h-20 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
         <div className="h-20 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
@@ -114,7 +114,7 @@ export function UserDetailsPage() {
   }
 
   function handleCancelEdit() {
-    setForm({ fullName: user? user.fullName: '', branchId: user? user.branchId: '', departmentId: user? user.departmentId: '' });
+    setForm({ fullName: user ? user.fullName : '', branchId: user ? user.branchId : '', departmentId: user ? user.departmentId : '' });
     setIsEditing(false);
   }
 
@@ -123,11 +123,11 @@ export function UserDetailsPage() {
     departmentOptions.find((d) => d.value === user.departmentId)?.label ?? "———";
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 md:p-6 py-6 px-2">
       {/* Header band */}
-      <div className="flex items-start justify-between rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
+      <div className="flex items-start md:flex-row flex-col justify-between rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
         <div className="flex items-center gap-4">
-          <Avatar name={user.fullName} size="lg" />
+          <Avatar name={user.fullName} size="md" />
           <div>
             <h1 className="text-lg font-semibold text-[var(--ink-primary)]">{user.fullName}</h1>
             <p className="text-sm text-[var(--ink-tertiary)]">{user.email}</p>
@@ -140,15 +140,17 @@ export function UserDetailsPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between md:w-auto w-full gap-2">
           {!isEditing && (
-            <button
-              type="button"
-              onClick={() => setIsEditing(true)}
-              className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-            >
-              {t("users.actions.edit")}
-            </button>
+            <div>
+              <button
+                type="button"
+                onClick={() => setIsEditing(true)}
+                className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+              >
+                {t("users.actions.edit")}
+              </button>
+            </div>
           )}
           <UserActionMenu
             userId={user.id}
@@ -162,7 +164,6 @@ export function UserDetailsPage() {
       </div>
 
       <div className="grid gap-4">
-        {/* Basic Information */}
         <section className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
           <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-[var(--ink-tertiary)]">
             {t("users.details.sections.basicInfo")}
@@ -178,12 +179,12 @@ export function UserDetailsPage() {
           )}
         </section>
 
-        {/* Contact Information */}
+
         <section className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
           <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-[var(--ink-tertiary)]">
             {t("users.details.sections.contactInfo")}
           </h2>
-          <div className="flex items-center gap-2">
+          <div className="flex md:items-center items-start md:flex-row flex-col gap-2">
             <p className="text-sm text-[var(--ink-primary)]">{user.email}</p>
             <span
               className="flex items-center gap-1 text-xs text-[var(--ink-tertiary)]"
@@ -195,7 +196,7 @@ export function UserDetailsPage() {
           </div>
         </section>
 
-        {/* Organization */}
+
         <section className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
           <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-[var(--ink-tertiary)]">
             {t("users.details.sections.organization")}

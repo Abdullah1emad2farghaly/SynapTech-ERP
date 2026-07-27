@@ -235,7 +235,7 @@ export function DepartmentsPage() {
     drawerTarget?.kind === "details" ? departments.find((d) => d.id === drawerTarget.id) : undefined;
 
   return (
-    <div className="flex flex-col gap-4 p-6 overflow-auto">
+    <div className="flex flex-col gap-4 md:p-6 py-6 px-2 overflow-auto">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">
@@ -261,16 +261,16 @@ export function DepartmentsPage() {
         root={kpis.root}
       />
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-3">
         <input
           type="text"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           placeholder={t("departments.list.search.placeholder")}
-          className="w-full max-w-sm rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] placeholder:text-[var(--ink-tertiary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
+          className="w-full max-w-xs rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] placeholder:text-[var(--ink-tertiary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
         />
 
-        <div className="flex items-center gap-2">
+        <div className="grid md:grid-cols-[auto_auto_auto_auto]  grid-cols-[auto_auto] text-end justify-end gap-2">
           <select
             value={branchFilter ?? ""}
             onChange={(e) => setBranchFilter(e.target.value || null)}

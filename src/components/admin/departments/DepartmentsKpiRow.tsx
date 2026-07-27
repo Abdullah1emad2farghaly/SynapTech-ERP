@@ -51,7 +51,7 @@ export function DepartmentsKpiRow({
   const { t } = useTranslation();
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       <KpiCard icon={<Building2 size={18} />} label={t("departments.kpi.total")} value={total} />
       <KpiCard
         icon={<CheckCircle2 size={18} />}

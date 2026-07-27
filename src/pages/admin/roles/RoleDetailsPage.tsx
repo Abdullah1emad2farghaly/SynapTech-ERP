@@ -54,7 +54,7 @@ export function RoleDetailsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 md:p-6 py-6 px-2">
       <button
         type="button"
         onClick={() => navigate("/organization/roles")}

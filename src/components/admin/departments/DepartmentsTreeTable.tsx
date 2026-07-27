@@ -110,12 +110,11 @@ export function DepartmentsTreeTable({
     const isCollapsed = collapsedIds.has(node.id);
 
     return (
-      <div key={node.id} role="treeitem" aria-expanded={hasChildren ? !isCollapsed : undefined} aria-level={level + 1}>
+      <div key={node.id} className="min-w-max" role="treeitem" aria-expanded={hasChildren ? !isCollapsed : undefined} aria-level={level + 1}>
         <div
           onClick={() => onRowClick?.(node)}
-          className={`flex items-center gap-3 border-t border-[var(--hairline)] px-4 py-3 transition-colors duration-150 hover:bg-[var(--sunken)] ${
-            onRowClick ? "cursor-pointer" : ""
-          }`}
+          className={`flex items-center gap-3 border-t border-[var(--hairline)] px-4 py-3 transition-colors duration-150 hover:bg-[var(--sunken)] ${onRowClick ? "cursor-pointer" : ""
+            }`}
         >
           <div
             className="flex flex-1 items-center gap-2 min-w-0"
@@ -133,9 +132,8 @@ export function DepartmentsTreeTable({
               >
                 <ChevronRight
                   size={14}
-                  className={`shrink-0 transition-transform duration-150 rtl:rotate-180 ${
-                    !isCollapsed ? "rotate-90 rtl:rotate-90" : ""
-                  }`}
+                  className={`shrink-0 transition-transform duration-150 rtl:rotate-180 ${!isCollapsed ? "rotate-90 rtl:rotate-90" : ""
+                    }`}
                 />
               </button>
             ) : (
@@ -214,14 +212,16 @@ export function DepartmentsTreeTable({
   }
 
   return (
-    <div role="tree" className="overflow-y-auto rounded-[16px] border border-[var(--hairline)]">
-      <div className="flex items-center gap-3 bg-[var(--sunken)] px-4 py-3 text-xs font-medium text-[var(--ink-secondary)]">
-        <span className="flex-1">{t("departments.column.department")}</span>
-        <span className="w-32 shrink-0">{t("departments.column.branch")}</span>
-        <span className="w-24 shrink-0">{t("departments.column.status")}</span>
-        <span className="w-10 shrink-0" />
+    <div role="tree" className="overflow-y-auto  rounded-[16px] border border-[var(--hairline)]">
+      <div className="min-w-max">
+        <div className="flex items-center gap-3 bg-[var(--sunken)] px-4 py-3 text-xs font-medium text-[var(--ink-secondary)]">
+          <span className="flex-1">{t("departments.column.department")}</span>
+          <span className="w-32 shrink-0">{t("departments.column.branch")}</span>
+          <span className="w-24 shrink-0">{t("departments.column.status")}</span>
+          <span className="w-10 shrink-0" />
+        </div>
+        {tree.map((node) => renderNode(node, 0))}
       </div>
-      {tree.map((node) => renderNode(node, 0))}
     </div>
   );
 }

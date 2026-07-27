@@ -25,6 +25,7 @@ export interface AccountsKpiRowProps {
   child: number;
   /** Distinct accountType values present in the loaded data, with counts — already sorted by frequency. */
   typeCounts: TypeCount[];
+  isLoading: boolean;
   /** How many per-type cards to show before folding the rest into the filter panel only. */
   maxTypeCards?: number;
 }
@@ -56,13 +57,23 @@ export function AccountsKpiRow({
   root,
   child,
   typeCounts,
+  isLoading,
   maxTypeCards = 5,
 }: AccountsKpiRowProps) {
   const { t } = useTranslation();
   const visibleTypeCounts = typeCounts.slice(0, maxTypeCards);
-  console.log(typeCounts)
+
+   if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className="h-[68px] animate-pulse rounded-lg bg-[--sunken]" />
+        ))}
+      </div>
+    );
+  }
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       <KpiCard icon={<Landmark size={18} />} label={t("accounts.kpi.total")} value={total} />
       <KpiCard icon={<CheckCircle2 size={18} />} label={t("accounts.kpi.active")} value={active} />
       <KpiCard icon={<XCircle size={18} />} label={t("accounts.kpi.inactive")} value={inactive} />

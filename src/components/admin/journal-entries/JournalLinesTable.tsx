@@ -17,8 +17,8 @@ export function JournalLinesTable({ lines }: JournalLinesTableProps) {
   const accountById = new Map(accounts.map((a) => [a.id, a]));
 
   return (
-    <div className="overflow-hidden rounded-lg border border-[--hairline]">
-      <table className="w-full text-sm">
+    <div className="overflow-x-auto rounded-lg border border-[--hairline]">
+      <table className="w-full min-w-max text-sm">
         <thead className="sticky top-0 bg-[--sunken] text-xs text-[--ink-secondary]">
           <tr>
             <th className="px-3 py-2 text-start">{t("journalEntries.lines.accountCode")}</th>

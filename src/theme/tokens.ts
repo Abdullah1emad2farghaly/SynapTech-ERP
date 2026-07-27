@@ -1,58 +1,49 @@
-// Typed source of truth for the design tokens defined in globals.css.
-// Components should reference Tailwind classes (bg-panel, text-ink-primary, etc.)
-// rather than importing this directly — this file exists for places that need
-// raw values in JS, e.g. the SynapseFieldPanel canvas drawing.
+// ============================================================================
+// SynapTech ERP Design Tokens
+// Premium Enterprise Theme
+// Designed for React + Tailwind CSS ERP
+// ============================================================================
 
 export const tokens = {
-  light: {
-    // Backgrounds
-    canvas: "#F6F7FB",
-    panel: "#FFFFFF",
-    sunken: "#EEF0F6",
+ light: {
+  canvas: "#F8FAFC",
+  panel: "#FFFFFF",
+  sunken: "#F1F5F9",
 
-    // Text
-    inkPrimary: "#12162A",
-    inkSecondary: "#565C79",
-    inkTertiary: "#9098B8",
+  inkPrimary: "#0F172A",
+  inkSecondary: "#475569",
+  inkTertiary: "#94A3B8",
 
-    // Brand
-    signal: "#4338CA",
-    signalHover: "#3730A3",
-    synapse: "#22D3EE",
+  signal: "#0F766E",
+  signalHover: "#115E59",
+  synapse: "#22D3EE",
 
-    // Status
-    success: "#0F9D68",
-    error: "#DC2626",
-    warning: "#D97706",
+  success: "#16A34A",
+  error: "#DC2626",
+  warning: "#CA8A04",
 
-    // Borders
-    hairline: "#E2E4F0",
-  },
+  hairline: "#E2E8F0",
+},
 
-  dark: {
-    // Backgrounds (Neutral Black Theme)
-    canvas: "#090909",
-    panel: "#141414",
-    sunken: "#1C1C1C",
+dark: {
+  canvas: "#09090B",
+  panel: "#18181B",
+  sunken: "#27272A",
 
-    // Text
-    inkPrimary: "#FAFAFA",
-    inkSecondary: "#B3B3B3",
-    inkTertiary: "#7A7A7A",
+  inkPrimary: "#FAFAFA",
+  inkSecondary: "#A1A1AA",
+  inkTertiary: "#71717A",
 
-    // Brand
-    signal: "#6366F1",
-    signalHover: "#818CF8",
-    synapse: "#22D3EE",
+  signal: "#14B8A6",
+  signalHover: "#2DD4BF",
+  synapse: "#22D3EE",
 
-    // Status
-    success: "#22C55E",
-    error: "#EF4444",
-    warning: "#F59E0B",
+  success: "#22C55E",
+  error: "#EF4444",
+  warning: "#EAB308",
 
-    // Borders
-    hairline: "#2A2A2A",
-  },
+  hairline: "#3F3F46",
+}
 } as const;
 
 export type ThemeMode = "light" | "dark";

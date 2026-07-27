@@ -59,7 +59,7 @@ export function JournalEntriesStats({
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="h-[68px] animate-pulse rounded-lg bg-[--sunken]" />
         ))}
@@ -83,7 +83,7 @@ export function JournalEntriesStats({
   );
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       <StatCard
         icon={<FileText size={18} />}
         label={t("journalEntries.stats.total")}

@@ -104,12 +104,18 @@
       "loadFailed": "Couldn't load the data",
       "actionFailed": "Something went wrong. Please try again."
     },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "updating": "Updating..."
+    },
     "actions": {
       "retry": "Retry",
       "refresh": "Refresh",
       "cancel": "Cancel",
       "delete": "Delete",
-      "saveChanges": "Save Changes"
+      "saveChanges": "Save Changes",
+      "export": "Export"
     }
   },
   "users": {
@@ -602,6 +608,7 @@
       }
     }
   },
+
   "journalEntries": {
     "page": {
       "title": "Journal Entries",
@@ -728,6 +735,150 @@
       "posted": "Journal entry posted.",
       "reversed": "Journal entry reversed.",
       "deleted": "Journal entry deleted."
+    }
+  },
+
+  "company": {
+    "breadcrumb": {
+      "organization": "Organization",
+      "company": "Company"
+    },
+    "actions": {
+      "edit": "Edit Company",
+      "refresh": "Refresh"
+    },
+    "fields": {
+      "name": "Company Name",
+      "legalName": "Legal Name",
+      "taxNumber": "Tax Number",
+      "country": "Country",
+      "currency": "Currency",
+      "status": "Status"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "activeDescription": "Company is currently operational.",
+      "inactiveDescription": "Company is currently deactivated."
+    },
+    "sections": {
+      "info": {
+        "title": "Company Information",
+        "description": "Core identity details for your organization."
+      },
+      "business": {
+        "title": "Business Details",
+        "description": "Registration and financial information."
+      }
+    },
+    "edit": {
+      "title": "Edit Company",
+      "save": "Save",
+      "saving": "Saving...",
+      "cancel": "Cancel"
+    },
+    "empty": {
+      "title": "No company information found",
+      "description": "We couldn't find any company details for your account.",
+      "retry": "Retry"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "We couldn't load your company information. Please try again.",
+      "retry": "Retry"
+    },
+    "toast": {
+      "updateSuccess": "Company updated successfully",
+      "updateError": "Failed to update company"
+    }
+  },
+
+   "warehouses": {
+    "page": {
+      "title": "Warehouses",
+      "description": "Manage company warehouses across all branches."
+    },
+    "stats": {
+      "total": "Total Warehouses",
+      "totalDescription": "Across all branches",
+      "active": "Active",
+      "activeDescription": "Currently operational",
+      "inactive": "Inactive",
+      "inactiveDescription": "Currently disabled",
+      "branchesWithWarehouses": "Branches with Warehouses",
+      "branchesWithWarehousesDescription": "Distinct branches in use"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by name or code...",
+      "allBranches": "All branches",
+      "allStatuses": "All statuses",
+      "sortNameAsc": "Name (A–Z)",
+      "sortNameDesc": "Name (Z–A)",
+      "sortCode": "Code",
+      "reset": "Reset filters",
+      "exportNotAvailable": "Export isn't available yet."
+    },
+    "table": {
+      "name": "Warehouse Name",
+      "code": "Code",
+      "branch": "Branch",
+      "status": "Status",
+      "unknownBranch": "Unknown branch"
+    },
+    "actions": {
+      "create": "New Warehouse",
+      "view": "View",
+      "edit": "Edit",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete"
+    },
+    "empty": {
+      "title": "No Warehouses Yet",
+      "description": "Create your first warehouse to start managing inventory.",
+      "filteredTitle": "No warehouses match your filters"
+    },
+    "drawer": {
+      "createTitle": "New Warehouse",
+      "editTitle": "Edit Warehouse",
+      "viewTitle": "Warehouse Details",
+      "generalInfo": "General Information",
+      "unsavedChangesTitle": "Discard unsaved changes?",
+      "unsavedChangesBody": "You have unsaved changes. If you close now, they will be lost.",
+      "discardChanges": "Discard",
+      "keepEditing": "Keep Editing"
+    },
+    "fields": {
+      "name": "Warehouse Name",
+      "code": "Warehouse Code",
+      "branch": "Branch",
+      "status": "Status",
+      "statusSwitchToDeactivate": "Active, switch to deactivate",
+      "statusSwitchToActivate": "Inactive, switch to activate"
+    },
+    "form": {
+      "selectBranch": "Select a branch",
+      "loadingBranches": "Loading branches...",
+      "searchBranches": "Search branches...",
+      "noBranchesFound": "No branches found"
+    },
+    "validation": {
+      "nameMin": "Warehouse name must be at least 2 characters.",
+      "nameMax": "Warehouse name must be 80 characters or fewer.",
+      "codeRequired": "Warehouse code is required.",
+      "codeMax": "Warehouse code must be 20 characters or fewer.",
+      "branchRequired": "Select a branch."
+    },
+    "deleteDialog": {
+      "title": "Delete warehouse",
+      "body": "This will permanently delete \"{{name}}\" ({{code}}). This action cannot be undone."
+    },
+    "toasts": {
+      "created": "Warehouse created.",
+      "updated": "Warehouse updated.",
+      "deleted": "Warehouse deleted.",
+      "activated": "Warehouse activated.",
+      "deactivated": "Warehouse deactivated."
     }
   }
 }

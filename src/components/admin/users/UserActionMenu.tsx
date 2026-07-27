@@ -96,7 +96,7 @@ export function UserActionMenu({
   }, []);
 
   return (
-    <div  ref={menuRef} className="relative inline-block text-start">
+    <div  ref={menuRef} className="relative inline-block">
       <button
         ref={triggerRef}
         type="button"

@@ -43,6 +43,8 @@ import {
   useAccountTypes,
 } from "../../../hooks/useAccounts.crud";
 import { AccountTypes } from "@/services/api/accounts.crud.api";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export function AccountsListPage() {
   const { t } = useTranslation();
@@ -155,13 +157,19 @@ export function AccountsListPage() {
 
   async function handleDeleteConfirm() {
     if (!deleteTargetId) return;
+    
     setIsDeleting(true);
     try {
       await deleteMutation.mutateAsync(deleteTargetId);
       if (selectedId === deleteTargetId) setSelectedId(null);
       setDeleteTargetId(null);
       refetch();
+    } catch(err){
+      if(axios.isAxiosError(err)){
+        handleErrors(err.response?.data.errors)
+      }
     } finally {
+      
       setIsDeleting(false);
     }
   }
@@ -185,9 +193,10 @@ export function AccountsListPage() {
     setIsCreateOpen(false);
     refetch();
   }
+ 
 
   return (
-    <div className="flex flex-col gap-4 p-6">
+    <div className="flex flex-col gap-4 p-2 md:p-6 py-6 ">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">
@@ -213,6 +222,7 @@ export function AccountsListPage() {
         root={kpis.root}
         child={kpis.child}
         typeCounts={typeCounts}
+        isLoading={isLoading}
       />
 
       <div className="flex flex-wrap items-center justify-between gap-3">

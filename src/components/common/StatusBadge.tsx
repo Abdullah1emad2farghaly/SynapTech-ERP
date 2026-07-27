@@ -15,7 +15,7 @@ export type StatusBadgeSize = "sm" | "md";
 export interface StatusBadgeProps {
   status: StatusBadgeStatus;
   /** Already-translated label from the caller (e.g. t("users.status.active")). */
-  label: string;
+  label?: string;
   size?: StatusBadgeSize;
   className?: string;
 }

@@ -75,7 +75,7 @@ export function JournalEntriesListPage() {
   }, [entries, filters, sort]);
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 px-2 py-6 md:p-6">
       <div>
         <h1 className="text-2xl font-semibold text-[--ink-primary]">
           {t("journalEntries.page.title")}

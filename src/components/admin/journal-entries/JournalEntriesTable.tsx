@@ -196,6 +196,7 @@ export function JournalEntriesTable({
       getRowId={(entry) => entry.id}
       isLoading={isLoading}
       skeletonRowCount={6}
+      className={" min-w-300"}
       emptyState={
         <div className="flex flex-col items-center gap-3 py-12 text-center">
           <FileText size={32} className="text-[--ink-tertiary]" />

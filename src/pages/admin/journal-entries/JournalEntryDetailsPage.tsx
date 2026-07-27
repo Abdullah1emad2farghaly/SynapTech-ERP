@@ -47,7 +47,7 @@ export function JournalEntryDetailsPage() {
   const canDelete = entry.status === "Draft";
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 md:p-6 py-6 px-2">
       <button
         type="button"
         onClick={() => navigate("/accounting/journal-entries")}
@@ -117,7 +117,7 @@ export function JournalEntryDetailsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         <div className="rounded-lg border border-[--hairline] bg-[--panel] p-4">
           <p className="text-xs text-[--ink-tertiary]">{t("journalEntries.totals.debit")}</p>
           <p className="text-lg font-semibold text-[--ink-primary]">{totalDebit.toFixed(2)}</p>
