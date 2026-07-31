@@ -27,6 +27,14 @@ import { CreateJournalEntryPage } from "./pages/admin/journal-entries/CreateJour
 import { JournalEntryDetailsPage } from "./pages/admin/journal-entries/JournalEntryDetailsPage";
 import CompanyPage from "./pages/admin/company/CompanyPage";
 import { WarehousesListPage } from "./pages/admin/warehouses/WarehousesListPage";
+import { CategoriesPage } from "./pages/admin/categories/CategoriesPage";
+import { ProductsListPage } from "./pages/admin/products/ProductsListPage";
+import { ProductDetailsPage } from "./pages/admin/products/ProductDetailsPage";
+import { StockOverviewPage } from "./pages/admin/stock/StockOverviewPage";
+import { ProductStockDetailsPage } from "./pages/admin/stock/ProductStockDetailsPage";
+import { WarehouseInventoryPage } from "./pages/admin/stock/WarehouseInventoryPage";
+import { RecordMovementPage } from "./pages/admin/stock/RecordMovementPage";
+import { TransferStockPage } from "./pages/admin/stock/TransferStockPage";
 
 const queryClient = new QueryClient();
 
@@ -83,8 +91,15 @@ export default function App() {
 
             <Route path="/inventory">
               <Route path="warehouses" element={<WarehousesListPage />} />
-              {/* <Route path="accounts/new" element={<AccountFormPage />} /> */}
+              <Route path="categories" element={<CategoriesPage />} />
+              <Route path="products" element={<ProductsListPage />} />
+              <Route path="products/:id" element={<ProductDetailsPage />} />
               
+              <Route path="stock" element={<StockOverviewPage />} />
+              
+              <Route path="warehouses/:warehouseId" element={<WarehouseInventoryPage />} />
+              <Route path="new-movement" element={<RecordMovementPage />} />
+              <Route path="stock/transfer" element={<TransferStockPage />} />
             </Route>
           </Route>
 

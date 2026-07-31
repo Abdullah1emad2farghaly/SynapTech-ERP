@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 
-export const handleErrors = (errors: string[]): void => {
+export const handleErrors = (errors: string[] | any): void => {
     if (Array.isArray(errors)) {
         errors.forEach((err, index) => {
             if(index != 0){
@@ -8,5 +8,11 @@ export const handleErrors = (errors: string[]): void => {
                 toast.error(err)
             }
         })
+    }else {
+        for (const key in errors) {
+            errors[key].forEach((err:string) => {
+                toast.error(err)
+            });
+        }
     }
 }

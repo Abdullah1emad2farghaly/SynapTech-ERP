@@ -77,7 +77,6 @@
       }
     }
   },
-
   "validation": {
     "emailRequired": "أدخل بريدك الإلكتروني",
     "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
@@ -93,7 +92,6 @@
     "passwordNumber": "أضف رقمًا",
     "passwordSymbol": "أضف رمزًا"
   },
-
   "common": {
     "errors": {
       "loadFailed": "تعذر تحميل البيانات",
@@ -105,11 +103,17 @@
       "updating": "جارٍ التحديث..."
     },
     "actions": {
+      "edit": "تعديل",
+      "create": "إنشاء",
+      "creating":"جاري الإنشاء ...",
       "retry": "إعادة المحاولة",
       "refresh": "تحديث",
       "cancel": "إلغاء",
       "delete": "حذف",
+      "viewDetails": "عرض التفاصيل",
+      "duplicate": "تكرار",
       "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
       "export": "تصدير"
     },
     "showPassword": "إظهار كلمة المرور",
@@ -120,7 +124,6 @@
     "dark": "داكن",
     "copyright": "© {{year}} Synaptech"
   },
-
   "users": {
     "status": {
       "active": "نشط",
@@ -233,7 +236,6 @@
       "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
     }
   },
-
   "departments": {
     "list": {
       "title": "الأقسام",
@@ -329,7 +331,6 @@
       "moved": "تم نقل {{name}}"
     }
   },
-  
   "branches": {
     "list": {
       "title": "الفروع",
@@ -427,7 +428,6 @@
       "deleted": "تم حذف {{name}}"
     }
   },
-
   "roles": {
     "page": {
       "title": "الأدوار",
@@ -518,7 +518,6 @@
       "permissionsUpdated": "تم تحديث الصلاحيات."
     }
   },
-
   "accounts": {
     "breadcrumb": {
       "dashboard": "لوحة التحكم"
@@ -615,7 +614,6 @@
       }
     }
   },
-  
   "journalEntries": {
     "page": {
       "title": "القيود اليومية",
@@ -744,7 +742,6 @@
       "deleted": "تم حذف القيد."
     }
   },
-
   "company": {
     "breadcrumb": {
       "organization": "المؤسسة",
@@ -799,7 +796,6 @@
       "updateError": "فشل تحديث بيانات الشركة"
     }
   },
-
   "warehouses": {
     "page": {
       "title": "المستودعات",
@@ -887,6 +883,326 @@
       "activated": "تم تفعيل المستودع.",
       "deactivated": "تم تعطيل المستودع."
     }
+  },
+  "categories": {
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل",
+      "move": "نقل",
+      "addChild": "إضافة فئة فرعية",
+      "copyId": "نسخ المعرف",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف",
+      "moreActions": "المزيد من الإجراءات"
+    },
+    "toast": {
+      "activated": "تم تفعيل {{name}}",
+      "idCopied": "تم نسخ معرف الفئة",
+      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "deleted": "تم حذف {{name}}"
+    },
+    "details": {
+      "nothingSelected": "اختر فئة لعرض تفاصيلها",
+      "sections": {
+        "hierarchy": "التسلسل الهرمي",
+        "children": "الفئات الفرعية",
+        "comingSoon": "قريبًا"
+      },
+      "noChildren": "لا توجد فئات فرعية",
+      "childrenCount": "فئة فرعية واحدة",
+      "childrenCount_other": "{{count}} فئات فرعية"
+    },
+    "comingSoon": {
+      "productCount": "عدد المنتجات",
+      "createdDate": "تاريخ الإنشاء",
+      "createdBy": "أُنشئ بواسطة",
+      "updatedDate": "تاريخ التحديث",
+      "recentActivity": "النشاط الأخير",
+      "auditTimeline": "سجل التدقيق",
+      "permissions": "الصلاحيات",
+      "body": "غير متاح بعد — هذا القسم جاهز لعرض البيانات عند إضافتها من الواجهة الخلفية."
+    },
+    "kpi": {
+      "total": "إجمالي الفئات",
+      "root": "الفئات الرئيسية",
+      "child": "الفئات الفرعية",
+      "active": "الفئات النشطة",
+      "inactive": "الفئات غير النشطة"
+    },
+    "column": {
+      "category": "الفئة",
+      "parent": "الفئة الرئيسية",
+      "hierarchyLevel": "المستوى الهرمي",
+      "status": "الحالة",
+      "childrenCount": "الفئات الفرعية"
+    },
+    "bulk": {
+      "selectedCount": "تم تحديد {{count}}",
+      "activateSelected": "تفعيل المحدد",
+      "deactivateSelected": "إلغاء تفعيل المحدد",
+      "activateSuccess": "تم تفعيل فئة واحدة",
+      "activateSuccess_other": "تم تفعيل {{count}} فئات",
+      "deactivateSuccess": "تم إلغاء تفعيل فئة واحدة",
+      "deactivateSuccess_other": "تم إلغاء تفعيل {{count}} فئات",
+      "deactivateTitle": "إلغاء تفعيل فئة واحدة؟",
+      "deactivateTitle_other": "إلغاء تفعيل {{count}} فئات؟"
+    },
+    "create": {
+      "title": "إنشاء فئة",
+      "editTitle": "تعديل الفئة",
+      "fields": {
+        "name": "اسم الفئة",
+        "parentCategory": "الفئة الرئيسية",
+        "parentCategoryNone": "بدون فئة رئيسية (مستوى أعلى)"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب"
+      },
+      "submitting": "جارٍ الحفظ..."
+    },
+    "list": {
+      "createCategory": "إنشاء فئة",
+      "title": "الفئات",
+      "subtitleCount": "فئة واحدة",
+      "subtitleCount_other": "{{count}} فئات",
+      "search": {
+        "placeholder": "ابحث باسم الفئة"
+      },
+      "filters": {
+        "status": "الحالة",
+        "hierarchy": "التسلسل الهرمي"
+      },
+      "viewToggle": {
+        "tree": "شجري",
+        "table": "جدول"
+      },
+      "empty": {
+        "noCategories": "لا توجد فئات بعد",
+        "noMatches": "لا توجد فئات مطابقة لعوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      }
+    },
+    "move": {
+      "searchPlaceholder": "ابحث عن الفئات"
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "هل تريد إلغاء تفعيل هذه الفئة؟",
+        "body": "لن تظهر بعد الآن في قوائم اختيار الفئات النشطة في باقي أجزاء المنتج."
+      },
+      "delete": {
+        "title": "حذف الفئة",
+        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "blockedHasChildren": "تحتوي هذه الفئة على فئات فرعية. يرجى نقلها أو حذفها أولاً."
+      }
+    }
+  },
+  "products": {
+    "pageTitle": "المنتجات",
+    "pageSubtitle": "إدارة كتالوج المنتجات والتسعير والتصنيف.",
+    "kpi": {
+      "total": "إجمالي المنتجات",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "categories": "الفئات"
+    },
+    "toolbar": {
+      "searchPlaceholder": "بحث عن منتج...",
+      "categoryFilter": "تصفية حسب الفئة",
+      "statusFilter": "تصفية حسب الحالة",
+      "allCategories": "جميع الفئات",
+      "allStatuses": "جميع الحالات",
+      "addProduct": "إضافة منتج",
+      "chips": {
+        "search": "بحث: {{value}}",
+        "category": "الفئة: {{value}}",
+        "status": {
+          "active": "الحالة: نشط",
+          "inactive": "الحالة: غير نشط"
+        }
+      }
+    },
+    "table": {
+      "sku": "رمز المنتج",
+      "name": "اسم المنتج",
+      "category": "الفئة",
+      "unit": "الوحدة",
+      "costPrice": "سعر التكلفة",
+      "salePrice": "سعر البيع",
+      "status": "الحالة",
+      "emptyTitle": "لا توجد منتجات بعد",
+      "emptyBody": "أضف أول منتج لبدء بناء الكتالوج الخاص بك.",
+      "errorTitle": "تعذر تحميل المنتجات",
+      "errorBody": "حدث خطأ أثناء تحميل قائمة المنتجات."
+    },
+    "drawer": {
+      "createTitle": "إضافة منتج",
+      "editTitle": "تعديل المنتج",
+      "duplicateTitle": "نسخ المنتج",
+      "subtitle": "الحقول المميزة بـ * مطلوبة.",
+      "sections": {
+        "basicInfo": "المعلومات الأساسية",
+        "classification": "التصنيف",
+        "pricing": "التسعير",
+        "status": "الحالة"
+      }
+    },
+    "form": {
+      "sku": "رمز المنتج",
+      "name": "اسم المنتج",
+      "description": "الوصف",
+      "category": "الفئة",
+      "categoryPlaceholder": "اختر فئة",
+      "categoryLoading": "جارٍ تحميل الفئات...",
+      "categoryLoadError": "تعذر تحميل الفئات.",
+      "unitOfMeasure": "وحدة القياس",
+      "costPrice": "سعر التكلفة",
+      "salePrice": "سعر البيع",
+      "active": "نشط",
+      "hints": {
+        "skuLocked": "لا يمكن تغيير رمز المنتج بعد إنشائه."
+      },
+      "errors": {
+        "skuRequired": "رمز المنتج مطلوب.",
+        "skuTooLong": "يجب ألا يتجاوز رمز المنتج 64 حرفًا.",
+        "nameRequired": "اسم المنتج مطلوب.",
+        "nameTooLong": "يجب ألا يتجاوز اسم المنتج 200 حرف.",
+        "descriptionTooLong": "يجب ألا يتجاوز الوصف 2000 حرف.",
+        "categoryRequired": "الفئة مطلوبة.",
+        "unitOfMeasureRequired": "وحدة القياس مطلوبة.",
+        "costPriceRequired": "سعر التكلفة مطلوب.",
+        "costPriceNonNegative": "لا يمكن أن يكون سعر التكلفة سالبًا.",
+        "salePriceRequired": "سعر البيع مطلوب.",
+        "salePriceNonNegative": "لا يمكن أن يكون سعر البيع سالبًا.",
+        "salePriceBelowCost": "سعر البيع أقل من سعر التكلفة — يرجى التحقق."
+      }
+    },
+    "details": {
+      "back": "العودة إلى المنتجات",
+      "description": "الوصف",
+      "classification": "التصنيف",
+      "pricing": "التسعير",
+      "margin": "الهامش",
+      "errorTitle": "تعذر تحميل هذا المنتج",
+      "errorBody": "حدث خطأ أثناء تحميل تفاصيل المنتج."
+    },
+    "deleteDialog": {
+      "title": "حذف المنتج؟",
+      "body": "سيؤدي هذا إلى حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "toasts": {
+      "createSuccess": "تم إنشاء المنتج.",
+      "updateSuccess": "تم تحديث المنتج.",
+      "deleteSuccess": "تم حذف المنتج."
+    }
+  },
+  "stock": {
+    "column": {
+      "product": "المنتج",
+      "warehouse": "المستودع",
+      "quantityOnHand": "الكمية المتوفرة"
+    },
+    "list": {
+      "empty": {
+        "noStock": "لا توجد سجلات مخزون بعد",
+        "noMatches": "لا توجد نتائج مطابقة لبحثك أو عوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      }
+    },
+    "actions": {
+      "moreActions": "المزيد من الإجراءات لـ {{product}}",
+      "recordMovement": "تسجيل حركة",
+      "transfer": "نقل",
+      "viewProduct": "عرض {{name}}",
+      "viewWarehouse": "عرض {{name}}"
+    },
+    "kpi": {
+      "totalProducts": "إجمالي المنتجات",
+      "totalWarehouses": "إجمالي المستودعات",
+      "totalUnitsOnHand": "إجمالي الوحدات المتوفرة"
+    },
+    "overview": {
+      "title": "نظرة عامة على المخزون",
+      "subtitleCount": "سجل مخزون واحد",
+      "subtitleCount_other": "{{count}} سجلات مخزون",
+      "search": {
+        "placeholder": "ابحث بالمنتج أو الرمز أو المستودع"
+      },
+      "filters": {
+        "warehouse": "المستودع",
+        "product": "المنتج"
+      },
+      "composing": "تم تحميل {{loaded}} من {{total}} مستودعات...",
+      "warehouseLoadFailed": "تعذر تحميل المخزون لـ {{name}}"
+    },
+    "product": {
+      "noStock": "لا يوجد مخزون مسجل لهذا المنتج بعد",
+      "backToOverview": "العودة إلى نظرة عامة على المخزون",
+      "totalQuantity": "الكمية الإجمالية"
+    },
+    "warehouse": {
+      "totalUnits": "إجمالي الوحدات",
+      "search": {
+        "placeholder": "ابحث بالمنتج أو الرمز"
+      }
+    },
+    "movement": {
+      "title": "تسجيل حركة مخزون",
+      "subtitle": "سجّل تغييرًا في الكمية لمنتج في أحد المستودعات.",
+      "back": "رجوع",
+      "submit": "تسجيل الحركة",
+      "submitting": "جارٍ التسجيل...",
+      "movementTypeNote": "قيم نوع الحركة بانتظار تأكيد الواجهة الخلفية — تُدخل حاليًا كنص حر.",
+      "fields": {
+        "product": "المنتج",
+        "productPlaceholder": "اختر منتجًا",
+        "searchProducts": "ابحث عن المنتجات",
+        "warehouse": "المستودع",
+        "warehousePlaceholder": "اختر مستودعًا",
+        "searchWarehouses": "ابحث عن المستودعات",
+        "movementType": "نوع الحركة",
+        "movementTypePlaceholder": "مثال: استلام، صرف، تصحيح",
+        "quantity": "الكمية",
+        "reference": "المرجع",
+        "referencePlaceholder": "رقم أمر الشراء أو ملاحظة (اختياري)"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب",
+        "quantityInvalid": "أدخل كمية أكبر من 0"
+      },
+      "success": {
+        "title": "تم تسجيل الحركة",
+        "saveNotice": "احفظ أو دوّن هذا التأكيد — لا يوجد سجل حركات للرجوع إليه لاحقًا.",
+        "date": "التاريخ",
+        "movementId": "معرّف الحركة",
+        "recordAnother": "تسجيل حركة أخرى",
+        "done": "تم"
+      }
+    },
+    "transfer": {
+      "title": "نقل المخزون",
+      "subtitle": "انقل كمية من منتج من مستودع إلى آخر.",
+      "backStep": "رجوع",
+      "nextStep": "التالي",
+      "confirmTransfer": "تأكيد النقل",
+      "submitting": "جارٍ النقل...",
+      "reviewSentence": "نقل <strong>{{quantity}} وحدة</strong> من <strong>{{product}}</strong> من <strong>{{source}}</strong> إلى <strong>{{destination}}</strong>.",
+      "steps": {
+        "product": "المنتج",
+        "source": "المصدر",
+        "destination": "الوجهة",
+        "quantity": "الكمية",
+        "review": "مراجعة"
+      },
+      "stepHints": {
+        "product": "ما هو المنتج الذي تنقله؟",
+        "source": "من أي مستودع؟",
+        "destination": "إلى أي مستودع؟",
+        "quantity": "كم عدد الوحدات، ومرجع اختياري.",
+        "review": "تحقق من كل التفاصيل قبل التأكيد — لا يمكن التراجع عن هذا الإجراء."
+      }
+    }
   }
-  
+
 }

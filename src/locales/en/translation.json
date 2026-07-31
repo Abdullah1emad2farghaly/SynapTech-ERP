@@ -110,11 +110,17 @@
       "updating": "Updating..."
     },
     "actions": {
+      "edit": "Edit",
+      "create": "Create",
+      "creating": "Creating ...",
       "retry": "Retry",
       "refresh": "Refresh",
       "cancel": "Cancel",
       "delete": "Delete",
       "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "viewDetails": "View Details",
+      "duplicate": "Duplicate",
       "export": "Export"
     }
   },
@@ -608,7 +614,6 @@
       }
     }
   },
-
   "journalEntries": {
     "page": {
       "title": "Journal Entries",
@@ -737,7 +742,6 @@
       "deleted": "Journal entry deleted."
     }
   },
-
   "company": {
     "breadcrumb": {
       "organization": "Organization",
@@ -792,8 +796,7 @@
       "updateError": "Failed to update company"
     }
   },
-
-   "warehouses": {
+  "warehouses": {
     "page": {
       "title": "Warehouses",
       "description": "Manage company warehouses across all branches."
@@ -880,5 +883,327 @@
       "activated": "Warehouse activated.",
       "deactivated": "Warehouse deactivated."
     }
+  },
+  "categories": {
+    "create": {
+      "title": "Create Category",
+      "editTitle": "Edit Category",
+      "fields": {
+        "name": "Category Name",
+        "parentCategory": "Parent Category",
+        "parentCategoryNone": "No parent (top-level)"
+      },
+      "errors": {
+        "required": "This field is required"
+      },
+      "submitting": "Saving..."
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "move": "Move",
+      "addChild": "Add Child",
+      "copyId": "Copy ID",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "moreActions": "More actions"
+    },
+    "toast": {
+      "deactivated": "{{name}} deactivated",
+      "deleted": "{{name}} deleted",
+      "activated": "{{name}} activated",
+      "idCopied": "Category ID copied"
+    },
+    "details": {
+      "nothingSelected": "Select a category to see its details",
+      "sections": {
+        "hierarchy": "Hierarchy",
+        "children": "Children",
+        "comingSoon": "Coming Soon"
+      },
+      "noChildren": "No child categories",
+      "childrenCount": "{{count}} child category",
+      "childrenCount_other": "{{count}} child categories"
+    },
+    "comingSoon": {
+      "productCount": "Product Count",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "updatedDate": "Updated Date",
+      "recentActivity": "Recent Activity",
+      "auditTimeline": "Audit Timeline",
+      "permissions": "Permissions",
+      "body": "Not available yet — this section is ready for when the backend adds support."
+    },
+    "kpi": {
+      "total": "Total Categories",
+      "root": "Root Categories",
+      "child": "Child Categories",
+      "active": "Active Categories",
+      "inactive": "Inactive Categories"
+    },
+    "column": {
+      "category": "Category",
+      "parent": "Parent",
+      "hierarchyLevel": "Hierarchy Level",
+      "status": "Status",
+      "childrenCount": "Children"
+    },
+    "bulk": {
+      "selectedCount": "{{count}} selected",
+      "activateSelected": "Activate Selected",
+      "deactivateSelected": "Deactivate Selected",
+      "activateSuccess": "{{count}} category activated",
+      "activateSuccess_other": "{{count}} categories activated",
+      "deactivateSuccess": "{{count}} category deactivated",
+      "deactivateSuccess_other": "{{count}} categories deactivated",
+      "deactivateTitle": "Deactivate {{count}} category?",
+      "deactivateTitle_other": "Deactivate {{count}} categories?"
+    },
+    "list": {
+      "createCategory": "Create Category",
+      "title": "Categories",
+      "subtitleCount": "{{count}} category",
+      "subtitleCount_other": "{{count}} categories",
+      "search": {
+        "placeholder": "Search by category name"
+      },
+      "filters": {
+        "status": "Status",
+        "hierarchy": "Hierarchy"
+      },
+      "viewToggle": {
+        "tree": "Tree",
+        "table": "Table"
+      },
+      "empty": {
+        "noCategories": "No categories yet",
+        "noMatches": "No categories match your filters",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "Deactivate this category?",
+        "body": "It will no longer appear in active category pickers elsewhere in the product."
+      },
+      "delete": {
+        "title": "Delete category",
+        "body": "This permanently removes {{name}}. This can't be undone.",
+        "blockedHasChildren": "This category has sub-categories. Move or delete them first."
+      }
+    },
+    "move": {
+      "searchPlaceholder": "Search categories"
+    }
+  },
+  "products": {
+    "pageTitle": "Products",
+    "pageSubtitle": "Manage your product catalog, pricing, and classification.",
+    "kpi": {
+      "total": "Total Products",
+      "active": "Active",
+      "inactive": "Inactive",
+      "categories": "Categories"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search products...",
+      "categoryFilter": "Filter by category",
+      "statusFilter": "Filter by status",
+      "allCategories": "All Categories",
+      "allStatuses": "All Statuses",
+      "addProduct": "Add Product",
+      "chips": {
+        "search": "Search: {{value}}",
+        "category": "Category: {{value}}",
+        "status": {
+          "active": "Status: Active",
+          "inactive": "Status: Inactive"
+        }
+      }
+    },
+    "table": {
+      "sku": "SKU",
+      "name": "Product Name",
+      "category": "Category",
+      "unit": "Unit",
+      "costPrice": "Cost Price",
+      "salePrice": "Sale Price",
+      "status": "Status",
+      "emptyTitle": "No products yet",
+      "emptyBody": "Add your first product to start building your catalog.",
+      "errorTitle": "Couldn't load products",
+      "errorBody": "Something went wrong while loading the product list."
+    },
+    "drawer": {
+      "createTitle": "Add Product",
+      "editTitle": "Edit Product",
+      "duplicateTitle": "Duplicate Product",
+      "subtitle": "Fields marked with * are required.",
+      "sections": {
+        "basicInfo": "Basic Information",
+        "classification": "Classification",
+        "pricing": "Pricing",
+        "status": "Status"
+      }
+    },
+    "form": {
+      "sku": "SKU",
+      "name": "Product Name",
+      "description": "Description",
+      "category": "Category",
+      "categoryPlaceholder": "Select a category",
+      "categoryLoading": "Loading categories...",
+      "categoryLoadError": "Couldn't load categories.",
+      "unitOfMeasure": "Unit of Measure",
+      "costPrice": "Cost Price",
+      "salePrice": "Sale Price",
+      "active": "Active",
+      "hints": {
+        "skuLocked": "SKU can't be changed after a product is created."
+      },
+      "errors": {
+        "skuRequired": "SKU is required.",
+        "skuTooLong": "SKU must be 64 characters or fewer.",
+        "nameRequired": "Product name is required.",
+        "nameTooLong": "Product name must be 200 characters or fewer.",
+        "descriptionTooLong": "Description must be 2000 characters or fewer.",
+        "categoryRequired": "Category is required.",
+        "unitOfMeasureRequired": "Unit of measure is required.",
+        "costPriceRequired": "Cost price is required.",
+        "costPriceNonNegative": "Cost price can't be negative.",
+        "salePriceRequired": "Sale price is required.",
+        "salePriceNonNegative": "Sale price can't be negative.",
+        "salePriceBelowCost": "Sale price is lower than cost price — double check this."
+      }
+    },
+    "details": {
+      "back": "Back to Products",
+      "description": "Description",
+      "classification": "Classification",
+      "pricing": "Pricing",
+      "margin": "Margin",
+      "errorTitle": "Couldn't load this product",
+      "errorBody": "Something went wrong while loading product details."
+    },
+    "deleteDialog": {
+      "title": "Delete product?",
+      "body": "This will permanently delete \"{{name}}\". This action can't be undone."
+    },
+    "toasts": {
+      "createSuccess": "Product created.",
+      "updateSuccess": "Product updated.",
+      "deleteSuccess": "Product deleted."
+    }
+  },
+
+  "stock": {
+    "column": {
+      "product": "Product",
+      "warehouse": "Warehouse",
+      "quantityOnHand": "Quantity On Hand"
+    },
+    "list": {
+      "empty": {
+        "noStock": "No stock records yet",
+        "noMatches": "No results match your search or filters",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "actions": {
+      "moreActions": "More actions for {{product}}",
+      "recordMovement": "Record Movement",
+      "transfer": "Transfer",
+      "viewProduct": "View {{name}}",
+      "viewWarehouse": "View {{name}}"
+    },
+    "kpi": {
+      "totalProducts": "Total Products",
+      "totalWarehouses": "Total Warehouses",
+      "totalUnitsOnHand": "Total Units On Hand"
+    },
+    "overview": {
+      "title": "Stock Overview",
+      "subtitleCount": "{{count}} stock record",
+      "subtitleCount_other": "{{count}} stock records",
+      "search": {
+        "placeholder": "Search by product, SKU, or warehouse"
+      },
+      "filters": {
+        "warehouse": "Warehouse",
+        "product": "Product"
+      },
+      "composing": "Loaded {{loaded}} of {{total}} warehouses...",
+      "warehouseLoadFailed": "Couldn't load stock for {{name}}"
+    },
+    "product": {
+      "noStock": "No stock recorded for this product yet",
+      "backToOverview": "Back to Stock Overview",
+      "totalQuantity": "Total Quantity"
+    },
+    "warehouse": {
+      "totalUnits": "Total Units",
+      "search": {
+        "placeholder": "Search by product or SKU"
+      }
+    },
+    "movement": {
+      "title": "Record Stock Movement",
+      "subtitle": "Record a change in quantity for a product at a warehouse.",
+      "back": "Back",
+      "submit": "Record Movement",
+      "submitting": "Recording...",
+      "movementTypeNote": "Movement type values are pending backend confirmation — entered as free text for now.",
+      "fields": {
+        "product": "Product",
+        "productPlaceholder": "Select a product",
+        "searchProducts": "Search products",
+        "warehouse": "Warehouse",
+        "warehousePlaceholder": "Select a warehouse",
+        "searchWarehouses": "Search warehouses",
+        "movementType": "Movement Type",
+        "movementTypePlaceholder": "e.g. Receipt, Issue, Correction",
+        "quantity": "Quantity",
+        "reference": "Reference",
+        "referencePlaceholder": "PO number, note, etc. (optional)"
+      },
+      "errors": {
+        "required": "This field is required",
+        "quantityInvalid": "Enter a quantity greater than 0"
+      },
+      "success": {
+        "title": "Movement recorded",
+        "saveNotice": "Save or note this confirmation — there's no movement history to look it up again later.",
+        "date": "Date",
+        "movementId": "Movement ID",
+        "recordAnother": "Record Another",
+        "done": "Done"
+      }
+    },
+    "transfer": {
+      "title": "Transfer Stock",
+      "subtitle": "Move quantity of a product from one warehouse to another.",
+      "backStep": "Back",
+      "nextStep": "Next",
+      "confirmTransfer": "Confirm Transfer",
+      "submitting": "Transferring...",
+      "reviewSentence": "Move <strong>{{quantity}} units</strong> of <strong>{{product}}</strong> from <strong>{{source}}</strong> to <strong>{{destination}}</strong>.",
+      "steps": {
+        "product": "Product",
+        "source": "Source",
+        "destination": "Destination",
+        "quantity": "Quantity",
+        "review": "Review"
+      },
+      "stepHints": {
+        "product": "Which product are you transferring?",
+        "source": "Which warehouse is it moving from?",
+        "destination": "Which warehouse is it moving to?",
+        "quantity": "How many units, and an optional reference.",
+        "review": "Check every detail before confirming — this can't be undone."
+      }
+    }
   }
+  
 }
