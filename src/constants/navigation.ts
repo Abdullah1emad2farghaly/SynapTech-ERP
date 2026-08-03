@@ -44,6 +44,11 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "products", label: "Products", to: "inventory/products" },
       { id: "stock", label: "Stock", to: "inventory/stock" },
       { id: "newMovment", label: "New Movement", to: "inventory/new-movement" },
+      { id: "suppliers", label: "Suppliers", to: "inventory/suppliers" },
+      { id: "purchase-orders", label: "Purchase Orders", to: "inventory/purchase-orders" },
+      { id: "customers", label: "Customers", to: "inventory/customers" },
+
+      // { id: "puchase-orders", label: "Purchase Orders", to: "inventory/purchase-orders" },
       // { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
     ],
   },

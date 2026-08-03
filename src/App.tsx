@@ -31,10 +31,16 @@ import { CategoriesPage } from "./pages/admin/categories/CategoriesPage";
 import { ProductsListPage } from "./pages/admin/products/ProductsListPage";
 import { ProductDetailsPage } from "./pages/admin/products/ProductDetailsPage";
 import { StockOverviewPage } from "./pages/admin/stock/StockOverviewPage";
-import { ProductStockDetailsPage } from "./pages/admin/stock/ProductStockDetailsPage";
 import { WarehouseInventoryPage } from "./pages/admin/stock/WarehouseInventoryPage";
 import { RecordMovementPage } from "./pages/admin/stock/RecordMovementPage";
 import { TransferStockPage } from "./pages/admin/stock/TransferStockPage";
+import { PurchaseOrdersListPage } from "./pages/admin/purchase-orders/PurchaseOrdersListPage";
+import { PurchaseOrderDetailsPage } from "./pages/admin/purchase-orders/PurchaseOrderDetailsPage";
+import { SuppliersListPage } from "./pages/admin/suppliers/SuppliersListPage";
+import { SupplierDetailsPage } from "./pages/admin/suppliers/SupplierDetailsPage";
+import { CreateEditPurchaseOrderPage } from "./pages/admin/purchase-orders/CreateEditPurchaseOrderPage";
+import { ReceiveGoodsPage } from "./pages/admin/purchase-orders/ReceiveGoodsPage";
+import { CustomersPage } from "./pages/admin/customers/CustomersPage";
 
 const queryClient = new QueryClient();
 
@@ -98,14 +104,26 @@ export default function App() {
               <Route path="stock" element={<StockOverviewPage />} />
               
               <Route path="warehouses/:warehouseId" element={<WarehouseInventoryPage />} />
+
               <Route path="new-movement" element={<RecordMovementPage />} />
               <Route path="stock/transfer" element={<TransferStockPage />} />
+
+              <Route path="suppliers" element={<SuppliersListPage />} />
+              <Route path="suppliers/:id" element={<SupplierDetailsPage />} />
+
+              <Route path="purchase-orders" element={<PurchaseOrdersListPage />} />
+              <Route path="purchase-orders/create" element={<CreateEditPurchaseOrderPage />} />
+              <Route path="purchase-orders/:id" element={<PurchaseOrderDetailsPage />} />
+              <Route path="purchase-orders/:id/edit" element={<CreateEditPurchaseOrderPage />} />
+              <Route path="purchase-orders/:id/receive" element={<ReceiveGoodsPage />} />
+              <Route path="customers" element={<CustomersPage />} />
+              
             </Route>
           </Route>
 
           {/* Module 2+ routes (dashboard, admin, etc.) register here later */}
 
-          <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
+          {/* <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} /> */}
         </Routes>
       </BrowserRouter>
       <Toaster position="top-center" />

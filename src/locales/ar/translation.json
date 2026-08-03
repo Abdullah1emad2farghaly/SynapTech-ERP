@@ -1203,6 +1203,263 @@
         "review": "تحقق من كل التفاصيل قبل التأكيد — لا يمكن التراجع عن هذا الإجراء."
       }
     }
+  },
+  "purchaseOrders": {
+    "page": { "title": "أوامر الشراء", "description": "إدارة المشتريات من المسودة حتى الاستلام." },
+    "status": {
+      "Draft": "مسودة",
+      "Submitted": "مُرسل",
+      "Approved": "مُعتمد",
+      "PartiallyReceived": "مُستلم جزئيًا",
+      "Received": "مُستلم",
+      "Cancelled": "ملغى"
+    },
+    "stats": {
+      "total": "إجمالي الأوامر",
+      "withWarnings": "بها تحذيرات",
+      "totalValue": "إجمالي قيمة الشراء",
+      "outstandingValue": "القيمة المستحقة"
+    },
+    "toolbar": {
+      "searchPlaceholder": "ابحث برقم الأمر أو المورد...",
+      "exportNotAvailable": "التصدير غير متاح حاليًا."
+    },
+    "filters": {
+      "allSuppliers": "جميع الموردين",
+      "allWarehouses": "جميع المستودعات",
+      "to": "إلى",
+      "warningsAny": "الكل",
+      "warningsYes": "به تحذيرات",
+      "warningsNo": "بدون تحذيرات",
+      "reset": "إعادة تعيين الفلاتر"
+    },
+    "table": {
+      "orderNumber": "رقم الأمر",
+      "supplier": "المورد",
+      "warehouse": "المستودع",
+      "status": "الحالة",
+      "orderDate": "تاريخ الأمر",
+      "expectedDate": "التاريخ المتوقع",
+      "total": "الإجمالي",
+      "receiving": "الاستلام",
+      "warnings": "التحذيرات"
+    },
+    "actions": {
+      "create": "أمر شراء جديد",
+      "view": "عرض",
+      "edit": "تعديل",
+      "submit": "إرسال",
+      "approve": "اعتماد",
+      "receive": "استلام البضاعة",
+      "cancel": "إلغاء الأمر",
+      "print": "طباعة",
+      "duplicate": "نسخ",
+      "saveDraft": "حفظ كمسودة"
+    },
+    "bulk": {
+      "selectedCount": "تم تحديد أمر واحد",
+      "selectedCount_other": "تم تحديد {{count}} أمر",
+      "cancelSelected": "إلغاء المحدد",
+      "cancelDisabledHint": "يجب أن تكون جميع الأوامر المحددة قابلة للإلغاء (مسودة أو مُرسلة أو مُعتمدة)."
+    },
+    "empty": {
+      "title": "لا توجد أوامر شراء بعد",
+      "description": "أنشئ أول أمر شراء لبدء المشتريات.",
+      "filteredTitle": "لا توجد أوامر مطابقة لبحثك أو فلاترك"
+    },
+    "form": {
+      "createTitle": "أمر شراء جديد",
+      "editTitle": "تعديل أمر الشراء",
+      "subtitle": "أدخل تفاصيل الأمر وأضف بنود الأصناف.",
+      "selectSupplier": "اختر موردًا",
+      "searchSuppliers": "ابحث عن الموردين...",
+      "noSuppliersFound": "لا يوجد موردون",
+      "selectWarehouse": "اختر مستودعًا",
+      "searchWarehouses": "ابحث عن المستودعات...",
+      "noWarehousesFound": "لا توجد مستودعات"
+    },
+    "fields": {
+      "supplier": "المورد",
+      "warehouse": "المستودع",
+      "orderDate": "تاريخ الأمر",
+      "expectedDate": "التاريخ المتوقع",
+      "notes": "ملاحظات"
+    },
+    "lines": {
+      "title": "بنود الأصناف",
+      "addRow": "إضافة سطر",
+      "removeRow": "حذف السطر",
+      "duplicateRow": "نسخ السطر",
+      "selectProduct": "اختر منتجًا",
+      "searchProducts": "ابحث عن المنتجات...",
+      "noProductsFound": "لا توجد منتجات",
+      "product": "المنتج",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "lineTotal": "إجمالي السطر",
+      "received": "المستلم",
+      "remaining": "المتبقي",
+      "grandTotal": "الإجمالي الكلي"
+    },
+    "validation": {
+      "supplierRequired": "اختر موردًا.",
+      "warehouseRequired": "اختر مستودعًا.",
+      "orderDateRequired": "تاريخ الأمر مطلوب.",
+      "expectedDateRequired": "التاريخ المتوقع مطلوب.",
+      "expectedBeforeOrder": "يجب أن يكون التاريخ المتوقع بعد أو يساوي تاريخ الأمر.",
+      "minOneLine": "يلزم وجود بند واحد على الأقل.",
+      "productRequired": "اختر منتجًا.",
+      "quantityPositive": "يجب أن تكون الكمية أكبر من صفر.",
+      "priceNonNegative": "لا يمكن أن يكون سعر الوحدة سالبًا."
+    },
+    "tracker": {
+      "title": "تقدّم الأمر",
+      "completion": "اكتمال {{percent}}%",
+      "noTimestamp": "لا يوجد وقت مسجل لهذه المرحلة",
+      "expectedDate": "تاريخ التسليم المتوقع",
+      "cancelledNote": "تم إلغاء هذا الأمر. لا يسجل الـ API المرحلة التي تم الإلغاء منها."
+    },
+    "warnings": {
+      "count": "تحذير واحد",
+      "count_other": "{{count}} تحذير",
+      "panelTitle": "تحذير واحد على هذا الأمر",
+      "panelTitle_other": "{{count}} تحذيرات على هذا الأمر"
+    },
+    "dialogs": {
+      "submitTitle": "إرسال للاعتماد",
+      "submitBody": "إرسال \"{{orderNumber}}\" للاعتماد؟ بمجرد الإرسال، لن يمكن تعديله.",
+      "approveTitle": "اعتماد الأمر",
+      "approveBody": "اعتماد \"{{orderNumber}}\"؟ هذا يؤكد أن الأمر جاهز للاستلام.",
+      "cancelTitle": "إلغاء الأمر",
+      "cancelBody": "سيتم وضع علامة \"ملغى\" على \"{{orderNumber}}\". لن يمكن إرساله أو اعتماده أو استلامه بعد ذلك. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "receive": {
+      "title": "استلام البضاعة",
+      "ordered": "المطلوب",
+      "previouslyReceived": "المستلم سابقًا",
+      "remaining": "المتبقي",
+      "receivingNow": "الاستلام الآن",
+      "newTotal": "الإجمالي الجديد",
+      "summary": "استلام {{receiving}} من أصل {{remaining}} وحدة متبقية",
+      "confirm": "تأكيد الاستلام",
+      "nothingToReceive": "أدخل كمية لسطر واحد على الأقل.",
+      "notReceivable": "لا يمكن استلام البضاعة لهذا الأمر في حالته الحالية."
+    },
+    "details": {
+      "back": "العودة إلى أوامر الشراء",
+      "notFound": "أمر الشراء غير موجود.",
+      "totalAmount": "الإجمالي",
+      "totalOrdered": "إجمالي المطلوب",
+      "totalReceived": "إجمالي المستلم",
+      "linesCount": "بنود الأصناف",
+      "lineItems": "بنود الأصناف",
+      "activityComingSoon": "سجل النشاط غير متاح من الـ API بعد.",
+      "auditComingSoon": "معلومات الإنشاء والتعديل غير متاحة من الـ API بعد."
+    },
+    "toasts": {
+      "created": "تم إنشاء أمر الشراء.",
+      "updated": "تم تحديث أمر الشراء.",
+      "submitted": "تم إرسال أمر الشراء للاعتماد.",
+      "approved": "تم اعتماد أمر الشراء.",
+      "received": "تم استلام البضاعة.",
+      "cancelled": "تم إلغاء أمر الشراء.",
+      "bulkCancelled": "تم إلغاء أمر واحد.",
+      "bulkCancelled_other": "تم إلغاء {{count}} أمر.",
+      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
+    }
+  },
+
+  "customers": {
+    "list": {
+      "title": "العملاء",
+      "subtitleCount": "عميل واحد",
+      "subtitleCount_other": "{{count}} عملاء",
+      "createCustomer": "إنشاء عميل",
+      "search": {
+        "placeholder": "ابحث بالاسم أو الشخص المسؤول أو الهاتف أو البريد الإلكتروني"
+      },
+      "filters": {
+        "status": "الحالة"
+      },
+      "empty": {
+        "noCustomers": "لا يوجد عملاء بعد",
+        "noMatches": "لا يوجد عملاء مطابقون لبحثك أو عوامل التصفية",
+        "clearFilters": "مسح عوامل التصفية"
+      }
+    },
+    "kpi": {
+      "total": "إجمالي العملاء",
+      "active": "العملاء النشطون",
+      "inactive": "العملاء غير النشطين"
+    },
+    "column": {
+      "name": "اسم العميل",
+      "contactName": "الشخص المسؤول",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "taxNumber": "الرقم الضريبي",
+      "status": "الحالة"
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل",
+      "deactivate": "إلغاء التفعيل",
+      "activate": "تفعيل",
+      "delete": "حذف",
+      "moreActions": "المزيد من الإجراءات"
+    },
+    "create": {
+      "title": "إنشاء عميل",
+      "editTitle": "تعديل العميل",
+      "sections": {
+        "business": "معلومات النشاط التجاري",
+        "contact": "معلومات التواصل",
+        "address": "العنوان"
+      },
+      "fields": {
+        "name": "اسم العميل",
+        "contactName": "الشخص المسؤول",
+        "phone": "الهاتف",
+        "email": "البريد الإلكتروني",
+        "address": "العنوان",
+        "taxNumber": "الرقم الضريبي"
+      },
+      "errors": {
+        "required": "هذا الحقل مطلوب",
+        "invalidEmail": "أدخل بريدًا إلكترونيًا صالحًا"
+      },
+      "submitting": "جارٍ الحفظ...",
+      "saveAndNew": "حفظ وإضافة جديد",
+      "unsavedChangesTitle": "تجاهل التغييرات غير المحفوظة؟",
+      "unsavedChangesBody": "لديك تغييرات غير محفوظة ستفقد إذا أغلقت هذا النموذج.",
+      "discard": "تجاهل",
+      "keepEditing": "متابعة التعديل"
+    },
+    "details": {
+      "sections": {
+        "contact": "معلومات التواصل",
+        "address": "العنوان",
+        "tax": "المعلومات الضريبية"
+      }
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "هل تريد إلغاء تفعيل هذا العميل؟",
+        "body": "لن يظهر بعد الآن في قوائم اختيار العملاء النشطين في باقي أجزاء المنتج."
+      },
+      "delete": {
+        "title": "حذف العميل",
+        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+      }
+    },
+    "toast": {
+      "created": "تم إنشاء {{name}}",
+      "updated": "تم تحديث {{name}}",
+      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "activated": "تم تفعيل {{name}}",
+      "deleted": "تم حذف {{name}}"
+    }
   }
+  
 
 }

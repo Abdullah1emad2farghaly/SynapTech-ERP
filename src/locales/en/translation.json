@@ -1204,6 +1204,353 @@
         "review": "Check every detail before confirming — this can't be undone."
       }
     }
+  },
+  "suppliers": {
+    "page": {
+      "title": "Suppliers",
+      "description": "Manage supplier master data used across purchasing."
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by name, contact, email, or tax number...",
+      "allStatuses": "All statuses",
+      "sortNameAsc": "Name (A–Z)",
+      "sortNameDesc": "Name (Z–A)"
+    },
+    "table": {
+      "name": "Supplier Name",
+      "contactPerson": "Contact Person",
+      "phone": "Phone",
+      "email": "Email",
+      "taxNumber": "Tax Number",
+      "status": "Status"
+    },
+    "actions": {
+      "create": "New Supplier",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "saveAndNew": "Save & New"
+    },
+    "bulk": {
+      "selectedCount": "{{count}} supplier selected",
+      "selectedCount_other": "{{count}} suppliers selected",
+      "deleteSelected": "Delete Selected"
+    },
+    "pagination": {
+      "summary": "Showing {{from}}–{{to}} of {{total}}"
+    },
+    "empty": {
+      "title": "No suppliers yet",
+      "description": "Add your first supplier to start managing procurement.",
+      "filteredTitle": "No suppliers match your search or filters"
+    },
+    "drawer": {
+      "createTitle": "New Supplier",
+      "editTitle": "Edit Supplier",
+      "supplierInfo": "Supplier Information",
+      "businessInfo": "Business Information",
+      "unsavedChangesTitle": "Discard unsaved changes?",
+      "unsavedChangesBody": "You have unsaved changes. If you close now, they will be lost.",
+      "discardChanges": "Discard",
+      "keepEditing": "Keep Editing"
+    },
+    "fields": {
+      "name": "Supplier Name",
+      "contactName": "Contact Person",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "taxNumber": "Tax Number",
+      "status": "Status"
+    },
+    "validation": {
+      "nameMin": "Supplier name must be at least 2 characters.",
+      "nameMax": "Supplier name must be 120 characters or fewer.",
+      "contactNameRequired": "Contact person is required.",
+      "contactNameMax": "Contact person must be 80 characters or fewer.",
+      "phoneRequired": "Phone number is required.",
+      "phoneMax": "Phone number must be 30 characters or fewer.",
+      "emailInvalid": "Enter a valid email address.",
+      "addressMax": "Address must be 240 characters or fewer.",
+      "taxNumberRequired": "Tax number is required.",
+      "taxNumberMax": "Tax number must be 40 characters or fewer."
+    },
+    "deleteDialog": {
+      "title": "Delete supplier",
+      "body": "This will permanently delete \"{{name}}\". This action cannot be undone."
+    },
+    "details": {
+      "back": "Back to Suppliers",
+      "notFound": "Supplier not found.",
+      "purchaseOrdersTitle": "Referenced by Purchase Orders",
+      "purchaseOrdersDescription": "This supplier's purchase order history isn't available in this view yet."
+    },
+    "toasts": {
+      "created": "Supplier created.",
+      "updated": "Supplier updated.",
+      "deleted": "Supplier deleted.",
+      "bulkDeleted": "{{count}} supplier deleted.",
+      "bulkDeleted_other": "{{count}} suppliers deleted.",
+      "bulkDeletePartial": "{{succeeded}} deleted, {{failed}} failed."
+    }
+  },
+
+  "purchaseOrders": {
+    "page": { "title": "Purchase Orders", "description": "Manage procurement from draft to receiving." },
+    "status": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "Approved": "Approved",
+      "PartiallyReceived": "Partially Received",
+      "Received": "Received",
+      "Cancelled": "Cancelled"
+    },
+    "stats": {
+      "total": "Total Orders",
+      "withWarnings": "With Warnings",
+      "totalValue": "Total Purchase Value",
+      "outstandingValue": "Outstanding Value"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by order number or supplier...",
+      "exportNotAvailable": "Export isn't available yet."
+    },
+    "filters": {
+      "allSuppliers": "All suppliers",
+      "allWarehouses": "All warehouses",
+      "to": "to",
+      "warningsAny": "Any",
+      "warningsYes": "Has warnings",
+      "warningsNo": "No warnings",
+      "reset": "Reset filters"
+    },
+    "table": {
+      "orderNumber": "Order Number",
+      "supplier": "Supplier",
+      "warehouse": "Warehouse",
+      "status": "Status",
+      "orderDate": "Order Date",
+      "expectedDate": "Expected Date",
+      "total": "Total",
+      "receiving": "Receiving",
+      "warnings": "Warnings"
+    },
+    "actions": {
+      "create": "New Purchase Order",
+      "view": "View",
+      "edit": "Edit",
+      "submit": "Submit",
+      "approve": "Approve",
+      "receive": "Receive Goods",
+      "cancel": "Cancel Order",
+      "print": "Print",
+      "duplicate": "Duplicate",
+      "saveDraft": "Save as Draft"
+    },
+    "bulk": {
+      "selectedCount": "{{count}} order selected",
+      "selectedCount_other": "{{count}} orders selected",
+      "cancelSelected": "Cancel Selected",
+      "cancelDisabledHint": "All selected orders must be cancellable (Draft, Submitted, or Approved)."
+    },
+    "empty": {
+      "title": "No purchase orders yet",
+      "description": "Create your first purchase order to start procurement.",
+      "filteredTitle": "No orders match your search or filters"
+    },
+    "form": {
+      "createTitle": "New Purchase Order",
+      "editTitle": "Edit Purchase Order",
+      "subtitle": "Fill in order details and add line items.",
+      "selectSupplier": "Select a supplier",
+      "searchSuppliers": "Search suppliers...",
+      "noSuppliersFound": "No suppliers found",
+      "selectWarehouse": "Select a warehouse",
+      "searchWarehouses": "Search warehouses...",
+      "noWarehousesFound": "No warehouses found"
+    },
+    "fields": {
+      "supplier": "Supplier",
+      "warehouse": "Warehouse",
+      "orderDate": "Order Date",
+      "expectedDate": "Expected Date",
+      "notes": "Notes"
+    },
+    "lines": {
+      "title": "Line Items",
+      "addRow": "Add Row",
+      "removeRow": "Remove row",
+      "duplicateRow": "Duplicate row",
+      "selectProduct": "Select product",
+      "searchProducts": "Search products...",
+      "noProductsFound": "No products found",
+      "product": "Product",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "lineTotal": "Line Total",
+      "received": "Received",
+      "remaining": "Remaining",
+      "grandTotal": "Grand Total"
+    },
+    "validation": {
+      "supplierRequired": "Select a supplier.",
+      "warehouseRequired": "Select a warehouse.",
+      "orderDateRequired": "Order date is required.",
+      "expectedDateRequired": "Expected date is required.",
+      "expectedBeforeOrder": "Expected date must be on or after the order date.",
+      "minOneLine": "At least one line item is required.",
+      "productRequired": "Select a product.",
+      "quantityPositive": "Quantity must be greater than 0.",
+      "priceNonNegative": "Unit price cannot be negative."
+    },
+    "tracker": {
+      "title": "Order Progress",
+      "completion": "{{percent}}% complete",
+      "noTimestamp": "No timestamp available for this stage",
+      "expectedDate": "Expected delivery",
+      "cancelledNote": "This order was cancelled. The API doesn't record which stage it was cancelled from."
+    },
+    "warnings": {
+      "count": "{{count}} warning",
+      "count_other": "{{count}} warnings",
+      "panelTitle": "{{count}} warning on this order",
+      "panelTitle_other": "{{count}} warnings on this order"
+    },
+    "dialogs": {
+      "submitTitle": "Submit for approval",
+      "submitBody": "Submit \"{{orderNumber}}\" for approval? Once submitted, it can no longer be edited.",
+      "approveTitle": "Approve order",
+      "approveBody": "Approve \"{{orderNumber}}\"? This confirms the order is ready to be received.",
+      "cancelTitle": "Cancel order",
+      "cancelBody": "This will mark \"{{orderNumber}}\" as Cancelled. It can no longer be submitted, approved, or received. This cannot be undone."
+    },
+    "receive": {
+      "title": "Receive Goods",
+      "ordered": "Ordered",
+      "previouslyReceived": "Previously Received",
+      "remaining": "Remaining",
+      "receivingNow": "Receiving Now",
+      "newTotal": "New Total",
+      "summary": "Receiving {{receiving}} of {{remaining}} remaining units",
+      "confirm": "Confirm Receipt",
+      "nothingToReceive": "Enter a quantity for at least one line.",
+      "notReceivable": "This order can't receive goods in its current status."
+    },
+    "details": {
+      "back": "Back to Purchase Orders",
+      "notFound": "Purchase order not found.",
+      "totalAmount": "Total Amount",
+      "totalOrdered": "Total Ordered",
+      "totalReceived": "Total Received",
+      "linesCount": "Line Items",
+      "lineItems": "Line Items",
+      "activityComingSoon": "Activity history isn't available from the API yet.",
+      "auditComingSoon": "Created/modified information isn't available from the API yet."
+    },
+    "toasts": {
+      "created": "Purchase order created.",
+      "updated": "Purchase order updated.",
+      "submitted": "Purchase order submitted for approval.",
+      "approved": "Purchase order approved.",
+      "received": "Goods received.",
+      "cancelled": "Purchase order cancelled.",
+      "bulkCancelled": "{{count}} order cancelled.",
+      "bulkCancelled_other": "{{count}} orders cancelled.",
+      "bulkCancelPartial": "{{succeeded}} cancelled, {{failed}} failed."
+    }
+  },
+
+  "customers": {
+    "list": {
+      "title": "Customers",
+      "subtitleCount": "{{count}} customer",
+      "subtitleCount_other": "{{count}} customers",
+      "createCustomer": "Create Customer",
+      "search": {
+        "placeholder": "Search by name, contact, phone, or email"
+      },
+      "filters": {
+        "status": "Status"
+      },
+      "empty": {
+        "noCustomers": "No customers yet",
+        "noMatches": "No customers match your search or filters",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "kpi": {
+      "total": "Total Customers",
+      "active": "Active Customers",
+      "inactive": "Inactive Customers"
+    },
+    "column": {
+      "name": "Customer Name",
+      "contactName": "Contact Person",
+      "phone": "Phone",
+      "email": "Email",
+      "taxNumber": "Tax Number",
+      "status": "Status"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "delete": "Delete",
+      "moreActions": "More actions"
+    },
+    "create": {
+      "title": "Create Customer",
+      "editTitle": "Edit Customer",
+      "sections": {
+        "business": "Business Information",
+        "contact": "Contact Information",
+        "address": "Address"
+      },
+      "fields": {
+        "name": "Customer Name",
+        "contactName": "Contact Person",
+        "phone": "Phone",
+        "email": "Email",
+        "address": "Address",
+        "taxNumber": "Tax Number"
+      },
+      "errors": {
+        "required": "This field is required",
+        "invalidEmail": "Enter a valid email address"
+      },
+      "submitting": "Saving...",
+      "saveAndNew": "Save & New",
+      "unsavedChangesTitle": "Discard unsaved changes?",
+      "unsavedChangesBody": "You have unsaved changes that will be lost if you close this form.",
+      "discard": "Discard",
+      "keepEditing": "Keep Editing"
+    },
+    "details": {
+      "sections": {
+        "contact": "Contact Information",
+        "address": "Address",
+        "tax": "Tax Information"
+      }
+    },
+    "dialogs": {
+      "deactivate": {
+        "title": "Deactivate this customer?",
+        "body": "It will no longer appear in active customer pickers elsewhere in the product."
+      },
+      "delete": {
+        "title": "Delete customer",
+        "body": "This permanently removes {{name}}. This can't be undone."
+      }
+    },
+    "toast": {
+      "created": "{{name}} created",
+      "updated": "{{name}} updated",
+      "deactivated": "{{name}} deactivated",
+      "activated": "{{name}} activated",
+      "deleted": "{{name}} deleted"
+    }
   }
   
 }
