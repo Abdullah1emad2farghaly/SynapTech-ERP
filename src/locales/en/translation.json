@@ -93,6 +93,11 @@
     "passwordSymbol": "Add a symbol"
   },
   "common": {
+    "loading": "Loading...",
+    "unknown": "Unknown",
+    "view": "View",
+    "refresh": "Refresh",
+    "tryAgain": "Try again",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "language": "Language",
@@ -740,60 +745,6 @@
       "posted": "Journal entry posted.",
       "reversed": "Journal entry reversed.",
       "deleted": "Journal entry deleted."
-    }
-  },
-  "company": {
-    "breadcrumb": {
-      "organization": "Organization",
-      "company": "Company"
-    },
-    "actions": {
-      "edit": "Edit Company",
-      "refresh": "Refresh"
-    },
-    "fields": {
-      "name": "Company Name",
-      "legalName": "Legal Name",
-      "taxNumber": "Tax Number",
-      "country": "Country",
-      "currency": "Currency",
-      "status": "Status"
-    },
-    "status": {
-      "active": "Active",
-      "inactive": "Inactive",
-      "activeDescription": "Company is currently operational.",
-      "inactiveDescription": "Company is currently deactivated."
-    },
-    "sections": {
-      "info": {
-        "title": "Company Information",
-        "description": "Core identity details for your organization."
-      },
-      "business": {
-        "title": "Business Details",
-        "description": "Registration and financial information."
-      }
-    },
-    "edit": {
-      "title": "Edit Company",
-      "save": "Save",
-      "saving": "Saving...",
-      "cancel": "Cancel"
-    },
-    "empty": {
-      "title": "No company information found",
-      "description": "We couldn't find any company details for your account.",
-      "retry": "Retry"
-    },
-    "error": {
-      "title": "Something went wrong",
-      "description": "We couldn't load your company information. Please try again.",
-      "retry": "Retry"
-    },
-    "toast": {
-      "updateSuccess": "Company updated successfully",
-      "updateError": "Failed to update company"
     }
   },
   "warehouses": {
@@ -1550,6 +1501,587 @@
       "deactivated": "{{name}} deactivated",
       "activated": "{{name}} activated",
       "deleted": "{{name}} deleted"
+    }
+  },
+
+  "salesOrders": {
+    "page": { "title": "Sales Orders", "description": "Manage customer orders from draft to shipping." },
+    "status": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "Approved": "Approved",
+      "PartiallyShipped": "Partially Shipped",
+      "Shipped": "Shipped",
+      "Cancelled": "Cancelled"
+    },
+    "stats": {
+      "total": "Total Orders",
+      "withWarnings": "With Stock Warnings",
+      "totalValue": "Total Sales Amount"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by order number or customer...",
+      "exportNotAvailable": "Export isn't available yet."
+    },
+    "filters": {
+      "allCustomers": "All customers",
+      "allWarehouses": "All warehouses",
+      "to": "to",
+      "warningsAny": "Any",
+      "warningsYes": "Has warnings",
+      "warningsNo": "No warnings",
+      "reset": "Reset filters"
+    },
+    "table": {
+      "orderNumber": "Order Number",
+      "customer": "Customer",
+      "warehouse": "Warehouse",
+      "orderDate": "Order Date",
+      "status": "Status",
+      "total": "Total",
+      "shipping": "Shipping",
+      "warnings": "Stock Warnings"
+    },
+    "actions": {
+      "create": "New Sales Order",
+      "view": "View",
+      "edit": "Edit",
+      "submit": "Submit",
+      "approve": "Approve",
+      "ship": "Ship Goods",
+      "cancel": "Cancel Order",
+      "print": "Print",
+      "duplicate": "Duplicate",
+      "saveDraft": "Save as Draft"
+    },
+    "bulk": {
+      "selectedCount": "{{count}} order selected",
+      "selectedCount_other": "{{count}} orders selected",
+      "cancelSelected": "Cancel Selected",
+      "cancelDisabledHint": "All selected orders must be cancellable (Draft, Submitted, or Approved)."
+    },
+    "empty": {
+      "title": "No sales orders yet",
+      "description": "Create your first sales order to start selling.",
+      "filteredTitle": "No orders match your search or filters"
+    },
+    "form": {
+      "createTitle": "New Sales Order",
+      "editTitle": "Edit Sales Order",
+      "subtitle": "Fill in order details and add line items.",
+      "selectCustomer": "Select a customer",
+      "searchCustomers": "Search customers...",
+      "noCustomersFound": "No customers found",
+      "selectWarehouse": "Select a warehouse",
+      "searchWarehouses": "Search warehouses...",
+      "noWarehousesFound": "No warehouses found"
+    },
+    "fields": {
+      "customer": "Customer",
+      "warehouse": "Warehouse",
+      "orderDate": "Order Date",
+      "notes": "Notes"
+    },
+    "lines": {
+      "title": "Line Items",
+      "addRow": "Add Row",
+      "removeRow": "Remove row",
+      "duplicateRow": "Duplicate row",
+      "selectProduct": "Select product",
+      "searchProducts": "Search products...",
+      "noProductsFound": "No products found",
+      "product": "Product",
+      "sku": "SKU",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "lineTotal": "Line Total",
+      "shipped": "Shipped",
+      "remaining": "Remaining",
+      "grandTotal": "Grand Total"
+    },
+    "validation": {
+      "customerRequired": "Select a customer.",
+      "warehouseRequired": "Select a warehouse.",
+      "orderDateRequired": "Order date is required.",
+      "minOneLine": "At least one line item is required.",
+      "productRequired": "Select a product.",
+      "quantityPositive": "Quantity must be greater than 0.",
+      "priceNonNegative": "Unit price cannot be negative."
+    },
+    "tracker": {
+      "title": "Order Progress",
+      "completion": "{{percent}}% complete",
+      "noTimestamp": "No timestamp available for this stage",
+      "cancelledNote": "This order was cancelled. The API doesn't record which stage it was cancelled from."
+    },
+    "warnings": {
+      "count": "{{count}} warning",
+      "count_other": "{{count}} warnings",
+      "panelTitle": "{{count}} stock warning on this order",
+      "panelTitle_other": "{{count}} stock warnings on this order"
+    },
+    "dialogs": {
+      "submitTitle": "Submit order",
+      "submitBody": "Submit \"{{orderNumber}}\"? Once submitted, it can no longer be edited.",
+      "approveTitle": "Approve order",
+      "approveBody": "Approve \"{{orderNumber}}\"? This confirms it's ready to ship.",
+      "cancelTitle": "Cancel order",
+      "cancelBody": "This will mark \"{{orderNumber}}\" as Cancelled. It can no longer be submitted, approved, or shipped. This cannot be undone."
+    },
+    "ship": {
+      "title": "Ship Goods",
+      "ordered": "Ordered",
+      "alreadyShipped": "Already Shipped",
+      "remaining": "Remaining",
+      "shippingNow": "Shipping Now",
+      "newTotal": "New Total",
+      "summary": "Shipping {{shipping}} of {{remaining}} remaining units",
+      "confirm": "Confirm Shipment",
+      "nothingToShip": "Enter a quantity for at least one line.",
+      "notShippable": "This order can't ship goods in its current status."
+    },
+    "details": {
+      "back": "Back to Sales Orders",
+      "notFound": "Sales order not found.",
+      "totalAmount": "Total Amount",
+      "totalOrdered": "Total Ordered",
+      "totalShipped": "Total Shipped",
+      "linesCount": "Line Items",
+      "lineItems": "Line Items",
+      "daysSinceOrder": "{{count}} day since order",
+      "daysSinceOrder_other": "{{count}} days since order",
+      "activityComingSoon": "Activity history isn't available from the API yet.",
+      "auditComingSoon": "Created/modified information isn't available from the API yet."
+    },
+    "toasts": {
+      "created": "Sales order created.",
+      "updated": "Sales order updated.",
+      "submitted": "Sales order submitted.",
+      "approved": "Sales order approved.",
+      "shipped": "Goods shipped.",
+      "cancelled": "Sales order cancelled.",
+      "bulkCancelled": "{{count}} order cancelled.",
+      "bulkCancelled_other": "{{count}} orders cancelled.",
+      "bulkCancelPartial": "{{succeeded}} cancelled, {{failed}} failed."
+    }
+  },
+
+  "employees": {
+    "pageTitle": "Employees",
+    "pageDescription": "Manage your organization's workforce, employee information, organizational structure, and system access.",
+    "addEmployee": "Add Employee",
+    "editEmployee": "Edit Employee",
+    "unnamed": "Unnamed employee",
+    "kpi": {
+      "total": "Total Employees",
+      "active": "Active Employees",
+      "withAccess": "Employees With Access",
+      "departments": "Departments"
+    },
+    "filters": {
+      "searchPlaceholder": "Search by name, code, email, or phone",
+      "status": "Status",
+      "department": "Department",
+      "branch": "Branch",
+      "jobTitle": "Job Title",
+      "access": "System access",
+      "accessAll": "All access states",
+      "accessWith": "With access",
+      "accessWithout": "No access"
+    },
+    "table": {
+      "employee": "Employee",
+      "jobTitle": "Job Title",
+      "department": "Department",
+      "branch": "Branch",
+      "hireDate": "Hire Date",
+      "baseSalary": "Base Salary",
+      "status": "Status",
+      "access": "System Access",
+      "actionsFor": "Actions for {{name}}"
+    },
+    "status": {
+      "unspecified": "Not set"
+    },
+    "access": {
+      "enabled": "Access enabled",
+      "none": "No access",
+      "notEnabledTitle": "System access not enabled",
+      "notEnabledBody": "This employee does not currently have access to the SynapTech ERP system.",
+      "title": "System Access",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "grantedNoDetail": "This employee has system access, but detailed account information isn't available from this view."
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit Employee",
+      "viewAccess": "View System Access",
+      "grantAccess": "Grant Access",
+      "delete": "Delete Employee"
+    },
+    "deleteDialog": {
+      "title": "Delete Employee?",
+      "body": "You are about to permanently remove {{name}} ({{code}}). This action cannot be undone.",
+      "confirm": "Delete Employee"
+    },
+    "grantAccess": {
+      "title": "Grant System Access",
+      "emailPlaceholder": "employee@company.com",
+      "roles": "Roles",
+      "searchRoles": "Search roles",
+      "granting": "Granting…",
+      "submit": "Grant Access",
+      "success": "System access granted successfully"
+    },
+    "empty": {
+      "noResultsTitle": "No employees found",
+      "noResultsBody": "Try adjusting your search or filters.",
+      "noneYetTitle": "No employees yet",
+      "noneYetBody": "Start building your workforce by adding your first employee."
+    },
+    "errors": {
+      "loadFailed": "We couldn't load employees right now."
+    },
+    "toast": {
+      "created": "Employee created",
+      "updated": "Employee updated",
+      "deleted": "Employee deleted"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "employment": "Employment",
+      "contact": "Contact",
+      "compensation": "Compensation",
+      "access": "System Access"
+    },
+    "overview": {
+      "personal": "Personal Information",
+      "employmentSummary": "Employment Summary"
+    },
+    "form": {
+      "section": {
+        "basic": "Basic Information",
+        "employment": "Employment Information",
+        "compensation": "Compensation",
+        "contact": "Contact Information"
+      },
+      "fullName": "Full Name",
+      "employeeCode": "Employee Code",
+      "employeeCodeAuto": "Auto-generated if left blank",
+      "nationalId": "National ID",
+      "dateOfBirth": "Date of Birth",
+      "jobTitle": "Job Title",
+      "hireDate": "Hire Date",
+      "status": "Status",
+      "statusPlaceholder": "e.g. Active, Inactive",
+      "department": "Department",
+      "branch": "Branch",
+      "manager": "Manager",
+      "searchManager": "Search employees",
+      "baseSalary": "Base Salary",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "saveChanges": "Save Changes",
+      "createEmployee": "Create Employee"
+    }
+  },
+
+  "attendance": {
+    "breadcrumb": "Human Resources / Attendance",
+    "title": "Attendance",
+    "description": "Monitor employee attendance and daily activity.",
+    "viewDetails": "View details",
+    "columns": {
+      "employee": "Employee",
+      "date": "Date",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "status": "Status",
+      "notes": "Notes",
+      "actions": "Actions"
+    },
+    "summary": {
+      "total": "Total Records",
+      "totalHint": "Current dataset",
+      "checkedIn": "Checked In",
+      "checkedInHint": "Has a check-in today",
+      "completed": "Completed",
+      "completedHint": "Checked in and out",
+      "attention": "Attention",
+      "attentionHint": "Missing check-out"
+    },
+    "filters": {
+      "title": "Filters",
+      "searchPlaceholder": "Search employees...",
+      "employee": "Employee",
+      "employeePlaceholder": "Select employee",
+      "employeeSearchPlaceholder": "Search by name or code",
+      "noEmployeesFound": "No employees found",
+      "date": "Date",
+      "dateAll": "All time",
+      "dateToday": "Today",
+      "dateWeek": "This week",
+      "dateMonth": "This month",
+      "status": "Status",
+      "statusAll": "All statuses",
+      "filtersButton": "Filters",
+      "clear": "Clear",
+      "apply": "Apply filters"
+    },
+    "status": {
+      "none": "No status"
+    },
+    "derived": {
+      "notCheckedIn": "Not checked in",
+      "checkedIn": "In progress",
+      "completed": "Completed"
+    },
+    "notes": {
+      "none": "No notes"
+    },
+    "details": {
+      "title": "Attendance Details",
+      "date": "Attendance Date",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "duration": "Working Duration",
+      "notes": "Notes"
+    },
+    "empty": {
+      "title": "No attendance records",
+      "description": "There are no attendance records matching your current filters."
+    },
+    "error": {
+      "title": "Unable to load attendance",
+      "description": "We couldn't retrieve attendance records right now."
+    },
+    "today": {
+      "label": "Today's attendance",
+      "notCheckedIn": "Not checked in yet",
+      "checkIn": "Check In",
+      "checkingIn": "Checking in...",
+      "checkedIn": "Checked In",
+      "checkOut": "Check Out",
+      "checkingOut": "Checking out...",
+      "duration": "Duration",
+      "completed": "Completed"
+    },
+    "toast": {
+      "checkInSuccess": "Checked in successfully",
+      "checkInError": "We couldn't complete your check-in. Please try again.",
+      "checkOutSuccess": "Checked out successfully",
+      "checkOutError": "We couldn't complete your check-out. Please try again."
+    },
+    "myAttendance": {
+      "title": "My Attendance",
+      "historyTitle": "Attendance History"
+    },
+    "myHistory": {
+      "emptyTitle": "No attendance history yet",
+      "emptyDescription": "Your attendance records will appear here once attendance activity is recorded."
+    }
+  },
+
+  "company": {
+    "title": "Company",
+    "description": "Manage your organization's core company information and status.",
+    "breadcrumb": {
+      "settings": "Settings",
+      "company": "Company"
+    },
+    "profile": {
+      "title": "Company Profile",
+      "description": "Core details that identify your organization.",
+      "name": "Company Name",
+      "legalName": "Legal Name",
+      "taxNumber": "Tax Number",
+      "country": "Country",
+      "currency": "Currency"
+    },
+    "status": {
+      "title": "Company Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "helperText": "Controls whether this company is currently active in the system."
+    },
+    "systemInfo": {
+      "title": "System Information",
+      "companyId": "Company ID",
+      "copy": "Copy",
+      "copied": "Company ID copied",
+      "copyFailed": "Couldn't copy the Company ID",
+      "readOnly": "Read-only"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "saving": "Saving..."
+    },
+    "discardDialog": {
+      "title": "Discard changes?",
+      "description": "You have unsaved changes. Are you sure you want to leave them?",
+      "confirm": "Discard Changes",
+      "cancel": "Keep Editing"
+    },
+    "toast": {
+      "saveSuccess": "Company information saved",
+      "saveError": "We couldn't save your company information. Please try again."
+    },
+    "error": {
+      "loadTitle": "Unable to load company information",
+      "loadDescription": "Something went wrong while loading your company information."
+    },
+    "validation": {
+      "maxLength": "This value is too long"
+    }
+  },
+
+  "leaveRequests": {
+    "dashboard": {
+      "title": "Leave Requests",
+      "subtitle": "Manage employee time off",
+      "pendingPanel": "Pending Requests",
+      "recentPanel": "Recent Requests",
+      "noPending": "No pending requests right now."
+    },
+    "list": {
+      "title": "Leave Requests"
+    },
+    "myRequests": {
+      "title": "My Leave Requests",
+      "requestLeave": "Request Leave",
+      "emptyTitle": "You haven't submitted any leave requests yet."
+    },
+    "create": {
+      "title": "Create Leave Request",
+      "submit": "Submit Request",
+      "submitting": "Submitting…"
+    },
+    "details": {
+      "backToList": "Back to Leave Requests",
+      "requestPeriod": "Request Period",
+      "reason": "Reason",
+      "noReason": "No reason provided",
+      "workflowStatus": "Workflow Status",
+      "approvalInformation": "Approval Information",
+      "notYetDecided": "Not yet decided",
+      "noAuditTrailNote": "Authorship and timeline details aren't available from the current system.",
+      "quickActions": "Quick Actions",
+      "noActionsAvailable": "No actions are available for this request."
+    },
+    "form": {
+      "employee": "Employee",
+      "employeePlaceholder": "Select an employee",
+      "employeeSearchPlaceholder": "Search employees…",
+      "employeeNoResults": "No employees found",
+      "you": "You",
+      "leaveType": "Leave Type",
+      "leaveTypePlaceholder": "Select a leave type",
+      "leaveTypeSearchPlaceholder": "Search leave types…",
+      "leaveTypeNoResults": "No leave types found",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "duration": "Duration",
+      "reason": "Reason",
+      "reasonPlaceholder": "Add any additional context for this request…"
+    },
+    "duration": {
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days"
+    },
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "tracker": {
+      "ariaLabel": "Leave request status",
+      "requested": "Requested",
+      "pending": "Pending",
+      "decision": "Decision",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "kpi": {
+      "total": "Total Requests",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "table": {
+      "employee": "Employee",
+      "leaveType": "Leave Type",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "duration": "Duration",
+      "status": "Status",
+      "approvedAt": "Approved At"
+    },
+    "filters": {
+      "all": "All",
+      "filters": "Filters",
+      "searchPlaceholder": "Search requests…",
+      "employee": "Employee",
+      "leaveType": "Leave Type",
+      "startDateFrom": "Start Date From",
+      "startDateTo": "Start Date To",
+      "clearAll": "Clear all"
+    },
+    "actions": {
+      "create": "Create Request",
+      "approve": "Approve",
+      "reject": "Reject",
+      "cancel": "Cancel"
+    },
+    "approve": {
+      "title": "Approve leave request?",
+      "body": "Approve {{employee}}'s leave request from {{startDate}} to {{endDate}}?"
+    },
+    "reject": {
+      "title": "Reject leave request?",
+      "body": "Reject {{employee}}'s leave request from {{startDate}} to {{endDate}}? This action does not include a rejection reason."
+    },
+    "cancel": {
+      "title": "Cancel leave request?",
+      "body": "Cancel {{employee}}'s leave request from {{startDate}} to {{endDate}}?",
+      "bodyApproved": "This request was previously approved — cancelling it will change its status to Cancelled. Continue?"
+    },
+    "toast": {
+      "created": "Leave request submitted",
+      "approved": "Leave request approved",
+      "rejected": "Leave request rejected",
+      "cancelled": "Leave request cancelled"
+    },
+    "empty": {
+      "noneTitle": "No leave requests yet",
+      "noneDescription": "Requests will appear here once employees start submitting them.",
+      "noMatchTitle": "No matching requests",
+      "noMatchDescription": "Try adjusting your search or filters."
+    },
+    "error": {
+      "loadFailed": "Couldn't load leave requests.",
+      "notFound": "This leave request couldn't be found."
+    },
+    "validation": {
+      "employeeRequired": "Select an employee",
+      "leaveTypeRequired": "Select a leave type",
+      "startDateRequired": "Start date is required",
+      "endDateRequired": "End date is required",
+      "endDateBeforeStartDate": "End date must be on or after the start date"
+    },
+    "types": {
+      "annual": "Annual Leave",
+      "sick": "Sick Leave",
+      "unpaid": "Unpaid Leave",
+      "maternity": "Maternity Leave",
+      "paternity": "Paternity Leave",
+      "other": "Other"
     }
   }
   

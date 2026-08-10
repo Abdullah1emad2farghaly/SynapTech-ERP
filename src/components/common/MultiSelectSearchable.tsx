@@ -8,7 +8,7 @@
 
 import { useMemo, useState } from "react";
 import { Search, X } from "lucide-react";
-import { RoleResponse } from "@/types/roles.types";
+// import { RoleResponse } from "@/types/roles.types";
 
 export interface MultiSelectOption {
   value: string;
@@ -16,7 +16,7 @@ export interface MultiSelectOption {
 }
 
 export interface MultiSelectSearchableProps {
-  options: RoleResponse[];
+  options: MultiSelectOption[];
   selected: string[];
   onChange: (selected: string[]) => void;
   searchPlaceholder: string;
@@ -40,11 +40,12 @@ export function MultiSelectSearchable({
   const filteredOptions = useMemo(() => {
     if (!query.trim()) return options;
     const q = query.trim().toLowerCase();
-    return options.filter((o) => o.name.toLowerCase().includes(q));
+    return options.filter((o) => o.label.toLowerCase().includes(q));
   }, [options, query]);
 
+
   const selectedOptions = useMemo(
-    () => options.filter((o) => selected.includes(o.name)),
+    () => options.filter((o) => selected.includes(o.label)),
     [options, selected],
   );
 
@@ -66,14 +67,14 @@ export function MultiSelectSearchable({
         <div className="mb-3 flex flex-wrap gap-1.5">
           {selectedOptions.map((option) => (
             <span
-              key={option.id}
+              key={option.value}
               className="inline-flex items-center gap-1 rounded-[6px] bg-[var(--sunken)] px-2 py-1 text-xs font-medium text-[var(--ink-primary)]"
             >
-              {option.name}
+              {option.label}
               <button
                 type="button"
-                onClick={() => remove(option.name)}
-                aria-label={`Remove ${option.name}`}
+                onClick={() => remove(option.label)}
+                aria-label={`Remove ${option.label}`}
                 className="text-[var(--ink-tertiary)] hover:text-[var(--error)]"
               >
                 <X size={12} />
@@ -109,10 +110,10 @@ export function MultiSelectSearchable({
         ) : (
           filteredOptions.map((option) => {
             
-            const isChecked = selected.includes(option.name);
+            const isChecked = selected.includes(option.label);
             return (
               <label
-                key={option.id}
+                key={option.value}
                 role="option"
                 aria-selected={isChecked}
                 className="flex cursor-pointer items-center gap-2 px-3 py-2 text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
@@ -120,10 +121,10 @@ export function MultiSelectSearchable({
                 <input
                   type="checkbox"
                   checked={isChecked}
-                  onChange={() => toggle(option.name)}
+                  onChange={() => toggle(option.label)}
                   className="h-4 w-4 rounded-[4px] border-[var(--hairline)]"
                 />
-                {option.name}
+                {option.label}
               </label>
             );
           })

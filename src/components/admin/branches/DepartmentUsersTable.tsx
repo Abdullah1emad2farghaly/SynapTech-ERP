@@ -42,7 +42,7 @@ export function DepartmentUsersTable({ users, onSetActive, onDelete }: Departmen
   const navigate = useNavigate();
 
   function goToUser(userId: string) {
-    navigate(`/organization/users/${userId}`);
+    navigate(`/administration/users/${userId}`);
   }
 
   return (

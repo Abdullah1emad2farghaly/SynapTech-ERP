@@ -1,20 +1,23 @@
-// src/types/company.types.ts
+// Intended path: src/types/company.types.ts
+//
+// Source of truth: GET/PUT /api/Companies/me only.
+// Do not add fields (logo, email, phone, address, etc.) — none exist on this API.
 
-export interface Company {
-  id: string;
-  name: string;
-  legalName: string;
-  taxNumber: string;
-  currency: string;
-  country: string;
+export interface CompanyResponse {
+  id: string; // UUID, read-only
+  name: string | null;
+  legalName: string | null;
+  taxNumber: string | null;
+  currency: string | null;
+  country: string | null;
   isActive: boolean;
 }
 
-export interface UpdateCompanyPayload {
-  name: string;
-  legalName: string;
-  taxNumber: string;
-  currency: string;
-  country: string;
+export interface UpdateCompanyRequest {
+  name: string | null;
+  legalName: string | null;
+  taxNumber: string | null;
+  currency: string | null;
+  country: string | null;
   isActive: boolean;
 }

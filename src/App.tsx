@@ -6,9 +6,7 @@ import RegisterPage from "@/pages/common/RegisterPage";
 import ForgotPasswordPage from "@/pages/common/ForgotPasswordPage";
 import ResetPasswordPage from "@/pages/common/ResetPasswordPage";
 import EmailConfirmationPage from "@/pages/common/EmailConfirmationPage";
-import HrDashboardPage from "@/pages/admin/hr/HrDashboardPage";
-import EmployeeDirectoryPage from "@/pages/admin/hr/EmployeeDirectoryPage";
-import EmployeeProfilePage from "@/pages/admin/hr/EmployeeProfilePage";
+
 import { ROUTES } from "@/constants/routes";
 import { AppShell } from "./components/admin/shell/AppShell";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
@@ -25,7 +23,6 @@ import { AccountDetailsPage } from "./pages/admin/accounts/AccountDetailsPage";
 import { JournalEntriesListPage } from "./pages/admin/journal-entries/JournalEntriesListPage";
 import { CreateJournalEntryPage } from "./pages/admin/journal-entries/CreateJournalEntryPage";
 import { JournalEntryDetailsPage } from "./pages/admin/journal-entries/JournalEntryDetailsPage";
-import CompanyPage from "./pages/admin/company/CompanyPage";
 import { WarehousesListPage } from "./pages/admin/warehouses/WarehousesListPage";
 import { CategoriesPage } from "./pages/admin/categories/CategoriesPage";
 import { ProductsListPage } from "./pages/admin/products/ProductsListPage";
@@ -41,6 +38,21 @@ import { SupplierDetailsPage } from "./pages/admin/suppliers/SupplierDetailsPage
 import { CreateEditPurchaseOrderPage } from "./pages/admin/purchase-orders/CreateEditPurchaseOrderPage";
 import { ReceiveGoodsPage } from "./pages/admin/purchase-orders/ReceiveGoodsPage";
 import { CustomersPage } from "./pages/admin/customers/CustomersPage";
+import { SalesOrdersListPage } from "./pages/admin/sales-orders/SalesOrdersListPage";
+import { CreateEditSalesOrderPage } from "./pages/admin/sales-orders/CreateEditSalesOrderPage";
+import { SalesOrderDetailsPage } from "./pages/admin/sales-orders/SalesOrderDetailsPage";
+import { ShipGoodsPage } from "./pages/admin/sales-orders/ShipGoodsPage";
+import { EmployeeDetailsPage } from "./pages/admin/employees/EmployeeDetailsPage";
+import { EditEmployeePage } from "./pages/admin/employees/EditEmployeePage";
+import { CreateEmployeePage } from "./pages/admin/employees/CreateEmployeePage";
+import { EmployeesListPage } from "./pages/admin/employees/EmployeesListPage";
+import { MyAttendancePage } from "./pages/admin/attendance/MyAttendancePage";
+import { AttendancePage } from "./pages/admin/attendance/AttendancePage";
+import { CompanySettingsPage } from "./pages/admin/company/CompanySettingsPage";
+import { MyLeaveRequestsPage } from "./pages/admin/leaveRequests/MyLeaveRequestsPage";
+import { LeaveRequestsDashboardPage } from "./pages/admin/leaveRequests/LeaveRequestsDashboardPage";
+import { LeaveRequestsListPage } from "./pages/admin/leaveRequests/LeaveRequestsListPage";
+import { LeaveRequestDetailsPage } from "./pages/admin/leaveRequests/LeaveRequestDetailsPage";
 
 const queryClient = new QueryClient();
 
@@ -69,21 +81,24 @@ export default function App() {
           <Route path={ROUTES.HR_EMPLOYEES} element={<EmployeeDirectoryPage />} />
           <Route path={ROUTES.HR_EMPLOYEE_DETAIL} element={<EmployeeProfilePage />} /> */}
 
+
           {/* Shelled pages — everything nested here renders inside AppShell */}
           <Route element={<DashboardLayout />}>
-            <Route path={ROUTES.DASHBOARD}  />
-            <Route path={ROUTES.HR_DASHBOARD} element={<HrDashboardPage />} />
-            <Route path={ROUTES.HR_EMPLOYEES} element={<EmployeeDirectoryPage />} />
-            <Route path={ROUTES.HR_EMPLOYEE_DETAIL} element={<EmployeeProfilePage />} />
+            <Route path={ROUTES.DASHBOARD} />
+            <Route path="settings" element={<CompanySettingsPage />} />
             <Route path="/organization">
-              <Route path="branches" element={<BranchesPage/>} />
-              <Route path="branches/:id" element={<BranchDetailsPage/>} />
-              <Route path="departments" element={<DepartmentsPage/>} />
+              <Route path="branches" element={<BranchesPage />} />
+              <Route path="branches/:id" element={<BranchDetailsPage />} />
+              <Route path="departments" element={<DepartmentsPage />} />
+            </Route>
+
+            <Route path="/administration">
               <Route path="users" element={<UsersListPage />} />
               <Route path="users/:id" element={<UserDetailsPage />} />
-              <Route path="roles" element={<RolesListPage/>}/>
-              <Route path="roles/:id" element={<RoleDetailsPage/>}/>
+              <Route path="roles" element={<RolesListPage />} />
+              <Route path="roles/:id" element={<RoleDetailsPage />} />
             </Route>
+
 
             <Route path="/accounting">
               <Route path="accounts" element={<AccountsListPage />} />
@@ -100,14 +115,31 @@ export default function App() {
               <Route path="categories" element={<CategoriesPage />} />
               <Route path="products" element={<ProductsListPage />} />
               <Route path="products/:id" element={<ProductDetailsPage />} />
-              
+
               <Route path="stock" element={<StockOverviewPage />} />
-              
+
               <Route path="warehouses/:warehouseId" element={<WarehouseInventoryPage />} />
 
               <Route path="new-movement" element={<RecordMovementPage />} />
               <Route path="stock/transfer" element={<TransferStockPage />} />
+            </Route>
 
+            <Route path="/hr">
+              <Route path="employees" element={<EmployeesListPage />} />
+              <Route path="employees/create" element={<CreateEmployeePage />} />
+              <Route path="employees/:id" element={<EmployeeDetailsPage />} />
+              <Route path="employees/:id/edit" element={<EditEmployeePage />} />
+
+              <Route path="attendance" element={<AttendancePage />} />
+              <Route path="my-attendance" element={<MyAttendancePage />} />
+
+              <Route path="leave-requests" element={<LeaveRequestsDashboardPage />} />
+              <Route path="leave-requests/all" element={<LeaveRequestsListPage />} />
+              <Route path="leave-requests/:id" element={<LeaveRequestDetailsPage />} />
+              <Route path="my-requests" element={<MyLeaveRequestsPage />} />
+            </Route>
+
+            <Route path="/purchasing">
               <Route path="suppliers" element={<SuppliersListPage />} />
               <Route path="suppliers/:id" element={<SupplierDetailsPage />} />
 
@@ -116,8 +148,15 @@ export default function App() {
               <Route path="purchase-orders/:id" element={<PurchaseOrderDetailsPage />} />
               <Route path="purchase-orders/:id/edit" element={<CreateEditPurchaseOrderPage />} />
               <Route path="purchase-orders/:id/receive" element={<ReceiveGoodsPage />} />
+            </Route>
+
+            <Route path="/sales">
               <Route path="customers" element={<CustomersPage />} />
-              
+              <Route path="sales-orders" element={<SalesOrdersListPage />} />
+              <Route path="sales-orders/create" element={<CreateEditSalesOrderPage />} />
+              <Route path="sales-orders/:id" element={<SalesOrderDetailsPage />} />
+              <Route path="sales-orders/:id/edit" element={<CreateEditSalesOrderPage />} />
+              <Route path="sales-orders/:id/ship" element={<ShipGoodsPage />} />
             </Route>
           </Route>
 

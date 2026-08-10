@@ -54,7 +54,10 @@ export function CreateUserDrawer({
 }: CreateUserDrawerProps) {
   const { t } = useTranslation();
 
-  console.log(roleOptions)
+  const options: MultiSelectOption[] = roleOptions.map((op) => ({
+    value: op.id,
+    label: op.name,
+  }));
   const {
     register,
     handleSubmit,
@@ -176,7 +179,7 @@ export function CreateUserDrawer({
             control={control}
             render={({ field }) => (
               <MultiSelectSearchable
-                options={roleOptions}
+                options={options}
                 selected={field.value}
                 onChange={field.onChange}
                 searchPlaceholder={t("users.roles.searchPlaceholder")}

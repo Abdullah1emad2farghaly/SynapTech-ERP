@@ -11,26 +11,27 @@ export const NAV_ITEMS: NavItem[] = [
     icon: LayoutDashboard,
   },
   {
-    id: "organization",
-    label: "Organization",
-    to: "/Organization",
-    icon: Building2,
+    id: "sales",
+    label: "Sales",
+    to: "/sales", 
+    icon: Package,
     children: [
-      
-      { id: "branches", label: "Branches", to: "/organization/branches" },
-      { id: "departments", label: "Departments", to: "/organization/departments" },
-      { id: "users", label: "Users", to: "/organization/users" },
-      { id: "roles", label: "Roles", to: "/organization/roles" },
+      { id: "customers", label: "Customers", to: "sales/customers" }, 
+      { id: "sales-orders", label: "Sales Orders", to: "sales/sales-orders" },
+      // { id: "employees", label: "Employees", to: "sales/employees" },
     ],
   },
+  
   {
-    id: "accounting",
-    label: "Accounting",
-    to: "/accounting",
-    icon: Wallet,
+    id: "purchasing",
+    label: "Purchasing",
+    to: "/purchasing",
+    icon: Package,
     children: [
-      { id: "accounts", label: "Chart Of Accounts", to: "accounting/accounts" },
-      { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
+      //suppliers
+      { id: "suppliers", label: "Suppliers", to: "/purchasing/suppliers" },
+      { id: "purchase-orders-list", label: "Purchase Orders", to: "/purchasing/purchase-orders" },
+
     ],
   },
   {
@@ -44,12 +45,17 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "products", label: "Products", to: "inventory/products" },
       { id: "stock", label: "Stock", to: "inventory/stock" },
       { id: "newMovment", label: "New Movement", to: "inventory/new-movement" },
-      { id: "suppliers", label: "Suppliers", to: "inventory/suppliers" },
-      { id: "purchase-orders", label: "Purchase Orders", to: "inventory/purchase-orders" },
-      { id: "customers", label: "Customers", to: "inventory/customers" },
 
-      // { id: "puchase-orders", label: "Purchase Orders", to: "inventory/purchase-orders" },
-      // { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
+    ],
+  },
+  {
+    id: "accounting",
+    label: "Accounting",
+    to: "/accounting",
+    icon: Wallet,
+    children: [
+      { id: "accounts", label: "Chart Of Accounts", to: "accounting/accounts" },
+      { id: "journalEntries", label: "Journal Entries", to: "accounting/journal-entries" },
     ],
   },
   {
@@ -60,9 +66,47 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { id: "hr-directory", label: "Employees", to: "/hr/employees" },
       { id: "hr-attendance", label: "Attendance", to: "/hr/attendance" },
-      { id: "hr-payroll", label: "Payroll", to: "/hr/payroll" },
-      { id: "hr-org-chart", label: "Org Chart", to: "/hr/org-chart" },
+      { id: "leave-requests", label: "Leave Requests", to: "/hr/leave-requests" },
+      { id: "my-requests", label: "My Requests", to: "/hr/my-requests" }
     ],
   },
+  {
+    id: "organization",
+    label: "Organization",
+    to: "/Organization",
+    icon: Building2,
+    children: [
+      
+      { id: "branches", label: "Branches", to: "/organization/branches" },
+      { id: "departments", label: "Departments", to: "/organization/departments" },
+    ],
+  },
+  {
+    id: "administration",
+    label: "Administration",
+    to: "/administration",
+    icon: Users2,
+    children: [
+      { id: "users", label: "Users", to: "/administration/users" },
+      { id: "roles", label: "Roles & Permissions", to: "/administration/roles" },
+    ],
+  },
+  
+  
+  
+  
+  
+  // {
+  //   id: "hr",
+  //   label: "HR & Payroll",
+  //   to: "/hr",
+  //   icon: Users2,
+  //   children: [
+  //     { id: "hr-directory", label: "Employees", to: "/hr/employees" },
+  //     { id: "hr-attendance", label: "Attendance", to: "/hr/attendance" },
+  //     { id: "hr-payroll", label: "Payroll", to: "/hr/payroll" },
+  //     { id: "hr-org-chart", label: "Org Chart", to: "/hr/org-chart" },
+  //   ],
+  // },
 
 ];

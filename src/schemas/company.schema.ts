@@ -1,15 +1,20 @@
-// src/schemas/company.schema.ts
+// Intended path: src/schemas/company.schema.ts
+//
+// All API fields except isActive are nullable strings. RHF inputs can't hold
+// null, so the form works in plain strings ('' = no value) and the page maps
+// to/from CompanyResponse / UpdateCompanyRequest at the load/submit boundary.
+// Nothing here is marked required — the API never mandates it, so we don't
+// invent a business rule that isn't backed by the contract.
+
 import { z } from 'zod';
 
-export const companyUpdateSchema = z.object({
-  name: z.string().min(1, 'validation.required').max(200),
-  legalName: z.string().min(1, 'validation.required').max(200),
-  // ASSUMPTION: tax number format/length not confirmed by backend — free text, min 1
-  taxNumber: z.string().min(1, 'validation.required').max(50),
-  // ASSUMPTION: currency assumed to be a 3-letter ISO 4217 code (e.g. "USD"); not confirmed
-  currency: z.string().min(1, 'validation.required').max(10),
-  country: z.string().min(1, 'validation.required').max(100),
+export const companySchema = z.object({
+  name: z.string().trim().max(200, 'validation.maxLength'),
+  legalName: z.string().trim().max(200, 'validation.maxLength'),
+  taxNumber: z.string().trim().max(100, 'validation.maxLength'),
+  currency: z.string().trim().max(10, 'validation.maxLength'),
+  country: z.string().trim().max(100, 'validation.maxLength'),
   isActive: z.boolean(),
 });
 
-export type CompanyUpdateFormValues = z.infer<typeof companyUpdateSchema>;
+export type CompanyFormValues = z.infer<typeof companySchema>;

@@ -93,6 +93,11 @@
     "passwordSymbol": "أضف رمزًا"
   },
   "common": {
+    "loading": "جارٍ التحميل...",
+    "unknown": "غير معروف",
+    "view": "عرض",
+    "refresh": "تحديث",
+    "tryAgain": "حاول مرة أخرى",
     "errors": {
       "loadFailed": "تعذر تحميل البيانات",
       "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
@@ -740,60 +745,6 @@
       "posted": "تم ترحيل القيد.",
       "reversed": "تم عكس القيد.",
       "deleted": "تم حذف القيد."
-    }
-  },
-  "company": {
-    "breadcrumb": {
-      "organization": "المؤسسة",
-      "company": "الشركة"
-    },
-    "actions": {
-      "edit": "تعديل بيانات الشركة",
-      "refresh": "تحديث"
-    },
-    "fields": {
-      "name": "اسم الشركة",
-      "legalName": "الاسم القانوني",
-      "taxNumber": "الرقم الضريبي",
-      "country": "الدولة",
-      "currency": "العملة",
-      "status": "الحالة"
-    },
-    "status": {
-      "active": "نشطة",
-      "inactive": "غير نشطة",
-      "activeDescription": "الشركة تعمل حاليًا.",
-      "inactiveDescription": "الشركة غير مفعّلة حاليًا."
-    },
-    "sections": {
-      "info": {
-        "title": "بيانات الشركة",
-        "description": "التفاصيل الأساسية لهوية مؤسستك."
-      },
-      "business": {
-        "title": "التفاصيل التجارية",
-        "description": "معلومات التسجيل والبيانات المالية."
-      }
-    },
-    "edit": {
-      "title": "تعديل بيانات الشركة",
-      "save": "حفظ",
-      "saving": "جارٍ الحفظ...",
-      "cancel": "إلغاء"
-    },
-    "empty": {
-      "title": "لا توجد بيانات للشركة",
-      "description": "لم نتمكن من العثور على بيانات شركة مرتبطة بحسابك.",
-      "retry": "إعادة المحاولة"
-    },
-    "error": {
-      "title": "حدث خطأ ما",
-      "description": "تعذّر تحميل بيانات الشركة. حاول مرة أخرى.",
-      "retry": "إعادة المحاولة"
-    },
-    "toast": {
-      "updateSuccess": "تم تحديث بيانات الشركة بنجاح",
-      "updateError": "فشل تحديث بيانات الشركة"
     }
   },
   "warehouses": {
@@ -1459,7 +1410,593 @@
       "activated": "تم تفعيل {{name}}",
       "deleted": "تم حذف {{name}}"
     }
-  }
-  
+  },
 
+  "salesOrders": {
+    "page": { "title": "أوامر البيع", "description": "إدارة طلبات العملاء من المسودة حتى الشحن." },
+    "status": {
+      "Draft": "مسودة",
+      "Submitted": "مُرسل",
+      "Approved": "مُعتمد",
+      "PartiallyShipped": "مشحون جزئيًا",
+      "Shipped": "مشحون",
+      "Cancelled": "ملغى"
+    },
+    "stats": {
+      "total": "إجمالي الأوامر",
+      "withWarnings": "بها تحذيرات مخزون",
+      "totalValue": "إجمالي المبيعات"
+    },
+    "toolbar": {
+      "searchPlaceholder": "ابحث برقم الأمر أو العميل...",
+      "exportNotAvailable": "التصدير غير متاح حاليًا."
+    },
+    "filters": {
+      "allCustomers": "جميع العملاء",
+      "allWarehouses": "جميع المستودعات",
+      "to": "إلى",
+      "warningsAny": "الكل",
+      "warningsYes": "به تحذيرات",
+      "warningsNo": "بدون تحذيرات",
+      "reset": "إعادة تعيين الفلاتر"
+    },
+    "table": {
+      "orderNumber": "رقم الأمر",
+      "customer": "العميل",
+      "warehouse": "المستودع",
+      "orderDate": "تاريخ الأمر",
+      "status": "الحالة",
+      "total": "الإجمالي",
+      "shipping": "الشحن",
+      "warnings": "تحذيرات المخزون"
+    },
+    "actions": {
+      "create": "أمر بيع جديد",
+      "view": "عرض",
+      "edit": "تعديل",
+      "submit": "إرسال",
+      "approve": "اعتماد",
+      "ship": "شحن البضاعة",
+      "cancel": "إلغاء الأمر",
+      "print": "طباعة",
+      "duplicate": "نسخ",
+      "saveDraft": "حفظ كمسودة"
+    },
+    "bulk": {
+      "selectedCount": "تم تحديد أمر واحد",
+      "selectedCount_other": "تم تحديد {{count}} أمر",
+      "cancelSelected": "إلغاء المحدد",
+      "cancelDisabledHint": "يجب أن تكون جميع الأوامر المحددة قابلة للإلغاء (مسودة أو مُرسلة أو مُعتمدة)."
+    },
+    "empty": {
+      "title": "لا توجد أوامر بيع بعد",
+      "description": "أنشئ أول أمر بيع لبدء البيع.",
+      "filteredTitle": "لا توجد أوامر مطابقة لبحثك أو فلاترك"
+    },
+    "form": {
+      "createTitle": "أمر بيع جديد",
+      "editTitle": "تعديل أمر البيع",
+      "subtitle": "أدخل تفاصيل الأمر وأضف بنود الأصناف.",
+      "selectCustomer": "اختر عميلًا",
+      "searchCustomers": "ابحث عن العملاء...",
+      "noCustomersFound": "لا يوجد عملاء",
+      "selectWarehouse": "اختر مستودعًا",
+      "searchWarehouses": "ابحث عن المستودعات...",
+      "noWarehousesFound": "لا توجد مستودعات"
+    },
+    "fields": {
+      "customer": "العميل",
+      "warehouse": "المستودع",
+      "orderDate": "تاريخ الأمر",
+      "notes": "ملاحظات"
+    },
+    "lines": {
+      "title": "بنود الأصناف",
+      "addRow": "إضافة سطر",
+      "removeRow": "حذف السطر",
+      "duplicateRow": "نسخ السطر",
+      "selectProduct": "اختر منتجًا",
+      "searchProducts": "ابحث عن المنتجات...",
+      "noProductsFound": "لا توجد منتجات",
+      "product": "المنتج",
+      "sku": "رمز الصنف",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "lineTotal": "إجمالي السطر",
+      "shipped": "المشحون",
+      "remaining": "المتبقي",
+      "grandTotal": "الإجمالي الكلي"
+    },
+    "validation": {
+      "customerRequired": "اختر عميلًا.",
+      "warehouseRequired": "اختر مستودعًا.",
+      "orderDateRequired": "تاريخ الأمر مطلوب.",
+      "minOneLine": "يلزم وجود بند واحد على الأقل.",
+      "productRequired": "اختر منتجًا.",
+      "quantityPositive": "يجب أن تكون الكمية أكبر من صفر.",
+      "priceNonNegative": "لا يمكن أن يكون سعر الوحدة سالبًا."
+    },
+    "tracker": {
+      "title": "تقدّم الأمر",
+      "completion": "اكتمال {{percent}}%",
+      "noTimestamp": "لا يوجد وقت مسجل لهذه المرحلة",
+      "cancelledNote": "تم إلغاء هذا الأمر. لا يسجل الـ API المرحلة التي تم الإلغاء منها."
+    },
+    "warnings": {
+      "count": "تحذير واحد",
+      "count_other": "{{count}} تحذير",
+      "panelTitle": "تحذير مخزون واحد على هذا الأمر",
+      "panelTitle_other": "{{count}} تحذيرات مخزون على هذا الأمر"
+    },
+    "dialogs": {
+      "submitTitle": "إرسال الأمر",
+      "submitBody": "إرسال \"{{orderNumber}}\"؟ بمجرد الإرسال، لن يمكن تعديله.",
+      "approveTitle": "اعتماد الأمر",
+      "approveBody": "اعتماد \"{{orderNumber}}\"؟ هذا يؤكد أنه جاهز للشحن.",
+      "cancelTitle": "إلغاء الأمر",
+      "cancelBody": "سيتم وضع علامة \"ملغى\" على \"{{orderNumber}}\". لن يمكن إرساله أو اعتماده أو شحنه بعد ذلك. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "ship": {
+      "title": "شحن البضاعة",
+      "ordered": "المطلوب",
+      "alreadyShipped": "المشحون سابقًا",
+      "remaining": "المتبقي",
+      "shippingNow": "الشحن الآن",
+      "newTotal": "الإجمالي الجديد",
+      "summary": "شحن {{shipping}} من أصل {{remaining}} وحدة متبقية",
+      "confirm": "تأكيد الشحن",
+      "nothingToShip": "أدخل كمية لسطر واحد على الأقل.",
+      "notShippable": "لا يمكن شحن البضاعة لهذا الأمر في حالته الحالية."
+    },
+    "details": {
+      "back": "العودة إلى أوامر البيع",
+      "notFound": "أمر البيع غير موجود.",
+      "totalAmount": "الإجمالي",
+      "totalOrdered": "إجمالي المطلوب",
+      "totalShipped": "إجمالي المشحون",
+      "linesCount": "بنود الأصناف",
+      "lineItems": "بنود الأصناف",
+      "daysSinceOrder": "يوم واحد منذ الطلب",
+      "daysSinceOrder_other": "{{count}} يوم منذ الطلب",
+      "activityComingSoon": "سجل النشاط غير متاح من الـ API بعد.",
+      "auditComingSoon": "معلومات الإنشاء والتعديل غير متاحة من الـ API بعد."
+    },
+    "toasts": {
+      "created": "تم إنشاء أمر البيع.",
+      "updated": "تم تحديث أمر البيع.",
+      "submitted": "تم إرسال أمر البيع.",
+      "approved": "تم اعتماد أمر البيع.",
+      "shipped": "تم شحن البضاعة.",
+      "cancelled": "تم إلغاء أمر البيع.",
+      "bulkCancelled": "تم إلغاء أمر واحد.",
+      "bulkCancelled_other": "تم إلغاء {{count}} أمر.",
+      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
+    }
+  },
+
+  "employees": {
+    "pageTitle": "الموظفون",
+    "pageDescription": "إدارة القوى العاملة في مؤسستك، وبيانات الموظفين، والهيكل التنظيمي، وصلاحيات الدخول إلى النظام.",
+    "addEmployee": "إضافة موظف",
+    "editEmployee": "تعديل بيانات الموظف",
+    "unnamed": "موظف بدون اسم",
+    "kpi": {
+      "total": "إجمالي الموظفين",
+      "active": "الموظفون النشطون",
+      "withAccess": "الموظفون الذين لديهم صلاحية دخول",
+      "departments": "الأقسام"
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث بالاسم أو الرقم الوظيفي أو البريد الإلكتروني أو الهاتف",
+      "status": "الحالة",
+      "department": "القسم",
+      "branch": "الفرع",
+      "jobTitle": "المسمى الوظيفي",
+      "access": "صلاحية الدخول للنظام",
+      "accessAll": "جميع حالات الصلاحية",
+      "accessWith": "لديه صلاحية دخول",
+      "accessWithout": "بدون صلاحية دخول"
+    },
+    "table": {
+      "employee": "الموظف",
+      "jobTitle": "المسمى الوظيفي",
+      "department": "القسم",
+      "branch": "الفرع",
+      "hireDate": "تاريخ التعيين",
+      "baseSalary": "الراتب الأساسي",
+      "status": "الحالة",
+      "access": "صلاحية النظام",
+      "actionsFor": "إجراءات {{name}}"
+    },
+    "status": {
+      "unspecified": "غير محدد"
+    },
+    "access": {
+      "enabled": "الدخول مفعّل",
+      "none": "لا توجد صلاحية دخول",
+      "notEnabledTitle": "صلاحية الدخول للنظام غير مفعّلة",
+      "notEnabledBody": "لا يملك هذا الموظف حاليًا صلاحية الدخول إلى نظام SynapTech ERP.",
+      "title": "صلاحية النظام",
+      "status": "الحالة",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "grantedNoDetail": "يملك هذا الموظف صلاحية دخول للنظام، لكن تفاصيل الحساب غير متاحة من هذه الشاشة."
+    },
+    "actions": {
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل بيانات الموظف",
+      "viewAccess": "عرض صلاحية النظام",
+      "grantAccess": "منح صلاحية الدخول",
+      "delete": "حذف الموظف"
+    },
+    "deleteDialog": {
+      "title": "حذف الموظف؟",
+      "body": "أنت على وشك حذف {{name}} ({{code}}) نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+      "confirm": "حذف الموظف"
+    },
+    "grantAccess": {
+      "title": "منح صلاحية الدخول للنظام",
+      "emailPlaceholder": "employee@company.com",
+      "roles": "الأدوار",
+      "searchRoles": "ابحث عن الأدوار",
+      "granting": "جارٍ المنح…",
+      "submit": "منح الصلاحية",
+      "success": "تم منح صلاحية الدخول للنظام بنجاح"
+    },
+    "empty": {
+      "noResultsTitle": "لا يوجد موظفون",
+      "noResultsBody": "حاول تعديل البحث أو عوامل التصفية.",
+      "noneYetTitle": "لا يوجد موظفون بعد",
+      "noneYetBody": "ابدأ ببناء فريق عملك بإضافة أول موظف."
+    },
+    "errors": {
+      "loadFailed": "تعذّر تحميل بيانات الموظفين حاليًا."
+    },
+    "toast": {
+      "created": "تم إنشاء الموظف",
+      "updated": "تم تحديث بيانات الموظف",
+      "deleted": "تم حذف الموظف"
+    },
+    "tabs": {
+      "overview": "نظرة عامة",
+      "employment": "الوظيفة",
+      "contact": "التواصل",
+      "compensation": "التعويضات",
+      "access": "صلاحية النظام"
+    },
+    "overview": {
+      "personal": "البيانات الشخصية",
+      "employmentSummary": "ملخص الوظيفة"
+    },
+    "form": {
+      "section": {
+        "basic": "البيانات الأساسية",
+        "employment": "بيانات الوظيفة",
+        "compensation": "التعويضات",
+        "contact": "بيانات التواصل"
+      },
+      "fullName": "الاسم الكامل",
+      "employeeCode": "الرقم الوظيفي",
+      "employeeCodeAuto": "يُولَّد تلقائيًا إذا تُرك فارغًا",
+      "nationalId": "الرقم القومي",
+      "dateOfBirth": "تاريخ الميلاد",
+      "jobTitle": "المسمى الوظيفي",
+      "hireDate": "تاريخ التعيين",
+      "status": "الحالة",
+      "statusPlaceholder": "مثال: نشط، غير نشط",
+      "department": "القسم",
+      "branch": "الفرع",
+      "manager": "المدير المباشر",
+      "searchManager": "ابحث عن موظف",
+      "baseSalary": "الراتب الأساسي",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "address": "العنوان",
+      "saveChanges": "حفظ التغييرات",
+      "createEmployee": "إنشاء موظف"
+    }
+  },
+
+  "attendance": {
+    "breadcrumb": "الموارد البشرية / الحضور",
+    "title": "الحضور",
+    "description": "متابعة حضور الموظفين والنشاط اليومي.",
+    "viewDetails": "عرض التفاصيل",
+    "columns": {
+      "employee": "الموظف",
+      "date": "التاريخ",
+      "checkIn": "تسجيل الدخول",
+      "checkOut": "تسجيل الخروج",
+      "status": "الحالة",
+      "notes": "ملاحظات",
+      "actions": "إجراءات"
+    },
+    "summary": {
+      "total": "إجمالي السجلات",
+      "totalHint": "البيانات الحالية",
+      "checkedIn": "تم تسجيل الدخول",
+      "checkedInHint": "سجّل الدخول اليوم",
+      "completed": "مكتمل",
+      "completedHint": "تم تسجيل الدخول والخروج",
+      "attention": "يتطلب انتباه",
+      "attentionHint": "تسجيل خروج مفقود"
+    },
+    "filters": {
+      "title": "الفلاتر",
+      "searchPlaceholder": "ابحث عن الموظفين...",
+      "employee": "الموظف",
+      "employeePlaceholder": "اختر موظفًا",
+      "employeeSearchPlaceholder": "ابحث بالاسم أو الرقم الوظيفي",
+      "noEmployeesFound": "لا يوجد موظفون مطابقون",
+      "date": "التاريخ",
+      "dateAll": "كل الأوقات",
+      "dateToday": "اليوم",
+      "dateWeek": "هذا الأسبوع",
+      "dateMonth": "هذا الشهر",
+      "status": "الحالة",
+      "statusAll": "جميع الحالات",
+      "filtersButton": "الفلاتر",
+      "clear": "مسح",
+      "apply": "تطبيق الفلاتر"
+    },
+    "status": {
+      "none": "بدون حالة"
+    },
+    "derived": {
+      "notCheckedIn": "لم يسجّل الدخول",
+      "checkedIn": "قيد التنفيذ",
+      "completed": "مكتمل"
+    },
+    "notes": {
+      "none": "لا توجد ملاحظات"
+    },
+    "details": {
+      "title": "تفاصيل الحضور",
+      "date": "تاريخ الحضور",
+      "checkIn": "تسجيل الدخول",
+      "checkOut": "تسجيل الخروج",
+      "duration": "مدة العمل",
+      "notes": "ملاحظات"
+    },
+    "empty": {
+      "title": "لا توجد سجلات حضور",
+      "description": "لا توجد سجلات حضور مطابقة للفلاتر الحالية."
+    },
+    "error": {
+      "title": "تعذّر تحميل بيانات الحضور",
+      "description": "لم نتمكن من استرجاع سجلات الحضور في الوقت الحالي."
+    },
+    "today": {
+      "label": "حضور اليوم",
+      "notCheckedIn": "لم يتم تسجيل الدخول بعد",
+      "checkIn": "تسجيل الدخول",
+      "checkingIn": "جارٍ تسجيل الدخول...",
+      "checkedIn": "تم تسجيل الدخول",
+      "checkOut": "تسجيل الخروج",
+      "checkingOut": "جارٍ تسجيل الخروج...",
+      "duration": "المدة",
+      "completed": "مكتمل"
+    },
+    "toast": {
+      "checkInSuccess": "تم تسجيل الدخول بنجاح",
+      "checkInError": "تعذّر إتمام تسجيل الدخول. حاول مرة أخرى.",
+      "checkOutSuccess": "تم تسجيل الخروج بنجاح",
+      "checkOutError": "تعذّر إتمام تسجيل الخروج. حاول مرة أخرى."
+    },
+    "myAttendance": {
+      "title": "حضوري",
+      "historyTitle": "سجل الحضور"
+    },
+    "myHistory": {
+      "emptyTitle": "لا يوجد سجل حضور بعد",
+      "emptyDescription": "ستظهر سجلات حضورك هنا بمجرد تسجيل أي نشاط حضور."
+    }
+  },
+
+  "leaveRequests": {
+    "dashboard": {
+      "title": "طلبات الإجازات",
+      "subtitle": "إدارة إجازات الموظفين",
+      "pendingPanel": "الطلبات المعلّقة",
+      "recentPanel": "الطلبات الأخيرة",
+      "noPending": "لا توجد طلبات معلّقة حاليًا."
+    },
+    "list": {
+      "title": "طلبات الإجازات"
+    },
+    "myRequests": {
+      "title": "طلبات إجازتي",
+      "requestLeave": "طلب إجازة",
+      "emptyTitle": "لم تقدّم أي طلب إجازة حتى الآن."
+    },
+    "create": {
+      "title": "إنشاء طلب إجازة",
+      "submit": "إرسال الطلب",
+      "submitting": "جارٍ الإرسال…"
+    },
+    "details": {
+      "backToList": "العودة إلى طلبات الإجازات",
+      "requestPeriod": "فترة الطلب",
+      "reason": "السبب",
+      "noReason": "لم يُذكر سبب",
+      "workflowStatus": "حالة سير العمل",
+      "approvalInformation": "معلومات الموافقة",
+      "notYetDecided": "لم يُتخذ القرار بعد",
+      "noAuditTrailNote": "تفاصيل الإنشاء والزمن غير متاحة من النظام الحالي.",
+      "quickActions": "إجراءات سريعة",
+      "noActionsAvailable": "لا توجد إجراءات متاحة لهذا الطلب."
+    },
+    "form": {
+      "employee": "الموظف",
+      "employeePlaceholder": "اختر موظفًا",
+      "employeeSearchPlaceholder": "ابحث عن موظف…",
+      "employeeNoResults": "لا يوجد موظفون مطابقون",
+      "you": "أنت",
+      "leaveType": "نوع الإجازة",
+      "leaveTypePlaceholder": "اختر نوع الإجازة",
+      "leaveTypeSearchPlaceholder": "ابحث عن نوع الإجازة…",
+      "leaveTypeNoResults": "لا توجد أنواع مطابقة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "duration": "المدة",
+      "reason": "السبب",
+      "reasonPlaceholder": "أضف أي تفاصيل إضافية لهذا الطلب…"
+    },
+    "duration": {
+      "days_zero": "بدون أيام",
+      "days_one": "يوم واحد",
+      "days_two": "يومان",
+      "days_few": "{{count}} أيام",
+      "days_many": "{{count}} يومًا",
+      "days_other": "{{count}} يوم"
+    },
+    "status": {
+      "pending": "معلّق",
+      "approved": "مُوافَق عليه",
+      "rejected": "مرفوض",
+      "cancelled": "ملغى",
+      "unknown": "غير معروف"
+    },
+    "tracker": {
+      "ariaLabel": "حالة طلب الإجازة",
+      "requested": "تم الطلب",
+      "pending": "معلّق",
+      "decision": "القرار",
+      "approved": "تمت الموافقة",
+      "rejected": "مرفوض",
+      "cancelled": "ملغى"
+    },
+    "kpi": {
+      "total": "إجمالي الطلبات",
+      "pending": "معلّقة",
+      "approved": "موافَق عليها",
+      "rejected": "مرفوضة"
+    },
+    "table": {
+      "employee": "الموظف",
+      "leaveType": "نوع الإجازة",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "duration": "المدة",
+      "status": "الحالة",
+      "approvedAt": "تاريخ الموافقة"
+    },
+    "filters": {
+      "all": "الكل",
+      "filters": "عوامل التصفية",
+      "searchPlaceholder": "ابحث في الطلبات…",
+      "employee": "الموظف",
+      "leaveType": "نوع الإجازة",
+      "startDateFrom": "تاريخ البدء من",
+      "startDateTo": "تاريخ البدء إلى",
+      "clearAll": "مسح الكل"
+    },
+    "actions": {
+      "create": "إنشاء طلب",
+      "approve": "موافقة",
+      "reject": "رفض",
+      "cancel": "إلغاء"
+    },
+    "approve": {
+      "title": "الموافقة على طلب الإجازة؟",
+      "body": "هل تريد الموافقة على طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟"
+    },
+    "reject": {
+      "title": "رفض طلب الإجازة؟",
+      "body": "هل تريد رفض طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟ لا يتضمن هذا الإجراء سبب الرفض."
+    },
+    "cancel": {
+      "title": "إلغاء طلب الإجازة؟",
+      "body": "هل تريد إلغاء طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟",
+      "bodyApproved": "تمت الموافقة على هذا الطلب سابقًا — سيؤدي إلغاؤه إلى تغيير حالته إلى ملغى. هل تريد المتابعة؟"
+    },
+    "toast": {
+      "created": "تم إرسال طلب الإجازة",
+      "approved": "تمت الموافقة على طلب الإجازة",
+      "rejected": "تم رفض طلب الإجازة",
+      "cancelled": "تم إلغاء طلب الإجازة"
+    },
+    "empty": {
+      "noneTitle": "لا توجد طلبات إجازة بعد",
+      "noneDescription": "ستظهر الطلبات هنا بمجرد أن يبدأ الموظفون بتقديمها.",
+      "noMatchTitle": "لا توجد طلبات مطابقة",
+      "noMatchDescription": "حاول تعديل البحث أو عوامل التصفية."
+    },
+    "error": {
+      "loadFailed": "تعذّر تحميل طلبات الإجازات.",
+      "notFound": "تعذّر العثور على طلب الإجازة هذا."
+    },
+    "validation": {
+      "employeeRequired": "اختر موظفًا",
+      "leaveTypeRequired": "اختر نوع الإجازة",
+      "startDateRequired": "تاريخ البدء مطلوب",
+      "endDateRequired": "تاريخ الانتهاء مطلوب",
+      "endDateBeforeStartDate": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء أو مساويًا له"
+    },
+    "types": {
+      "annual": "إجازة سنوية",
+      "sick": "إجازة مرضية",
+      "unpaid": "إجازة بدون راتب",
+      "maternity": "إجازة أمومة",
+      "paternity": "إجازة أبوة",
+      "other": "أخرى"
+    }
+  },
+
+  "company": {
+    "title": "الشركة",
+    "description": "إدارة بيانات شركتك الأساسية وحالتها.",
+    "breadcrumb": {
+      "settings": "الإعدادات",
+      "company": "الشركة"
+    },
+    "profile": {
+      "title": "بيانات الشركة",
+      "description": "المعلومات الأساسية التي تعرّف مؤسستك.",
+      "name": "اسم الشركة",
+      "legalName": "الاسم القانوني",
+      "taxNumber": "الرقم الضريبي",
+      "country": "الدولة",
+      "currency": "العملة"
+    },
+    "status": {
+      "title": "حالة الشركة",
+      "active": "نشطة",
+      "inactive": "غير نشطة",
+      "helperText": "يتحكم في ما إذا كانت الشركة نشطة حاليًا في النظام."
+    },
+    "systemInfo": {
+      "title": "معلومات النظام",
+      "companyId": "معرّف الشركة",
+      "copy": "نسخ",
+      "copied": "تم نسخ معرّف الشركة",
+      "copyFailed": "تعذّر نسخ معرّف الشركة",
+      "readOnly": "للقراءة فقط"
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "save": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ..."
+    },
+    "discardDialog": {
+      "title": "تجاهل التغييرات؟",
+      "description": "لديك تغييرات غير محفوظة. هل تريد بالتأكيد مغادرة الصفحة؟",
+      "confirm": "تجاهل التغييرات",
+      "cancel": "متابعة التعديل"
+    },
+    "toast": {
+      "saveSuccess": "تم حفظ بيانات الشركة بنجاح",
+      "saveError": "تعذّر حفظ بيانات الشركة. حاول مرة أخرى."
+    },
+    "error": {
+      "loadTitle": "تعذّر تحميل بيانات الشركة",
+      "loadDescription": "حدث خطأ أثناء تحميل بيانات الشركة."
+    },
+    "validation": {
+      "maxLength": "القيمة طويلة جدًا"
+    }
+  }
+
+
+  
 }

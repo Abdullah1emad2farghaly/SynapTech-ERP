@@ -8,12 +8,13 @@ interface RetryRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
-export const apiClient = axios.create({
+ export const apiClient = axios.create({
   baseURL:
     import.meta.env.VITE_API_BASE_URL ??
     "https://synaptecherp.runasp.net/api",
   withCredentials: true,
 });
+
 
 // ---------------------------
 // Helper

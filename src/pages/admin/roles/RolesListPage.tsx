@@ -82,7 +82,7 @@ export function RolesListPage() {
       <RolesDataTable
         roles={visibleRoles}
         isLoading={isLoading}
-        onView={(role) => navigate(`/organization/roles/${role.id}`)}
+        onView={(role) => navigate(`${role.id}`)}
         onEdit={(role) => setDrawer({ type: "edit", role })}
         onManagePermissions={(role) =>
           setDrawer({ type: "managePermissions", role })

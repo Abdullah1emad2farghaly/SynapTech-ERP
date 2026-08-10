@@ -15,7 +15,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
-import { MultiSelectSearchable, type MultiSelectOption } from "../../common/MultiSelectSearchable";
+import { MultiSelectOption, MultiSelectSearchable } from "../../common/MultiSelectSearchable";
 import { RoleResponse } from "@/types/roles.types";
 import axios from "axios";
 
@@ -49,6 +49,10 @@ export function RoleAssignmentDrawer({
   const [selected, setSelected] = useState<string[]>(currentRoleIds);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const options: MultiSelectOption[] = roleOptions.map((op) => ({
+    value: op.id,
+    label: op.name,
+  }));
   // Reset local selection whenever the drawer opens for a (possibly
   // different) user, rather than carrying over stale state between opens.
   useEffect(() => {
@@ -93,7 +97,7 @@ export function RoleAssignmentDrawer({
     >
       <div className="flex flex-col gap-4">
         <MultiSelectSearchable
-          options={roleOptions}
+          options={options}
           selected={selected}
           onChange={setSelected}
           searchPlaceholder={t("users.roles.searchPlaceholder")}

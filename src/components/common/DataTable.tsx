@@ -111,7 +111,7 @@ export function DataTable<User>({
   }
 
   return (
-    <div className={`overflow-x-auto rounded-[16px] border border-[var(--hairline)] ${className}`}>
+    <div className={`overflow-x-auto overflow-y-visible rounded-[16px] border border-[var(--hairline)] ${className}`}>
       <table className="w-full border-collapse min-w-max text-sm">
         <thead className="sticky top-0 z-10 bg-[var(--sunken)]">
           <tr>
@@ -220,7 +220,7 @@ export interface DataTablePaginationProps {
   pageSize: number;
   totalCount: number;
   onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
   pageSizeOptions?: number[];
 }
 
@@ -239,7 +239,7 @@ export function DataTablePagination({
       <div className="flex items-center gap-2">
         <select
           value={pageSize}
-          onChange={(e) => onPageSizeChange(Number(e.target.value))}
+          onChange={(e) => onPageSizeChange && onPageSizeChange(Number(e.target.value))}
           className="rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-2 py-1"
         >
           {pageSizeOptions.map((size) => (

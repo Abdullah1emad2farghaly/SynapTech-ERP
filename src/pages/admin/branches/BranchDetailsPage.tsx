@@ -17,7 +17,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
-import { Breadcrumb } from "../../../components/common/Breadcrumb";
 import { ConfirmationDialog } from "../../../components/common/ConfirmationDialog";
 import { BranchHeader } from "../../../components/admin/branches/BranchHeader";
 import { BranchInformationCard } from "../../../components/admin/branches/BranchInformationCard";
