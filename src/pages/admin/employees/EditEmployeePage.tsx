@@ -107,7 +107,7 @@ export function EditEmployeePage() {
         },
       });
       toast.success(t("employees.toast.updated", "Employee updated"));
-      navigate(`/employees/${employee.id}`);
+      navigate(`/hr/employees/${employee.id}`);
     } catch {
       toast.error(t("common.errors.actionFailed", "Something went wrong. Please try again."));
     }
@@ -117,7 +117,7 @@ export function EditEmployeePage() {
     <div className="mx-auto flex flex-col gap-6 md:px-6 px-2 py-6">
       <button
         type="button"
-        onClick={() => navigate(`/employees/${employee.id}`)}
+        onClick={() => navigate(`/hr/employees/${employee.id}`)}
         className="inline-flex w-fit items-center gap-1.5 text-sm text-[var(--ink-secondary)] hover:text-[var(--ink-primary)]"
       >
         <ArrowLeft size={16} aria-hidden="true" />

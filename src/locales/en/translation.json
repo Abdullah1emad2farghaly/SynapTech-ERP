@@ -2083,6 +2083,63 @@
       "paternity": "Paternity Leave",
       "other": "Other"
     }
+  },
+
+  "sales": {
+    "overview": {
+      "pageTitle": "Sales Overview",
+      "categoryNavLabel": "Sales navigation",
+      "newOrder": "New Order",
+      "errorTitle": "Something went wrong loading your sales data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Create your first customer or sales order to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "customers": "Customers",
+        "salesOrders": "Sales Orders"
+      },
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "totalOrdersCaption": "Across all statuses",
+        "totalOrderValue": "Total Order Value",
+        "totalOrderValueCaption": "Sum of all order totals",
+        "totalCustomers": "Total Customers",
+        "totalCustomersCaption": "All customer records",
+        "activeCustomers": "Active Customers",
+        "activeCustomersCaption": "Currently active"
+      },
+      "ordersByStatus": {
+        "title": "Orders by Status",
+        "emptyTitle": "No orders yet",
+        "emptyDescription": "Order status distribution will appear here once orders exist."
+      },
+      "topCustomers": {
+        "title": "Top Customers by Value",
+        "emptyTitle": "No order activity yet",
+        "emptyDescription": "Top customers will appear here once orders are placed.",
+        "orderCount": "{{count}} order",
+        "orderCount_other": "{{count}} orders"
+      },
+      "recentOrders": {
+        "title": "Recent Sales Orders",
+        "viewAll": "View all",
+        "emptyTitle": "No orders yet",
+        "emptyDescription": "Recent orders will appear here."
+      },
+      "customersSnapshot": {
+        "title": "Customers",
+        "manage": "Manage Customers",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "quickActions": {
+        "newOrder": "New Sales Order",
+        "newCustomer": "New Customer",
+        "viewAllOrders": "View All Orders"
+      }
+    }
   }
   
 }

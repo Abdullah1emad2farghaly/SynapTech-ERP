@@ -1995,6 +1995,63 @@
     "validation": {
       "maxLength": "القيمة طويلة جدًا"
     }
+  },
+
+  "sales": {
+    "overview": {
+      "pageTitle": "نظرة عامة على المبيعات",
+      "categoryNavLabel": "تنقل المبيعات",
+      "newOrder": "طلب جديد",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات المبيعات.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أنشئ أول عميل أو طلب مبيعات لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "customers": "العملاء",
+        "salesOrders": "طلبات المبيعات"
+      },
+      "kpi": {
+        "totalOrders": "إجمالي الطلبات",
+        "totalOrdersCaption": "عبر جميع الحالات",
+        "totalOrderValue": "إجمالي قيمة الطلبات",
+        "totalOrderValueCaption": "مجموع إجماليات الطلبات",
+        "totalCustomers": "إجمالي العملاء",
+        "totalCustomersCaption": "جميع سجلات العملاء",
+        "activeCustomers": "العملاء النشطون",
+        "activeCustomersCaption": "نشط حاليًا"
+      },
+      "ordersByStatus": {
+        "title": "الطلبات حسب الحالة",
+        "emptyTitle": "لا توجد طلبات بعد",
+        "emptyDescription": "سيظهر توزيع حالة الطلبات هنا بمجرد وجود طلبات."
+      },
+      "topCustomers": {
+        "title": "أفضل العملاء حسب القيمة",
+        "emptyTitle": "لا يوجد نشاط طلبات بعد",
+        "emptyDescription": "سيظهر أفضل العملاء هنا بمجرد تقديم الطلبات.",
+        "orderCount": "{{count}} طلب",
+        "orderCount_other": "{{count}} طلبات"
+      },
+      "recentOrders": {
+        "title": "أحدث طلبات المبيعات",
+        "viewAll": "عرض الكل",
+        "emptyTitle": "لا توجد طلبات بعد",
+        "emptyDescription": "ستظهر الطلبات الأخيرة هنا."
+      },
+      "customersSnapshot": {
+        "title": "العملاء",
+        "manage": "إدارة العملاء",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "quickActions": {
+        "newOrder": "طلب مبيعات جديد",
+        "newCustomer": "عميل جديد",
+        "viewAllOrders": "عرض جميع الطلبات"
+      }
+    }
   }
 
 

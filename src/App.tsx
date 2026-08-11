@@ -53,6 +53,7 @@ import { MyLeaveRequestsPage } from "./pages/admin/leaveRequests/MyLeaveRequests
 import { LeaveRequestsDashboardPage } from "./pages/admin/leaveRequests/LeaveRequestsDashboardPage";
 import { LeaveRequestsListPage } from "./pages/admin/leaveRequests/LeaveRequestsListPage";
 import { LeaveRequestDetailsPage } from "./pages/admin/leaveRequests/LeaveRequestDetailsPage";
+import SalesOverviewPage from "./pages/admin/sales/SalesOverviewPage";
 
 const queryClient = new QueryClient();
 
@@ -151,6 +152,7 @@ export default function App() {
             </Route>
 
             <Route path="/sales">
+              <Route path="/sales" element={<SalesOverviewPage/>}/>
               <Route path="customers" element={<CustomersPage />} />
               <Route path="sales-orders" element={<SalesOrdersListPage />} />
               <Route path="sales-orders/create" element={<CreateEditSalesOrderPage />} />

@@ -28,6 +28,7 @@ import { useBranches } from "../../../hooks/useBranches";
 import { useDepartmentsList } from "../../../hooks/useDepartments.crud";
 import type { CreateEmployeeFormValues } from "../../../schemas/employee.schema";
 import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export function CreateEmployeePage() {
   const { t } = useTranslation();
@@ -85,12 +86,11 @@ export function CreateEmployeePage() {
         userId: null,
       });
       toast.success(t("employees.toast.created", "Employee created"));
-      navigate(`/employees/${created.id}`);
+      navigate(`/hr/employees/${created.id}`);
     } catch (error) {
       if(axios.isAxiosError(error)){
-        console.log("Axios error", error.response?.data);
+        handleErrors(error.response?.data.errors)
       }
-      toast.error(t("common.errors.actionFailed", "Something went wrong. Please try again."));
     }
   };
 
@@ -98,7 +98,7 @@ export function CreateEmployeePage() {
     <div className="mx-auto flex flex-col gap-6 md:px-6 px-2 py-6">
       <button
         type="button"
-        onClick={() => navigate("/employees")}
+        onClick={() => navigate("/hr/employees")}
         className="inline-flex w-fit items-center gap-1.5 text-sm text-[var(--ink-secondary)] hover:text-[var(--ink-primary)]"
       >
         <ArrowLeft size={16} aria-hidden="true" />
