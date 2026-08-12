@@ -54,6 +54,8 @@ import { LeaveRequestsDashboardPage } from "./pages/admin/leaveRequests/LeaveReq
 import { LeaveRequestsListPage } from "./pages/admin/leaveRequests/LeaveRequestsListPage";
 import { LeaveRequestDetailsPage } from "./pages/admin/leaveRequests/LeaveRequestDetailsPage";
 import SalesOverviewPage from "./pages/admin/sales/SalesOverviewPage";
+import PurchasingOverviewPage from "./pages/admin/purchasing/PurchasingOverviewPage";
+import InventoryOverviewPage from "./pages/admin/inventory/InventoryOverviewPage";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +114,8 @@ export default function App() {
             </Route>
 
             <Route path="/inventory">
+              <Route path="/inventory" element={<InventoryOverviewPage />} />
+              
               <Route path="warehouses" element={<WarehousesListPage />} />
               <Route path="categories" element={<CategoriesPage />} />
               <Route path="products" element={<ProductsListPage />} />
@@ -141,6 +145,7 @@ export default function App() {
             </Route>
 
             <Route path="/purchasing">
+              <Route path="/purchasing" element={<PurchasingOverviewPage />} />
               <Route path="suppliers" element={<SuppliersListPage />} />
               <Route path="suppliers/:id" element={<SupplierDetailsPage />} />
 

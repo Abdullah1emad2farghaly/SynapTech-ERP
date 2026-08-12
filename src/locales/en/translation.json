@@ -2140,6 +2140,137 @@
         "viewAllOrders": "View All Orders"
       }
     }
+  },
+
+  "purchasing": {
+    "overview": {
+      "pageTitle": "Purchasing Overview",
+      "categoryNavLabel": "Purchasing navigation",
+      "newOrder": "New Order",
+      "errorTitle": "Something went wrong loading your purchasing data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Create your first supplier or purchase order to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "suppliers": "Suppliers",
+        "purchaseOrders": "Purchase Orders"
+      },
+      "kpi": {
+        "totalOrders": "Total Orders",
+        "totalOrdersCaption": "Across all statuses",
+        "totalOrderValue": "Total Order Value",
+        "totalOrderValueCaption": "Sum of all order totals",
+        "totalSuppliers": "Total Suppliers",
+        "totalSuppliersCaption": "All supplier records",
+        "activeSuppliers": "Active Suppliers",
+        "activeSuppliersCaption": "Currently active"
+      },
+      "ordersByStatus": {
+        "title": "Orders by Status",
+        "emptyTitle": "No orders yet",
+        "emptyDescription": "Order status distribution will appear here once orders exist."
+      },
+      "topSuppliers": {
+        "title": "Top Suppliers by Value",
+        "emptyTitle": "No order activity yet",
+        "emptyDescription": "Top suppliers will appear here once orders are placed.",
+        "orderCount": "{{count}} order",
+        "orderCount_other": "{{count}} orders"
+      },
+      "recentOrders": {
+        "title": "Recent Purchase Orders",
+        "viewAll": "View all",
+        "emptyTitle": "No orders yet",
+        "emptyDescription": "Recent orders will appear here."
+      },
+      "overdueOrders": {
+        "title": "Overdue Purchase Orders",
+        "badge": "{{count}} overdue",
+        "badge_other": "{{count}} overdue",
+        "daysOverdue": "{{count}} day overdue",
+        "daysOverdue_other": "{{count}} days overdue",
+        "emptyDescription": "No purchase orders are past their expected delivery date."
+      },
+      "suppliersSnapshot": {
+        "title": "Suppliers",
+        "manage": "Manage Suppliers",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "quickActions": {
+        "newOrder": "New Purchase Order",
+        "newSupplier": "New Supplier",
+        "viewAllOrders": "View All Orders"
+      }
+    }
+  },
+
+  "inventory": {
+    "overview": {
+      "pageTitle": "Inventory Overview",
+      "categoryNavLabel": "Inventory navigation",
+      "errorTitle": "Something went wrong loading your inventory data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Add your first product or warehouse to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "products": "Products",
+        "categories": "Categories",
+        "warehouses": "Warehouses"
+      },
+      "kpi": {
+        "totalProducts": "Total Products",
+        "totalProductsCaption": "All product records",
+        "activeProducts": "Active Products",
+        "activeProductsCaption": "Currently active",
+        "totalCategories": "Total Categories",
+        "totalCategoriesCaption": "All category records",
+        "totalWarehouses": "Total Warehouses",
+        "totalWarehousesCaption": "All warehouse records"
+      },
+      "stockByWarehouse": {
+        "title": "Stock by Warehouse",
+        "unitsLabel": "Units",
+        "emptyTitle": "No stock data",
+        "emptyDescription": "Stock levels by warehouse will appear here once stock exists."
+      },
+      "topProductsByStock": {
+        "title": "Top Products by Stock",
+        "units": "{{count}} unit",
+        "units_other": "{{count}} units",
+        "emptyTitle": "No stock data",
+        "emptyDescription": "Top products by stock quantity will appear here once stock exists."
+      },
+      "productsSnapshot": {
+        "title": "Products",
+        "manage": "Manage Products",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "categoriesSnapshot": {
+        "title": "Categories",
+        "manage": "Manage Categories",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "warehousesSnapshot": {
+        "title": "Warehouses",
+        "manage": "Manage Warehouses",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "quickActions": {
+        "newProduct": "New Product",
+        "newCategory": "New Category",
+        "manageWarehouses": "Manage Warehouses"
+      }
+    }
   }
   
 }

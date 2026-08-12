@@ -2052,8 +2052,137 @@
         "viewAllOrders": "عرض جميع الطلبات"
       }
     }
+  },
+
+  "purchasing": {
+    "overview": {
+      "pageTitle": "نظرة عامة على المشتريات",
+      "categoryNavLabel": "تنقل المشتريات",
+      "newOrder": "طلب جديد",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات المشتريات.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أنشئ أول مورد أو طلب شراء لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "suppliers": "الموردون",
+        "purchaseOrders": "طلبات الشراء"
+      },
+      "kpi": {
+        "totalOrders": "إجمالي الطلبات",
+        "totalOrdersCaption": "عبر جميع الحالات",
+        "totalOrderValue": "إجمالي قيمة الطلبات",
+        "totalOrderValueCaption": "مجموع إجماليات الطلبات",
+        "totalSuppliers": "إجمالي الموردين",
+        "totalSuppliersCaption": "جميع سجلات الموردين",
+        "activeSuppliers": "الموردون النشطون",
+        "activeSuppliersCaption": "نشط حاليًا"
+      },
+      "ordersByStatus": {
+        "title": "الطلبات حسب الحالة",
+        "emptyTitle": "لا توجد طلبات بعد",
+        "emptyDescription": "سيظهر توزيع حالة الطلبات هنا بمجرد وجود طلبات."
+      },
+      "topSuppliers": {
+        "title": "أفضل الموردين حسب القيمة",
+        "emptyTitle": "لا يوجد نشاط طلبات بعد",
+        "emptyDescription": "سيظهر أفضل الموردين هنا بمجرد تقديم الطلبات.",
+        "orderCount": "{{count}} طلب",
+        "orderCount_other": "{{count}} طلبات"
+      },
+      "recentOrders": {
+        "title": "أحدث طلبات الشراء",
+        "viewAll": "عرض الكل",
+        "emptyTitle": "لا توجد طلبات بعد",
+        "emptyDescription": "ستظهر الطلبات الأخيرة هنا."
+      },
+      "overdueOrders": {
+        "title": "طلبات الشراء المتأخرة",
+        "badge": "{{count}} متأخر",
+        "badge_other": "{{count}} متأخرة",
+        "daysOverdue": "متأخر بـ {{count}} يوم",
+        "daysOverdue_other": "متأخر بـ {{count}} أيام",
+        "emptyDescription": "لا توجد طلبات شراء تجاوزت تاريخ التسليم المتوقع."
+      },
+      "suppliersSnapshot": {
+        "title": "الموردون",
+        "manage": "إدارة الموردين",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "quickActions": {
+        "newOrder": "طلب شراء جديد",
+        "newSupplier": "مورد جديد",
+        "viewAllOrders": "عرض جميع الطلبات"
+      }
+    }
+  },
+
+  "inventory": {
+    "overview": {
+      "pageTitle": "نظرة عامة على المخزون",
+      "categoryNavLabel": "تنقل المخزون",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات المخزون.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أضف أول منتج أو مستودع لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "products": "المنتجات",
+        "categories": "الفئات",
+        "warehouses": "المستودعات"
+      },
+      "kpi": {
+        "totalProducts": "إجمالي المنتجات",
+        "totalProductsCaption": "جميع سجلات المنتجات",
+        "activeProducts": "المنتجات النشطة",
+        "activeProductsCaption": "نشط حاليًا",
+        "totalCategories": "إجمالي الفئات",
+        "totalCategoriesCaption": "جميع سجلات الفئات",
+        "totalWarehouses": "إجمالي المستودعات",
+        "totalWarehousesCaption": "جميع سجلات المستودعات"
+      },
+      "stockByWarehouse": {
+        "title": "المخزون حسب المستودع",
+        "unitsLabel": "الوحدات",
+        "emptyTitle": "لا توجد بيانات مخزون",
+        "emptyDescription": "ستظهر مستويات المخزون حسب المستودع هنا بمجرد وجود مخزون."
+      },
+      "topProductsByStock": {
+        "title": "أفضل المنتجات حسب المخزون",
+        "units": "{{count}} وحدة",
+        "units_other": "{{count}} وحدات",
+        "emptyTitle": "لا توجد بيانات مخزون",
+        "emptyDescription": "ستظهر أفضل المنتجات حسب كمية المخزون هنا بمجرد وجود مخزون."
+      },
+      "productsSnapshot": {
+        "title": "المنتجات",
+        "manage": "إدارة المنتجات",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "categoriesSnapshot": {
+        "title": "الفئات",
+        "manage": "إدارة الفئات",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "warehousesSnapshot": {
+        "title": "المستودعات",
+        "manage": "إدارة المستودعات",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "quickActions": {
+        "newProduct": "منتج جديد",
+        "newCategory": "فئة جديدة",
+        "manageWarehouses": "إدارة المستودعات"
+      }
+    }
   }
-
-
   
 }

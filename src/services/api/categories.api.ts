@@ -11,6 +11,7 @@ import {apiClient} from "./axiosClient";
 export interface Category {
   id: string;
   name: string;
+  isActive: boolean;
 }
 
 export async function getCategories(): Promise<Category[]> {

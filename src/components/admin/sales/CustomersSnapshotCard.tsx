@@ -30,7 +30,7 @@ export function CustomersSnapshotCard({ stats, isLoading }: Props) {
           than silently working around it — a Customers Management module
           is the natural next build after this one.
         */}
-        <Link to="/customers" className="text-xs font-medium text-signal hover:text-signal-hover">
+        <Link to="/sales/customers" className="text-xs font-medium text-signal hover:text-signal-hover">
           {t('sales.overview.customersSnapshot.manage')}
         </Link>
       </div>

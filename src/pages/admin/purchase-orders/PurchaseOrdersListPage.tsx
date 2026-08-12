@@ -27,7 +27,6 @@ export function PurchaseOrdersListPage() {
   const { data: orders = [], isLoading, isFetching, refetch } = usePurchaseOrders();
   const bulkCancel = useBulkCancelPurchaseOrders();
 
-  console.log("orders", orders);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<PurchaseOrdersFiltersState>(DEFAULT_PO_FILTERS);
   const [dialog, setDialog] = useState<{ action: PurchaseOrderDialogAction; order: PurchaseOrderResponse } | null>(null);
