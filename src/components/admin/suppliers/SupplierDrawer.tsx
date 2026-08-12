@@ -15,6 +15,8 @@ import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { supplierFormSchema, type SupplierFormValues } from "../../../schemas/suppliers.schema";
 import { useCreateSupplier, useUpdateSupplier } from "../../../hooks/useSupplierMutations";
 import type { SupplierResponse } from "../../../types/suppliers.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export type SupplierDrawerMode = "create" | "edit";
 
@@ -84,7 +86,7 @@ export function SupplierDrawer({ mode, supplier, open, onClose }: SupplierDrawer
   const submit = async (values: SupplierFormValues, stayAndCreateAnother: boolean) => {
     try {
       if (mode === "create") {
-        await createSupplier.mutateAsync(values);
+        // await createSupplier.mutateAsync(values);
         toast.success(t("suppliers.toasts.created"));
         if (stayAndCreateAnother) {
           reset(EMPTY_VALUES);
@@ -95,8 +97,10 @@ export function SupplierDrawer({ mode, supplier, open, onClose }: SupplierDrawer
         toast.success(t("suppliers.toasts.updated"));
       }
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 
@@ -223,7 +227,7 @@ export function SupplierDrawer({ mode, supplier, open, onClose }: SupplierDrawer
                 >
                   <span
                     className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-                      isActive ? "translate-x-5 rtl:-translate-x-5" : "translate-x-0.5"
+                      isActive ? "translate-x-5 ltr:-translate-x-5" : "translate-x-0.5"
                     }`}
                   />
                 </button>
