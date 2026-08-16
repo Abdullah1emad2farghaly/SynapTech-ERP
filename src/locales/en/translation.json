@@ -1048,7 +1048,6 @@
       "deleteSuccess": "Product deleted."
     }
   },
-
   "stock": {
     "column": {
       "product": "Product",
@@ -1246,9 +1245,11 @@
       "bulkDeletePartial": "{{succeeded}} deleted, {{failed}} failed."
     }
   },
-
   "purchaseOrders": {
-    "page": { "title": "Purchase Orders", "description": "Manage procurement from draft to receiving." },
+    "page": {
+      "title": "Purchase Orders",
+      "description": "Manage procurement from draft to receiving."
+    },
     "status": {
       "Draft": "Draft",
       "Submitted": "Submitted",
@@ -1411,7 +1412,6 @@
       "bulkCancelPartial": "{{succeeded}} cancelled, {{failed}} failed."
     }
   },
-
   "customers": {
     "list": {
       "title": "Customers",
@@ -1503,9 +1503,11 @@
       "deleted": "{{name}} deleted"
     }
   },
-
   "salesOrders": {
-    "page": { "title": "Sales Orders", "description": "Manage customer orders from draft to shipping." },
+    "page": {
+      "title": "Sales Orders",
+      "description": "Manage customer orders from draft to shipping."
+    },
     "status": {
       "Draft": "Draft",
       "Submitted": "Submitted",
@@ -1665,7 +1667,6 @@
       "bulkCancelPartial": "{{succeeded}} cancelled, {{failed}} failed."
     }
   },
-
   "employees": {
     "pageTitle": "Employees",
     "pageDescription": "Manage your organization's workforce, employee information, organizational structure, and system access.",
@@ -1788,7 +1789,6 @@
       "createEmployee": "Create Employee"
     }
   },
-
   "attendance": {
     "breadcrumb": "Human Resources / Attendance",
     "title": "Attendance",
@@ -1884,7 +1884,6 @@
       "emptyDescription": "Your attendance records will appear here once attendance activity is recorded."
     }
   },
-
   "company": {
     "title": "Company",
     "description": "Manage your organization's core company information and status.",
@@ -1938,7 +1937,6 @@
       "maxLength": "This value is too long"
     }
   },
-
   "leaveRequests": {
     "dashboard": {
       "title": "Leave Requests",
@@ -2084,7 +2082,6 @@
       "other": "Other"
     }
   },
-
   "sales": {
     "overview": {
       "pageTitle": "Sales Overview",
@@ -2141,7 +2138,6 @@
       }
     }
   },
-
   "purchasing": {
     "overview": {
       "pageTitle": "Purchasing Overview",
@@ -2206,9 +2202,26 @@
       }
     }
   },
-
   "inventory": {
     "overview": {
+      "pageSubtitle": "Real-time snapshot of your products, categories, warehouses, and stock.",
+      "inventoryValue": {
+        "title": "Total Inventory Value",
+        "caption": "At cost, across all warehouses"
+      },
+      "productsByCategory": {
+        "title": "Products by Category",
+        "uncategorized": "Uncategorized",
+        "emptyTitle": "No products yet",
+        "emptyDescription": "Category distribution will appear here once products exist."
+      },
+      "outOfStock": {
+        "title": "Out of Stock",
+        "badge": "{{count}} product",
+        "badge_other": "{{count}} products",
+        "emptyDescription": "No active products are currently out of stock.",
+        "viewAll": "View all {{count}} out-of-stock products"
+      },
       "pageTitle": "Inventory Overview",
       "categoryNavLabel": "Inventory navigation",
       "errorTitle": "Something went wrong loading your inventory data.",
@@ -2272,5 +2285,4 @@
       }
     }
   }
-  
 }

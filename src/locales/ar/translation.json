@@ -110,7 +110,7 @@
     "actions": {
       "edit": "تعديل",
       "create": "إنشاء",
-      "creating":"جاري الإنشاء ...",
+      "creating": "جاري الإنشاء ...",
       "retry": "إعادة المحاولة",
       "refresh": "تحديث",
       "cancel": "إلغاء",
@@ -1156,7 +1156,10 @@
     }
   },
   "purchaseOrders": {
-    "page": { "title": "أوامر الشراء", "description": "إدارة المشتريات من المسودة حتى الاستلام." },
+    "page": {
+      "title": "أوامر الشراء",
+      "description": "إدارة المشتريات من المسودة حتى الاستلام."
+    },
     "status": {
       "Draft": "مسودة",
       "Submitted": "مُرسل",
@@ -1319,7 +1322,6 @@
       "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
     }
   },
-
   "customers": {
     "list": {
       "title": "العملاء",
@@ -1411,9 +1413,11 @@
       "deleted": "تم حذف {{name}}"
     }
   },
-
   "salesOrders": {
-    "page": { "title": "أوامر البيع", "description": "إدارة طلبات العملاء من المسودة حتى الشحن." },
+    "page": {
+      "title": "أوامر البيع",
+      "description": "إدارة طلبات العملاء من المسودة حتى الشحن."
+    },
     "status": {
       "Draft": "مسودة",
       "Submitted": "مُرسل",
@@ -1573,7 +1577,6 @@
       "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
     }
   },
-
   "employees": {
     "pageTitle": "الموظفون",
     "pageDescription": "إدارة القوى العاملة في مؤسستك، وبيانات الموظفين، والهيكل التنظيمي، وصلاحيات الدخول إلى النظام.",
@@ -1696,7 +1699,6 @@
       "createEmployee": "إنشاء موظف"
     }
   },
-
   "attendance": {
     "breadcrumb": "الموارد البشرية / الحضور",
     "title": "الحضور",
@@ -1792,7 +1794,6 @@
       "emptyDescription": "ستظهر سجلات حضورك هنا بمجرد تسجيل أي نشاط حضور."
     }
   },
-
   "leaveRequests": {
     "dashboard": {
       "title": "طلبات الإجازات",
@@ -1942,7 +1943,6 @@
       "other": "أخرى"
     }
   },
-
   "company": {
     "title": "الشركة",
     "description": "إدارة بيانات شركتك الأساسية وحالتها.",
@@ -1996,7 +1996,6 @@
       "maxLength": "القيمة طويلة جدًا"
     }
   },
-
   "sales": {
     "overview": {
       "pageTitle": "نظرة عامة على المبيعات",
@@ -2053,7 +2052,6 @@
       }
     }
   },
-
   "purchasing": {
     "overview": {
       "pageTitle": "نظرة عامة على المشتريات",
@@ -2118,9 +2116,26 @@
       }
     }
   },
-
   "inventory": {
     "overview": {
+      "pageSubtitle": "لمحة فورية عن منتجاتك وفئاتك ومستودعاتك ومخزونك.",
+      "inventoryValue": {
+        "title": "إجمالي قيمة المخزون",
+        "caption": "بسعر التكلفة، عبر جميع المستودعات"
+      },
+      "productsByCategory": {
+        "title": "المنتجات حسب الفئة",
+        "uncategorized": "غير مصنف",
+        "emptyTitle": "لا توجد منتجات بعد",
+        "emptyDescription": "سيظهر توزيع الفئات هنا بمجرد وجود منتجات."
+      },
+      "outOfStock": {
+        "title": "نفاد المخزون",
+        "badge": "{{count}} منتج",
+        "badge_other": "{{count}} منتجات",
+        "emptyDescription": "لا توجد منتجات نشطة نفد مخزونها حاليًا.",
+        "viewAll": "عرض جميع المنتجات النافدة ({{count}})"
+      },
       "pageTitle": "نظرة عامة على المخزون",
       "categoryNavLabel": "تنقل المخزون",
       "errorTitle": "حدث خطأ أثناء تحميل بيانات المخزون.",
@@ -2184,5 +2199,4 @@
       }
     }
   }
-  
 }

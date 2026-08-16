@@ -1,23 +1,35 @@
 // Intended path: src/hooks/useInventoryOverviewStats.ts
-// Unlike useSalesOverviewStats/usePurchasingOverviewStats, this one issues
-// MORE than the "two list queries" pattern, because Stock has no list-all
-// endpoint (see stock.api.ts). Stock totals are computed by calling
-// GET /api/Stock/warehouses/{id} once per warehouse (Promise.all) rather
-// than once per product — warehouse count is expected to be far smaller
-// than product count, so this is the cheaper of the two possible N+1
-// shapes, but it's still a real extra-round-trips cost this page
-// introduces on every load. Same category of scalability tradeoff already
-// flagged elsewhere in this project (Departments/Branches full-list
-// pattern) — written down explicitly here since it compounds per warehouse.
-// ASSUMPTION: imports useWarehouses from './useWarehouses' — the actual
-// Module 6 hook name/path is unverified, check before merging.
+// REPLACES the previous version of this file. Adds three new derived
+// metrics on top of the original (totalProducts/activeProducts/
+// totalCategories/warehouses/stockByWarehouse/topProductsByStock, all
+// unchanged below) — each grounded in fields that are actually on the
+// confirmed contract, not invented:
+//
+//   1. totalInventoryValueAtCost — quantityOnHand × costPrice, summed
+//      across every stock level, cross-referenced against ProductResponse.
+//      Uses cost (not sale price) since that's the standard basis for an
+//      inventory valuation figure, not a projected-revenue one.
+//   2. productsByCategory — real distribution: every ProductResponse has a
+//      categoryId (nullable), grouped against CategoryResponse names, with
+//      an explicit "Uncategorized" bucket for null.
+//   3. outOfStockProducts — active products whose summed quantityOnHand
+//      across all warehouses is zero (or has no stock record at all).
+//      Deliberately NOT a "low stock" list — there is no reorder-point /
+//      minimum-stock field anywhere on ProductResponse, so any non-zero
+//      threshold would be invented. Zero is the one threshold that's
+//      actually determinable from the data as-is.
+//
+// Still carries the same N+1-by-warehouse stock-fetch caveat as before —
+// see the stockQuery block below, unchanged in shape.
+// ASSUMPTION: useWarehouses from './useWarehouses' — Module 6's actual hook
+// name/path is unverified, check before merging.
 
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useProducts } from './useProducts';
 import { useCategories } from './useCategories';
 import { useWarehouses } from './useWarehouses';
-import { getWarehouseStock, type StockLevel } from '../services/api/stock.api';
+import { getWarehouseStock, StockLevel } from '@/services/api/stock.api';
 
 export interface WarehouseStockTotal {
   warehouseId: string;
@@ -32,6 +44,18 @@ export interface TopStockProduct {
   totalUnits: number;
 }
 
+export interface CategoryProductCount {
+  categoryId: string | null;
+  categoryName: string;
+  productCount: number;
+}
+
+export interface OutOfStockProduct {
+  productId: string;
+  productSku: string;
+  productName: string;
+}
+
 export interface InventoryOverviewStats {
   totalProducts: number;
   activeProducts: number;
@@ -39,8 +63,12 @@ export interface InventoryOverviewStats {
   activeCategories: number;
   totalWarehouses: number;
   activeWarehouses: number;
+  totalInventoryValueAtCost: number;
   stockByWarehouse: WarehouseStockTotal[];
   topProductsByStock: TopStockProduct[];
+  productsByCategory: CategoryProductCount[];
+  outOfStockProducts: OutOfStockProduct[];
+  outOfStockCount: number;
 }
 
 export function useInventoryOverviewStats() {
@@ -65,19 +93,30 @@ export function useInventoryOverviewStats() {
   const stats = useMemo<InventoryOverviewStats | null>(() => {
     if (!productsQuery.data || !categoriesQuery.data || !warehousesQuery.data) return null;
 
+    const products = productsQuery.data;
+    const categories = categoriesQuery.data;
     // Stock is deliberately allowed to still be loading/empty without
-    // blocking the rest of the page — the chart/ranking below render their
-    // own independent loading state rather than gating the whole page on
-    // the slowest, most expensive query.
+    // blocking the rest of the page.
     const stockLevels: StockLevel[] = stockQuery.data ?? [];
 
-    const totalProducts = productsQuery.data.length;
-    const activeProducts = productsQuery.data.filter(p => p.isActive).length;
-    const totalCategories = categoriesQuery.data.length;
-    const activeCategories = categoriesQuery.data.filter(c => c.isActive).length;
+    const totalProducts = products.length;
+    const activeProducts = products.filter(p => p.isActive).length;
+    const totalCategories = categories.length;
+    const activeCategories = categories.filter(c => c.isActive).length;
     const totalWarehouses = warehousesQuery.data.length;
     const activeWarehouses = warehousesQuery.data.filter(w => w.isActive).length;
 
+    // --- per-product stock totals (used by both "top products" and
+    // "out of stock") ---
+    const productStockTotals = new Map<string, number>();
+    for (const level of stockLevels) {
+      productStockTotals.set(
+        level.productId,
+        (productStockTotals.get(level.productId) ?? 0) + level.quantityOnHand,
+      );
+    }
+
+    // --- warehouse totals ---
     const warehouseTotals = new Map<string, WarehouseStockTotal>();
     for (const level of stockLevels) {
       const existing = warehouseTotals.get(level.warehouseId);
@@ -95,23 +134,58 @@ export function useInventoryOverviewStats() {
       (a, b) => b.totalUnits - a.totalUnits,
     );
 
-    const productTotals = new Map<string, TopStockProduct>();
+    // --- top products by stock ---
+    const productMeta = new Map(products.map(p => [p.id, p]));
+    const topProductsByStock: TopStockProduct[] = Array.from(productStockTotals.entries())
+      .map(([productId, totalUnits]) => {
+        const meta = productMeta.get(productId);
+        return {
+          productId,
+          productSku: meta?.sku ?? '—',
+          productName: meta?.name ?? '—',
+          totalUnits,
+        };
+      })
+      .sort((a, b) => b.totalUnits - a.totalUnits)
+      .slice(0, 5);
+
+    // --- inventory value at cost ---
+    let totalInventoryValueAtCost = 0;
     for (const level of stockLevels) {
-      const existing = productTotals.get(level.productId);
+      const product = productMeta.get(level.productId);
+      // ASSUMPTION: a stock record referencing a product not found in the
+      // current products list (edge case — e.g. race condition between
+      // queries) is skipped rather than guessed at.
+      if (!product) continue;
+      totalInventoryValueAtCost += level.quantityOnHand * (product.costPrice ?? 0);
+    }
+
+    // --- products by category ---
+    const categoryNameById = new Map(categories.map(c => [c.id, c.name ?? '—']));
+    const categoryCounts = new Map<string, CategoryProductCount>();
+    for (const product of products) {
+      const key = product.categoryId ?? '__uncategorized__';
+      const existing = categoryCounts.get(key);
       if (existing) {
-        existing.totalUnits += level.quantityOnHand;
+        existing.productCount += 1;
       } else {
-        productTotals.set(level.productId, {
-          productId: level.productId,
-          productSku: level.productSku ?? '—',
-          productName: level.productName ?? '—',
-          totalUnits: level.quantityOnHand,
+        categoryCounts.set(key, {
+          categoryId: product.categoryId,
+          categoryName: product.categoryId
+            ? categoryNameById.get(product.categoryId) ?? '—'
+            : '__uncategorized__', // resolved to a translated label by the component, not here
+          productCount: 1,
         });
       }
     }
-    const topProductsByStock = Array.from(productTotals.values())
-      .sort((a, b) => b.totalUnits - a.totalUnits)
-      .slice(0, 5);
+    const productsByCategory = Array.from(categoryCounts.values()).sort(
+      (a, b) => b.productCount - a.productCount,
+    );
+
+    // --- out of stock (active products only, zero total across all warehouses) ---
+    const outOfStockProducts: OutOfStockProduct[] = products
+      .filter(p => p.isActive && (productStockTotals.get(p.id) ?? 0) <= 0)
+      .map(p => ({ productId: p.id, productSku: p.sku ?? '—', productName: p.name ?? '—' }));
 
     return {
       totalProducts,
@@ -120,8 +194,12 @@ export function useInventoryOverviewStats() {
       activeCategories,
       totalWarehouses,
       activeWarehouses,
+      totalInventoryValueAtCost,
       stockByWarehouse,
       topProductsByStock,
+      productsByCategory,
+      outOfStockProducts: outOfStockProducts.slice(0, 6),
+      outOfStockCount: outOfStockProducts.length,
     };
   }, [productsQuery.data, categoriesQuery.data, warehousesQuery.data, stockQuery.data]);
 
