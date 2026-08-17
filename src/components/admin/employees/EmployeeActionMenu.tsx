@@ -16,6 +16,8 @@ import {
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useDeleteEmployee } from "../../../hooks/useEmployees";
 import type { EmployeeResponse } from "../../../types/employee.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface EmployeeActionMenuProps {
   employee: EmployeeResponse;
@@ -72,13 +74,10 @@ export function EmployeeActionMenu({
 
       setConfirmDeleteOpen(false);
       closeMenu();
-    } catch {
-      toast.error(
-        t(
-          "common.errors.actionFailed",
-          "Something went wrong. Please try again."
-        )
-      );
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 

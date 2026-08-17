@@ -24,6 +24,8 @@ import {
   ProductDrawer,
   type ProductDrawerMode,
 } from "../../../components/admin/products/ProductDrawer";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 function formatCurrency(value: number): string {
   return value.toLocaleString(undefined, {
@@ -50,8 +52,10 @@ export function ProductDetailsPage() {
       await deleteProduct.mutateAsync(product.id);
       toast.success(t("products.toasts.deleteSuccess") ?? "");
       navigate("/products");
-    } catch {
-      toast.error(t("common.errors.actionFailed") ?? "");
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 

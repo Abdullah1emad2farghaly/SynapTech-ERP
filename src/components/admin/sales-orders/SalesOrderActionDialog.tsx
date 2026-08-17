@@ -12,6 +12,8 @@ import {
   useCancelSalesOrder,
 } from "../../../hooks/useSalesOrderMutations";
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export type SalesOrderDialogAction = "submit" | "approve" | "cancel";
 
@@ -61,8 +63,10 @@ export function SalesOrderActionDialog({ action, order, onClose }: SalesOrderAct
       await config.mutation.mutateAsync();
       toast.success(config.successMessage);
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

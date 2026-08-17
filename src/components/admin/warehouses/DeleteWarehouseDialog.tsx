@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useDeleteWarehouse } from "../../../hooks/useWarehouseMutations";
 import type { WarehouseResponse } from "../../../types/warehouses.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface DeleteWarehouseDialogProps {
   warehouse: WarehouseResponse | null;
@@ -26,8 +28,10 @@ export function DeleteWarehouseDialog({
       await deleteWarehouse.mutateAsync(warehouse.id);
       toast.success(t("warehouses.toasts.deleted"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

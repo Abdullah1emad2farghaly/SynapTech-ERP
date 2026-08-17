@@ -81,7 +81,6 @@ export function GrantAccessDrawer({
       onClose();
     } catch(error) {
       if(axios.isAxiosError(error)){
-        console.log(error.response?.data)
         handleErrors(error.response?.data.errors)
       }
     }

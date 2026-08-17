@@ -1049,6 +1049,7 @@
     }
   },
   "stock": {
+    "new-movement": "حركة جديده",
     "column": {
       "product": "المنتج",
       "warehouse": "المستودع",
@@ -1742,7 +1743,11 @@
       "apply": "تطبيق الفلاتر"
     },
     "status": {
-      "none": "بدون حالة"
+      "none": "بدون حالة",
+      "Present": "حاضر",
+      "Absent": "غائب",
+      "Late": "متأخر",
+      "HalfDay": "نصف يوم"
     },
     "derived": {
       "notCheckedIn": "لم يسجّل الدخول",
@@ -2196,6 +2201,200 @@
         "newProduct": "منتج جديد",
         "newCategory": "فئة جديدة",
         "manageWarehouses": "إدارة المستودعات"
+      }
+    }
+  },
+
+  "accounting": {
+    "overview": {
+      "pageTitle": "نظرة عامة على الحسابات",
+      "pageSubtitle": "دليل الحسابات والقيود اليومية وميزان المراجعة في لمحة واحدة.",
+      "categoryNavLabel": "تنقل الحسابات",
+      "newEntry": "قيد جديد",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات الحسابات.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أنشئ أول حساب أو قيد يومية لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "accounts": "دليل الحسابات",
+        "journalEntries": "القيود اليومية",
+        "trialBalance": "ميزان المراجعة",
+        "settings": "إعدادات الحسابات"
+      },
+      "kpi": {
+        "totalAccounts": "إجمالي الحسابات",
+        "totalAccountsCaption": "جميع سجلات الحسابات",
+        "activeAccounts": "الحسابات النشطة",
+        "activeAccountsCaption": "نشط حاليًا",
+        "totalJournalEntries": "إجمالي القيود اليومية",
+        "totalJournalEntriesCaption": "عبر جميع الحالات",
+        "postedJournalEntries": "القيود المرحّلة",
+        "postedJournalEntriesCaption": "مُرحّلة في دفتر الأستاذ"
+      },
+      "trialBalance": {
+        "title": "ميزان المراجعة",
+        "caption": "الفترة الحالية",
+        "balanced": "متوازن",
+        "unbalanced": "غير متوازن",
+        "totalDebit": "إجمالي المدين",
+        "totalCredit": "إجمالي الدائن"
+      },
+      "accountsByType": {
+        "title": "الحسابات حسب النوع",
+        "countLabel": "الحسابات",
+        "emptyTitle": "لا توجد حسابات بعد",
+        "emptyDescription": "سيظهر توزيع الحسابات هنا بمجرد وجود حسابات."
+      },
+      "balanceByType": {
+        "title": "الرصيد حسب نوع الحساب",
+        "netLabel": "الرصيد الصافي",
+        "emptyTitle": "لا توجد بيانات رصيد",
+        "emptyDescription": "ستظهر الأرصدة حسب النوع هنا بمجرد وجود قيود يومية."
+      },
+      "topAccounts": {
+        "title": "أفضل الحسابات حسب الرصيد",
+        "balanceLabel": "الرصيد",
+        "emptyTitle": "لا توجد بيانات رصيد",
+        "emptyDescription": "ستظهر أفضل الحسابات هنا بمجرد وجود قيود يومية."
+      },
+      "entriesByStatus": {
+        "title": "القيود اليومية حسب الحالة",
+        "emptyTitle": "لا توجد قيود بعد",
+        "emptyDescription": "سيظهر توزيع حالة القيود هنا بمجرد وجود قيود."
+      },
+      "entriesOverTime": {
+        "title": "القيود اليومية عبر الزمن",
+        "countLabel": "القيود",
+        "emptyTitle": "لا توجد قيود بعد",
+        "emptyDescription": "سيظهر نشاط القيود الشهري هنا بمجرد وجود قيود."
+      },
+      "recentEntries": {
+        "title": "أحدث القيود اليومية",
+        "viewAll": "عرض الكل",
+        "emptyTitle": "لا توجد قيود بعد",
+        "emptyDescription": "ستظهر القيود الأخيرة هنا."
+      },
+      "accountsSnapshot": {
+        "title": "دليل الحسابات",
+        "manage": "إدارة الحسابات",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "quickActions": {
+        "newEntry": "قيد يومية جديد",
+        "newAccount": "حساب جديد",
+        "viewAllEntries": "عرض جميع القيود"
+      }
+    }
+  },
+
+  "hr": {
+    "overview": {
+      "pageTitle": "نظرة عامة على الموارد البشرية",
+      "pageSubtitle": "القوى العاملة والإجازات والحضور في لمحة واحدة.",
+      "categoryNavLabel": "تنقل الموارد البشرية",
+      "newEmployee": "موظف جديد",
+      "unassigned": "غير مُعيَّن",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات الموارد البشرية.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أضف أول موظف لعرض النشاط.",
+      "attendanceSectionTitle": "الحضور",
+      "attendanceSectionCaption": "نشاط الحضور على مستوى الشركة.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "employees": "الموظفون",
+        "leaveRequests": "طلبات الإجازة"
+      },
+      "kpi": {
+        "totalEmployees": "إجمالي الموظفين",
+        "totalEmployeesCaption": "جميع سجلات الموظفين",
+        "activeEmployees": "الموظفون النشطون",
+        "activeEmployeesCaption": "نشط حاليًا",
+        "totalLeaveRequests": "إجمالي طلبات الإجازة",
+        "totalLeaveRequestsCaption": "عبر جميع الحالات",
+        "pendingLeaveRequests": "الطلبات المعلّقة",
+        "pendingLeaveRequestsCaption": "بانتظار القرار"
+      },
+      "payroll": {
+        "title": "إجمالي الرواتب الأساسية",
+        "caption": "مجموع الرواتب الأساسية للموظفين النشطين",
+        "captionWithCount": "عبر {{count}} موظف نشط"
+      },
+      "pendingLeave": {
+        "title": "طلبات الإجازة المعلّقة",
+        "badge": "{{count}} معلّق",
+        "badge_other": "{{count}} معلّقة",
+        "emptyDescription": "لا توجد طلبات إجازة بانتظار القرار حاليًا.",
+        "viewAll": "عرض جميع الطلبات المعلّقة ({{count}})"
+      },
+      "employeesByDepartment": {
+        "title": "الموظفون حسب القسم",
+        "countLabel": "الموظفون",
+        "emptyTitle": "لا يوجد موظفون بعد",
+        "emptyDescription": "سيظهر توزيع الأقسام هنا بمجرد وجود موظفين."
+      },
+      "employeesByBranch": {
+        "title": "الموظفون حسب الفرع",
+        "countLabel": "الموظفون",
+        "emptyTitle": "لا يوجد موظفون بعد",
+        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود موظفين."
+      },
+      "headcountGrowth": {
+        "title": "نمو عدد الموظفين",
+        "countLabel": "الموظفون",
+        "emptyTitle": "لا توجد تواريخ تعيين بعد",
+        "emptyDescription": "سيظهر إجمالي عدد الموظفين التراكمي هنا بمجرد وجود موظفين."
+      },
+      "leaveByType": {
+        "title": "طلبات الإجازة حسب النوع",
+        "countLabel": "الطلبات",
+        "emptyTitle": "لا توجد طلبات إجازة بعد",
+        "emptyDescription": "سيظهر توزيع أنواع الإجازات هنا بمجرد وجود طلبات."
+      },
+      "leaveByStatus": {
+        "title": "طلبات الإجازة حسب الحالة",
+        "emptyTitle": "لا توجد طلبات إجازة بعد",
+        "emptyDescription": "سيظهر توزيع الحالات هنا بمجرد وجود طلبات."
+      },
+      "leaveOverTime": {
+        "title": "طلبات الإجازة عبر الزمن",
+        "countLabel": "الطلبات",
+        "emptyTitle": "لا توجد طلبات إجازة بعد",
+        "emptyDescription": "سيظهر نشاط الطلبات الشهري هنا بمجرد وجود طلبات."
+      },
+      "recentLeave": {
+        "title": "أحدث طلبات الإجازة",
+        "viewAll": "عرض الكل",
+        "emptyTitle": "لا توجد طلبات إجازة بعد",
+        "emptyDescription": "ستظهر طلبات الإجازة الأخيرة هنا."
+      },
+      "employeesSnapshot": {
+        "title": "الموظفون",
+        "manage": "إدارة الموظفين",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "other": "أخرى"
+      },
+      "attendanceByStatus": {
+        "title": "الحضور حسب الحالة",
+        "emptyTitle": "لا توجد بيانات حضور",
+        "emptyDescription": "سيظهر توزيع الحضور هنا بمجرد وجود سجلات.",
+        "errorDescription": "تعذّر تحميل بيانات الحضور."
+      },
+      "checkInsOverTime": {
+        "title": "تسجيلات الحضور عبر الزمن",
+        "countLabel": "تسجيلات الحضور",
+        "emptyTitle": "لا توجد بيانات حضور",
+        "emptyDescription": "سيظهر نشاط تسجيل الحضور الشهري هنا بمجرد وجود سجلات.",
+        "errorDescription": "تعذّر تحميل بيانات الحضور."
+      },
+      "quickActions": {
+        "newEmployee": "موظف جديد",
+        "viewLeaveRequests": "عرض طلبات الإجازة",
+        "viewEmployees": "عرض الموظفين"
       }
     }
   }

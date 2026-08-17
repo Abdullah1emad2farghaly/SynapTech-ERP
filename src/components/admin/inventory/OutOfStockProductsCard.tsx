@@ -59,7 +59,7 @@ export function OutOfStockProductsCard({ data, totalCount, isLoading }: Props) {
             ))}
           </ul>
           {(totalCount ?? 0) > (data?.length ?? 0) && (
-            <Link to="/products" className="text-xs font-medium text-signal hover:text-signal-hover mt-2 inline-block">
+            <Link to="products" className="text-xs font-medium text-signal hover:text-signal-hover mt-2 inline-block">
               {t('inventory.overview.outOfStock.viewAll', { count: totalCount })}
             </Link>
           )}

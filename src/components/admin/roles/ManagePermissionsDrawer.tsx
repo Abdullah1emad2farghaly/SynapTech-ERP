@@ -13,6 +13,8 @@ import { PermissionPicker } from "./PermissionPicker";
 import { usePermissionsCatalog } from "../../../hooks/useRoles";
 import { useAssignPermissions } from "../../../hooks/useRoleMutations";
 import type { RoleResponse } from "../../../types/roles.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface ManagePermissionsDrawerProps {
   role: RoleResponse | null;
@@ -44,8 +46,10 @@ export function ManagePermissionsDrawer({
       await assignPermissions.mutateAsync({ permissionCodes: selected });
       toast.success(t("roles.toasts.permissionsUpdated"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

@@ -18,6 +18,8 @@ import { useTransferStock } from "../../../hooks/useStock";
 import { useProducts } from "../../../hooks/useProducts";
 import { useWarehouses } from "../../../hooks/useWarehouses";
 import type { MovementResponse } from "../../../services/api/stock.api";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export function TransferStockPage() {
   const { t } = useTranslation();
@@ -51,8 +53,10 @@ export function TransferStockPage() {
       const result: MovementResponse[] = await transferMutation.mutateAsync(values);
       console.log(result)
       setSuccessResult(result[1]);
-    } catch {
-      setSubmitError(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

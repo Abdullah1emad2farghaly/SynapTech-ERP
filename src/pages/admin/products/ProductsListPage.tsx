@@ -44,8 +44,6 @@ export function ProductsListPage() {
   [products]
 );
 
-  // console.log(products)
-  // console.log(categoryOptions)
 
   const kpis = useMemo(
     () => ({

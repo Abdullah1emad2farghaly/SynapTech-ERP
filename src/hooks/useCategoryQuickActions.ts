@@ -10,6 +10,8 @@
 
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export function useCategoryQuickActions(onSetActive: (id: string, active: boolean) => Promise<void>) {
   const { t } = useTranslation();
@@ -18,8 +20,10 @@ export function useCategoryQuickActions(onSetActive: (id: string, active: boolea
     try {
       await onSetActive(categoryId, true);
       toast.success(t("categories.toast.activated", { name: categoryName }));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 
@@ -27,8 +31,10 @@ export function useCategoryQuickActions(onSetActive: (id: string, active: boolea
     try {
       await navigator.clipboard.writeText(categoryId);
       toast.success(t("categories.toast.idCopied"));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 

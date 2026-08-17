@@ -16,7 +16,7 @@ import { ROUTES } from "@/constants/routes";
 
 const REDIRECT_SECONDS = 3;
 
-export function ResetPasswordForm({ token }: { token: string }) {
+export function ResetPasswordForm({ email, code, setIsExpired }: { email: string; code: string; setIsExpired: ()=> void }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const resetPassword = useResetPassword();
@@ -48,8 +48,11 @@ export function ResetPasswordForm({ token }: { token: string }) {
 
   const submit = (values: ResetPasswordFormValues) => {
     resetPassword.mutate(
-      { token, password: values.password, confirmPassword: values.confirmPassword },
-      { onSuccess: () => setSucceeded(true) }
+      { email, password: values.password, code },
+      { 
+        onSuccess: () => setSucceeded(true),
+        onError: () => setIsExpired()
+      },
     );
   };
 
@@ -94,11 +97,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
             />
             <PasswordStrengthMeter score={score} value={passwordValue} />
           </div>
-          <PasswordInput
-            label={t("auth.resetPassword.confirmPasswordLabel")}
-            error={errors.confirmPassword && t(errors.confirmPassword.message as string)}
-            {...register("confirmPassword")}
-          />
+          
           <Button type="submit" fullWidth disabled={!isValid} isLoading={resetPassword.isPending}>
             {t("auth.resetPassword.submit")}
           </Button>

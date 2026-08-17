@@ -27,6 +27,8 @@ import { useEmployee, useUpdateEmployee, useEmployees } from "../../../hooks/use
 import { useBranches } from "../../../hooks/useBranches";
 import { useDepartmentsList } from "../../../hooks/useDepartments.crud";
 import type { UpdateEmployeeFormValues } from "../../../schemas/employee.schema";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export function EditEmployeePage() {
   const { t } = useTranslation();
@@ -108,8 +110,10 @@ export function EditEmployeePage() {
       });
       toast.success(t("employees.toast.updated", "Employee updated"));
       navigate(`/hr/employees/${employee.id}`);
-    } catch {
-      toast.error(t("common.errors.actionFailed", "Something went wrong. Please try again."));
+    }catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

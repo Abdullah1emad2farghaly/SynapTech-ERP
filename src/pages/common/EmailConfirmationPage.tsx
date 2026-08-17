@@ -38,7 +38,6 @@ export default function EmailConfirmationPage() {
     ? JSON.parse(storedUser)
     : null;
 
-  console.log(currentUser?.email)
   useEffect(() => {
     if (cooldown <= 0) return;
     const id = setTimeout(() => setCooldown((s) => s - 1), 1000);

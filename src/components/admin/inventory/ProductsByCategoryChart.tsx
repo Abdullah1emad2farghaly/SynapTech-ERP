@@ -57,7 +57,24 @@ export function ProductsByCategoryChart({ data, isLoading }: Props) {
                 <Cell key={entry.categoryId ?? 'uncategorized'} fill={PALETTE[i % PALETTE.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip contentStyle={{
+              backgroundColor: 'rgb(var(--color-panel))',
+              border: '1px solid rgb(var(--color-hairline))',
+              borderRadius: '8px',
+              boxShadow: 'var(--shadow-elevation-1)',
+              color: 'rgb(var(--color-ink-primary))',
+            }}
+              labelStyle={{
+                color: 'rgb(var(--color-ink-primary))',
+                fontWeight: 500,
+                marginBottom: '4px',
+              }}
+              itemStyle={{
+                color: 'rgb(var(--color-ink-secondary))',
+              }}
+              cursor={{
+                stroke: 'rgb(var(--color-hairline))',
+              }} />
             <Legend />
           </PieChart>
         </ResponsiveContainer>

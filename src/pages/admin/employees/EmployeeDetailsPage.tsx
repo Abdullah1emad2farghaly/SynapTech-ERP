@@ -21,6 +21,8 @@ import { GrantAccessDrawer } from "../../../components/admin/employees/GrantAcce
 import { ConfirmationDialog } from "../../../components/common/ConfirmationDialog";
 import { useRoles } from "@/hooks/useRoles";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 type TabId = "overview" | "employment" | "contact" | "compensation" | "access";
 
@@ -107,8 +109,10 @@ export function EmployeeDetailsPage() {
       await deleteEmployee.mutateAsync(employee.id);
       toast.success(t("employees.toast.deleted", "Employee deleted"));
       navigate("/hr/employees");
-    } catch {
-      toast.error(t("common.errors.actionFailed", "Something went wrong. Please try again."));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

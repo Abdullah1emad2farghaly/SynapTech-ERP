@@ -26,6 +26,8 @@ import { SearchableEntitySelect } from "../../../components/admin/purchase-order
 import { LineItemsEditableGrid } from "../../../components/admin/purchase-orders/LineItemsEditableGrid";
 import { useSuppliers } from "../../../hooks/useSuppliers"; // existing module
 import { useWarehouses } from "../../../hooks/useWarehouses"; // existing module
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 const EMPTY_LINE = { productId: "", quantity: 0, unitPrice: 0 };
 
@@ -108,8 +110,10 @@ export function CreateEditPurchaseOrderPage() {
         toast.success(t("purchaseOrders.toasts.created"));
         navigate(`/inventory/purchase-orders/${created.id}`);
       }
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

@@ -38,7 +38,7 @@ export function Sidebar() {
 
       <aside
         className={[
-          "fixed inset-y-0 left-0 z-50 flex flex-col border-e border-hairline bg-panel shadow-xl",
+          "fixed inset-y-0 left-0 flex flex-col border-e border-hairline bg-panel shadow-xl",
           "transition-transform duration-300 ease-in-out",
 
           // Desktop

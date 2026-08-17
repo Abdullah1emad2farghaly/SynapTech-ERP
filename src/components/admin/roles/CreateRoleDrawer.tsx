@@ -15,6 +15,8 @@ import { PermissionPicker } from "./PermissionPicker";
 import { createRoleSchema, type CreateRoleFormValues } from "../../../schemas/roles.schema";
 import { usePermissionsCatalog } from "../../../hooks/useRoles";
 import { useCreateRole } from "../../../hooks/useRoleMutations";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface CreateRoleDrawerProps {
   open: boolean;
@@ -57,8 +59,10 @@ export function CreateRoleDrawer({
       toast.success(t("roles.toasts.created"));
       reset();
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

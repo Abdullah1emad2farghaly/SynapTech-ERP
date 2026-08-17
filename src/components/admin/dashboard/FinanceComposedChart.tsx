@@ -31,8 +31,24 @@ export function FinanceComposedChart({ title, summary, data, viewAllHref }: Fina
           <YAxis yAxisId="cost" hide />
           <YAxis yAxisId="margin" orientation="right" hide domain={[0, 100]} />
           <Tooltip
-            cursor={{ fill: "#EEF0F6" }}
-            contentStyle={{ borderRadius: 8, border: "1px solid #E2E4F0", fontSize: 13 }}
+            contentStyle={{
+              backgroundColor: 'rgb(var(--color-panel))',
+              border: '1px solid rgb(var(--color-hairline))',
+              borderRadius: '8px',
+              boxShadow: 'var(--shadow-elevation-1)',
+              color: 'rgb(var(--color-ink-primary))',
+            }}
+            labelStyle={{
+              color: 'rgb(var(--color-ink-primary))',
+              fontWeight: 500,
+              marginBottom: '4px',
+            }}
+            itemStyle={{
+              color: 'rgb(var(--color-ink-secondary))',
+            }}
+            cursor={{
+              stroke: 'rgb(var(--color-hairline))',
+            }}
           />
           <Bar
             yAxisId="cost"

@@ -13,6 +13,8 @@ import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useDeleteProduct } from "../../../hooks/useProducts";
 import toast from "react-hot-toast";
 import type { Product } from "../../../services/api/products.api";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface ProductActionMenuProps {
   product: Product;
@@ -65,8 +67,10 @@ export function ProductActionMenu({
       await deleteProduct.mutateAsync(product.id);
       toast.success(t("products.toasts.deleteSuccess") ?? "");
       setIsConfirmOpen(false);
-    } catch {
-      toast.error(t("common.errors.actionFailed") ?? "");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 

@@ -20,6 +20,8 @@ import {
   Trash2,
 } from "lucide-react";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface BranchActionMenuProps {
   branchId: string;
@@ -66,8 +68,10 @@ export function BranchActionMenu({
     try {
       await onSetActive(branchId, true);
       toast.success(t("branches.toast.activated", { name: branchName }));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 
@@ -83,8 +87,10 @@ export function BranchActionMenu({
         toast.success(t("branches.toast.deleted", { name: branchName }));
       }
       setConfirmState(null);
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

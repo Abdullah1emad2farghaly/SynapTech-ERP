@@ -41,7 +41,28 @@ export function StockByWarehouseChart({ data, isLoading }: Props) {
               width={100}
               tick={{ fontSize: 12, fill: 'var(--ink-secondary)' }}
             />
-            <Tooltip formatter={(value) => [ Number(value ?? 0), t('inventory.overview.stockByWarehouse.unitsLabel'), ]} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: 'rgb(var(--color-panel))',
+                border: '1px solid rgb(var(--color-hairline))',
+                borderRadius: '8px',
+                boxShadow: 'var(--shadow-elevation-1)',
+                color: 'rgb(var(--color-ink-primary))',
+              }}
+              labelStyle={{
+                color: 'rgb(var(--color-ink-primary))',
+                fontWeight: 500,
+                marginBottom: '4px',
+              }}
+              itemStyle={{
+                color: 'rgb(var(--color-ink-secondary))',
+              }}
+              cursor={{
+                stroke: 'rgb(var(--color-hairline))',
+              }}
+              formatter={(value) => [Number(value ?? 0),
+              t('inventory.overview.stockByWarehouse.unitsLabel'),]}
+            />
             <Bar dataKey="totalUnits" fill="var(--signal)" radius={[0, 4, 4, 0]} />
           </BarChart>
         </ResponsiveContainer>

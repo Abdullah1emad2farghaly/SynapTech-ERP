@@ -105,7 +105,6 @@ export function RecordMovementPage() {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors)
-        console.log(error.response?.data.errors)
       }
       setSubmitError(t("common.errors.actionFailed"));
     } finally {

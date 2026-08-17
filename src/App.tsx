@@ -56,6 +56,8 @@ import { LeaveRequestDetailsPage } from "./pages/admin/leaveRequests/LeaveReques
 import SalesOverviewPage from "./pages/admin/sales/SalesOverviewPage";
 import PurchasingOverviewPage from "./pages/admin/purchasing/PurchasingOverviewPage";
 import InventoryOverviewPage from "./pages/admin/inventory/InventoryOverviewPage";
+import AccountingOverviewPage from "./pages/admin/accounting/AccountingOverviewPage";
+import HrOverviewPage from "./pages/admin/hr/HrOverviewPage";
 
 const queryClient = new QueryClient();
 
@@ -104,6 +106,7 @@ export default function App() {
 
 
             <Route path="/accounting">
+              <Route path="/accounting" element={<AccountingOverviewPage />} />
               <Route path="accounts" element={<AccountsListPage />} />
               <Route path="accounts/new" element={<AccountFormPage />} />
               <Route path="accounts/:id" element={<AccountDetailsPage />} />
@@ -115,7 +118,7 @@ export default function App() {
 
             <Route path="/inventory">
               <Route path="/inventory" element={<InventoryOverviewPage />} />
-              
+
               <Route path="warehouses" element={<WarehousesListPage />} />
               <Route path="categories" element={<CategoriesPage />} />
               <Route path="products" element={<ProductsListPage />} />
@@ -125,11 +128,12 @@ export default function App() {
 
               <Route path="warehouses/:warehouseId" element={<WarehouseInventoryPage />} />
 
-              <Route path="new-movement" element={<RecordMovementPage />} />
+              <Route path="stock/new-movement" element={<RecordMovementPage />} />
               <Route path="stock/transfer" element={<TransferStockPage />} />
             </Route>
 
             <Route path="/hr">
+              <Route path="/hr" element={<HrOverviewPage />} />
               <Route path="employees" element={<EmployeesListPage />} />
               <Route path="employees/create" element={<CreateEmployeePage />} />
               <Route path="employees/:id" element={<EmployeeDetailsPage />} />
@@ -157,7 +161,7 @@ export default function App() {
             </Route>
 
             <Route path="/sales">
-              <Route path="/sales" element={<SalesOverviewPage/>}/>
+              <Route path="/sales" element={<SalesOverviewPage />} />
               <Route path="customers" element={<CustomersPage />} />
               <Route path="sales-orders" element={<SalesOrdersListPage />} />
               <Route path="sales-orders/create" element={<CreateEditSalesOrderPage />} />
@@ -172,7 +176,43 @@ export default function App() {
           {/* <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} /> */}
         </Routes>
       </BrowserRouter>
-      <Toaster position="top-center" />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3500,
+          style: {
+            background: 'rgb(var(--color-panel))',
+            color: 'rgb(var(--color-ink-primary))',
+            border: '1px solid rgb(var(--color-hairline))',
+            borderRadius: '10px',
+            boxShadow: 'var(--shadow-elevation-2)',
+            padding: '12px 14px',
+            fontSize: '14px',
+            fontWeight: 500,
+          },
+
+          success: {
+            iconTheme: {
+              primary: 'rgb(var(--color-success))',
+              secondary: 'rgb(var(--color-panel))',
+            },
+          },
+
+          error: {
+            iconTheme: {
+              primary: 'rgb(var(--color-error))',
+              secondary: 'rgb(var(--color-panel))',
+            },
+          },
+
+          loading: {
+            iconTheme: {
+              primary: 'rgb(var(--color-synapse))',
+              secondary: 'rgb(var(--color-panel))',
+            },
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

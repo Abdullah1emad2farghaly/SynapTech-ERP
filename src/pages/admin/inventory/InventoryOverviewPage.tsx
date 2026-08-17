@@ -84,19 +84,19 @@ export default function InventoryOverviewPage() {
           <div className="flex flex-wrap gap-3">
             {/* FLAG: New Product / New Category route to modules that don't exist yet — see the respective snapshot cards' header comments. */}
             <button
-              onClick={() => navigate('/products')}
+              onClick={() => navigate('products')}
               className="text-sm font-medium px-4 py-2 rounded-md border border-hairline hover:border-signal/40 text-ink-primary transition-colors"
             >
               {t('inventory.overview.quickActions.newProduct')}
             </button>
             <button
-              onClick={() => navigate('/categories')}
+              onClick={() => navigate('categories')}
               className="text-sm font-medium px-4 py-2 rounded-md border border-hairline hover:border-signal/40 text-ink-primary transition-colors"
             >
               {t('inventory.overview.quickActions.newCategory')}
             </button>
             <button
-              onClick={() => navigate('/warehouses')}
+              onClick={() => navigate('warehouses')}
               className="text-sm font-medium px-4 py-2 rounded-md border border-hairline hover:border-signal/40 text-ink-primary transition-colors"
             >
               {t('inventory.overview.quickActions.manageWarehouses')}

@@ -18,6 +18,7 @@ import { Drawer } from "../../common/Drawer";
 import { MultiSelectOption, MultiSelectSearchable } from "../../common/MultiSelectSearchable";
 import { RoleResponse } from "@/types/roles.types";
 import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface RoleAssignmentDrawerProps {
   open: boolean;
@@ -74,14 +75,9 @@ export function RoleAssignmentDrawer({
     try {
       await onSubmit(userId, selected);
       onClose();
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        console.log("Response:", err.response);
-        console.log("Status:", err.response?.status);
-        console.log("Data:", err.response?.data);
-        console.log("Message:", err.message);
-      } else {
-        console.log(err);
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
       }
     } finally {
       setIsSubmitting(false);

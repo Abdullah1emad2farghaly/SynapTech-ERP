@@ -7,14 +7,18 @@ import { ResetPasswordForm } from "@/components/admin/auth/ResetPasswordForm";
 import { Button } from "@/components/common/Button";
 import { Link } from "@/components/common/Link";
 import { ROUTES } from "@/constants/routes";
+import { useState } from "react";
 
 // Token validity (expired vs valid) is resolved by the page — a route-level
 // concern — before handing a confirmed-valid token down to the form.
 export default function ResetPasswordPage() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
-  const token = searchParams.get("token") ?? "";
-  const isExpired = !token; // replace with a useQuery(authApi.verifyResetToken) call in production
+  const code = searchParams.get("code") ?? "";
+  const email = searchParams.get("email") ?? "";
+  const [isExpired, setIsExpired] = useState(false);
+
+  console.log(code)
 
   return (
     <AuthLayout tagline="Almost there.">
@@ -42,7 +46,11 @@ export default function ResetPasswordPage() {
             </div>
           </div>
         ) : (
-          <ResetPasswordForm token={token} />
+          <ResetPasswordForm
+            code={code}
+            email={email}
+            setIsExpired={() => setIsExpired(true)}
+          />
         )}
       </AuthContainer>
     </AuthLayout>

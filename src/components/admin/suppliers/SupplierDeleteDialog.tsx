@@ -6,6 +6,8 @@ import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useDeleteSupplier } from "../../../hooks/useSupplierMutations";
 import type { SupplierResponse } from "../../../types/suppliers.types";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface SupplierDeleteDialogProps {
   supplier: SupplierResponse | null;
@@ -29,8 +31,10 @@ export function SupplierDeleteDialog({
       toast.success(t("suppliers.toasts.deleted"));
       navigate("/inventory/suppliers");
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { X } from "lucide-react";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface BulkStatusToolbarProps {
   selectedCount: number;
@@ -37,8 +39,10 @@ export function BulkStatusToolbar({
       await onActivateSelected();
       toast.success(t("categories.bulk.activateSuccess", { count: selectedCount }));
       onClearSelection();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 
@@ -49,8 +53,10 @@ export function BulkStatusToolbar({
       toast.success(t("categories.bulk.deactivateSuccess", { count: selectedCount }));
       setConfirmOpen(false);
       onClearSelection();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

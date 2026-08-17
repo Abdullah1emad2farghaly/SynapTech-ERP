@@ -9,9 +9,9 @@ export interface ForgotPasswordPayload {
 }
 
 export interface ResetPasswordPayload {
-  token: string;
+  code: string;
   password: string;
-  confirmPassword: string;
+  email: string;
 }
 
 export interface AuthUser {

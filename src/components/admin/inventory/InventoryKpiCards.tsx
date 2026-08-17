@@ -25,28 +25,28 @@ export function InventoryKpiCards({ stats, isLoading }: Props) {
       value: stats?.totalProducts ?? 0,
       caption: t('inventory.overview.kpi.totalProductsCaption'),
       icon: Package,
-      onClick: () => navigate('/products'),
+      onClick: () => navigate('products'),
     },
     {
       key: 'activeProducts',
       value: stats?.activeProducts ?? 0,
       caption: t('inventory.overview.kpi.activeProductsCaption'),
       icon: PackageCheck,
-      onClick: () => navigate('/products'),
+      onClick: () => navigate('products'),
     },
     {
       key: 'totalCategories',
       value: stats?.totalCategories ?? 0,
       caption: t('inventory.overview.kpi.totalCategoriesCaption'),
       icon: FolderTree,
-      onClick: () => navigate('/categories'),
+      onClick: () => navigate('categories'),
     },
     {
       key: 'totalWarehouses',
       value: stats?.totalWarehouses ?? 0,
       caption: t('inventory.overview.kpi.totalWarehousesCaption'),
       icon: WarehouseIcon,
-      onClick: () => navigate('/warehouses'),
+      onClick: () => navigate('warehouses'),
     },
   ];
 

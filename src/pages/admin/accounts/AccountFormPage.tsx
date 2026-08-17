@@ -26,6 +26,7 @@ import { ArrowLeft } from "lucide-react";
 import { TreeSelect, type TreeSelectNode } from "../../../components/common/TreeSelect";
 import { useAccountsList, useCreateAccount } from "../../../hooks/useAccounts.crud";
 import axios, { isAxiosError } from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface FormState {
   code: string;
@@ -79,9 +80,10 @@ export function AccountFormPage() {
         parentAccountId: form.parentAccountId,
       });
       navigate(`/accounting/accounts/${created.id}`);
-    } catch(error) {
-      
-      setServerError(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

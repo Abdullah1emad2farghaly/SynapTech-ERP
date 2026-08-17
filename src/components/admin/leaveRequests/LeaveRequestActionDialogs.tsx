@@ -15,6 +15,7 @@ import {
 } from "../../../hooks/useLeaveRequests";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
 import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface ActionDialogProps {
   request: LeaveRequestResponse | null;
@@ -31,8 +32,10 @@ export function ApproveLeaveRequestDialog({ request, onClose }: ActionDialogProp
       await approveMutation.mutateAsync(request.id);
       toast.success(t("leaveRequests.toast.approved"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 
@@ -48,10 +51,10 @@ export function ApproveLeaveRequestDialog({ request, onClose }: ActionDialogProp
       body={
         request
           ? t("leaveRequests.approve.body", {
-              employee: request.employeeName,
-              startDate: request.startDate,
-              endDate: request.endDate,
-            })
+            employee: request.employeeName,
+            startDate: request.startDate,
+            endDate: request.endDate,
+          })
           : ""
       }
       confirmLabel={t("leaveRequests.actions.approve")}
@@ -69,8 +72,10 @@ export function RejectLeaveRequestDialog({ request, onClose }: ActionDialogProps
       await rejectMutation.mutateAsync(request.id);
       toast.success(t("leaveRequests.toast.rejected"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 
@@ -86,10 +91,10 @@ export function RejectLeaveRequestDialog({ request, onClose }: ActionDialogProps
       body={
         request
           ? t("leaveRequests.reject.body", {
-              employee: request.employeeName,
-              startDate: request.startDate,
-              endDate: request.endDate,
-            })
+            employee: request.employeeName,
+            startDate: request.startDate,
+            endDate: request.endDate,
+          })
           : ""
       }
       confirmLabel={t("leaveRequests.actions.reject")}
@@ -108,10 +113,9 @@ export function CancelLeaveRequestDialog({ request, onClose }: ActionDialogProps
       toast.success(t("leaveRequests.toast.cancelled"));
       onClose();
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         console.log(error.response?.data)
       }
-      toast.error(t("common.errors.actionFailed"));
     }
   };
 
@@ -130,10 +134,10 @@ export function CancelLeaveRequestDialog({ request, onClose }: ActionDialogProps
       body={
         request
           ? t(bodyKey, {
-              employee: request.employeeName,
-              startDate: request.startDate,
-              endDate: request.endDate,
-            })
+            employee: request.employeeName,
+            startDate: request.startDate,
+            endDate: request.endDate,
+          })
           : ""
       }
       confirmLabel={t("leaveRequests.actions.cancel")}

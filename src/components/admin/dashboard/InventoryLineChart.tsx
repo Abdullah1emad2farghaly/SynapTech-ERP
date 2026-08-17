@@ -27,7 +27,24 @@ export function InventoryLineChart({ title, summary, data, viewAllHref }: Invent
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 4, right: 4, bottom: 0, left: 4 }}>
           <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#9098B8", fontSize: 12 }} />
-          <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #E2E4F0", fontSize: 13 }} />
+          <Tooltip contentStyle={{
+            backgroundColor: 'rgb(var(--color-panel))',
+            border: '1px solid rgb(var(--color-hairline))',
+            borderRadius: '8px',
+            boxShadow: 'var(--shadow-elevation-1)',
+            color: 'rgb(var(--color-ink-primary))',
+          }}
+            labelStyle={{
+              color: 'rgb(var(--color-ink-primary))',
+              fontWeight: 500,
+              marginBottom: '4px',
+            }}
+            itemStyle={{
+              color: 'rgb(var(--color-ink-secondary))',
+            }}
+            cursor={{
+              stroke: 'rgb(var(--color-hairline))',
+            }} />
           <Legend
             verticalAlign="top"
             align="right"

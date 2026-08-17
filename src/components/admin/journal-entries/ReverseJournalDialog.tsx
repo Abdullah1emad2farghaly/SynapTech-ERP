@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useReverseJournalEntry } from "../../../hooks/useJournalEntryMutations";
 import type { JournalEntryResponse } from "../../../types/journalEntries.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface ReverseJournalDialogProps {
   entry: JournalEntryResponse | null;
@@ -32,8 +34,10 @@ export function ReverseJournalDialog({
       await reverseEntry.mutateAsync(entry.id);
       toast.success(t("journalEntries.toasts.reversed"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

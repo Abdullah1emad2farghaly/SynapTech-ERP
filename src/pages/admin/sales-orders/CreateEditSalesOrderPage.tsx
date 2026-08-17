@@ -18,6 +18,8 @@ import { useCreateSalesOrder, useUpdateSalesOrder } from "../../../hooks/useSale
 import { SearchableEntitySelect } from "../../../components/admin/purchase-orders/SearchableEntitySelect";
 import { LineItemsEditableGrid } from "../../../components/admin/sales-orders/LineItemsEditableGrid";
 import { useWarehouses } from "../../../hooks/useWarehouses"; // existing module
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 const EMPTY_LINE = { productId: "", quantity: 0, unitPrice: 0 };
 
@@ -95,8 +97,10 @@ export function CreateEditSalesOrderPage() {
         toast.success(t("salesOrders.toasts.created"));
         navigate(`/sales/sales-orders/${created.id}`);
       }
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

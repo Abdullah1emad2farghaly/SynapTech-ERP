@@ -21,6 +21,8 @@ import {
   Trash2,
 } from "lucide-react";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface DepartmentActionMenuProps {
   departmentId: string;
@@ -69,8 +71,10 @@ export function DepartmentActionMenu({
     try {
       await onSetActive(departmentId, true);
       toast.success(t("departments.toast.activated", { name: departmentName }));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 
@@ -86,8 +90,10 @@ export function DepartmentActionMenu({
         toast.success(t("departments.toast.deleted", { name: departmentName }));
       }
       setConfirmState(null);
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

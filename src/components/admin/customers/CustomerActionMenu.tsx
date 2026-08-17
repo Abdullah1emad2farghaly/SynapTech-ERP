@@ -12,6 +12,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { MoreVertical, Eye, Pencil, UserX, UserCheck, Trash2 } from "lucide-react";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface CustomerActionMenuProps {
   customerId: string;
@@ -46,8 +48,10 @@ export function CustomerActionMenu({
     try {
       await onSetActive(customerId, true);
       toast.success(t("customers.toast.activated", { name: customerName }));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 

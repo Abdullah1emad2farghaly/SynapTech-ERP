@@ -24,6 +24,7 @@ export function LanguageSwitcher() {
           </option>
         ))}
       </select>
+      
     </label>
   );
 }

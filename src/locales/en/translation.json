@@ -1049,6 +1049,7 @@
     }
   },
   "stock": {
+    "new-movement": "New Movement",
     "column": {
       "product": "Product",
       "warehouse": "Warehouse",
@@ -1832,7 +1833,11 @@
       "apply": "Apply filters"
     },
     "status": {
-      "none": "No status"
+      "none": "No status",
+      "Present": "Present",
+      "Absent": "Absent",
+      "Late": "Late",
+      "HalfDay": "Half Day"
     },
     "derived": {
       "notCheckedIn": "Not checked in",
@@ -2282,6 +2287,199 @@
         "newProduct": "New Product",
         "newCategory": "New Category",
         "manageWarehouses": "Manage Warehouses"
+      }
+    }
+  },
+  "accounting": {
+    "overview": {
+      "pageTitle": "Accounting Overview",
+      "pageSubtitle": "Chart of accounts, journal entries, and trial balance at a glance.",
+      "categoryNavLabel": "Accounting navigation",
+      "newEntry": "New Entry",
+      "errorTitle": "Something went wrong loading your accounting data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Create your first account or journal entry to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "accounts": "Chart of Accounts",
+        "journalEntries": "Journal Entries",
+        "trialBalance": "Trial Balance",
+        "settings": "Accounting Settings"
+      },
+      "kpi": {
+        "totalAccounts": "Total Accounts",
+        "totalAccountsCaption": "All account records",
+        "activeAccounts": "Active Accounts",
+        "activeAccountsCaption": "Currently active",
+        "totalJournalEntries": "Total Journal Entries",
+        "totalJournalEntriesCaption": "Across all statuses",
+        "postedJournalEntries": "Posted Entries",
+        "postedJournalEntriesCaption": "Finalized in the ledger"
+      },
+      "trialBalance": {
+        "title": "Trial Balance",
+        "caption": "Current period",
+        "balanced": "Balanced",
+        "unbalanced": "Unbalanced",
+        "totalDebit": "Total Debits",
+        "totalCredit": "Total Credits"
+      },
+      "accountsByType": {
+        "title": "Accounts by Type",
+        "countLabel": "Accounts",
+        "emptyTitle": "No accounts yet",
+        "emptyDescription": "Account distribution will appear here once accounts exist."
+      },
+      "balanceByType": {
+        "title": "Balance by Account Type",
+        "netLabel": "Net balance",
+        "emptyTitle": "No balance data",
+        "emptyDescription": "Balances by type will appear here once journal entries exist."
+      },
+      "topAccounts": {
+        "title": "Top Accounts by Balance",
+        "balanceLabel": "Balance",
+        "emptyTitle": "No balance data",
+        "emptyDescription": "Top accounts will appear here once journal entries exist."
+      },
+      "entriesByStatus": {
+        "title": "Journal Entries by Status",
+        "emptyTitle": "No entries yet",
+        "emptyDescription": "Entry status distribution will appear here once entries exist."
+      },
+      "entriesOverTime": {
+        "title": "Journal Entries Over Time",
+        "countLabel": "Entries",
+        "emptyTitle": "No entries yet",
+        "emptyDescription": "Monthly entry activity will appear here once entries exist."
+      },
+      "recentEntries": {
+        "title": "Recent Journal Entries",
+        "viewAll": "View all",
+        "emptyTitle": "No entries yet",
+        "emptyDescription": "Recent journal entries will appear here."
+      },
+      "accountsSnapshot": {
+        "title": "Chart of Accounts",
+        "manage": "Manage Accounts",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "quickActions": {
+        "newEntry": "New Journal Entry",
+        "newAccount": "New Account",
+        "viewAllEntries": "View All Entries"
+      }
+    }
+  },
+
+  "hr": {
+    "overview": {
+      "pageTitle": "HR Overview",
+      "pageSubtitle": "Workforce, leave, and attendance at a glance.",
+      "categoryNavLabel": "HR navigation",
+      "newEmployee": "New Employee",
+      "unassigned": "Unassigned",
+      "errorTitle": "Something went wrong loading your HR data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Add your first employee to see activity.",
+      "attendanceSectionTitle": "Attendance",
+      "attendanceSectionCaption": "Company-wide attendance activity.",
+      "tabs": {
+        "overview": "Overview",
+        "employees": "Employees",
+        "leaveRequests": "Leave Requests"
+      },
+      "kpi": {
+        "totalEmployees": "Total Employees",
+        "totalEmployeesCaption": "All employee records",
+        "activeEmployees": "Active Employees",
+        "activeEmployeesCaption": "Currently active",
+        "totalLeaveRequests": "Total Leave Requests",
+        "totalLeaveRequestsCaption": "Across all statuses",
+        "pendingLeaveRequests": "Pending Requests",
+        "pendingLeaveRequestsCaption": "Awaiting a decision"
+      },
+      "payroll": {
+        "title": "Total Base Payroll",
+        "caption": "Sum of active employees' base salaries",
+        "captionWithCount": "Across {{count}} active employees"
+      },
+      "pendingLeave": {
+        "title": "Pending Leave Requests",
+        "badge": "{{count}} pending",
+        "badge_other": "{{count}} pending",
+        "emptyDescription": "No leave requests are currently awaiting a decision.",
+        "viewAll": "View all {{count}} pending requests"
+      },
+      "employeesByDepartment": {
+        "title": "Employees by Department",
+        "countLabel": "Employees",
+        "emptyTitle": "No employees yet",
+        "emptyDescription": "Department distribution will appear here once employees exist."
+      },
+      "employeesByBranch": {
+        "title": "Employees by Branch",
+        "countLabel": "Employees",
+        "emptyTitle": "No employees yet",
+        "emptyDescription": "Branch distribution will appear here once employees exist."
+      },
+      "headcountGrowth": {
+        "title": "Headcount Growth",
+        "countLabel": "Employees",
+        "emptyTitle": "No hire dates yet",
+        "emptyDescription": "Cumulative headcount will appear here once employees exist."
+      },
+      "leaveByType": {
+        "title": "Leave Requests by Type",
+        "countLabel": "Requests",
+        "emptyTitle": "No leave requests yet",
+        "emptyDescription": "Leave type distribution will appear here once requests exist."
+      },
+      "leaveByStatus": {
+        "title": "Leave Requests by Status",
+        "emptyTitle": "No leave requests yet",
+        "emptyDescription": "Status distribution will appear here once requests exist."
+      },
+      "leaveOverTime": {
+        "title": "Leave Requests Over Time",
+        "countLabel": "Requests",
+        "emptyTitle": "No leave requests yet",
+        "emptyDescription": "Monthly request activity will appear here once requests exist."
+      },
+      "recentLeave": {
+        "title": "Recent Leave Requests",
+        "viewAll": "View all",
+        "emptyTitle": "No leave requests yet",
+        "emptyDescription": "Recent leave requests will appear here."
+      },
+      "employeesSnapshot": {
+        "title": "Employees",
+        "manage": "Manage Employees",
+        "total": "Total",
+        "active": "Active",
+        "other": "Other"
+      },
+      "attendanceByStatus": {
+        "title": "Attendance by Status",
+        "emptyTitle": "No attendance data",
+        "emptyDescription": "Attendance distribution will appear here once records exist.",
+        "errorDescription": "Attendance data couldn't be loaded."
+      },
+      "checkInsOverTime": {
+        "title": "Check-ins Over Time",
+        "countLabel": "Check-ins",
+        "emptyTitle": "No attendance data",
+        "emptyDescription": "Monthly check-in activity will appear here once records exist.",
+        "errorDescription": "Attendance data couldn't be loaded."
+      },
+      "quickActions": {
+        "newEmployee": "New Employee",
+        "viewLeaveRequests": "View Leave Requests",
+        "viewEmployees": "View Employees"
       }
     }
   }

@@ -17,6 +17,8 @@ import { warehouseFormSchema, type WarehouseFormValues } from "../../../schemas/
 import { useCreateWarehouse, useUpdateWarehouse } from "../../../hooks/useWarehouseMutations";
 import type { WarehouseResponse } from "../../../types/warehouses.types";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface BranchOption {
   id: string;
@@ -110,8 +112,10 @@ export function WarehouseDrawer({
         toast.success(t("warehouses.toasts.updated"));
       }
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

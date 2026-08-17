@@ -77,9 +77,8 @@ export function ReceiveGoodsPage() {
     } catch (error) {
       if(axios.isAxiosError(error)){
         handleErrors(error.response?.data.errors);
-        console.log("error.response?.data.errors", error.response?.data.errors);
-      }
-      toast.error(t("common.errors.actionFailed"));
+      }else
+        toast.error(t("common.errors.actionFailed"));
     }
   };
 

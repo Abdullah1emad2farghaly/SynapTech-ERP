@@ -65,8 +65,7 @@ export function LeaveRequestsDashboardPage() {
       }
     } catch (error) {
       if(axios.isAxiosError(error)){
-        console.log(error.response?.data)
-        handleErrors(error.response?.data);
+        handleErrors(error.response?.data.errors);
       }
     }
   }

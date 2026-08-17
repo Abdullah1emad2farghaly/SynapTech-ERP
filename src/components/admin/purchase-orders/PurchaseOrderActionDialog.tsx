@@ -14,6 +14,8 @@ import {
   useCancelPurchaseOrder,
 } from "../../../hooks/usePurchaseOrderMutations";
 import type { PurchaseOrderResponse } from "../../../types/purchaseOrders.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export type PurchaseOrderDialogAction = "submit" | "approve" | "cancel";
 
@@ -67,8 +69,10 @@ export function PurchaseOrderActionDialog({
       await config.mutation.mutateAsync();
       toast.success(config.successMessage);
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

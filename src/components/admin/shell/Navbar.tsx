@@ -1,4 +1,4 @@
-import { Menu, Search } from "lucide-react";
+import { Menu, Moon, Search, Sun } from "lucide-react";
 import { Breadcrumb } from "@/components/admin/shell/Breadcrumb";
 import {
   NotificationBell,
@@ -6,6 +6,8 @@ import {
 } from "@/components/admin/shell/NotificationBell";
 import { UserMenu } from "@/components/admin/shell/UserMenu";
 import { useShellStore } from "@/store/shellStore";
+import { useTranslation } from "react-i18next";
+import { useThemeStore } from "@/store/themeStore";
 
 interface NavbarProps {
   notifications: NotificationItem[];
@@ -22,6 +24,12 @@ export function Navbar({
   const openMobileSidebar = useShellStore(
     (s) => s.openMobileSidebar
   );
+    const mode = useThemeStore((s) => s.mode);
+    const toggleTheme = useThemeStore((s) => s.toggle);
+
+  const { i18n } = useTranslation();
+
+  let lang = i18n.language;
 
   return (
     <header className="flex h-16 items-center gap-4 border-b border-hairline bg-panel px-4 lg:px-6">
@@ -42,18 +50,6 @@ export function Navbar({
 
       <div className="flex-1" />
 
-      {/* Desktop Search */}
-      <button
-        type="button"
-        onClick={onSearchFocus}
-        className="hidden items-center gap-2 rounded-md border border-hairline bg-sunken px-3 py-2 text-[0.8125rem] text-ink-tertiary hover:text-ink-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-synapse sm:flex sm:w-64"
-      >
-        <Search className="h-4 w-4" aria-hidden="true" />
-        <span className="flex-1 text-start">Search...</span>
-        <kbd className="rounded border border-hairline bg-panel px-1.5 py-0.5 font-mono text-[0.6875rem]">
-          Ctrl K
-        </kbd>
-      </button>
 
       {/* Mobile Search */}
       <button
@@ -65,8 +61,32 @@ export function Navbar({
         <Search className="h-4.5 w-4.5" aria-hidden="true" />
       </button>
 
-      <NotificationBell notifications={notifications} />
+
+      <button
+        className="toggle-btn"
+        onClick={toggleTheme}
+        title={mode === 'dark' ? (lang === 'ar' ? 'الوضع الفاتح' : 'Light Mode') : (lang === 'ar' ? 'الوضع الداكن' : 'Dark Mode')}
+        id="theme-toggle-btn"
+        style={{ width: 36, height: 36 }}
+      >
+        {mode === 'dark' ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
+      </button>
+
+      <div className="lang-switch cursor-pointer" onClick={() => {
+        if (lang === 'ar')
+          i18n.changeLanguage('en')
+        else
+          i18n.changeLanguage('ar')
+      }}>
+        <button className={`lang-btn ${lang === 'ar' ? 'active' : ''}`} >ع</button>
+        <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} >EN</button>
+      </div>
+
+      
+
+      {/* <NotificationBell notifications={notifications} /> */}
       <UserMenu />
+
     </header>
   );
 }

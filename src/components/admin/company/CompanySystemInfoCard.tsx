@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Check, Copy } from 'lucide-react';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { handleErrors } from '@/utils/HandleErrors';
 
 interface CompanySystemInfoCardProps {
   id: string;
@@ -22,8 +24,10 @@ export function CompanySystemInfoCard({ id }: CompanySystemInfoCardProps) {
       setCopied(true);
       toast.success(t('company.systemInfo.copied'));
       window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      toast.error(t('company.systemInfo.copyFailed'));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

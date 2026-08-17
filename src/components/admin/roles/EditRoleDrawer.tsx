@@ -12,6 +12,8 @@ import { Drawer } from "../../common/Drawer";
 import { editRoleSchema, type EditRoleFormValues } from "../../../schemas/roles.schema";
 import { useUpdateRole } from "../../../hooks/useRoleMutations";
 import type { RoleResponse } from "../../../types/roles.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface EditRoleDrawerProps {
   role: RoleResponse | null;
@@ -40,8 +42,10 @@ export function EditRoleDrawer({ role, open, onClose }: EditRoleDrawerProps) {
       await updateRole.mutateAsync(values);
       toast.success(t("roles.toasts.updated"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

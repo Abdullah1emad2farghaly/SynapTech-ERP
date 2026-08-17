@@ -44,8 +44,6 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "categories", label: "Categories", to: "inventory/categories" },
       { id: "products", label: "Products", to: "inventory/products" },
       { id: "stock", label: "Stock", to: "inventory/stock" },
-      { id: "newMovment", label: "New Movement", to: "inventory/new-movement" },
-
     ],
   },
   {

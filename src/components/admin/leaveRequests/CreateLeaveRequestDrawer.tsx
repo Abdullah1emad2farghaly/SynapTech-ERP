@@ -75,7 +75,6 @@ export function CreateLeaveRequestDrawer({
       if(axios.isAxiosError(error)){
         console.log(error.response?.data)
       }
-      toast.error(t("common.errors.actionFailed"));
     }
   });
 

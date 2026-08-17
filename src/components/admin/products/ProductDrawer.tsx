@@ -119,8 +119,6 @@ export function ProductDrawer({
       if(axios.isAxiosError(error)){
         console.log(error.response?.data.errors)
         handleErrors(error.response?.data.errors)
-      }else{
-        console.log(error)
       }
     }
   }

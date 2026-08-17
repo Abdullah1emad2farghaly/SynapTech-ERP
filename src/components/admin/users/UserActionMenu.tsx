@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { MoreVertical, UserCog, UserX, UserCheck, Trash2 } from "lucide-react";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { User } from "@/types/users.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export interface UserActionMenuProps {
   userId: string;
@@ -44,8 +46,10 @@ export function UserActionMenu({
     try {
       await onSetActive(isActive);
       toast.success(t("users.toast.activated", { name: userName }));
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   }
 
@@ -71,8 +75,10 @@ export function UserActionMenu({
         toast.success(t("users.toast.deleted", { name: userName }));
       }
       setConfirmState(null);
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     } finally {
       setIsSubmitting(false);
     }

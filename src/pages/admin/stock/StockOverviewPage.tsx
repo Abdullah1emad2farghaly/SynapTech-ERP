@@ -16,7 +16,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import { RefreshCw, Search } from "lucide-react";
+import { Plus, RefreshCw, Search } from "lucide-react";
 import { StockSummaryRow } from "../../../components/admin/stock/StockSummaryRow";
 import { StockCompositionStatus } from "../../../components/admin/stock/StockCompositionStatus";
 import {
@@ -209,6 +209,16 @@ export function StockOverviewPage() {
               </option>
             ))}
           </select>
+          <button
+            type="button"
+            onClick={() => navigate('new-movement')}
+            className="flex h-10 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white transition-colors duration-150 ease-out hover:bg-[var(--signal-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40"
+          >
+            <Plus size={16} />
+            <span className="hidden sm:inline">
+              {t("stock.new-movement")}
+            </span>
+          </button>
         </div>
       </div>
 

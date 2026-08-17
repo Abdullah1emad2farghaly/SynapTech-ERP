@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import { ConfirmationDialog } from "../../common/ConfirmationDialog";
 import { useDeleteRole } from "../../../hooks/useRoleMutations";
 import type { RoleResponse } from "../../../types/roles.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface DeleteRoleDialogProps {
   role: RoleResponse | null;
@@ -26,8 +28,10 @@ export function DeleteRoleDialog({
       await deleteRole.mutateAsync(role.id);
       toast.success(t("roles.toasts.deleted"));
       onClose();
-    } catch {
-      toast.error(t("common.errors.actionFailed"));
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
     }
   };
 

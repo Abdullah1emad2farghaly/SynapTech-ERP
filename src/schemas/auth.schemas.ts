@@ -34,10 +34,6 @@ export type RegisterFormValues = z.infer<typeof registerSchema>;
 export const resetPasswordSchema = z
   .object({
     password,
-    confirmPassword: z.string().min(1, "validation.confirmPasswordRequired"),
   })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "validation.passwordsDoNotMatch",
-    path: ["confirmPassword"],
-  });
+ 
 export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;

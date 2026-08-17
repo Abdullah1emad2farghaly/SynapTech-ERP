@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { LogOut, Moon, Sun, User } from "lucide-react";
 import { Avatar } from "@/components/admin/hr/Avatar";
-import { LanguageSwitcher } from "@/components/admin/auth/LanguageSwitcher";
 import { useThemeStore } from "@/store/themeStore";
 import { useAuthStore } from "@/store/authStore";
 import { ROUTES } from "@/constants/routes";
@@ -13,10 +12,15 @@ export function UserMenu() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const user = useAuthStore((s) => s.user);
+  const user: {
+    userId: string;
+    email: string;
+    fullName: string;
+    role: string;
+    accessToken: string;
+    refreshToken: string;
+  } = JSON.parse( window.localStorage.getItem('currentUser') || "") || "";
   const clearSession = useAuthStore((s) => s.clearSession);
-  const mode = useThemeStore((s) => s.mode);
-  const toggleTheme = useThemeStore((s) => s.toggle);
 
   useEffect(() => {
     function onClickOutside(event: MouseEvent) {
@@ -58,30 +62,8 @@ export function UserMenu() {
           </div>
           <div className="my-1 border-t border-hairline" />
 
-          <button
-            role="menuitem"
-            type="button"
-            className="flex w-full items-center gap-2.5 px-3.5 py-2 text-start text-[0.8125rem] text-ink-secondary hover:bg-sunken hover:text-ink-primary"
-          >
-            <User className="h-4 w-4" aria-hidden="true" />
-            Profile
-          </button>
-
-          <button
-            role="menuitem"
-            type="button"
-            onClick={toggleTheme}
-            className="flex w-full items-center gap-2.5 px-3.5 py-2 text-start text-[0.8125rem] text-ink-secondary hover:bg-sunken hover:text-ink-primary"
-          >
-            {mode === "dark" ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
-            {mode === "dark" ? t("common.light") : t("common.dark")}
-          </button>
-
-          <div className="px-3.5 py-2">
-            <LanguageSwitcher />
-          </div>
-
-          <div className="my-1 border-t border-hairline" />
+          
+          
 
           <button
             role="menuitem"
