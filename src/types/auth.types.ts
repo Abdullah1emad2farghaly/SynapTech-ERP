@@ -10,7 +10,7 @@ export interface ForgotPasswordPayload {
 
 export interface ResetPasswordPayload {
   code: string;
-  password: string;
+  newPassword: string;
   email: string;
 }
 

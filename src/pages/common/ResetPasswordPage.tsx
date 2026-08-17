@@ -18,7 +18,6 @@ export default function ResetPasswordPage() {
   const email = searchParams.get("email") ?? "";
   const [isExpired, setIsExpired] = useState(false);
 
-  console.log(code)
 
   return (
     <AuthLayout tagline="Almost there.">

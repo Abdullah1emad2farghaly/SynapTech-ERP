@@ -13,6 +13,8 @@ import { resetPasswordSchema, type ResetPasswordFormValues } from "@/schemas/aut
 import { useResetPassword } from "@/hooks/useAuth";
 import { scorePasswordStrength } from "@/utils/passwordStrength";
 import { ROUTES } from "@/constants/routes";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 const REDIRECT_SECONDS = 3;
 
@@ -48,10 +50,15 @@ export function ResetPasswordForm({ email, code, setIsExpired }: { email: string
 
   const submit = (values: ResetPasswordFormValues) => {
     resetPassword.mutate(
-      { email, password: values.password, code },
+      { email, newPassword: values.password, code },
       { 
         onSuccess: () => setSucceeded(true),
-        onError: () => setIsExpired()
+        onError: (error) => {
+          if(axios.isAxiosError(error)){
+            handleErrors(error.response?.data.errors)
+          }
+          setIsExpired();
+        }
       },
     );
   };

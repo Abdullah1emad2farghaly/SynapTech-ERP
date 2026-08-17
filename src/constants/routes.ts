@@ -1,5 +1,5 @@
 export const ROUTES = {
-  LOGIN: "/login",
+  LOGIN: "/",
   REGISTER: "/register",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/auth/forgetPassword",
