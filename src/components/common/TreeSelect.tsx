@@ -110,7 +110,7 @@ export function TreeSelect({
 
       <div
         role="listbox"
-        className="max-h-64 overflow-y-auto rounded-[10px] border border-[var(--hairline)]"
+        className="max-h-40 overflow-y-auto rounded-[10px] border border-[var(--hairline)]"
       >
         {!query.trim() && (
           <label
@@ -168,13 +168,7 @@ export function TreeSelect({
   );
 }
 
-/**
- * Utility for callers: given the full flat department list and the id of
- * the department being moved/edited, returns the set of ids to exclude
- * (itself + every descendant) so a circular hierarchy can never be
- * selected. Kept here since it's tightly coupled to TreeSelectNode shape,
- * though it contains no Department-specific naming.
- */
+
 export function getSelfAndDescendantIds(
   nodes: TreeSelectNode[],
   rootId: string,

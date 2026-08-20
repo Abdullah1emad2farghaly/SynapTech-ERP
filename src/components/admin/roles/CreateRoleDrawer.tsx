@@ -17,6 +17,7 @@ import { usePermissionsCatalog } from "../../../hooks/useRoles";
 import { useCreateRole } from "../../../hooks/useRoleMutations";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 interface CreateRoleDrawerProps {
   open: boolean;
@@ -110,6 +111,7 @@ export function CreateRoleDrawer({
           <div>
             <label className="mb-1 block text-sm text-[--ink-secondary]">
               {t("roles.fields.description")}
+              <Optional/>
             </label>
             <textarea
               {...register("description")}

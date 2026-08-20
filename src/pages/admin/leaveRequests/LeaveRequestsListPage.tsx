@@ -22,6 +22,7 @@ import {
 import { Drawer } from "../../../components/common/Drawer";
 import { ErrorState } from "../../../components/common/ErrorState";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function LeaveRequestsListPage() {
   const { t } = useTranslation();
@@ -35,6 +36,8 @@ export function LeaveRequestsListPage() {
   const [filters, setFilters] = useState<LeaveRequestFiltersState>(EMPTY_LEAVE_REQUEST_FILTERS);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  
+
 
   const [approveTarget, setApproveTarget] = useState<LeaveRequestResponse | null>(null);
   const [rejectTarget, setRejectTarget] = useState<LeaveRequestResponse | null>(null);
@@ -87,6 +90,7 @@ export function LeaveRequestsListPage() {
         activeFilterCount={countActiveFilters(filters)}
         onOpenAdvancedFilters={() => setIsFiltersOpen(true)}
         onCreateClick={() => setIsCreateOpen(true)}
+
       />
 
       {/* Desktop table */}

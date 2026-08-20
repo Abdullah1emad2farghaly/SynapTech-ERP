@@ -20,6 +20,7 @@ import {
   REASON_SOFT_LIMIT,
 } from "../../../schemas/leaveRequest.schema";
 import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface CreateLeaveRequestDrawerProps {
   isOpen: boolean;
@@ -73,7 +74,7 @@ export function CreateLeaveRequestDrawer({
       onClose();
     } catch (error) {
       if(axios.isAxiosError(error)){
-        console.log(error.response?.data)
+        handleErrors(error.response?.data.errors)
       }
     }
   });

@@ -1,16 +1,4 @@
-// src/pages/admin/branches/BranchesPage.tsx
-//
-// The module's only page. Owns local state (search, status filter, sort,
-// drawer targets) and cross-references the already-loaded Departments and
-// Users data to compute per-branch Delete-safety flags and Details counts
-// — no dedicated backend aggregate exists for either, so this is done
-// client-side, same tradeoff flagged for Departments' "hasAssignedUsers".
-//
-// ASSUMPTION: hook names (useBranchesList, useCreateBranch,
-// useUpdateBranch, useDeleteBranch) inferred per the project's stated
-// convention, kept distinct from the lookup-only useBranches() built for
-// Users/Departments' dropdowns (same naming-collision note as
-// useDepartments.crud.ts).
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,12 +8,7 @@ import { BranchesKpiRow } from "../../../components/admin/branches/BranchesKpiRo
 import { BranchesTable, type BranchRow } from "../../../components/admin/branches/BranchesTable";
 import { BranchActionMenu } from "../../../components/admin/branches/BranchActionMenu";
 import { BranchDrawer, type BranchFormValues } from "../../../components/admin/branches/BranchDrawer";
-// BranchDetailsDrawer removed — Branch Details is now a dedicated page
-// at /organization/branches/:id (see BranchDetailsPage.tsx). Row click
-// and the "View Details" row action both navigate there instead of
-// opening a drawer.
 
-// Replace with the project's actual hooks.
 import {
   useBranchesList,
   useCreateBranch,
@@ -34,6 +17,9 @@ import {
 } from "../../../hooks/useBranches.crud";
 import { useDepartmentsList } from "../../../hooks/useDepartments.crud";
 import { useUsers } from "../../../hooks/useUsers";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import toast from "react-hot-toast";
 
 type DrawerTarget =
   | { kind: "create" }
@@ -152,8 +138,10 @@ export function BranchesPage() {
   }
 
   async function handleDrawerSubmit(values: BranchFormValues, id?: string) {
-    if (id) {
+    try {
+      if (id) {
       await updateMutation.mutateAsync({ id, ...values });
+      toast.success(t("branches.toast.updated"))
     } else {
       await createMutation.mutateAsync({
         name: values.name,
@@ -162,9 +150,17 @@ export function BranchesPage() {
         phone: values.phone,
         isMain: values.isMain,
       });
+      toast.success(t("branches.toast.created"))
     }
     setDrawerTarget(null);
     refetch();
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors);
+        console.log(error)
+      }
+      
+    }
   }
 
   function renderRowActions(row: BranchRow) {

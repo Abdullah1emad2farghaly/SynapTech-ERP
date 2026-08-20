@@ -29,7 +29,7 @@ export function SupplierDeleteDialog({
     try {
       await deleteSupplier.mutateAsync(supplier.id);
       toast.success(t("suppliers.toasts.deleted"));
-      navigate("/inventory/suppliers");
+      navigate("/purchasing/suppliers");
       onClose();
     } catch (error) {
       if(axios.isAxiosError(error)){

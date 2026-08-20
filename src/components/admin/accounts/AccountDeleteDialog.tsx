@@ -23,7 +23,7 @@ export interface AccountDeleteDialogProps {
   /** true if totalDebit, totalCredit, or balance is non-zero — determines which flow renders. */
   requiresTypedConfirmation: boolean;
   isSubmitting?: boolean;
-  onConfirm: () => Promise<void> | void;
+  onConfirm: (name: string) => Promise<void> | void;
   onCancel: () => void;
 }
 
@@ -55,6 +55,7 @@ export function AccountDeleteDialog({
         isSubmitting={isSubmitting}
         onConfirm={onConfirm}
         onCancel={onCancel}
+        accountName={accountName}
       />
     );
   }
@@ -112,7 +113,7 @@ export function AccountDeleteDialog({
           </button>
           <button
             type="button"
-            onClick={() => onConfirm()}
+            onClick={() => onConfirm(accountName)}
             disabled={!isMatch || isSubmitting}
             className="rounded-[10px] bg-[var(--error)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--error)]/90 disabled:cursor-not-allowed disabled:opacity-50"
           >

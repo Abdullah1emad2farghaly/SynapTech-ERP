@@ -12,6 +12,7 @@ import { JournalLinesTable } from "../../../components/admin/journal-entries/Jou
 import { PostJournalDialog } from "../../../components/admin/journal-entries/PostJournalDialog";
 import { ReverseJournalDialog } from "../../../components/admin/journal-entries/ReverseJournalDialog";
 import { DeleteJournalDialog } from "../../../components/admin/journal-entries/DeleteJournalDialog";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function JournalEntryDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +23,11 @@ export function JournalEntryDetailsPage() {
   const [postOpen, setPostOpen] = useState(false);
   const [reverseOpen, setReverseOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const canPostAccess = hasAnyPermission(["accounting.journal.post"]);
+  const canReverseAccess = hasAnyPermission(["accounting.journal.reverse"]);
+  const canCreateAccess = hasAnyPermission(["accounting.journal.create"]);
+
+
 
   if (isLoading) {
     return (
@@ -76,7 +82,7 @@ export function JournalEntryDetailsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {canPost && (
+          {(canPost && canPostAccess) && (
             <button
               type="button"
               onClick={() => setPostOpen(true)}
@@ -86,7 +92,7 @@ export function JournalEntryDetailsPage() {
               {t("journalEntries.actions.post")}
             </button>
           )}
-          {canReverse && (
+          {(canReverse && canReverseAccess) && (
             <button
               type="button"
               onClick={() => setReverseOpen(true)}
@@ -104,7 +110,7 @@ export function JournalEntryDetailsPage() {
             <Printer size={15} />
             {t("journalEntries.actions.print")}
           </button>
-          {canDelete && (
+          {(canDelete && canCreateAccess) && (
             <button
               type="button"
               onClick={() => setDeleteOpen(true)}

@@ -1,15 +1,4 @@
-// src/pages/admin/users/UserDetailsPage.tsx
-//
-// Single-record read view with inline Edit mode, matching PUT /api/Users/{id}
-// exactly (Full Name, Branch, Department, Active Status). Email is never
-// editable and Roles never appear in edit mode — both stay visually locked
-// even while the rest of the page is editing, so the boundary between
-// "Update User" and "Assign Roles" (its own drawer, its own endpoint)
-// is never ambiguous. Sections ordered per the module design doc: Basic
-// Information, Contact Information, Organization, Roles, Status.
-//
-// ASSUMPTION: hook names (useUser, useUpdateUser) inferred per the
-// project's stated convention. Wire to your actual hooks/useUsers.ts.
+
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,6 +15,9 @@ import { useBranches } from "../../../hooks/useBranches";
 import { useDepartments } from "../../../hooks/useDepartments";
 import { useRoles } from "../../../hooks/useRoles";
 import { User } from "@/types/users.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import toast from "react-hot-toast";
 
 interface EditFormState {
   fullName: string;
@@ -42,6 +34,7 @@ export function UserDetailsPage() {
   const { data: branchOptions = [] } = useBranches();
   const { data: departmentOptions = [] } = useDepartments();
   const { data: roleOptions = [] } = useRoles();
+
   // console.log(user)
   const updateUserMutation = useUpdateUser();
   const deleteUserMutation = useDeleteUser();
@@ -50,6 +43,7 @@ export function UserDetailsPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [roleDrawerOpen, setRoleDrawerOpen] = useState(false);
   const [form, setForm] = useState<EditFormState | null>(null);
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     if (user && !isEditing) {
@@ -101,16 +95,30 @@ export function UserDetailsPage() {
   }
 
   async function handleSaveEdit() {
-    if (!form) return;
-    await updateUserMutation.mutateAsync({
-      id: user ? user.id : '',
-      fullName: form.fullName,
-      branchId: form.branchId,
-      departmentId: form.departmentId,
-      isActive: user?.isActive,
-    });
-    setIsEditing(false);
-    refetch();
+    setLoading(true)
+    try {
+      if (!form) return;
+      await updateUserMutation.mutateAsync({
+        id: user ? user.id : '',
+        fullName: form.fullName,
+        branchId: form.branchId,
+        departmentId: form.departmentId,
+        isActive: user?.isActive,
+      }, {
+        onSuccess: () => toast.success(t("users.toast.updated", {
+          name: form.fullName
+        })),
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            handleErrors(error.response?.data.errors)
+          }
+        }
+      });
+      setIsEditing(false);
+      refetch();
+    } finally {
+      setLoading(false)
+    }
   }
 
   function handleCancelEdit() {
@@ -282,9 +290,12 @@ export function UserDetailsPage() {
           <button
             type="button"
             onClick={handleSaveEdit}
-            className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
+            disabled={loading}
+            className="rounded-[10px] disabled:cursor-not-allowed bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
           >
-            {t("users.actions.save")}
+            {
+              loading ? t("common.actions.saving") : t("users.actions.save")
+            }
           </button>
         </div>
       )}

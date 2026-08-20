@@ -3,8 +3,10 @@
 import { CalendarX2, Check, Eye, MoreVertical, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { getAvailableLeaveRequestActions } from "../../../utils/leaveRequestActions";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
+import { hasAnyPermission } from "@/utils/permissions";
 
 interface LeaveRequestActionMenuProps {
   request: LeaveRequestResponse;
@@ -22,8 +24,20 @@ export function LeaveRequestActionMenu({
   onCancel,
 }: LeaveRequestActionMenuProps) {
   const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
-  const actions = getAvailableLeaveRequestActions(request.status);
+
+  const canSubmitAccess = hasAnyPermission([
+    "hr.leaves.request",
+  ]);
+
+  const canApproveAccess = hasAnyPermission([
+    "hr.leaves.approve",
+  ]);
+
+  const actions = getAvailableLeaveRequestActions(
+    request.status,
+  );
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -39,12 +53,19 @@ export function LeaveRequestActionMenu({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside,
+    );
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside,
+      );
     };
   }, [isOpen]);
+
 
   let items: Array<{
     key: string;
@@ -54,11 +75,25 @@ export function LeaveRequestActionMenu({
     tone?: "default" | "destructive";
   }> = [];
 
+
   if (actions.includes("view")) {
-    items.push({ key: "view", labelKey: "common.actions.viewDetails", icon: Eye, onSelect: () => onView(request) });
+    items.push({
+      key: "view",
+      labelKey: "common.actions.viewDetails",
+      icon: Eye,
+      onSelect: () => onView(request),
+    });
   }
 
-  if (actions.includes("approve")) {
+
+  /**
+   * Approve / Reject
+   * Requires hr.leaves.approve
+   */
+  if (
+    canApproveAccess &&
+    actions.includes("approve")
+  ) {
     items.push({
       key: "approve",
       labelKey: "leaveRequests.actions.approve",
@@ -66,7 +101,12 @@ export function LeaveRequestActionMenu({
       onSelect: () => onApprove(request),
     });
   }
-  if (actions.includes("reject" ) ) {
+
+
+  if (
+    canApproveAccess &&
+    actions.includes("reject")
+  ) {
     items.push({
       key: "reject",
       labelKey: "leaveRequests.actions.reject",
@@ -75,7 +115,16 @@ export function LeaveRequestActionMenu({
       tone: "destructive",
     });
   }
-  if (actions.includes("cancel" ) ) {
+
+
+  /**
+   * Cancel own request
+   * Requires hr.leaves.request
+   */
+  if (
+    canSubmitAccess &&
+    actions.includes("cancel")
+  ) {
     items.push({
       key: "cancel",
       labelKey: "leaveRequests.actions.cancel",
@@ -85,8 +134,26 @@ export function LeaveRequestActionMenu({
     });
   }
 
-  if(request.status === "Approved" || request.status === "Rejected" || request.status === "Cancelled")
-    items = [{ key: "view", labelKey: "common.actions.viewDetails", icon: Eye, onSelect: () => onView(request) }]
+
+  /**
+   * After final states only show details.
+   */
+  if (
+    request.status === "Approved" ||
+    request.status === "Rejected" ||
+    request.status === "Cancelled"
+  ) {
+    items = [
+      {
+        key: "view",
+        labelKey: "common.actions.viewDetails",
+        icon: Eye,
+        onSelect: () => onView(request),
+      },
+    ];
+  }
+
+
   return (
     <div className="relative">
       <button
@@ -97,10 +164,13 @@ export function LeaveRequestActionMenu({
         }}
         aria-label={t("common.actions.moreActions")}
         className="p-1.5 rounded-md hover:opacity-80"
-        style={{ color: "var(--ink-secondary)" }}
+        style={{
+          color: "var(--ink-secondary)",
+        }}
       >
         <MoreVertical size={16} />
       </button>
+
 
       {isOpen && (
         <div
@@ -114,7 +184,9 @@ export function LeaveRequestActionMenu({
         >
           {items.map((item) => {
             const Icon = item.icon;
-            const isDestructive = item.tone === "destructive";
+
+            const isDestructive =
+              item.tone === "destructive";
 
             return (
               <button

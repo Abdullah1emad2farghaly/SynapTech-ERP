@@ -1,24 +1,4 @@
-// src/pages/admin/accounts/AccountsListPage.tsx
-//
-// Wires AccountsTree + AccountPreviewPanel + AccountsKpiRow + toolbar
-// together. Two-column desktop layout (tree left, preview right),
-// stacks on mobile.
-//
-// UPDATED: Create is now an AccountDrawer opened from this page, not a
-// navigation to /accounting/accounts/new — reversing the module design
-// doc's original "pages, not drawers" call for Create specifically, per
-// later direction. Edit still navigates to /accounting/accounts/:id
-// (inline edit mode there) — that part is unchanged, since Edit's field
-// set (code/name/isActive) is small enough that inline-on-Details still
-// makes more sense than either a drawer or a route.
-//
-// Delete-blocked (has children) is computed client-side from the full
-// loaded list, same technique as Departments' childIdsByParent. The
-// typed-confirmation-required check fetches the target account's
-// balance on demand when the delete dialog opens — not eagerly for
-// every row, consistent with the rest of this module's balance rules.
-//
-// ASSUMPTION: hook names per this project's established convention.
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -45,6 +25,7 @@ import {
 import { AccountTypes } from "@/services/api/accounts.crud.api";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function AccountsListPage() {
   const { t } = useTranslation();
@@ -64,6 +45,7 @@ export function AccountsListPage() {
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
   const { data: accountTypes = [] } = useAccountTypes();
+  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"]);
 
   const accountById = useMemo(() => {
     const map = new Map<string, (typeof accounts)[number]>();
@@ -85,9 +67,7 @@ export function AccountsListPage() {
     const counts = new Map<string, number>();
     accountTypes?.forEach((type) => counts.set(type.value, 0)); // ensure every known type shows a card, even at 0
     accounts.forEach((a) => counts.set(a.accountType, (counts.get(a.accountType) ?? 0) + 1));
-    // Fixed order (matches ACCOUNT_TYPES) rather than sorted by frequency —
-    // now that the type set is known and stable, a stable KPI order reads
-    // better than one that reshuffles as data changes.
+
     return accountTypes.map((type) => ({ accountType: type.value, count: counts.get(type.value) ?? 0 }));
   }, [accounts]);
 
@@ -114,7 +94,7 @@ export function AccountsListPage() {
     () => ({
       total: accounts.length,
       active: accounts.filter((a) => a.isActive).length,
-      inactive: accounts.filter((a) => !a.isActive).length, 
+      inactive: accounts.filter((a) => !a.isActive).length,
       root: accounts.filter((a) => !a.parentAccountId).length,
       child: accounts.filter((a) => !!a.parentAccountId).length,
     }),
@@ -124,15 +104,15 @@ export function AccountsListPage() {
   const selectedAccount = selectedId ? accountById.get(selectedId) : undefined;
   const previewData: AccountPreviewData | null = selectedAccount
     ? {
-        id: selectedAccount.id,
-        code: selectedAccount.code,
-        name: selectedAccount.name,
-        accountType: selectedAccount.accountType,
-        isActive: selectedAccount.isActive,
-        parentAccountName: selectedAccount.parentAccountId
-          ? (accountById.get(selectedAccount.parentAccountId)?.name ?? null)
-          : null,
-      }
+      id: selectedAccount.id,
+      code: selectedAccount.code,
+      name: selectedAccount.name,
+      accountType: selectedAccount.accountType,
+      isActive: selectedAccount.isActive,
+      parentAccountName: selectedAccount.parentAccountId
+        ? (accountById.get(selectedAccount.parentAccountId)?.name ?? null)
+        : null,
+    }
     : null;
 
   const deleteTarget = deleteTargetId ? accountById.get(deleteTargetId) : undefined;
@@ -154,22 +134,23 @@ export function AccountsListPage() {
     });
     refetch();
   }
-
-  async function handleDeleteConfirm() {
+  // ! ------------------------------------
+  async function handleDeleteConfirm(name: string) {
     if (!deleteTargetId) return;
-    
     setIsDeleting(true);
     try {
       await deleteMutation.mutateAsync(deleteTargetId);
       if (selectedId === deleteTargetId) setSelectedId(null);
       setDeleteTargetId(null);
+      toast.success(t("accounts.success.deleted", {
+        name: name
+      }))
       refetch();
-    } catch(err){
-      if(axios.isAxiosError(err)){
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
         handleErrors(err.response?.data.errors)
       }
     } finally {
-      
       setIsDeleting(false);
     }
   }
@@ -189,11 +170,20 @@ export function AccountsListPage() {
     accountType: string;
     parentAccountId: string | null;
   }) {
-    await createMutation.mutateAsync(values);
-    setIsCreateOpen(false);
-    refetch();
+    try {
+      await createMutation.mutateAsync(values);
+      setIsCreateOpen(false);
+      refetch();
+      toast.success(t("accounts.success.created", {
+        name: values.name
+      }))
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors)
+      }
+    }
   }
- 
+
 
   return (
     <div className="flex flex-col gap-4 p-2 md:p-6 py-6 ">
@@ -206,13 +196,17 @@ export function AccountsListPage() {
             {t("accounts.list.subtitleCount", { count: kpis.total })}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsCreateOpen(true)}
-          className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
-        >
-          {t("accounts.list.createAccount")}
-        </button>
+        {
+          canManageAccess && (
+            <button
+              type="button"
+              onClick={() => setIsCreateOpen(true)}
+              className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
+            >
+              {t("accounts.list.createAccount")}
+            </button>
+          )
+        }
       </div>
 
       <AccountsKpiRow
@@ -304,6 +298,7 @@ export function AccountsListPage() {
           onEdit={(id) => navigate(`/accounting/accounts/${id}`)}
           onSetActive={handleSetActive}
           onDelete={handleDeleteRequest}
+          canManageAccess={canManageAccess}
         />
       </div>
 
@@ -313,7 +308,7 @@ export function AccountsListPage() {
         accountCode={deleteTarget?.code ?? ""}
         requiresTypedConfirmation={deleteRequiresTypedConfirmation}
         isSubmitting={isDeleting}
-        onConfirm={handleDeleteConfirm}
+        onConfirm={(name) => handleDeleteConfirm(name)}
         onCancel={() => setDeleteTargetId(null)}
       />
 

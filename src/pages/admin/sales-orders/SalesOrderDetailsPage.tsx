@@ -15,6 +15,7 @@ import {
   type SalesOrderDialogAction,
 } from "../../../components/admin/sales-orders/SalesOrderActionDialog";
 import { canPerform } from "../../../utils/salesOrderWorkflow";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function SalesOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +23,18 @@ export function SalesOrderDetailsPage() {
   const { t } = useTranslation();
   const { data: order, isLoading } = useSalesOrder(id);
   const [dialogAction, setDialogAction] = useState<SalesOrderDialogAction | null>(null);
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"])
+
+  const access = {
+    canCancelAccess,
+    canShipAccess,
+    canApproveAccess,
+    canCreateAccess
+  }
+
 
   if (isLoading) {
     return (
@@ -68,7 +81,7 @@ export function SalesOrderDetailsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {canPerform("edit", order.status) && (
+          {canPerform("edit", order.status, access) && (
             <button
               type="button"
               onClick={() => navigate(`/sales/sales-orders/${order.id}/edit`)}
@@ -77,17 +90,17 @@ export function SalesOrderDetailsPage() {
               {t("salesOrders.actions.edit")}
             </button>
           )}
-          {canPerform("submit", order.status) && (
+          {canPerform("submit", order.status, access) && (
             <button type="button" onClick={() => setDialogAction("submit")} className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]">
               {t("salesOrders.actions.submit")}
             </button>
           )}
-          {canPerform("approve", order.status) && (
+          {(canPerform("approve", order.status, access))&& (
             <button type="button" onClick={() => setDialogAction("approve")} className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]">
               {t("salesOrders.actions.approve")}
             </button>
           )}
-          {canPerform("ship", order.status) && (
+          {(canPerform("ship", order.status, access)) && (
             <button
               type="button"
               onClick={() => navigate(`/sales/sales-orders/${order.id}/ship`)}
@@ -100,7 +113,7 @@ export function SalesOrderDetailsPage() {
             <Printer size={15} />
             {t("salesOrders.actions.print")}
           </button>
-          {canPerform("cancel", order.status) && (
+          {(canPerform("cancel", order.status, access)) && (
             <button
               type="button"
               onClick={() => setDialogAction("cancel")}
@@ -157,14 +170,14 @@ export function SalesOrderDetailsPage() {
         <LineItemsReadOnlyTable lines={order.lines} />
       </div>
 
-      <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
+      {/* <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
         <Clock size={16} />
         {t("salesOrders.details.activityComingSoon")}
       </div>
       <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
         <ShieldQuestion size={16} />
         {t("salesOrders.details.auditComingSoon")}
-      </div>
+      </div> */}
 
       <SalesOrderActionDialog action={dialogAction} order={order} onClose={() => setDialogAction(null)} />
     </div>

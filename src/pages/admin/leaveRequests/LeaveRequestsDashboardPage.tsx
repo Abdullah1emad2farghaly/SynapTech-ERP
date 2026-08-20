@@ -18,6 +18,7 @@ import { ErrorState } from "../../../components/common/ErrorState";
 import { Skeleton } from "../../../components/common/Skeleton";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function LeaveRequestsDashboardPage() {
   const { t } = useTranslation();
@@ -26,13 +27,15 @@ export function LeaveRequestsDashboardPage() {
   const approveMutation = useApproveLeaveRequest()
   const cancelMutation = useCancelLeaveRequest()
   const rejectMutation = useRejectLeaveRequest();
-  
+
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [approveTarget, setApproveTarget] = useState<LeaveRequestResponse | null>(null);
   const [rejectTarget, setRejectTarget] = useState<LeaveRequestResponse | null>(null);
   const [cancelTarget, setCancelTarget] = useState<LeaveRequestResponse | null>(null);
 
+  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"]);
   
+
   const pendingRequests = useMemo(() => {
     if (!requests) return [];
     return requests
@@ -56,15 +59,15 @@ export function LeaveRequestsDashboardPage() {
 
   const handleSubmit = (id: string, type: string) => {
     try {
-      if(type === 'approve'){
+      if (type === 'approve') {
         approveMutation.mutate(id)
-      }else if(type === 'cancel'){
+      } else if (type === 'cancel') {
         cancelMutation.mutate(id);
-      }else {
+      } else {
         rejectMutation.mutate(id);
       }
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors);
       }
     }
@@ -81,15 +84,19 @@ export function LeaveRequestsDashboardPage() {
             {t("leaveRequests.dashboard.subtitle")}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsCreateOpen(true)}
-          className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
-          style={{ backgroundColor: "var(--signal)", color: "var(--on-signal)" }}
-        >
-          <Plus size={16} />
-          {t("leaveRequests.actions.create")}
-        </button>
+        {
+          canSubmitAccess && (
+            <button
+              type="button"
+              onClick={() => setIsCreateOpen(true)}
+              className="inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
+              style={{ backgroundColor: "var(--signal)", color: "var(--on-signal)" }}
+            >
+              <Plus size={16} />
+              {t("leaveRequests.actions.create")}
+            </button>
+          )
+        }
       </div>
 
       {isLoading || !requests ? (
@@ -106,15 +113,20 @@ export function LeaveRequestsDashboardPage() {
           <p className="text-sm mt-1" style={{ color: "var(--ink-tertiary)" }}>
             {t("leaveRequests.empty.noneDescription")}
           </p>
-          <button
-            type="button"
-            onClick={() => setIsCreateOpen(true)}
-            className="mt-4 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
-            style={{ backgroundColor: "var(--signal)", color: "var(--on-signal)" }}
-          >
-            <Plus size={16} />
-            {t("leaveRequests.actions.create")}
-          </button>
+          {
+            canSubmitAccess && (
+              <button
+                type="button"
+                onClick={() => setIsCreateOpen(true)}
+                className="mt-4 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium"
+                style={{ backgroundColor: "var(--signal)", color: "var(--on-signal)" }}
+              >
+                <Plus size={16} />
+                {t("leaveRequests.actions.create")}
+              </button>
+            )
+          }
+
         </div>
       ) : (
         <>

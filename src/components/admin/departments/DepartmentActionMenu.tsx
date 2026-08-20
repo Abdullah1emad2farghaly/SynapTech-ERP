@@ -1,13 +1,7 @@
 // src/components/admin/departments/DepartmentActionMenu.tsx
-//
-// Row-level kebab menu: View Details, Edit, Move, Duplicate,
-// Deactivate/Activate, Delete. Same confirmation-dialog conventions as
-// Users' UserActionMenu (Deactivate = dialog, Activate = instant + toast),
-// plus one extra rule Users didn't need: Delete is blocked with an
-// explanation if the department has children or assigned users, since the
-// API doesn't confirm cascade behavior on delete.
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import {
@@ -28,7 +22,6 @@ export interface DepartmentActionMenuProps {
   departmentId: string;
   departmentName: string;
   isActive: boolean;
-  /** Computed by the parent from the full loaded set — see DepartmentsPage. */
   hasChildren: boolean;
   hasAssignedUsers: boolean;
   onViewDetails: (id: string) => void;
@@ -39,7 +32,9 @@ export interface DepartmentActionMenuProps {
   onDelete: (id: string) => Promise<void>;
 }
 
-type ConfirmState = { kind: "deactivate" | "delete" } | null;
+type ConfirmState =
+  | { kind: "deactivate" | "delete" }
+  | null;
 
 export function DepartmentActionMenu({
   departmentId,
@@ -55,10 +50,19 @@ export function DepartmentActionMenu({
   onDelete,
 }: DepartmentActionMenuProps) {
   const { t } = useTranslation();
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [confirmState, setConfirmState] = useState<ConfirmState>(null);
+  const [confirmState, setConfirmState] =
+    useState<ConfirmState>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const [menuPosition, setMenuPosition] = useState({
+    top: 0,
+    left: 0,
+  });
 
   const deleteBlocked = hasChildren || hasAssignedUsers;
 
@@ -66,33 +70,102 @@ export function DepartmentActionMenu({
     setMenuOpen(false);
   }
 
+  function updateMenuPosition() {
+    if (!buttonRef.current || !menuRef.current) return;
+
+    const buttonRect =
+      buttonRef.current.getBoundingClientRect();
+
+    const menuRect =
+      menuRef.current.getBoundingClientRect();
+
+    const spacing = 4;
+    const viewportPadding = 8;
+
+    let top = buttonRect.bottom + spacing;
+
+    let left = buttonRect.right - menuRect.width;
+
+    if (
+      top + menuRect.height >
+      window.innerHeight - viewportPadding
+    ) {
+      top =
+        buttonRect.top -
+        menuRect.height -
+        spacing;
+    }
+
+    if (
+      left + menuRect.width >
+      window.innerWidth - viewportPadding
+    ) {
+      left =
+        window.innerWidth -
+        menuRect.width -
+        viewportPadding;
+    }
+
+    if (left < viewportPadding) {
+      left = viewportPadding;
+    }
+
+    if (top < viewportPadding) {
+      top = viewportPadding;
+    }
+
+    setMenuPosition({
+      top,
+      left,
+    });
+  }
+
   async function handleActivate() {
     closeMenu();
+
     try {
       await onSetActive(departmentId, true);
-      toast.success(t("departments.toast.activated", { name: departmentName }));
+
+      toast.success(
+        t("departments.toast.activated", {
+          name: departmentName,
+        })
+      );
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        handleErrors(error.response?.data.errors)
+        handleErrors(error.response?.data.errors);
       }
     }
   }
 
   async function handleConfirm() {
     if (!confirmState) return;
+
     setIsSubmitting(true);
+
     try {
       if (confirmState.kind === "deactivate") {
         await onSetActive(departmentId, false);
-        toast.success(t("departments.toast.deactivated", { name: departmentName }));
+
+        toast.success(
+          t("departments.toast.deactivated", {
+            name: departmentName,
+          })
+        );
       } else {
         await onDelete(departmentId);
-        toast.success(t("departments.toast.deleted", { name: departmentName }));
+
+        toast.success(
+          t("departments.toast.deleted", {
+            name: departmentName,
+          })
+        );
       }
+
       setConfirmState(null);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        handleErrors(error.response?.data.errors)
+        handleErrors(error.response?.data.errors);
       }
     } finally {
       setIsSubmitting(false);
@@ -101,40 +174,88 @@ export function DepartmentActionMenu({
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+
       if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
+        buttonRef.current?.contains(target) ||
+        menuRef.current?.contains(target)
       ) {
-        setMenuOpen(false);
+        return;
       }
+
+      setMenuOpen(false);
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (menuOpen) {
+      document.addEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+
+      requestAnimationFrame(() => {
+        updateMenuPosition();
+      });
+
+      window.addEventListener(
+        "scroll",
+        updateMenuPosition,
+        true
+      );
+
+      window.addEventListener(
+        "resize",
+        updateMenuPosition
+      );
+    }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+
+      window.removeEventListener(
+        "scroll",
+        updateMenuPosition,
+        true
+      );
+
+      window.removeEventListener(
+        "resize",
+        updateMenuPosition
+      );
     };
-  }, []);
+  }, [menuOpen]);
+    return (
+    <>
+      <div className="relative inline-block text-start">
+        <button
+          ref={buttonRef}
+          type="button"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-haspopup="menu"
+          aria-expanded={menuOpen}
+          aria-label={t("departments.actions.moreActions")}
+          className="flex h-8 w-8 items-center justify-center rounded-[10px] text-[var(--ink-secondary)] transition-colors duration-150 hover:bg-[var(--sunken)] hover:text-[var(--ink-primary)]"
+        >
+          <MoreVertical size={16} />
+        </button>
+      </div>
 
-  return (
-    <div ref={menuRef} className="relative inline-block text-start">
-      <button
-        type="button"
-        onClick={() => setMenuOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={menuOpen}
-        aria-label={t("departments.actions.moreActions")}
-        className="flex h-8 w-8 items-center justify-center rounded-[10px] text-[var(--ink-secondary)] transition-colors duration-150 hover:bg-[var(--sunken)] hover:text-[var(--ink-primary)]"
-      >
-        <MoreVertical size={16} />
-      </button>
-
-      {menuOpen && (
-        <>
-          {/* <div className="fixed inset-0 z-10" onClick={closeMenu} aria-hidden="true" /> */}
+      {menuOpen &&
+        createPortal(
           <div
+            ref={menuRef}
             role="menu"
-            className="absolute end-0 z-20 mt-1 w-52 rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] py-1 shadow-[var(--elevation-1)]"
+            className="fixed z-[9999] w-52 rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] py-1 shadow-[var(--elevation-1)]"
+            style={{
+              top: menuPosition.top,
+              left: menuPosition.left,
+              visibility:
+                menuPosition.top === 0
+                  ? "hidden"
+                  : "visible",
+            }}
           >
             <button
               role="menuitem"
@@ -194,7 +315,9 @@ export function DepartmentActionMenu({
                 type="button"
                 onClick={() => {
                   closeMenu();
-                  setConfirmState({ kind: "deactivate" });
+                  setConfirmState({
+                    kind: "deactivate",
+                  });
                 }}
                 className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
               >
@@ -218,14 +341,23 @@ export function DepartmentActionMenu({
               type="button"
               disabled={deleteBlocked}
               onClick={() => {
+                if (deleteBlocked) return;
+
                 closeMenu();
-                setConfirmState({ kind: "delete" });
+
+                setConfirmState({
+                  kind: "delete",
+                });
               }}
               title={
                 deleteBlocked
                   ? hasChildren
-                    ? t("departments.dialogs.delete.blockedHasChildren")
-                    : t("departments.dialogs.delete.blockedHasUsers")
+                    ? t(
+                        "departments.dialogs.delete.blockedHasChildren"
+                      )
+                    : t(
+                        "departments.dialogs.delete.blockedHasUsers"
+                      )
                   : undefined
               }
               className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm text-[var(--error)] hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
@@ -233,9 +365,9 @@ export function DepartmentActionMenu({
               <Trash2 size={15} />
               {t("departments.actions.delete")}
             </button>
-          </div>
-        </>
-      )}
+          </div>,
+          document.body
+        )}
 
       <ConfirmationDialog
         open={confirmState?.kind === "deactivate"}
@@ -253,13 +385,15 @@ export function DepartmentActionMenu({
         open={confirmState?.kind === "delete"}
         tone="destructive"
         title={t("departments.dialogs.delete.title")}
-        body={t("departments.dialogs.delete.body", { name: departmentName })}
+        body={t("departments.dialogs.delete.body", {
+          name: departmentName,
+        })}
         confirmLabel={t("departments.actions.delete")}
         cancelLabel={t("users.actions.cancel")}
         isSubmitting={isSubmitting}
         onConfirm={handleConfirm}
         onCancel={() => setConfirmState(null)}
       />
-    </div>
+    </>
   );
 }

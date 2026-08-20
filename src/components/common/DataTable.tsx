@@ -198,7 +198,7 @@ export function DataTable<User>({
                     </td>
                   )}
                   {visibleColumns.map((column) => {
-                    // console.log(column.cell(row))
+                    
                     return (
                     <td key={column.id} className="px-4 py-3 text-[var(--ink-primary)]">
                       {column.cell(row)}

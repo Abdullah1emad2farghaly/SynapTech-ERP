@@ -20,6 +20,7 @@ import {
   type SalesOrderDialogAction,
 } from "../../../components/admin/sales-orders/SalesOrderActionDialog";
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function SalesOrdersListPage() {
   const { t } = useTranslation();
@@ -38,6 +39,8 @@ export function SalesOrdersListPage() {
     orders.forEach((o) => { counts[o.status] = (counts[o.status] ?? 0) + 1; });
     return counts;
   }, [orders]);
+
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"]);
 
   const hasActiveFilters =
     search !== "" ||
@@ -110,6 +113,7 @@ export function SalesOrdersListPage() {
         onRefresh={() => refetch()}
         isRefreshing={isFetching}
         onCreate={() => navigate("create")}
+        canCreateAccess={canCreateAccess}
       />
 
       <SalesOrdersFilters
@@ -134,6 +138,7 @@ export function SalesOrdersListPage() {
         onDuplicate={handleDuplicate}
         onBulkCancel={handleBulkCancel}
         onCreate={() => navigate("create")}
+        
       />
 
       <SalesOrderActionDialog

@@ -1,45 +1,4 @@
-// Project path: src/components/admin/employees/EmployeeForm.tsx
-//
-// One shared form component parameterized by `mode: "create" | "edit"` rather
-// than two near-duplicate forms — mirrors DepartmentDrawer/BranchDrawer's
-// Create+Edit-combined pattern, just as a page instead of a drawer (the
-// brief explicitly asks for full Add/Edit pages, and the field count here
-// exceeds what a Drawer comfortably holds — same reasoning that gave
-// Purchase Orders a full page instead of a drawer).
-//
-// Employee Code: editable input on create, read-only display on edit
-// (UpdateEmployeeRequest has no employeeCode field — never submitted).
-//
-// Manager select reuses the shared TreeSelect component in flat mode (every
-// node's parentId is null) rather than building a new picker — it already
-// gives searchable single-select behavior, which matters once an org has
-// more than a handful of employees. Department/Branch use plain selects,
-// consistent with their existing lightweight lookup-hook usage elsewhere in
-// the project.
-//
-// Branch/Department cross-filtering: a Department belongs to exactly one
-// Branch (branchId on the Department record — confirmed by the Departments
-// module's own API surface). So this is NOT a many-to-many filter — it's a
-// single source of truth (Department → its one Branch) applied in two
-// directions:
-//   - Pick a Branch first → Department dropdown narrows to only departments
-//     whose branchId matches (departments with no branchId stay visible,
-//     since they aren't scoped to any branch).
-//   - Pick a Department first → Branch dropdown narrows to that department's
-//     one owning branch, AND the branch field auto-syncs to it (there's only
-//     ever one valid branch for a given department, so "narrowing" and
-//     "selecting" collapse into the same action).
-//   - Changing Branch after a Department is already selected clears the
-//     Department if it no longer belongs to the new branch, rather than
-//     leaving an inconsistent selection sitting in the form.
-// This requires each department option to carry its branchId, which the
-// lookup-only useDepartments() hook (used elsewhere for plain dropdowns)
-// does NOT return — see CreateEmployeePage/EditEmployeePage, which source
-// department options from the existing full useDepartmentsList() CRUD hook
-// instead (already returns branchId, nothing new created).
-//
-// Responsive: two-column grid per section on desktop (md+), single column
-// on mobile — per the brief's explicit layout requirement.
+
 
 import { useEffect, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -53,6 +12,7 @@ import {
   type UpdateEmployeeFormValues,
 } from "../../../schemas/employee.schema";
 import type { EmployeeResponse } from "../../../types/employee.types";
+import Optional from "@/components/common/Optional";
 
 interface Option {
   value: string;
@@ -95,7 +55,7 @@ type EmployeeFormProps = CreateProps | EditProps;
 
 const inputClass =
   "h-10 w-full rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-3 text-sm text-[var(--ink-primary)] placeholder:text-[var(--ink-tertiary)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]";
-const labelClass = "mb-1.5 block text-sm font-medium text-[var(--ink-primary)]";
+const labelClass = "mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]";
 const errorClass = "mt-1 text-xs text-[var(--error)]";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
@@ -154,9 +114,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
   const selectedBranchId = watch("branchId");
   const selectedDepartmentId = watch("departmentId");
 
-  // Department dropdown: narrowed to the selected branch's departments once
-  // a branch is chosen. Departments with no branchId are treated as
-  // unscoped and stay visible regardless of branch selection.
+
   const visibleDepartmentOptions = useMemo(() => {
     if (!selectedBranchId) return props.departmentOptions;
     return props.departmentOptions.filter(
@@ -164,8 +122,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
     );
   }, [props.departmentOptions, selectedBranchId]);
 
-  // Branch dropdown: narrowed to the selected department's one owning
-  // branch (a department has exactly one branchId, never many).
+  
   const selectedDepartmentBranchId = useMemo(() => {
     const dept = props.departmentOptions.find((d) => d.value === selectedDepartmentId);
     return dept?.branchId ?? null;
@@ -176,9 +133,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
     return props.branchOptions.filter((b) => b.value === selectedDepartmentBranchId);
   }, [props.branchOptions, selectedDepartmentId, selectedDepartmentBranchId]);
 
-  // Picking a Department auto-syncs Branch to its one owning branch — there
-  // is only ever one valid branch for a given department, so this keeps the
-  // two fields consistent instead of leaving Branch on a stale/wrong value.
+  
   useEffect(() => {
     if (selectedDepartmentBranchId && selectedDepartmentBranchId !== selectedBranchId) {
       setValue("branchId", selectedDepartmentBranchId, { shouldValidate: true });
@@ -186,9 +141,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDepartmentBranchId]);
 
-  // Changing Branch after a Department is already selected: clear the
-  // Department if it no longer belongs to the new branch, rather than
-  // submitting a Department/Branch pair that don't match.
+  
   useEffect(() => {
     if (!selectedDepartmentId) return;
     const dept = props.departmentOptions.find((d) => d.value === selectedDepartmentId);
@@ -285,6 +238,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               <div>
                 <label className={labelClass}>
                   {t("employees.form.nationalId", "National ID")}
+                  <Optional/>
                 </label>
 
                 <input
@@ -307,6 +261,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               <div>
                 <label className={labelClass}>
                   {t("employees.form.dateOfBirth", "Date of Birth")}
+                  <Optional/>
                 </label>
 
                 <input
@@ -324,18 +279,13 @@ export function EmployeeForm(props: EmployeeFormProps) {
             </div>
             {/* Contact Information */}
             <section className="mt-5">
-              {/* <SectionTitle>
-            {t(
-              "employees.form.section.contact",
-              "Contact Information"
-            )}
-          </SectionTitle> */}
 
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {/* Email */}
                 <div>
                   <label className={labelClass}>
                     {t("employees.form.email", "Email")}
+                    <Optional/>
                   </label>
 
                   <input
@@ -355,6 +305,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 <div>
                   <label className={labelClass}>
                     {t("employees.form.phone", "Phone")}
+                    <Optional/>
                   </label>
 
                   <input
@@ -374,6 +325,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 <div className="md:col-span-2">
                   <label className={labelClass}>
                     {t("employees.form.address", "Address")}
+                    <Optional/>
                   </label>
 
                   <textarea
@@ -475,6 +427,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               <div>
                 <label className={labelClass}>
                   {t("employees.form.department", "Department")}
+                  <Optional/>
                 </label>
 
                 <Controller
@@ -522,6 +475,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               <div>
                 <label className={labelClass}>
                   {t("employees.form.branch", "Branch")}
+                  <Optional/>
                 </label>
 
                 <Controller
@@ -570,6 +524,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               <div>
                 <label className={labelClass}>
                   {t("employees.form.manager", "Manager")}
+                  <Optional/>
                 </label>
 
 

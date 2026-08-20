@@ -20,6 +20,7 @@ import {
   type PurchaseOrderDialogAction,
 } from "../../../components/admin/purchase-orders/PurchaseOrderActionDialog";
 import type { PurchaseOrderResponse } from "../../../types/purchaseOrders.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function PurchaseOrdersListPage() {
   const { t } = useTranslation();
@@ -33,6 +34,9 @@ export function PurchaseOrdersListPage() {
 
   const supplierNames = useMemo(() => Array.from(new Set(orders.map((o) => o.supplierName))).sort(), [orders]);
   const warehouseNames = useMemo(() => Array.from(new Set(orders.map((o) => o.warehouseName))).sort(), [orders]);
+
+
+
   const statusCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     orders.forEach((o) => { counts[o.status] = (counts[o.status] ?? 0) + 1; });

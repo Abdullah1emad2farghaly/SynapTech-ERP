@@ -50,7 +50,6 @@ export interface CreatePurchaseOrderPayload {
   supplierId: string;
   warehouseId: string;
   orderDate: string;
-  expectedDate: string;
   notes: string;
   lines: PurchaseOrderLineRequest[];
 }

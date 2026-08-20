@@ -79,7 +79,7 @@ export function StockOverviewTable({
             id: "warehouse",
             header: t("stock.column.warehouse"),
             sortable: true,
-            cell: (row: StockOverviewRow) => row.warehouseName,
+            cell: (row: StockOverviewRow) => <span className="text-[var(--ink-secondary)]">{row.warehouseName}</span>,
           } as DataTableColumn<StockOverviewRow>,
         ]
       : []),
@@ -89,7 +89,7 @@ export function StockOverviewTable({
       sortable: true,
       widthClass: "w-32",
       cell: (row) => (
-        <span className="font-medium text-[var(--ink-primary)]">
+        <span className="font-medium text-[var(--success)]">
           {row.quantityOnHand.toLocaleString()}
         </span>
       ),

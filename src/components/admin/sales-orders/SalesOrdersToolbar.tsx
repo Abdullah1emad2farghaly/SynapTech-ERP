@@ -1,8 +1,7 @@
 // Project path: src/components/admin/sales-orders/SalesOrdersToolbar.tsx
 
 import { useTranslation } from "react-i18next";
-import toast from "react-hot-toast";
-import { Search, RefreshCw, Plus, Download } from "lucide-react";
+import { Search, RefreshCw, Plus } from "lucide-react";
 
 interface SalesOrdersToolbarProps {
   searchValue: string;
@@ -10,6 +9,7 @@ interface SalesOrdersToolbarProps {
   onRefresh: () => void;
   onCreate: () => void;
   isRefreshing?: boolean;
+  canCreateAccess: boolean;
 }
 
 export function SalesOrdersToolbar({
@@ -18,6 +18,7 @@ export function SalesOrdersToolbar({
   onRefresh,
   onCreate,
   isRefreshing,
+  canCreateAccess,
 }: SalesOrdersToolbarProps) {
   const { t } = useTranslation();
 
@@ -34,32 +35,32 @@ export function SalesOrdersToolbar({
         />
       </div>
 
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={onRefresh}
-          title={t("common.actions.refresh")}
-          className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
-        >
-          <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
-        </button>
-        <button
-          type="button"
-          onClick={() => toast(t("salesOrders.toolbar.exportNotAvailable"))}
-          className="inline-flex items-center justify-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-secondary] hover:bg-[--sunken]"
-        >
-          <Download size={16} />
-          {t("common.actions.export")}
-        </button>
-        <button
-          type="button"
-          onClick={onCreate}
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
-        >
-          <Plus size={16} />
-          {t("salesOrders.actions.create")}
-        </button>
-      </div>
+
+
+      {
+        canCreateAccess && (
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onRefresh}
+              title={t("common.actions.refresh")}
+              className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
+            >
+              <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
+            </button>
+            <button
+              type="button"
+              onClick={onCreate}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
+            >
+              <Plus size={16} />
+              {t("salesOrders.actions.create")}
+            </button>
+          </div>
+        )
+      }
+
+
     </div>
   );
 }

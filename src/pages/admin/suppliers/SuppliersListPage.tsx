@@ -19,6 +19,7 @@ import {
 } from "../../../components/admin/suppliers/SupplierDrawer";
 import { SupplierDeleteDialog } from "../../../components/admin/suppliers/SupplierDeleteDialog";
 import type { SupplierResponse } from "../../../types/suppliers.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 const DEFAULT_FILTERS: SuppliersFilters = { search: "", status: "all" };
 
@@ -34,6 +35,7 @@ export function SuppliersListPage() {
   const [sort, setSort] = useState<SuppliersSortOption>("nameAsc");
   const [drawer, setDrawer] = useState<DrawerState>(null);
   const [deleteTarget, setDeleteTarget] = useState<SupplierResponse | null>(null);
+  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"]);
 
   const hasActiveFilters = filters.search !== "" || filters.status !== "all";
 
@@ -94,6 +96,7 @@ export function SuppliersListPage() {
         onRefresh={() => refetch()}
         isRefreshing={isFetching}
         onCreate={() => setDrawer({ mode: "create", supplier: null })}
+        canManageAccess={canManageAccess}
       />
 
       <SuppliersTable

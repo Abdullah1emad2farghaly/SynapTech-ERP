@@ -167,6 +167,7 @@ export function DepartmentsTreeTable({
     );
   }
 
+  
   if (hasError) {
     return (
       <div className="rounded-[16px] border border-[var(--hairline)] px-4 py-10 text-center">
@@ -183,7 +184,6 @@ export function DepartmentsTreeTable({
       </div>
     );
   }
-
   if (isLoading) {
     return (
       <div className="rounded-[16px] border border-[var(--hairline)]">

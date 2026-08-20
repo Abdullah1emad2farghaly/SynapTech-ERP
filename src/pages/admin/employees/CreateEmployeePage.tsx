@@ -1,21 +1,4 @@
-// Project path: src/pages/admin/employees/CreateEmployeePage.tsx
-//
-// Route: /employees/create. userId is deliberately never sent on create —
-// linking an existing account is the separate Grant Access action, done
-// after the employee record exists (needs a real employee id in the URL).
-//
-// Per the module's integration rules: Branch options come from the
-// project's EXISTING lookup hook (useBranches — the one built for Users'
-// dropdowns, returns { value, label }[]). Department options come from the
-// EXISTING full useDepartmentsList() CRUD hook instead of the lookup-only
-// useDepartments() — the plain lookup strips branchId, and branchId is
-// required here to drive Branch↔Department cross-filtering (see
-// EmployeeForm.tsx's header comment: a department has exactly one owning
-// branch). Nothing new is created for either — both hooks already exist and
-// are reused as-is. Manager options come from the existing useEmployees()
-// hook — Manager IS an Employee, so there is no separate manager entity or
-// lookup to build. On Create, no employee id exists yet, so every existing
-// employee is a valid manager candidate (no self-exclusion needed here).
+
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -35,12 +18,10 @@ export function CreateEmployeePage() {
   const navigate = useNavigate();
   const createEmployee = useCreateEmployee();
 
-  // Existing lookup hook — reused as-is, not recreated.
+
   const { data: branchOptions = [], isLoading: branchesLoading } = useBranches();
 
-  // Existing full Departments CRUD hook — reused for its branchId field,
-  // which the plain lookup hook doesn't carry. Mapped to the
-  // { value, label, branchId } shape EmployeeForm needs for filtering.
+ 
   const { data: departments = [], isLoading: departmentsLoading } = useDepartmentsList();
   const departmentOptions = useMemo(
     () =>
@@ -52,8 +33,6 @@ export function CreateEmployeePage() {
     [departments]
   );
 
-  // Manager is an Employee — sourced from the existing full Employees list,
-  // not a separate manager/lookup service.
   const { data: employees = [], isLoading: employeesLoading } = useEmployees();
   const managerOptions = useMemo(
     () =>

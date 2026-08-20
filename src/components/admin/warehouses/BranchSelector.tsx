@@ -12,7 +12,7 @@ import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
 
 interface BranchSelectorProps {
   branches: MultiSelectOption[];
-  value: string;
+  value: string | null;
   onChange: (branchId: string) => void;
   isLoading?: boolean;
   hasError?: boolean;

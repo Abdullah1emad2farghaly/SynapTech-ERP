@@ -17,6 +17,7 @@ import {
 } from "../../../components/admin/products/ProductDrawer";
 import { DataTablePagination } from "../../../components/common/DataTable";
 import type { Product } from "../../../services/api/products.api";
+import { hasAnyPermission } from "@/utils/permissions";
 
 const PAGE_SIZE = 20;
 
@@ -31,6 +32,7 @@ export function ProductsListPage() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc" | undefined>(
     "asc"
   );
+  const canManageAccess = hasAnyPermission(['inventory.products.manage'])
 
   const [drawerMode, setDrawerMode] = useState<ProductDrawerMode>("create");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -73,6 +75,8 @@ export function ProductsListPage() {
     setDrawerOpen(true);
   }
 
+  
+
   function handleSortChange(columnId: string, direction: "asc" | "desc"): void {
     setSortColumnId(columnId);
     setSortDirection(direction);
@@ -90,37 +94,38 @@ export function ProductsListPage() {
         </p>
       </div>
 
-      {/* <ProductsKpiRow
+      <ProductsKpiRow
         totalCount={kpis.totalCount}
         activeCount={kpis.activeCount}
         inactiveCount={kpis.inactiveCount}
         categoryCount={kpis.categoryCount}
         isLoading={isLoading}
-      /> */}
+      />
 
-        <div className="border-b border-[var(--hairline)] p-4 sm:p-5">
-          <ProductsToolbar
-            searchValue={search}
-            onSearchChange={(value) => {
-              setSearch(value);
-              setPage(1);
-            }}
-            categoryValue={category}
-            onCategoryChange={(value) => {
-              setCategory(value);
-              setPage(1);
-            }}
-            categoryOptions={categoryOptions}
-            statusValue={status}
-            onStatusChange={(value) => {
-              setStatus(value);
-              setPage(1);
-            }}
-            onRefresh={() => refetch()}
-            onAddProduct={openCreateDrawer}
-            isRefreshing={isFetching}
-          />
-        </div>
+      <div className="border-b border-[var(--hairline)] p-4 sm:p-5">
+        <ProductsToolbar
+          searchValue={search}
+          onSearchChange={(value) => {
+            setSearch(value);
+            setPage(1);
+          }}
+          categoryValue={category}
+          onCategoryChange={(value) => {
+            setCategory(value);
+            setPage(1);
+          }}
+          categoryOptions={categoryOptions}
+          statusValue={status}
+          onStatusChange={(value) => {
+            setStatus(value);
+            setPage(1);
+          }}
+          onRefresh={() => refetch()}
+          onAddProduct={openCreateDrawer}
+          isRefreshing={isFetching}
+          canManageAccess={canManageAccess}
+        />
+      </div>
       <div className="rounded-lg border border-[var(--hairline)] bg-[var(--panel)] shadow-[var(--elevation-1)]">
 
         <motion.div
@@ -139,8 +144,9 @@ export function ProductsListPage() {
             onEdit={openEditDrawer}
             onDuplicate={openDuplicateDrawer}
             onDelete={() => {
-              /* deletion is handled inside ProductActionMenu's ConfirmationDialog */
+              
             }}
+            canManageAccess={canManageAccess}
           />
         </motion.div>
 

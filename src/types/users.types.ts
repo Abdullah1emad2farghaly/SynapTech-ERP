@@ -18,16 +18,16 @@ export interface GetUsersResult {
 export interface CreateUserPayload {
   fullName: string;
   email: string;
-  branchId: string;
-  departmentId: string;
+  branchId: string | null;
+  departmentId: string | null;
   roleNames: string[];
 }
 
 export interface UpdateUserPayload {
   id: string;
   fullName?: string;
-  branchId?: string;
-  departmentId?: string;
+  branchId?: string | null;
+  departmentId?: string | null;
   isActive?: boolean;
 }
 

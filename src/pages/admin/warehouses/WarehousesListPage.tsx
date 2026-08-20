@@ -20,6 +20,7 @@ import {
 } from "../../../components/admin/warehouses/WarehouseDrawer";
 import { DeleteWarehouseDialog } from "../../../components/admin/warehouses/DeleteWarehouseDialog";
 import type { WarehouseResponse } from "../../../types/warehouses.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 const DEFAULT_FILTERS: WarehousesFilters = {
   search: "",
@@ -40,6 +41,8 @@ export function WarehousesListPage() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>();
   const [drawer, setDrawer] = useState<DrawerState>(null);
   const [deleteTarget, setDeleteTarget] = useState<WarehouseResponse | null>(null);
+
+  const canManageAccess = hasAnyPermission(["inventory.warehouses.manage"]);
 
   const hasActiveFilters =
     filters.search !== "" || filters.branchId !== "all" || filters.status !== "all";
@@ -91,6 +94,7 @@ export function WarehousesListPage() {
         onRefresh={() => refetch()}
         isRefreshing={isFetching}
         onCreate={() => setDrawer({ mode: "create", warehouse: null })}
+        canManageAccess={canManageAccess}
       />
 
       <WarehousesDataTable
@@ -125,6 +129,7 @@ export function WarehousesListPage() {
         onDelete={setDeleteTarget}
         onCreate={() => setDrawer({ mode: "create", warehouse: null })}
         onResetFilters={() => setFilters(DEFAULT_FILTERS)}
+        canManageAccess={canManageAccess}
       />
 
       <WarehouseDrawer

@@ -93,6 +93,7 @@
     "passwordSymbol": "Add a symbol"
   },
   "common": {
+    "optional": "optional",
     "loading": "Loading...",
     "unknown": "Unknown",
     "view": "View",
@@ -137,7 +138,9 @@
     "toast": {
       "activated": "{{name}} activated",
       "deactivated": "{{name}} deactivated",
-      "deleted": "{{name}} deleted"
+      "deleted": "{{name}} deleted",
+      "created": "{{name}} created",
+      "updated": "{{name}} updated"
     },
     "list": {
       "columnVisibility": "Toggle columns",
@@ -524,6 +527,11 @@
     }
   },
   "accounts": {
+    "success": {
+      "created": "{{name}} created",
+      "updated": "{{name}} updated",
+      "deleted": "{{name}} deleted"
+    },
     "breadcrumb": {
       "dashboard": "Dashboard"
     },
@@ -1100,6 +1108,10 @@
       }
     },
     "movement": {
+      "In": "In",
+      "Out": "Out",
+      "AdjustmentIncrease": "Adjustment Increase",
+      "AdjustmentDecrease": "Adjustment Decrease",
       "title": "Record Stock Movement",
       "subtitle": "Record a change in quantity for a product at a warehouse.",
       "back": "Back",
@@ -2374,7 +2386,6 @@
       }
     }
   },
-
   "hr": {
     "overview": {
       "pageTitle": "HR Overview",
@@ -2480,6 +2491,285 @@
         "newEmployee": "New Employee",
         "viewLeaveRequests": "View Leave Requests",
         "viewEmployees": "View Employees"
+      }
+    }
+  },
+  "organization": {
+    "overview": {
+      "pageTitle": "Organization Overview",
+      "pageSubtitle": "Your company, branches, and department structure at a glance.",
+      "categoryNavLabel": "Organization navigation",
+      "unassigned": "Unassigned",
+      "errorTitle": "Something went wrong loading your organization data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Add your first branch or department to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "branches": "Branches",
+        "departments": "Departments"
+      },
+      "company": {
+        "noLegalName": "No legal name on file",
+        "country": "Country",
+        "currency": "Currency",
+        "taxNumber": "Tax No.",
+        "active": "Active",
+        "inactive": "Inactive",
+        "edit": "Edit",
+        "editNotAvailable": "Company settings editing isn't available yet",
+        "errorDescription": "Company details couldn't be loaded."
+      },
+      "kpi": {
+        "totalBranches": "Total Branches",
+        "totalBranchesCaption": "All branch records",
+        "activeBranches": "Active Branches",
+        "activeBranchesCaption": "Currently active",
+        "totalDepartments": "Total Departments",
+        "totalDepartmentsCaption": "All department records",
+        "topLevelDepartments": "Top-Level Departments",
+        "topLevelDepartmentsCaption": "No parent department"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "hierarchy": {
+        "topLevel": "Top-level",
+        "nested": "Nested"
+      },
+      "branchesByStatus": {
+        "title": "Branches by Status",
+        "emptyTitle": "No branches yet",
+        "emptyDescription": "Status distribution will appear here once branches exist."
+      },
+      "departmentHierarchy": {
+        "title": "Department Hierarchy",
+        "emptyTitle": "No departments yet",
+        "emptyDescription": "Hierarchy distribution will appear here once departments exist."
+      },
+      "departmentsByBranch": {
+        "title": "Departments by Branch",
+        "countLabel": "Departments",
+        "emptyTitle": "No departments yet",
+        "emptyDescription": "Branch distribution will appear here once departments exist."
+      },
+      "departmentsTreemap": {
+        "title": "Department Distribution",
+        "countLabel": "Departments",
+        "emptyTitle": "No departments yet",
+        "emptyDescription": "A proportional view of departments per branch will appear here once departments exist."
+      },
+      "branchesSnapshot": {
+        "title": "Branches",
+        "manage": "Manage Branches",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive",
+        "mainBranch": "Main branch"
+      },
+      "departmentsSnapshot": {
+        "title": "Departments",
+        "manage": "Manage Departments",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    }
+  },
+  "administration": {
+    "overview": {
+      "pageTitle": "Administration Overview",
+      "pageSubtitle": "Users, roles, and permissions across your organization.",
+      "categoryNavLabel": "Administration navigation",
+      "unassigned": "Unassigned",
+      "errorTitle": "Something went wrong loading your administration data.",
+      "retry": "Retry",
+      "emptyTitle": "Nothing here yet",
+      "emptyDescription": "Add your first user or role to see activity.",
+      "tabs": {
+        "overview": "Overview",
+        "users": "Users",
+        "roles": "Roles & Permissions"
+      },
+      "kpi": {
+        "totalUsers": "Total Users",
+        "totalUsersCaption": "All user accounts",
+        "activeUsers": "Active Users",
+        "activeUsersCaption": "Currently active",
+        "totalRoles": "Total Roles",
+        "totalRolesCaption": "Defined in the system",
+        "totalPermissions": "Total Permissions",
+        "totalPermissionsCaption": "Available in the catalog"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "usersWithoutRoles": {
+        "title": "Users Without Roles",
+        "badge": "{{count}} user",
+        "badge_other": "{{count}} users",
+        "emptyDescription": "Every user has at least one role assigned.",
+        "viewAll": "View all {{count}} users without roles"
+      },
+      "rolesWithNoUsers": {
+        "title": "Roles With No Users",
+        "badge": "{{count}} role",
+        "badge_other": "{{count}} roles",
+        "emptyDescription": "Every defined role is assigned to at least one user."
+      },
+      "usersByRole": {
+        "title": "Users by Role",
+        "countLabel": "Users",
+        "emptyTitle": "No role assignments yet",
+        "emptyDescription": "Role distribution will appear here once users have roles assigned."
+      },
+      "usersByStatus": {
+        "title": "Users by Status",
+        "emptyTitle": "No users yet",
+        "emptyDescription": "Status distribution will appear here once users exist."
+      },
+      "usersByBranch": {
+        "title": "Users by Branch",
+        "countLabel": "Users",
+        "emptyTitle": "No users yet",
+        "emptyDescription": "Branch distribution will appear here once users exist."
+      },
+      "usersByDepartment": {
+        "title": "Users by Department",
+        "countLabel": "Users",
+        "emptyTitle": "No users yet",
+        "emptyDescription": "Department distribution will appear here once users exist."
+      },
+      "rolesByPermissionCount": {
+        "title": "Roles by Permission Count",
+        "countLabel": "Permissions",
+        "emptyTitle": "No roles yet",
+        "emptyDescription": "Roles ranked by permission count will appear here once roles exist."
+      },
+      "permissionsByModule": {
+        "title": "Permissions by Module",
+        "emptyTitle": "No permissions catalog data",
+        "emptyDescription": "The permission catalog breakdown will appear here once available.",
+        "errorDescription": "The permissions catalog couldn't be loaded."
+      },
+      "usersSnapshot": {
+        "title": "Users",
+        "manage": "Manage Users",
+        "total": "Total",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "rolesSnapshot": {
+        "title": "Roles & Permissions",
+        "manage": "Manage Roles",
+        "totalRoles": "Roles",
+        "totalPermissions": "Permissions"
+      }
+    }
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "sales": "Sales",
+    "customers": "Customers",
+    "salesOrders": "Sales Orders",
+    "purchasing": "Purchasing",
+    "suppliers": "Suppliers",
+    "purchaseOrders": "Purchase Orders",
+    "inventory": "Inventory",
+    "warehouses": "Warehouses",
+    "categories": "Categories",
+    "products": "Products",
+    "stock": "Stock",
+    "accounting": "Accounting",
+    "chartOfAccounts": "Chart of Accounts",
+    "journalEntries": "Journal Entries",
+    "hr": "HR & Payroll",
+    "employees": "Employees",
+    "attendance": "Attendance",
+    "myAttendance": "My Attendance",
+    "leaveRequests": "Leave Requests",
+    "myRequests": "My Requests",
+    "organization": "Organization",
+    "branches": "Branches",
+    "departments": "Departments",
+    "administration": "Administration",
+    "users": "Users",
+    "rolesAndPermissions": "Roles & Permissions",
+    "companySettings": "Company Settings"
+  },
+  "dashboard": {
+    "overview": {
+      "pageTitle": "Business Overview",
+      "pageSubtitle": "A cross-category snapshot — click any card to see the full picture.",
+      "refreshAll": "Refresh all",
+      "lastRefreshed": "Last refreshed {{time}}",
+      "categories": {
+        "sales": "Sales",
+        "purchasing": "Purchasing",
+        "inventory": "Inventory",
+        "accounting": "Accounting",
+        "hr": "HR",
+        "organization": "Organization",
+        "administration": "Administration"
+      },
+      "sections": {
+        "revenueSupply": "Revenue & Supply",
+        "finance": "Finance",
+        "peopleStructure": "People & Structure"
+      },
+      "attention": {
+        "title": "Needs Attention",
+        "allClear": "Nothing needs attention right now.",
+        "purchasingOverdue": "{{count}} overdue purchase order",
+        "purchasingOverdue_other": "{{count}} overdue purchase orders",
+        "inventoryOutOfStock": "{{count}} product out of stock",
+        "inventoryOutOfStock_other": "{{count}} products out of stock",
+        "accountingUnbalanced": "Trial balance is unbalanced",
+        "hrPendingLeave": "{{count}} leave request awaiting a decision",
+        "hrPendingLeave_other": "{{count}} leave requests awaiting a decision",
+        "adminUsersWithoutRoles": "{{count}} user without a role",
+        "adminUsersWithoutRoles_other": "{{count}} users without a role",
+        "adminRolesWithNoUsers": "{{count}} role with no users assigned",
+        "adminRolesWithNoUsers_other": "{{count}} roles with no users assigned"
+      },
+      "kpi": {
+        "totalOrders": "Orders",
+        "totalValue": "Value",
+        "overdue": "Overdue",
+        "totalCustomers": "Customers",
+        "activeCustomers": "Active Customers",
+        "totalSuppliers": "Suppliers",
+        "activeSuppliers": "Active Suppliers",
+        "totalProducts": "Products",
+        "activeProducts": "Active Products",
+        "inventoryValue": "Inv. Value",
+        "outOfStock": "Out of Stock",
+        "totalAccounts": "Accounts",
+        "journalEntries": "Entries",
+        "postedEntries": "Posted Entries",
+        "totalDebits": "Total Debits",
+        "totalCredits": "Total Credits",
+        "totalEmployees": "Employees",
+        "activeEmployees": "Active Employees",
+        "pendingLeave": "Pending Leave",
+        "totalLeaveRequests": "Leave Requests",
+        "totalBranches": "Branches",
+        "activeBranches": "Active Branches",
+        "totalDepartments": "Departments",
+        "topLevelDepartments": "Top-Level Depts.",
+        "totalUsers": "Users",
+        "activeUsers": "Active Users",
+        "totalRoles": "Roles",
+        "totalPermissions": "Permissions"
+      },
+      "badges": {
+        "attention": "Needs attention",
+        "outOfStock": "{{count}} out of stock",
+        "outOfStock_other": "{{count}} out of stock",
+        "balanced": "Balanced",
+        "unbalanced": "Unbalanced"
       }
     }
   }

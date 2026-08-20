@@ -1,18 +1,4 @@
-// Project path: src/pages/admin/employees/EmployeesListPage.tsx
-//
-// Owns all local UI state (search/filters/pagination/which action menu or
-// drawer is open) and wires hooks to presentation components — per the
-// project's page-vs-component separation rule. Search/filter/sort/pagination
-// are all client-side over the full fetched list (no confirmed query-param
-// contract on GET /api/Employees), same precedent as Suppliers/Departments.
-//
-// Department/branch name lookups reuse the project's EXISTING
-// useDepartments()/useBranches() lookup hooks built for Users' dropdowns
-// (see project handoff doc, Section 5.2/8) — already return
-// `{ value, label }[]`, consumed here as-is, nothing new created.
-// Role options for Grant Access still reuse the same unconfirmed
-// GET /api/Roles gap already flagged for the Roles module — swap in the
-// real roles hook once confirmed.
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,10 +18,8 @@ import { GrantAccessDrawer } from "../../../components/admin/employees/GrantAcce
 import type { EmployeeResponse } from "../../../types/employee.types";
 import { useRoles } from "@/hooks/useRoles";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
+import { hasAnyPermission } from "@/utils/permissions";
 
-// ASSUMPTION — Roles hook path unverified (see Roles module's own
-// unconfirmed GET /api/Roles gap):
-// import { useRoles } from "../../../hooks/useRoles";
 
 const PAGE_SIZE = 10;
 const DEFAULT_FILTERS: EmployeesFilters = {
@@ -76,19 +60,20 @@ export function EmployeesListPage() {
   // Existing lookup hooks — reused as-is, not recreated.
   const { data: departmentOptions = [] } = useDepartments();
   const { data: branchOptions = [] } = useBranches();
+  const canManageAccess = hasAnyPermission(["hr.employees.manage"]);
 
   // ASSUMPTION: role options still pending the unconfirmed GET /api/Roles
   // endpoint (see Roles module notes) — swap in the real useRoles() hook
   // once that's resolved.
-  const {data: roleOptions = []} = useRoles()
-  
-    const options: MultiSelectOption[] = roleOptions.map((opt) => {
-      return {
-        value: opt.id,
-        label: opt.name
-      }
-      
-    })
+  const { data: roleOptions = [] } = useRoles()
+
+  const options: MultiSelectOption[] = roleOptions.map((opt) => {
+    return {
+      value: opt.id,
+      label: opt.name
+    }
+
+  })
 
   const departmentNames = useMemo(
     () => Object.fromEntries(departmentOptions.map((o) => [o.value, o.label])),
@@ -104,7 +89,7 @@ export function EmployeesListPage() {
   const [actionMenuEmployee, setActionMenuEmployee] = useState<EmployeeResponse | null>(null);
   const [grantAccessEmployee, setGrantAccessEmployee] = useState<EmployeeResponse | null>(null);
 
-  console.log(grantAccessEmployee)
+
   const jobTitleOptions = useMemo(() => {
     const titles = new Set<string>();
     employees.forEach((e) => e.jobTitle && titles.add(e.jobTitle));
@@ -163,14 +148,18 @@ export function EmployeesListPage() {
             )}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => navigate("create")}
-          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
-        >
-          <Plus size={16} aria-hidden="true" />
-          {t("employees.addEmployee", "Add Employee")}
-        </button>
+        {
+          canManageAccess && (
+            <button
+              type="button"
+              onClick={() => navigate("create")}
+              className="inline-flex h-10 shrink-0 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
+            >
+              <Plus size={16} aria-hidden="true" />
+              {t("employees.addEmployee", "Add Employee")}
+            </button>
+          )
+        }
       </div>
 
       {!isOrgEmpty && (
@@ -245,6 +234,7 @@ export function EmployeesListPage() {
             onGrantAccess={setGrantAccessEmployee}
             formatSalary={formatSalary}
             formatDate={formatDate}
+            canManageAccess={canManageAccess}
           />
 
           {actionMenuEmployee && (

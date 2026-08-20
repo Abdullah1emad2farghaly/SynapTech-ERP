@@ -1,17 +1,3 @@
-// src/pages/admin/departments/DepartmentsPage.tsx
-//
-// The module's only page. Owns all local UI state (search, filters, view
-// toggle, drawer/dialog targets) and delegates fetching/mutations to
-// hooks over services/api — no direct API calls here, per the
-// architecture rule.
-//
-// ASSUMPTION: hook names (useDepartments, useCreateDepartment,
-// useUpdateDepartment, useDeleteDepartment) inferred per the project's
-// stated convention. useDepartments here refers to the FULL Departments
-// CRUD hook set — not the lookup-only useDepartments() built earlier for
-// Users' Branch/Department dropdowns (that one only maps to
-// MultiSelectOption; this page needs the richer shape). Rename either to
-// avoid a collision if you wire both into the same project.
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,6 +23,9 @@ import {
 } from "../../../hooks/useDepartments.crud";
 import { useBranches } from "../../../hooks/useBranches";
 import { useUsers } from "../../../hooks/useUsers"; // used only to check hasAssignedUsers before allowing delete
+import toast from "react-hot-toast";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 type ViewMode = "tree" | "flat";
 type DrawerTarget =
@@ -176,17 +165,29 @@ export function DepartmentsPage() {
   }
 
   async function handleDrawerSubmit(values: DepartmentFormValues, id?: string) {
-    if (id) {
+    try {
+       if (id) {
       await updateMutation.mutateAsync({ id, ...values });
+      toast.success(t("departments.toast.updated",{
+        name: values.name
+      }))
     } else {
       await createMutation.mutateAsync({
         name: values.name,
         branchId: values.branchId,
         parentDepartmentId: values.parentDepartmentId,
       });
+      toast.success(t("departments.toast.created",{
+        name: values.name
+      }))
     }
     setDrawerTarget(null);
     refetch();
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors);
+      }
+    }
   }
 
   async function handleMoveSubmit(id: string, newParentId: string | null) {

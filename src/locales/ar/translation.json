@@ -93,6 +93,7 @@
     "passwordSymbol": "أضف رمزًا"
   },
   "common": {
+    "optional": "اختياري",
     "loading": "جارٍ التحميل...",
     "unknown": "غير معروف",
     "view": "عرض",
@@ -1100,6 +1101,10 @@
       }
     },
     "movement": {
+      "In": "إدخال",
+      "Out": "إخراج",
+      "AdjustmentIncrease": "تعديل زيادة",
+      "AdjustmentDecrease": "تعديل نقصان",
       "title": "تسجيل حركة مخزون",
       "subtitle": "سجّل تغييرًا في الكمية لمنتج في أحد المستودعات.",
       "back": "رجوع",
@@ -2395,6 +2400,296 @@
         "newEmployee": "موظف جديد",
         "viewLeaveRequests": "عرض طلبات الإجازة",
         "viewEmployees": "عرض الموظفين"
+      }
+    }
+  },
+
+  "organization": {
+    "overview": {
+      "pageTitle": "نظرة عامة على المؤسسة",
+      "pageSubtitle": "شركتك وفروعك وهيكل أقسامك في لمحة واحدة.",
+      "categoryNavLabel": "تنقل المؤسسة",
+      "unassigned": "غير مُعيَّن",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات المؤسسة.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أضف أول فرع أو قسم لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "branches": "الفروع",
+        "departments": "الأقسام"
+      },
+      "company": {
+        "noLegalName": "لا يوجد اسم قانوني مسجل",
+        "country": "الدولة",
+        "currency": "العملة",
+        "taxNumber": "الرقم الضريبي",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "edit": "تعديل",
+        "editNotAvailable": "تعديل إعدادات الشركة غير متاح بعد",
+        "errorDescription": "تعذّر تحميل بيانات الشركة."
+      },
+      "kpi": {
+        "totalBranches": "إجمالي الفروع",
+        "totalBranchesCaption": "جميع سجلات الفروع",
+        "activeBranches": "الفروع النشطة",
+        "activeBranchesCaption": "نشط حاليًا",
+        "totalDepartments": "إجمالي الأقسام",
+        "totalDepartmentsCaption": "جميع سجلات الأقسام",
+        "topLevelDepartments": "الأقسام الرئيسية",
+        "topLevelDepartmentsCaption": "بدون قسم أب"
+      },
+      "status": {
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "hierarchy": {
+        "topLevel": "رئيسي",
+        "nested": "فرعي"
+      },
+      "branchesByStatus": {
+        "title": "الفروع حسب الحالة",
+        "emptyTitle": "لا توجد فروع بعد",
+        "emptyDescription": "سيظهر توزيع الحالة هنا بمجرد وجود فروع."
+      },
+      "departmentHierarchy": {
+        "title": "التسلسل الهرمي للأقسام",
+        "emptyTitle": "لا توجد أقسام بعد",
+        "emptyDescription": "سيظهر توزيع التسلسل الهرمي هنا بمجرد وجود أقسام."
+      },
+      "departmentsByBranch": {
+        "title": "الأقسام حسب الفرع",
+        "countLabel": "الأقسام",
+        "emptyTitle": "لا توجد أقسام بعد",
+        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود أقسام."
+      },
+      "departmentsTreemap": {
+        "title": "توزيع الأقسام",
+        "countLabel": "الأقسام",
+        "emptyTitle": "لا توجد أقسام بعد",
+        "emptyDescription": "سيظهر عرض تناسبي للأقسام حسب الفرع هنا بمجرد وجود أقسام."
+      },
+      "branchesSnapshot": {
+        "title": "الفروع",
+        "manage": "إدارة الفروع",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "mainBranch": "الفرع الرئيسي"
+      },
+      "departmentsSnapshot": {
+        "title": "الأقسام",
+        "manage": "إدارة الأقسام",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      }
+    }
+  },
+
+  "administration": {
+    "overview": {
+      "pageTitle": "نظرة عامة على الإدارة",
+      "pageSubtitle": "المستخدمون والأدوار والصلاحيات عبر مؤسستك.",
+      "categoryNavLabel": "تنقل الإدارة",
+      "unassigned": "غير مُعيَّن",
+      "errorTitle": "حدث خطأ أثناء تحميل بيانات الإدارة.",
+      "retry": "إعادة المحاولة",
+      "emptyTitle": "لا يوجد شيء هنا بعد",
+      "emptyDescription": "أضف أول مستخدم أو دور لعرض النشاط.",
+      "tabs": {
+        "overview": "نظرة عامة",
+        "users": "المستخدمون",
+        "roles": "الأدوار والصلاحيات"
+      },
+      "kpi": {
+        "totalUsers": "إجمالي المستخدمين",
+        "totalUsersCaption": "جميع حسابات المستخدمين",
+        "activeUsers": "المستخدمون النشطون",
+        "activeUsersCaption": "نشط حاليًا",
+        "totalRoles": "إجمالي الأدوار",
+        "totalRolesCaption": "المعرَّفة في النظام",
+        "totalPermissions": "إجمالي الصلاحيات",
+        "totalPermissionsCaption": "المتاحة في الدليل"
+      },
+      "status": {
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "usersWithoutRoles": {
+        "title": "مستخدمون بدون أدوار",
+        "badge": "{{count}} مستخدم",
+        "badge_other": "{{count}} مستخدمين",
+        "emptyDescription": "كل مستخدم لديه دور واحد على الأقل مُعيَّن.",
+        "viewAll": "عرض جميع المستخدمين بدون أدوار ({{count}})"
+      },
+      "rolesWithNoUsers": {
+        "title": "أدوار بدون مستخدمين",
+        "badge": "{{count}} دور",
+        "badge_other": "{{count}} أدوار",
+        "emptyDescription": "كل دور مُعرَّف مُعيَّن لمستخدم واحد على الأقل."
+      },
+      "usersByRole": {
+        "title": "المستخدمون حسب الدور",
+        "countLabel": "المستخدمون",
+        "emptyTitle": "لا توجد تعيينات أدوار بعد",
+        "emptyDescription": "سيظهر توزيع الأدوار هنا بمجرد تعيين أدوار للمستخدمين."
+      },
+      "usersByStatus": {
+        "title": "المستخدمون حسب الحالة",
+        "emptyTitle": "لا يوجد مستخدمون بعد",
+        "emptyDescription": "سيظهر توزيع الحالة هنا بمجرد وجود مستخدمين."
+      },
+      "usersByBranch": {
+        "title": "المستخدمون حسب الفرع",
+        "countLabel": "المستخدمون",
+        "emptyTitle": "لا يوجد مستخدمون بعد",
+        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود مستخدمين."
+      },
+      "usersByDepartment": {
+        "title": "المستخدمون حسب القسم",
+        "countLabel": "المستخدمون",
+        "emptyTitle": "لا يوجد مستخدمون بعد",
+        "emptyDescription": "سيظهر توزيع الأقسام هنا بمجرد وجود مستخدمين."
+      },
+      "rolesByPermissionCount": {
+        "title": "الأدوار حسب عدد الصلاحيات",
+        "countLabel": "الصلاحيات",
+        "emptyTitle": "لا توجد أدوار بعد",
+        "emptyDescription": "سيظهر ترتيب الأدوار حسب عدد الصلاحيات هنا بمجرد وجود أدوار."
+      },
+      "permissionsByModule": {
+        "title": "الصلاحيات حسب الوحدة",
+        "emptyTitle": "لا توجد بيانات دليل صلاحيات",
+        "emptyDescription": "سيظهر توزيع دليل الصلاحيات هنا بمجرد توفره.",
+        "errorDescription": "تعذّر تحميل دليل الصلاحيات."
+      },
+      "usersSnapshot": {
+        "title": "المستخدمون",
+        "manage": "إدارة المستخدمين",
+        "total": "الإجمالي",
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "rolesSnapshot": {
+        "title": "الأدوار والصلاحيات",
+        "manage": "إدارة الأدوار",
+        "totalRoles": "الأدوار",
+        "totalPermissions": "الصلاحيات"
+      }
+    }
+  },
+
+  "sidebar": {
+    "dashboard": "لوحة التحكم",
+    "sales": "المبيعات",
+    "customers": "العملاء",
+    "salesOrders": "أوامر البيع",
+
+    "purchasing": "المشتريات",
+    "suppliers": "الموردون",
+    "purchaseOrders": "أوامر الشراء",
+
+    "inventory": "المخزون",
+    "warehouses": "المخازن",
+    "categories": "الفئات",
+    "products": "المنتجات",
+    "stock": "الأصناف بالمخزون",
+
+    "accounting": "المحاسبة",
+    "chartOfAccounts": "دليل الحسابات",
+    "journalEntries": "قيود اليومية",
+
+    "hr": "الموارد البشرية ",
+    "employees": "الموظفون",
+    "attendance": "الحضور والانصراف",
+    "myAttendance": "حضوري الشخصي",
+    "leaveRequests": "طلبات الإجازات",
+    "myRequests": "أجازاتي الشخصيه",
+
+    "organization": "الهيكل التنظيمي",
+    "branches": "الفروع",
+    "departments": "الأقسام",
+
+    "administration": "الإدارة",
+    "users": "المستخدمون",
+    "rolesAndPermissions": "الأدوار والصلاحيات",
+
+    "companySettings": "إعدادات الشركة"
+  },
+
+  "dashboard": {
+    "overview": {
+      "pageTitle": "نظرة عامة على الأعمال",
+      "pageSubtitle": "لمحة عبر جميع الفئات — انقر على أي بطاقة لعرض الصورة الكاملة.",
+      "refreshAll": "تحديث الكل",
+      "lastRefreshed": "آخر تحديث {{time}}",
+      "categories": {
+        "sales": "المبيعات",
+        "purchasing": "المشتريات",
+        "inventory": "المخزون",
+        "accounting": "الحسابات",
+        "hr": "الموارد البشرية",
+        "organization": "المؤسسة",
+        "administration": "الإدارة"
+      },
+      "sections": {
+        "revenueSupply": "الإيرادات والتوريد",
+        "finance": "المالية",
+        "peopleStructure": "الأفراد والهيكل"
+      },
+      "attention": {
+        "title": "يتطلب اهتمامًا",
+        "allClear": "لا شيء يتطلب اهتمامًا الآن.",
+        "purchasingOverdue": "{{count}} طلب شراء متأخر",
+        "purchasingOverdue_other": "{{count}} طلبات شراء متأخرة",
+        "inventoryOutOfStock": "{{count}} منتج نافد المخزون",
+        "inventoryOutOfStock_other": "{{count}} منتجات نافدة المخزون",
+        "accountingUnbalanced": "ميزان المراجعة غير متوازن",
+        "hrPendingLeave": "{{count}} طلب إجازة بانتظار القرار",
+        "hrPendingLeave_other": "{{count}} طلبات إجازة بانتظار القرار",
+        "adminUsersWithoutRoles": "{{count}} مستخدم بدون دور",
+        "adminUsersWithoutRoles_other": "{{count}} مستخدمين بدون دور",
+        "adminRolesWithNoUsers": "{{count}} دور بدون مستخدمين معيّنين",
+        "adminRolesWithNoUsers_other": "{{count}} أدوار بدون مستخدمين معيّنين"
+      },
+      "kpi": {
+        "totalOrders": "الطلبات",
+        "totalValue": "القيمة",
+        "overdue": "متأخر",
+        "totalCustomers": "العملاء",
+        "activeCustomers": "العملاء النشطون",
+        "totalSuppliers": "الموردون",
+        "activeSuppliers": "الموردون النشطون",
+        "totalProducts": "المنتجات",
+        "activeProducts": "المنتجات النشطة",
+        "inventoryValue": "قيمة المخزون",
+        "outOfStock": "نافد المخزون",
+        "totalAccounts": "الحسابات",
+        "journalEntries": "القيود",
+        "postedEntries": "القيود المرحّلة",
+        "totalDebits": "إجمالي المدين",
+        "totalCredits": "إجمالي الدائن",
+        "totalEmployees": "الموظفون",
+        "activeEmployees": "الموظفون النشطون",
+        "pendingLeave": "إجازات معلّقة",
+        "totalLeaveRequests": "طلبات الإجازة",
+        "totalBranches": "الفروع",
+        "activeBranches": "الفروع النشطة",
+        "totalDepartments": "الأقسام",
+        "topLevelDepartments": "الأقسام الرئيسية",
+        "totalUsers": "المستخدمون",
+        "activeUsers": "المستخدمون النشطون",
+        "totalRoles": "الأدوار",
+        "totalPermissions": "الصلاحيات"
+      },
+      "badges": {
+        "attention": "يتطلب اهتمامًا",
+        "outOfStock": "{{count}} نافد المخزون",
+        "outOfStock_other": "{{count}} نافدة المخزون",
+        "balanced": "متوازن",
+        "unbalanced": "غير متوازن"
       }
     }
   }

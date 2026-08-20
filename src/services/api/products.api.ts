@@ -54,7 +54,7 @@ export interface CreateProductPayload {
   sku: string;
   name: string;
   description?: string;
-  categoryId: string | undefined;
+  categoryId: string | null;
   unitOfMeasure: string;
   costPrice: number;
   salePrice: number;
@@ -67,7 +67,7 @@ export interface UpdateProductPayload {
   name: string;
   sku: string;
   description?: string;
-  categoryId: string;
+  categoryId: string | null;
   unitOfMeasure: string;
   costPrice: number;
   salePrice: number;
@@ -95,7 +95,6 @@ export async function updateProduct(
   id: string,
   payload: UpdateProductPayload
 ): Promise<Product> {
-  console.log(id, payload)
   const { data } = await apiClient.put<Product>(`/Products/${id}`, payload);
   return data;
 }

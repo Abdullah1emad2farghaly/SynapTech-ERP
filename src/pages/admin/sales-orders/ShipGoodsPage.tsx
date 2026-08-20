@@ -16,6 +16,7 @@ import { canPerform } from "../../../utils/salesOrderWorkflow";
 import type { ShipGoodsLineRequest } from "../../../types/salesOrders.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function ShipGoodsPage() {
   const { id } = useParams<{ id: string }>();
@@ -31,6 +32,18 @@ export function ShipGoodsPage() {
     const clamped = Math.max(0, Math.min(remaining, Number.isFinite(raw) ? raw : 0));
     setShippingNow((prev) => ({ ...prev, [lineId]: clamped }));
   };
+
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"])
+
+  const access = {
+    canCancelAccess,
+    canShipAccess,
+    canApproveAccess,
+    canCreateAccess
+  }
 
   const totals = useMemo(() => {
     const totalRemaining = lines.reduce((s, l) => s + (l.quantity - l.shippedQuantity), 0);
@@ -51,7 +64,7 @@ export function ShipGoodsPage() {
     return <div className="p-6 text-center text-sm text-[--ink-secondary]">{t("salesOrders.details.notFound")}</div>;
   }
 
-  if (!canPerform("ship", order.status)) {
+  if (!canPerform("ship", order.status, access)) {
     navigate(`/sales-orders/${order.id}`);
     toast.error(t("salesOrders.ship.notShippable"));
     return null;
@@ -72,7 +85,7 @@ export function ShipGoodsPage() {
       toast.success(t("salesOrders.toasts.shipped"));
       navigate(`/sales/sales-orders/${order.id}`);
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors)
       }
     }

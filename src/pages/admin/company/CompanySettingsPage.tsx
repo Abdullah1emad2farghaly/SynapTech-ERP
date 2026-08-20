@@ -156,14 +156,6 @@ export function CompanySettingsPage() {
 
         <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
-            type="button"
-            onClick={handleCancelClick}
-            disabled={updateCompany.isPending}
-            className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-4 py-2.5 text-sm font-medium text-[var(--ink-primary)] transition-colors duration-[160ms] hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-          >
-            {t('company.actions.cancel')}
-          </button>
-          <button
             type="submit"
             disabled={!isDirty || updateCompany.isPending}
             className="w-full rounded-[10px] bg-[var(--signal)] px-4 py-2.5 text-sm font-medium text-white transition-colors duration-[160ms] hover:bg-[var(--signal-hover)] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"

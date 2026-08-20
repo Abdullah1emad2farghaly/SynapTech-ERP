@@ -8,7 +8,12 @@
 
 import { useTranslation } from "react-i18next";
 import { StatusBadge } from "../../common/StatusBadge";
-import { DataTable, type DataTableColumn, type SortDirection } from "../../common/DataTable";
+import {
+  DataTable,
+  type DataTableColumn,
+  type SortDirection,
+} from "../../common/DataTable";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export interface CustomerRow {
   id: string;
@@ -29,7 +34,10 @@ export interface CustomersTableProps {
   isFiltered?: boolean;
   sortColumnId?: string | null;
   sortDirection?: SortDirection;
-  onSortChange?: (columnId: string, direction: SortDirection) => void;
+  onSortChange?: (
+    columnId: string,
+    direction: SortDirection,
+  ) => void;
   onRowClick?: (row: CustomerRow) => void;
   renderRowActions?: (row: CustomerRow) => React.ReactNode;
 }
@@ -49,44 +57,75 @@ export function CustomersTable({
 }: CustomersTableProps) {
   const { t } = useTranslation();
 
+  /**
+   * Check whether the current user can manage customers.
+   *
+   * useHasAnyPermission internally gets the current user's
+   * permissions from useMyPermissions().
+   */
+  const canManageCustomers = hasAnyPermission([
+    "sales.customers.manage",
+  ]);
+
   const columns: DataTableColumn<CustomerRow>[] = [
     {
       id: "name",
       header: t("customers.column.name"),
       sortable: true,
-      cell: (row) => <span className="font-medium text-[var(--ink-primary)]">{row.name}</span>,
+      cell: (row) => (
+        <span className="font-medium text-[var(--ink-primary)]">
+          {row.name}
+        </span>
+      ),
     },
+
     {
       id: "contactName",
       header: t("customers.column.contactName"),
       sortable: true,
-      cell: (row) => row.contactName || "—",
+      cell: (row) => (
+        <span className="text-[var(--ink-secondary)]">
+          {row.contactName || "—"}
+        </span>
+      ),
     },
+
     {
       id: "phone",
       header: t("customers.column.phone"),
       cell: (row) => (
-        <span dir="ltr" className="inline-block text-start">
+        <span
+          dir="ltr"
+          className="inline-block text-start text-[var(--ink-secondary)]"
+        >
           {row.phone || "—"}
         </span>
       ),
     },
+
     {
       id: "email",
       header: t("customers.column.email"),
       cell: (row) => (
-        <span dir="ltr" className="inline-block text-start">
+        <span
+          dir="ltr"
+          className="inline-block text-start text-[var(--ink-secondary)]"
+        >
           {row.email || "—"}
         </span>
       ),
     },
+
     {
       id: "taxNumber",
       header: t("customers.column.taxNumber"),
       cell: (row) => (
-        <span className="font-mono text-xs text-[var(--ink-tertiary)]">{row.taxNumber || "—"}</span>
+        <span className="font-mono text-xs text-[var(--ink-tertiary)]">
+          {row.taxNumber || "—"}
+        </span>
       ),
     },
+
     {
       id: "status",
       header: t("customers.column.status"),
@@ -94,18 +133,28 @@ export function CustomersTable({
       cell: (row) => (
         <StatusBadge
           status={row.isActive ? "active" : "inactive"}
-          label={row.isActive ? t("users.status.active") : t("users.status.inactive")}
+          label={
+            row.isActive
+              ? t("users.status.active")
+              : t("users.status.inactive")
+          }
         />
       ),
     },
-    ...(renderRowActions
+
+    // Show row actions only when:
+    // 1. The user has sales.customers.manage permission.
+    // 2. renderRowActions was actually provided.
+    ...(canManageCustomers && renderRowActions
       ? [
           {
             id: "actions",
             header: "",
             widthClass: "w-12",
             cell: (row: CustomerRow) => (
-              <div onClick={(e) => e.stopPropagation()}>{renderRowActions(row)}</div>
+              <div onClick={(e) => e.stopPropagation()}>
+                {renderRowActions(row)}
+              </div>
             ),
           } as DataTableColumn<CustomerRow>,
         ]
@@ -115,8 +164,11 @@ export function CustomersTable({
   const emptyState = (
     <div className="flex flex-col items-center gap-2 text-center">
       <p className="font-medium text-[var(--ink-primary)]">
-        {isFiltered ? t("customers.list.empty.noMatches") : t("customers.list.empty.noCustomers")}
+        {isFiltered
+          ? t("customers.list.empty.noMatches")
+          : t("customers.list.empty.noCustomers")}
       </p>
+
       {isFiltered && onClearFilters && (
         <button
           type="button"
@@ -131,7 +183,10 @@ export function CustomersTable({
 
   const errorState = (
     <div className="flex flex-col items-center gap-2 text-center">
-      <p className="font-medium text-[var(--error)]">{t("common.errors.loadFailed")}</p>
+      <p className="font-medium text-[var(--error)]">
+        {t("common.errors.loadFailed")}
+      </p>
+
       {onRetry && (
         <button
           type="button"

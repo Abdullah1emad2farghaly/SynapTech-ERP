@@ -9,6 +9,7 @@
 import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
 import { StatusBadge } from "../../common/StatusBadge";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export interface CustomerDetailsData {
   id: string;
@@ -29,6 +30,7 @@ export interface CustomerDetailsDrawerProps {
   onSetActive: (id: string, active: boolean) => Promise<void>;
   onDeactivateRequest: (id: string) => void;
   onDeleteRequest: (id: string) => void;
+  canManageAccess: boolean;
 }
 
 export function CustomerDetailsDrawer({
@@ -39,6 +41,7 @@ export function CustomerDetailsDrawer({
   onSetActive,
   onDeactivateRequest,
   onDeleteRequest,
+  canManageAccess,
 }: CustomerDetailsDrawerProps) {
   const { t } = useTranslation();
 
@@ -93,39 +96,44 @@ export function CustomerDetailsDrawer({
         <p className="font-mono text-sm text-[var(--ink-primary)]">{customer.taxNumber || "—"}</p>
       </section>
 
-      <div className="flex flex-wrap gap-2 border-t border-[var(--hairline)] pt-4">
-        {customer.isActive ? (
-          <button
-            type="button"
-            onClick={() => onDeactivateRequest(customer.id)}
-            className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-          >
-            {t("customers.actions.deactivate")}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => onSetActive(customer.id, true)}
-            className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-          >
-            {t("customers.actions.activate")}
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => onDeleteRequest(customer.id)}
-          className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)]"
-        >
-          {t("customers.actions.delete")}
-        </button>
-        <button
-          type="button"
-          onClick={() => onEdit(customer.id)}
-          className="ms-auto rounded-[10px] bg-[var(--signal)] px-3 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
-        >
-          {t("customers.actions.edit")}
-        </button>
-      </div>
+    
+      {
+        canManageAccess && (
+          <div className="flex flex-wrap gap-2 border-t border-[var(--hairline)] pt-4">
+            {customer.isActive ? (
+              <button
+                type="button"
+                onClick={() => onDeactivateRequest(customer.id)}
+                className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+              >
+                {t("customers.actions.deactivate")}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onSetActive(customer.id, true)}
+                className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+              >
+                {t("customers.actions.activate")}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => onDeleteRequest(customer.id)}
+              className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)]"
+            >
+              {t("customers.actions.delete")}
+            </button>
+            <button
+              type="button"
+              onClick={() => onEdit(customer.id)}
+              className="ms-auto rounded-[10px] bg-[var(--signal)] px-3 py-2 text-sm font-medium text-white hover:bg-[var(--signal-hover)]"
+            >
+              {t("customers.actions.edit")}
+            </button>
+          </div>
+        )
+      }
     </Drawer>
   );
 }

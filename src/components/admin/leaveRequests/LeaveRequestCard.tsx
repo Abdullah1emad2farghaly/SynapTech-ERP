@@ -7,6 +7,7 @@ import { LeaveRequestStatusBadge } from "./LeaveRequestStatusBadge";
 import { LeaveRequestActionMenu } from "./LeaveRequestActionMenu";
 import { getLeaveTypeOption } from "../../../constants/leaveTypes";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
+import { hasAnyPermission } from "@/utils/permissions";
 
 interface LeaveRequestCardProps {
   request: LeaveRequestResponse;
@@ -28,6 +29,9 @@ export function LeaveRequestCard({
 }: LeaveRequestCardProps) {
   const { t, i18n } = useTranslation();
   const option = getLeaveTypeOption(request.leaveType);
+  const canApproveAccess = hasAnyPermission([
+    "hr.leaves.approve",
+  ]);
 
   const formatDate = (d: string) =>
     new Date(d).toLocaleDateString(i18n.language, { month: "short", day: "numeric" });
@@ -54,13 +58,18 @@ export function LeaveRequestCard({
         </div>
         <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
           <LeaveRequestStatusBadge status={request.status} size="sm" />
-          <LeaveRequestActionMenu
-            request={request}
-            onView={onView}
-            onApprove={onApprove}
-            onReject={onReject}
-            onCancel={onCancel}
-          />
+          {
+            (
+              <LeaveRequestActionMenu
+                request={request}
+                onView={onView}
+                onApprove={onApprove}
+                onReject={onReject}
+                onCancel={onCancel}
+              />
+            )
+          }
+
         </div>
       </div>
 

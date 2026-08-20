@@ -1,16 +1,4 @@
-// src/pages/admin/products/ProductDetailsPage.tsx
-//
-// Dedicated page rather than a details drawer — Products has 8 real fields
-// (SKU, Name, Description, Category, UoM, Cost Price, Sale Price, Status), the
-// same "enough real data to justify a page" reasoning applied to Users (Section 6),
-// vs. Departments/Branches which stayed in a details drawer for having only 4-6
-// fields.
-//
-// NOTE ON SCOPE: "Stock per warehouse" / inventory preview from the design brief is
-// intentionally NOT built here. The handoff (Section 5.3 / 12) documents that no
-// Warehouses/Inventory backend integration exists yet for this project — the same
-// reason it was cut from Branches. Building it would mean inventing an endpoint.
-// Add it here once a confirmed inventory API exists.
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
@@ -26,6 +14,7 @@ import {
 } from "../../../components/admin/products/ProductDrawer";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 function formatCurrency(value: number): string {
   return value.toLocaleString(undefined, {
@@ -45,13 +34,15 @@ export function ProductDetailsPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerMode] = useState<ProductDrawerMode>("edit");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const canManageAccess = hasAnyPermission(['inventory.products.manage'])
+  
 
   async function handleConfirmDelete(): Promise<void> {
     if (!product) return;
     try {
       await deleteProduct.mutateAsync(product.id);
       toast.success(t("products.toasts.deleteSuccess") ?? "");
-      navigate("/products");
+      navigate("/inventory/products");
     } catch (error) {
       if(axios.isAxiosError(error)){
         handleErrors(error.response?.data.errors)
@@ -101,7 +92,7 @@ export function ProductDetailsPage() {
     >
       <button
         type="button"
-        onClick={() => navigate("/products")}
+        onClick={() => navigate("/inventory/products")}
         className="flex w-fit items-center gap-2 text-sm font-medium text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:text-[var(--ink-primary)]"
       >
         <ArrowLeft size={16} />
@@ -129,24 +120,28 @@ export function ProductDetailsPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setDrawerOpen(true)}
-            className="flex h-10 min-w-[44px] items-center gap-2 rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-4 text-sm font-medium text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)]"
-          >
-            <Pencil size={16} />
-            {t("common.actions.edit")}
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsConfirmOpen(true)}
-            className="flex h-10 min-w-[44px] items-center gap-2 rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-4 text-sm font-medium text-[var(--error)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)]"
-          >
-            <Trash2 size={16} />
-            {t("common.actions.delete")}
-          </button>
-        </div>
+        {
+          canManageAccess && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(true)}
+                className="flex h-10 min-w-[44px] items-center gap-2 rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-4 text-sm font-medium text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)]"
+              >
+                <Pencil size={16} />
+                {t("common.actions.edit")}
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsConfirmOpen(true)}
+                className="flex h-10 min-w-[44px] items-center gap-2 rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-4 text-sm font-medium text-[var(--error)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)]"
+              >
+                <Trash2 size={16} />
+                {t("common.actions.delete")}
+              </button>
+            </div>
+          )
+        }
       </div>
 
       {product.description && (

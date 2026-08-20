@@ -32,6 +32,13 @@ export interface UseUsersParams {
   sortDirection: "asc" | "desc" | null;
 }
 
+export function useListUsers(){
+  return useQuery({
+    queryKey: usersQueryKeys.all,
+    queryFn: () => usersApi.getUsers(),
+  });
+}
+
 export function useUsers(params: UseUsersParams) {
   const query = useQuery({
     queryKey: usersQueryKeys.all,

@@ -29,6 +29,7 @@ export interface AccountPreviewPanelProps {
   onEdit: (id: string) => void;
   onSetActive: (id: string, active: boolean) => Promise<void>;
   onDelete: (id: string) => void;
+  canManageAccess: boolean;
 }
 
 export function AccountPreviewPanel({
@@ -37,6 +38,7 @@ export function AccountPreviewPanel({
   onEdit,
   onSetActive,
   onDelete,
+  canManageAccess
 }: AccountPreviewPanelProps) {
   const { t } = useTranslation();
   const { data: balance, isLoading: isBalanceLoading } = useAccountBalance(
@@ -94,41 +96,48 @@ export function AccountPreviewPanel({
           <Eye size={14} />
           {t("accounts.preview.openDetails")}
         </button>
-        <button
-          type="button"
-          onClick={() => onEdit(account.id)}
-          className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-        >
-          <Pencil size={14} />
-          {t("accounts.actions.edit")}
-        </button>
-        {account.isActive ? (
-          <button
-            type="button"
-            onClick={() => onSetActive(account.id, false)}
-            className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-          >
-            <UserX size={14} />
-            {t("accounts.actions.deactivate")}
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => onSetActive(account.id, true)}
-            className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-          >
-            <UserCheck size={14} />
-            {t("accounts.actions.activate")}
-          </button>
-        )}
-        <button
-          type="button"
-          onClick={() => onDelete(account.id)}
-          className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)]"
-        >
-          <Trash2 size={14} />
-          {t("accounts.actions.delete")}
-        </button>
+        {
+          canManageAccess && (
+            <>
+              <button
+                type="button"
+                onClick={() => onEdit(account.id)}
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+              >
+                <Pencil size={14} />
+                {t("accounts.actions.edit")}
+              </button>
+              {account.isActive ? (
+                <button
+                  type="button"
+                  onClick={() => onSetActive(account.id, false)}
+                  className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                >
+                  <UserX size={14} />
+                  {t("accounts.actions.deactivate")}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => onSetActive(account.id, true)}
+                  className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                >
+                  <UserCheck size={14} />
+                  {t("accounts.actions.activate")}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => onDelete(account.id)}
+                className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)]"
+              >
+                <Trash2 size={14} />
+                {t("accounts.actions.delete")}
+              </button>
+            </>
+          )
+        }
+
       </div>
     </div>
   );

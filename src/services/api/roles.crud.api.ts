@@ -22,6 +22,11 @@ export async function getRoles(): Promise<RoleResponse[]> {
   const { data } = await apiClient.get<RoleResponse[]>(BASE_URL);
   return data;
 }
+export async function getMyPermissions(): Promise<string[]> {
+  const { data } = await apiClient.get<string[]>("/Account/me/permissions");
+  // console.log(data)
+  return data;
+}
 
 export async function getRoleById(id: string): Promise<RoleResponse> {
   const { data } = await apiClient.get<RoleResponse>(`${BASE_URL}/${id}`);

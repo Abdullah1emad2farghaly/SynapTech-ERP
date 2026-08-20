@@ -57,7 +57,7 @@ export function RoleDetailsPage() {
     <div className="flex flex-col gap-6 md:p-6 py-6 px-2">
       <button
         type="button"
-        onClick={() => navigate("/organization/roles")}
+        onClick={() => navigate("/administration/roles")}
         className="flex w-fit items-center gap-1.5 text-sm text-[--ink-secondary] hover:text-[--ink-primary]"
       >
         <ArrowLeft size={16} className="rtl:rotate-180" />
@@ -160,7 +160,6 @@ export function RoleDetailsPage() {
         open={deleteOpen}
         onClose={() => {
           setDeleteOpen(false);
-          navigate("/organization/roles");
         }}
       />
     </div>

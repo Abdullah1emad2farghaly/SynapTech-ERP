@@ -172,7 +172,10 @@ export function CreateEditSalesOrderPage() {
           </div>
 
           <div>
-            <label className="mb-1 block text-sm text-[--ink-secondary]">{t("salesOrders.fields.notes")}</label>
+            <label className="mb-1 block text-sm text-[--ink-secondary]">
+              {t("salesOrders.fields.notes")}{" "}
+              <span className="text-[var(--ink-tertiary)]">{t("common.optional")}</span>
+            </label>
             <textarea
               {...register("notes")}
               rows={1}
@@ -193,7 +196,12 @@ export function CreateEditSalesOrderPage() {
               setValue("lines", copy, { shouldDirty: true });
             }}
           />
-          {errors.lines?.message && <p className="mt-2 text-sm text-[--error]">{t(errors.lines.message as string)}</p>}
+          {errors?.lines?.[0] && (
+            <ul>
+              <li className="mt-2 text-sm text-[--error]">{t(errors?.lines?.[0]?.productId?.message as string)}</li>
+              <li className="mt-2 text-sm text-[--error]">{t(errors?.lines?.[0]?.quantity?.message as string)}</li>
+            </ul>
+          )}
         </section>
       </div>
 

@@ -85,14 +85,14 @@ export function UsersDataTable({
       header: t("users.list.column.branch"),
       sortable: true,
       hidden: hiddenColumnIds.includes("branch"),
-      cell: (row) => row.branchName,
+      cell: (row) => row.branchName || "__",
     },
     {
       id: "department",
       header: t("users.list.column.department"),
       sortable: true,
       hidden: hiddenColumnIds.includes("department"),
-      cell: (row) => row.departmentName,
+      cell: (row) => row.departmentName || "__",
     },
     {
       id: "roles",
@@ -102,9 +102,9 @@ export function UsersDataTable({
         const overflow = row.roles.length - shown.length;
         return (
           <div className="flex flex-wrap items-center gap-1">
-            {shown.map((role) => (
+            {shown.length > 0 ? shown.map((role) => (
               <RoleBadge key={role} label={role} />
-            ))}
+            )): "__"}
             {overflow > 0 && <RoleOverflowChip count={overflow} />}
           </div>
         );

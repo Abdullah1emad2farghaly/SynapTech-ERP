@@ -35,7 +35,7 @@ function FormField({
 }) {
   return (
     <div className="space-y-1.5">
-      <label htmlFor={id} className="block text-sm font-medium text-[var(--ink-primary)]">
+      <label htmlFor={id} className="block text-sm font-medium text-[var(--ink-secondary)]">
         {label}
       </label>
       {children}

@@ -15,6 +15,7 @@ import {
   type PurchaseOrderDialogAction,
 } from "../../../components/admin/purchase-orders/PurchaseOrderActionDialog";
 import { canPerform } from "../../../utils/purchaseOrderWorkflow";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function PurchaseOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +23,20 @@ export function PurchaseOrderDetailsPage() {
   const { t } = useTranslation();
   const { data: order, isLoading } = usePurchaseOrder(id);
   const [dialogAction, setDialogAction] = useState<PurchaseOrderDialogAction | null>(null);
+
+  const canManageAccess = hasAnyPermission(["purchasing.orders.manage"])
+  const canCteateAccess = hasAnyPermission(["purchasing.orders.create"])
+  const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"])
+  const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"])
+  const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"])
+
+  const access = {
+    canManageAccess,
+    canCteateAccess,
+    canApproveAccess,
+    canCancelAccess,
+    canReceiveAccess
+  }
 
   if (isLoading) {
     return (
@@ -43,7 +58,7 @@ export function PurchaseOrderDetailsPage() {
     <div className="flex flex-col gap-6 p-6">
       <button
         type="button"
-        onClick={() => navigate("/inventory/purchase-orders")}
+        onClick={() => navigate("/purchasing/purchase-orders")}
         className="flex w-fit items-center gap-1.5 text-sm text-[--ink-secondary] hover:text-[--ink-primary]"
       >
         <ArrowLeft size={16} className="rtl:rotate-180" />
@@ -62,29 +77,29 @@ export function PurchaseOrderDetailsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {canPerform("edit", order.status) && (
+          {canPerform("edit", order.status, access) && (
             <button
               type="button"
-              onClick={() => navigate(`/inventory/purchase-orders/${order.id}/edit`)}
+              onClick={() => navigate(`/purchasing/purchase-orders/${order.id}/edit`)}
               className="rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-primary] hover:bg-[--sunken]"
             >
               {t("purchaseOrders.actions.edit")}
             </button>
           )}
-          {canPerform("submit", order.status) && (
+          {canPerform("submit", order.status, access) && (
             <button type="button" onClick={() => setDialogAction("submit")} className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]">
               {t("purchaseOrders.actions.submit")}
             </button>
           )}
-          {canPerform("approve", order.status) && (
+          {canPerform("approve", order.status, access) && (
             <button type="button" onClick={() => setDialogAction("approve")} className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]">
               {t("purchaseOrders.actions.approve")}
             </button>
           )}
-          {canPerform("receive", order.status) && (
+          {canPerform("receive", order.status, access) && (
             <button
               type="button"
-              onClick={() => navigate(`/inventory/purchase-orders/${order.id}/receive`)}
+              onClick={() => navigate(`/purchasing/purchase-orders/${order.id}/receive`)}
               className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
             >
               {t("purchaseOrders.actions.receive")}
@@ -94,7 +109,7 @@ export function PurchaseOrderDetailsPage() {
             <Printer size={15} />
             {t("purchaseOrders.actions.print")}
           </button>
-          {canPerform("cancel", order.status) && (
+          {canPerform("cancel", order.status, access) && (
             <button
               type="button"
               onClick={() => setDialogAction("cancel")}
@@ -152,14 +167,14 @@ export function PurchaseOrderDetailsPage() {
         <LineItemsReadOnlyTable lines={order.lines} />
       </div>
 
-      <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
+      {/* <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
         <Clock size={16} />
         {t("purchaseOrders.details.activityComingSoon")}
       </div>
       <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
         <ShieldQuestion size={16} />
         {t("purchaseOrders.details.auditComingSoon")}
-      </div>
+      </div> */}
 
       <PurchaseOrderActionDialog action={dialogAction} order={order} onClose={() => setDialogAction(null)} />
     </div>

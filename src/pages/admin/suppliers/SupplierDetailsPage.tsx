@@ -13,6 +13,7 @@ import { useSupplier } from "../../../hooks/useSuppliers";
 import { SupplierStatusBadge } from "../../../components/admin/suppliers/SupplierStatusBadge";
 import { SupplierDrawer } from "../../../components/admin/suppliers/SupplierDrawer";
 import { SupplierDeleteDialog } from "../../../components/admin/suppliers/SupplierDeleteDialog";
+import { hasAnyPermission } from "@/utils/permissions";
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
@@ -31,6 +32,7 @@ export function SupplierDetailsPage() {
 
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"]);
 
   if (isLoading) {
     return (
@@ -69,24 +71,29 @@ export function SupplierDetailsPage() {
           <p className="mt-1 text-sm text-[--ink-secondary]">{supplier.contactName}</p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setEditOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-primary] hover:bg-[--sunken]"
-          >
-            <Pencil size={15} />
-            {t("suppliers.actions.edit")}
-          </button>
-          <button
-            type="button"
-            onClick={() => setDeleteOpen(true)}
-            className="inline-flex items-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--error] hover:bg-[--error]/5"
-          >
-            <Trash2 size={15} />
-            {t("suppliers.actions.delete")}
-          </button>
-        </div>
+        {
+          canManageAccess && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setEditOpen(true)}
+                className="inline-flex items-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-primary] hover:bg-[--sunken]"
+              >
+                <Pencil size={15} />
+                {t("suppliers.actions.edit")}
+              </button>
+              <button
+                type="button"
+                onClick={() => setDeleteOpen(true)}
+                className="inline-flex items-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--error] hover:bg-[--error]/5"
+              >
+                <Trash2 size={15} />
+                {t("suppliers.actions.delete")}
+              </button>
+            </div>
+          )
+        }
+
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-1 rounded-lg border border-[--hairline] bg-[--panel] p-5 sm:grid-cols-2">

@@ -3,9 +3,17 @@
 // "Duplicate" reads the role and opens Create Role pre-filled — same UI
 // composition pattern used for Departments/Branches, not a new endpoint.
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
-import { MoreVertical, Eye, Pencil, KeyRound, Copy, Trash2 } from "lucide-react";
+import {
+  MoreVertical,
+  Eye,
+  Pencil,
+  KeyRound,
+  Copy,
+  Trash2,
+} from "lucide-react";
 import type { RoleResponse } from "../../../types/roles.types";
 
 interface RoleActionMenuProps {
@@ -26,11 +34,28 @@ export function RoleActionMenu({
   onDelete,
 }: RoleActionMenuProps) {
   const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const [menuPosition, setMenuPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+
   const items = [
-    { label: t("roles.actions.view"), icon: Eye, onClick: () => onView(role) },
-    { label: t("roles.actions.edit"), icon: Pencil, onClick: () => onEdit(role) },
+    {
+      label: t("roles.actions.view"),
+      icon: Eye,
+      onClick: () => onView(role),
+    },
+    {
+      label: t("roles.actions.edit"),
+      icon: Pencil,
+      onClick: () => onEdit(role),
+    },
     {
       label: t("roles.actions.managePermissions"),
       icon: KeyRound,
@@ -49,41 +74,174 @@ export function RoleActionMenu({
     },
   ];
 
-  return (
-    <div className="relative">
-      <button
-        type="button"
-        role="menu"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((o) => !o)}
-        onBlur={() => setTimeout(() => setOpen(false), 120)}
-        className="inline-flex items-center justify-center rounded-md p-1.5 text-[--ink-secondary] transition-colors hover:bg-[--sunken]"
-      >
-        <MoreVertical size={16} />
-      </button>
+  function closeMenu() {
+    setOpen(false);
+  }
 
-      {open && (
-        <div
-          role="menu"
-          className="absolute end-0 z-10 mt-1 w-48 overflow-hidden rounded-md border border-[--hairline] bg-[--panel] py-1 shadow-[var(--elevation-1)]"
+  function updateMenuPosition() {
+    if (!buttonRef.current || !menuRef.current) return;
+
+    const buttonRect =
+      buttonRef.current.getBoundingClientRect();
+
+    const menuRect =
+      menuRef.current.getBoundingClientRect();
+
+    const spacing = 4;
+    const viewportPadding = 8;
+
+    let top = buttonRect.bottom + spacing;
+
+    let left = buttonRect.right - menuRect.width;
+
+    if (
+      top + menuRect.height >
+      window.innerHeight - viewportPadding
+    ) {
+      top =
+        buttonRect.top -
+        menuRect.height -
+        spacing;
+    }
+
+    if (
+      left + menuRect.width >
+      window.innerWidth - viewportPadding
+    ) {
+      left =
+        window.innerWidth -
+        menuRect.width -
+        viewportPadding;
+    }
+
+    if (left < viewportPadding) {
+      left = viewportPadding;
+    }
+
+    if (top < viewportPadding) {
+      top = viewportPadding;
+    }
+
+    setMenuPosition({
+      top,
+      left,
+    });
+  }
+
+  useEffect(() => {
+    if (!open) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+
+      if (
+        buttonRef.current?.contains(target) ||
+        menuRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setOpen(false);
+    }
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    requestAnimationFrame(() => {
+      updateMenuPosition();
+    });
+
+    window.addEventListener(
+      "scroll",
+      updateMenuPosition,
+      true
+    );
+
+    window.addEventListener(
+      "resize",
+      updateMenuPosition
+    );
+
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+
+      window.removeEventListener(
+        "scroll",
+        updateMenuPosition,
+        true
+      );
+
+      window.removeEventListener(
+        "resize",
+        updateMenuPosition
+      );
+    };
+  }, [open]);
+
+  return (
+    <>
+      <div className="relative">
+        <button
+          ref={buttonRef}
+          type="button"
+          aria-haspopup="menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+          className="inline-flex items-center justify-center rounded-md p-1.5 text-[var(--ink-secondary)] transition-colors hover:bg-[var(--sunken)]"
         >
-          {items.map(({ label, icon: Icon, onClick, destructive }) => (
-            <button
-              key={label}
-              type="button"
-              role="menuitem"
-              onClick={onClick}
-              className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-[--sunken] ${
-                destructive ? "text-[--error]" : "text-[--ink-primary]"
-              }`}
-            >
-              <Icon size={15} />
-              {label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+          <MoreVertical size={16} />
+        </button>
+      </div>
+
+      {open &&
+        createPortal(
+          <div
+            ref={menuRef}
+            role="menu"
+            className="fixed z-[9999] w-48 overflow-hidden rounded-md border border-[var(--hairline)] bg-[var(--panel)] py-1 shadow-[var(--elevation-1)]"
+            style={{
+              top: menuPosition.top,
+              left: menuPosition.left,
+              visibility:
+                menuPosition.top === 0
+                  ? "hidden"
+                  : "visible",
+            }}
+          >
+            {items.map(
+              ({
+                label,
+                icon: Icon,
+                onClick,
+                destructive,
+              }) => (
+                <button
+                  key={label}
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    closeMenu();
+                    onClick();
+                  }}
+                  className={`flex w-full items-center gap-2 px-3 py-2 text-sm transition-colors hover:bg-[var(--sunken)] ${
+                    destructive
+                      ? "text-[var(--error)]"
+                      : "text-[var(--ink-primary)]"
+                  }`}
+                >
+                  <Icon size={15} />
+                  {label}
+                </button>
+              )
+            )}
+          </div>,
+          document.body
+        )}
+    </>
   );
 }

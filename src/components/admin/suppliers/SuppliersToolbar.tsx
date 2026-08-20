@@ -21,6 +21,7 @@ interface SuppliersToolbarProps {
   onRefresh: () => void;
   onCreate: () => void;
   isRefreshing?: boolean;
+  canManageAccess: boolean;
 }
 
 export function SuppliersToolbar({
@@ -31,6 +32,7 @@ export function SuppliersToolbar({
   onRefresh,
   onCreate,
   isRefreshing,
+  canManageAccess
 }: SuppliersToolbarProps) {
   const { t } = useTranslation();
   const patch = (partial: Partial<SuppliersFilters>) =>
@@ -84,14 +86,19 @@ export function SuppliersToolbar({
         </button>
       </div>
 
-      <button
-        type="button"
-        onClick={onCreate}
-        className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
-      >
-        <Plus size={16} />
-        {t("suppliers.actions.create")}
-      </button>
+      {
+        canManageAccess && (
+          <button
+            type="button"
+            onClick={onCreate}
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
+          >
+            <Plus size={16} />
+            {t("suppliers.actions.create")}
+          </button>
+        )
+      }
+
     </div>
   );
 }

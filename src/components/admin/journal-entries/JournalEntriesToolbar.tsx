@@ -5,6 +5,7 @@
 
 import { useTranslation } from "react-i18next";
 import { Search, RefreshCw, Plus, SlidersHorizontal } from "lucide-react";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export interface JournalEntriesFilters {
   search: string;
@@ -40,6 +41,8 @@ export function JournalEntriesToolbar({
   isRefreshing,
 }: JournalEntriesToolbarProps) {
   const { t } = useTranslation();
+  const canCreateAccess = hasAnyPermission(["accounting.journal.create"]);
+
 
   const patch = (partial: Partial<JournalEntriesFilters>) =>
     onFiltersChange({ ...filters, ...partial });
@@ -61,24 +64,29 @@ export function JournalEntriesToolbar({
           />
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onRefresh}
-            title={t("common.actions.refresh")}
-            className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
-          >
-            <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
-          </button>
-          <button
-            type="button"
-            onClick={onCreate}
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
-          >
-            <Plus size={16} />
-            {t("journalEntries.actions.create")}
-          </button>
-        </div>
+        {
+          canCreateAccess && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={onRefresh}
+                title={t("common.actions.refresh")}
+                className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
+              >
+                <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
+              </button>
+              <button
+                type="button"
+                onClick={onCreate}
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
+              >
+                <Plus size={16} />
+                {t("journalEntries.actions.create")}
+              </button>
+            </div>
+          )
+        }
+
       </div>
 
       <div className="flex flex-wrap items-center gap-2 border-t border-[--hairline] pt-3">

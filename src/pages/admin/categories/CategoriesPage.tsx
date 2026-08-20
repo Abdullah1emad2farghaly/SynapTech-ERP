@@ -40,6 +40,9 @@ import {
   useUpdateCategory,
   useDeleteCategory,
 } from "../../../hooks/useCategories.crud";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 type ViewMode = "tree" | "table";
 type DrawerTarget =
@@ -74,6 +77,8 @@ export function CategoriesPage() {
   const createMutation = useCreateCategory();
   const updateMutation = useUpdateCategory();
   const deleteMutation = useDeleteCategory();
+
+  const canManageAccess = hasAnyPermission(["inventory.categories.manage"])
 
   const categoryById = useMemo(() => {
     const map = new Map<string, (typeof categories)[number]>();
@@ -141,20 +146,20 @@ export function CategoriesPage() {
   const selectedCategory = selectedCategoryId ? categoryById.get(selectedCategoryId) : undefined;
   const detailsData = selectedCategory
     ? {
-        id: selectedCategory.id,
-        name: selectedCategory.name,
-        isActive: selectedCategory.isActive,
-        parent: selectedCategory.parentCategoryId
-          ? (() => {
-              const p = categoryById.get(selectedCategory.parentCategoryId!);
-              return p ? { id: p.id, name: p.name } : null;
-            })()
-          : null,
-        children: (childIdsByParent.get(selectedCategory.id) ?? []).map((childId) => {
-          const child = categoryById.get(childId)!;
-          return { id: child.id, name: child.name };
-        }),
-      }
+      id: selectedCategory.id,
+      name: selectedCategory.name,
+      isActive: selectedCategory.isActive,
+      parent: selectedCategory.parentCategoryId
+        ? (() => {
+          const p = categoryById.get(selectedCategory.parentCategoryId!);
+          return p ? { id: p.id, name: p.name } : null;
+        })()
+        : null,
+      children: (childIdsByParent.get(selectedCategory.id) ?? []).map((childId) => {
+        const child = categoryById.get(childId)!;
+        return { id: child.id, name: child.name };
+      }),
+    }
     : null;
 
   const tableRows: CategoryFlatRow[] = filteredCategories.map((c) => ({
@@ -193,16 +198,22 @@ export function CategoriesPage() {
   }
 
   async function handleDrawerSubmit(values: CategoryFormValues, id?: string) {
-    if (id) {
-      await updateMutation.mutateAsync({ id, ...values });
-    } else {
-      await createMutation.mutateAsync({
-        name: values.name,
-        parentCategoryId: values.parentCategoryId,
-      });
+    try {
+      if (id) {
+        await updateMutation.mutateAsync({ id, ...values });
+      } else {
+        await createMutation.mutateAsync({
+          name: values.name,
+          parentCategoryId: values.parentCategoryId,
+        });
+      }
+      setDrawerTarget(null);
+      refetch();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors)
+      }
     }
-    setDrawerTarget(null);
-    refetch();
   }
 
   async function handleMoveSubmit(id: string, newParentId: string | null) {
@@ -312,13 +323,17 @@ export function CategoriesPage() {
             {t("categories.list.subtitleCount", { count: kpis.total })}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setDrawerTarget({ kind: "create" })}
-          className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
-        >
-          {t("categories.list.createCategory")}
-        </button>
+        {
+          canManageAccess && (
+            <button
+              type="button"
+              onClick={() => setDrawerTarget({ kind: "create" })}
+              className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
+            >
+              {t("categories.list.createCategory")}
+            </button>
+          )
+        }
       </div>
 
       <CategoriesKpiRow
@@ -373,11 +388,10 @@ export function CategoriesPage() {
             <button
               type="button"
               onClick={() => setViewMode("tree")}
-              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium ${
-                viewMode === "tree"
-                  ? "bg-[var(--signal)] text-white"
-                  : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
-              }`}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium ${viewMode === "tree"
+                ? "bg-[var(--signal)] text-white"
+                : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
+                }`}
             >
               <TreeIcon size={14} />
               {t("categories.list.viewToggle.tree")}
@@ -385,11 +399,10 @@ export function CategoriesPage() {
             <button
               type="button"
               onClick={() => setViewMode("table")}
-              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium ${
-                viewMode === "table"
-                  ? "bg-[var(--signal)] text-white"
-                  : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
-              }`}
+              className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium ${viewMode === "table"
+                ? "bg-[var(--signal)] text-white"
+                : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
+                }`}
             >
               <List size={14} />
               {t("categories.list.viewToggle.table")}
@@ -457,6 +470,7 @@ export function CategoriesPage() {
             onSelectionChange={setSelectedIds}
             onRowClick={(row) => handleSelect(row.id)}
             renderRowActions={renderRowActions}
+            canManageAccess={canManageAccess}
           />
         </div>
       )}
@@ -467,11 +481,11 @@ export function CategoriesPage() {
         initialValues={
           editingCategory
             ? {
-                id: editingCategory.id,
-                name: editingCategory.name,
-                parentCategoryId: editingCategory.parentCategoryId,
-                isActive: editingCategory.isActive,
-              }
+              id: editingCategory.id,
+              name: editingCategory.name,
+              parentCategoryId: editingCategory.parentCategoryId,
+              isActive: editingCategory.isActive,
+            }
             : null
         }
         presetParentId={drawerTarget?.kind === "create" ? drawerTarget.presetParentId : null}

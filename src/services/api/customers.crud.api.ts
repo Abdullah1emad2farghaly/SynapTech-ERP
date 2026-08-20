@@ -26,21 +26,21 @@ export interface Customer {
 
 export interface CreateCustomerPayload {
   name: string;
-  contactName: string;
-  phone: string;
-  email: string;
-  address: string;
-  taxNumber: string;
+  contactName: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  taxNumber: string | null;
 }
 
 export interface UpdateCustomerPayload {
   id: string;
   name: string;
-  contactName: string;
-  phone: string;
-  email: string;
-  address: string;
-  taxNumber: string;
+  contactName: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  taxNumber: string | null;
   isActive: boolean;
 }
 
@@ -55,6 +55,7 @@ export async function getCustomerById(id: string): Promise<Customer> {
 }
 
 export async function createCustomer(payload: CreateCustomerPayload): Promise<Customer> {
+  console.log(payload)
   const { data } = await apiClient.post<Customer>("/Customers", payload);
   return data;
 }

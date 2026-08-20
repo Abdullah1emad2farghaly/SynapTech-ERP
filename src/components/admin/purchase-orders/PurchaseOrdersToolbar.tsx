@@ -5,6 +5,7 @@
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Search, RefreshCw, Plus, Download } from "lucide-react";
+import { hasAnyPermission } from "@/utils/permissions";
 
 interface PurchaseOrdersToolbarProps {
   searchValue: string;
@@ -22,6 +23,7 @@ export function PurchaseOrdersToolbar({
   isRefreshing,
 }: PurchaseOrdersToolbarProps) {
   const { t } = useTranslation();
+  const canCreateAccess = hasAnyPermission(["purchasing.orders.create"])
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -45,14 +47,15 @@ export function PurchaseOrdersToolbar({
         >
           <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
         </button>
-        <button
+        {/* <button
           type="button"
           onClick={() => toast(t("purchaseOrders.toolbar.exportNotAvailable"))}
           className="inline-flex items-center justify-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-secondary] hover:bg-[--sunken]"
         >
           <Download size={16} />
           {t("common.actions.export")}
-        </button>
+        </button> */}
+        
         <button
           type="button"
           onClick={onCreate}

@@ -4,6 +4,7 @@ export interface NavChild {
   id: string;
   label: string;
   to: string;
+  permissions: string[];
 }
 
 export interface NavItem {
@@ -11,5 +12,6 @@ export interface NavItem {
   label: string;
   to: string;
   icon: LucideIcon;
+  permissions?: string[];
   children?: NavChild[];
 }

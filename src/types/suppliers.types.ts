@@ -15,20 +15,20 @@ export interface SupplierResponse {
 /** Body for POST /api/Suppliers */
 export interface CreateSupplierPayload {
   name: string;
-  contactName: string;
-  phone: string;
-  email: string;
-  address: string;
-  taxNumber: string;
+  contactName: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  taxNumber: string | null;
 }
 
 /** Body for PUT /api/Suppliers/{id} */
 export interface UpdateSupplierPayload {
   name: string;
-  contactName: string;
-  phone: string;
-  email: string;
-  address: string;
-  taxNumber: string;
+  contactName: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  taxNumber: string | null;
   isActive: boolean;
 }

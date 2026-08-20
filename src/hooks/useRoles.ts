@@ -34,9 +34,11 @@ import {
   getRoles,
   getRoleById,
   getPermissionsCatalog,
+  getMyPermissions,
 } from "../services/api/roles.crud.api";
 
 export const rolesQueryKeys = {
+  list: ['permissions'] as const,
   all: ["roles"] as const,
   detail: (id: string) => ["roles", id] as const,
   permissionsCatalog: ["roles", "permissions-catalog"] as const,
@@ -47,6 +49,13 @@ export function useRoles() {
     queryKey: rolesQueryKeys.all,
     queryFn: getRoles,
   });
+}
+
+export function usePermissions() {
+  return useQuery({
+    queryKey: rolesQueryKeys.list,
+    queryFn: getMyPermissions,
+  })
 }
 
 export function useRole(id: string | undefined) {
@@ -62,6 +71,13 @@ export function usePermissionsCatalog() {
   return useQuery({
     queryKey: rolesQueryKeys.permissionsCatalog,
     queryFn: getPermissionsCatalog,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+export function useMyPermissions() {
+  return useQuery({
+    queryKey: rolesQueryKeys.list,
+    queryFn: getMyPermissions,
     staleTime: 5 * 60 * 1000,
   });
 }

@@ -1,17 +1,4 @@
-// src/pages/admin/stock/StockOverviewPage.tsx
-//
-// Wires useStockOverview (the composed N+1 dataset), StockSummaryRow,
-// StockCompositionStatus (progressive-loading / partial-failure UI),
-// the toolbar (client-side search + Warehouse/Product filters, per the
-// design spec's explicit "client-side only" instruction), and
-// StockOverviewTable together. No pagination controls — the design spec
-// treats this as full-set client-side, same assumption class as
-// Departments/Categories' unpaginated trees, though here the dataset is
-// composed rather than a single list call.
-//
-// Row actions navigate to Record Movement / Transfer pre-filled with
-// that row's product+warehouse, or to that product's/warehouse's own
-// page — never Edit/Delete, since stock has no CRUD identity.
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";

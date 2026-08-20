@@ -17,6 +17,7 @@ import { JournalLineRow } from "../../../components/admin/journal-entries/Journa
 import { BalanceIndicator } from "../../../components/admin/journal-entries/BalanceIndicator";
 import axios from "axios";
 import {handleErrors} from "../../../utils/HandleErrors"
+import Optional from "@/components/common/Optional";
 
 const emptyLine = { accountId: "", description: "", debit: 0, credit: 0 };
 
@@ -153,6 +154,7 @@ export function CreateJournalEntryPage() {
           <div className="sm:col-span-1">
             <label className="mb-1 block text-sm text-[--ink-secondary]">
               {t("journalEntries.fields.description")}
+              <Optional/>
             </label>
             <input
               {...register("description")}

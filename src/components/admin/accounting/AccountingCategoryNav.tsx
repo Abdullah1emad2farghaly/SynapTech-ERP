@@ -14,7 +14,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const TABS = [
-  { to: 'accounting', end: true, key: 'overview' },
+  { to: '/accounting', end: true, key: 'overview' },
   { to: 'accounts', end: false, key: 'accounts' },
   { to: 'journal-entries', end: false, key: 'journalEntries' },
   // { to: 'trial-balance', end: false, key: 'trialBalance' },

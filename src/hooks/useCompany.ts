@@ -23,7 +23,6 @@ export function useUpdateCompany() {
   return useMutation({
     mutationFn: (payload: UpdateCompanyRequest) => companyApi.updateMyCompany(payload),
     onSuccess: (data) => {
-      // The PUT response is the new source of truth — no refetch needed.
       queryClient.setQueryData(companyKeys.me(), data);
     },
   });

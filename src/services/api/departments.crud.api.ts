@@ -27,14 +27,14 @@ export interface Department {
 
 export interface CreateDepartmentPayload {
   name: string;
-  branchId: string;
+  branchId?: string | null;
   parentDepartmentId?: string | null;
 }
 
 export interface UpdateDepartmentPayload {
   id: string;
   name: string;
-  branchId: string;
+  branchId?: string | null;
   parentDepartmentId?: string | null;
   isActive: boolean;
 }

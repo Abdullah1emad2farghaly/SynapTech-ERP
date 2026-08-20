@@ -36,6 +36,7 @@ interface EmployeesDataTableProps {
 
   formatSalary: (value: number) => string;
   formatDate: (value: string | null) => string;
+  canManageAccess: boolean;
 }
 
 export function EmployeesDataTable({
@@ -49,6 +50,7 @@ export function EmployeesDataTable({
   branchNames,
   onGrantAccess,
   formatDate,
+  canManageAccess
 }: EmployeesDataTableProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -178,15 +180,6 @@ export function EmployeesDataTable({
         />
       ),
     },
-
-    /**
-     * IMPORTANT:
-     *
-     * The menu is rendered directly inside the action cell.
-     *
-     * We do NOT change DataTable.
-     * We do NOT create a global menu outside the table.
-     */
     {
       id: "actions",
       header: "",
@@ -198,10 +191,14 @@ export function EmployeesDataTable({
             event.stopPropagation();
           }}
         >
-          <EmployeeActionMenu
-            employee={row}
-            onGrantAccess={onGrantAccess}
-          />
+          {
+            canManageAccess && (
+              <EmployeeActionMenu
+                employee={row}
+                onGrantAccess={onGrantAccess}
+              />
+            )
+          }
         </div>
       ),
     },

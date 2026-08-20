@@ -1,14 +1,4 @@
-// src/pages/admin/users/UsersListPage.tsx
-//
-// Composes everything built for the Users module so far. Owns page-level
-// state (search text, filters, sort, pagination, selection, drawer
-// open/closed) and delegates fetching to hooks over services/api — no
-// direct API calls in this file, per the architecture rule.
-//
-// ASSUMPTION: hook names/shapes (useUsers, useCreateUser, useUpdateUser,
-// useDeleteUser, useAssignRoles, useBranches, useDepartments, useRoles)
-// are inferred from the project's stated convention (hooks/useX.ts
-// wrapping TanStack Query) — wire these to your actual hooks.
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -39,6 +29,9 @@ import { useBranches } from "../../../hooks/useBranches";
 import { useDepartments } from "../../../hooks/useDepartments";
 import { useRoles } from "../../../hooks/useRoles";
 import { User } from "@/types/users.types";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import toast from "react-hot-toast";
 
 const DEFAULT_PAGE_SIZE = 25;
 
@@ -98,13 +91,22 @@ export function UsersListPage() {
   async function handleCreateSubmit(values: {
     fullName: string;
     email: string;
-    branchId: string;
-    departmentId: string;
+    branchId: string | null;
+    departmentId: string | null;
     roleNames: string[];
   }) {
-    await createUserMutation.mutateAsync(values);
-    setCreateOpen(false);
-    refetch();
+    try {
+      await createUserMutation.mutateAsync(values);
+      setCreateOpen(false);
+      refetch();
+      toast.success(t("users.create.success",{
+        name: values.fullName
+      }))
+    } catch (error) {
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors);
+      }
+    }
   }
 
   async function handleSetActive(user: User) {

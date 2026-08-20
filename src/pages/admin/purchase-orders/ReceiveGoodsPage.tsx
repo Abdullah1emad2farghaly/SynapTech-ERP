@@ -17,6 +17,7 @@ import { canPerform } from "../../../utils/purchaseOrderWorkflow";
 import type { ReceivedLineRequest } from "../../../types/purchaseOrders.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function ReceiveGoodsPage() {
   const { id } = useParams<{ id: string }>();
@@ -24,6 +25,19 @@ export function ReceiveGoodsPage() {
   const { t } = useTranslation();
   const { data: order, isLoading } = usePurchaseOrder(id);
   const receiveGoods = useReceivePurchaseOrderGoods(id ?? "");
+  const canManageAccess = hasAnyPermission(["purchasing.orders.manage"])
+  const canCteateAccess = hasAnyPermission(["purchasing.orders.create"])
+  const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"])
+  const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"])
+  const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"])
+
+  const access = {
+    canManageAccess,
+    canCteateAccess,
+    canApproveAccess,
+    canCancelAccess,
+    canReceiveAccess
+  }
 
   const [receivingNow, setReceivingNow] = useState<Record<string, number>>({});
 
@@ -53,7 +67,7 @@ export function ReceiveGoodsPage() {
     return <div className="p-6 text-center text-sm text-[--ink-secondary]">{t("purchaseOrders.details.notFound")}</div>;
   }
 
-  if (!canPerform("receive", order.status)) {
+  if (!canPerform("receive", order.status, access)) {
     navigate(`/purchase-orders/${order.id}`);
     toast.error(t("purchaseOrders.receive.notReceivable"));
     return null;
@@ -73,11 +87,11 @@ export function ReceiveGoodsPage() {
       console.log("receivedLines", receivedLines);
       await receiveGoods.mutateAsync({ lines: receivedLines });
       toast.success(t("purchaseOrders.toasts.received"));
-      navigate(`/inventory/purchase-orders/${order.id}`);
+      navigate(`/purchasing/purchase-orders/${order.id}`);
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors);
-      }else
+      } else
         toast.error(t("common.errors.actionFailed"));
     }
   };
@@ -86,7 +100,7 @@ export function ReceiveGoodsPage() {
     <div className="flex flex-col gap-6 p-6 pb-28">
       <button
         type="button"
-        onClick={() => navigate(`/inventory/purchase-orders/${order.id}`)}
+        onClick={() => navigate(`/purchasing/purchase-orders/${order.id}`)}
         className="flex w-fit items-center gap-1.5 text-sm text-[--ink-secondary] hover:text-[--ink-primary]"
       >
         <ArrowLeft size={16} className="rtl:rotate-180" />

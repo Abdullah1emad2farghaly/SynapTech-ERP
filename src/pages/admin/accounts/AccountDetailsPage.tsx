@@ -31,6 +31,10 @@ import {
   useUpdateAccount,
   useDeleteAccount,
 } from "../../../hooks/useAccounts.crud";
+import { hasAnyPermission } from "@/utils/permissions";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 interface EditFormState {
   code: string;
@@ -47,9 +51,11 @@ export function AccountDetailsPage() {
   const { data: allAccounts = [] } = useAccountsList(); // for parent lookup + children
   const { data: balance, isLoading: isBalanceLoading } = useAccountBalance(id, !!id);
 
-  // console.log(allAccounts)
+
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
+  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"]);
+
 
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState<EditFormState | null>(null);
@@ -83,6 +89,9 @@ export function AccountDetailsPage() {
     try {
       await deleteMutation.mutateAsync(account.id);
       navigate("/accounting/accounts");
+      toast.success(t("accounts.success.deleted", {
+        name: form?.name
+      }))
     } finally {
       setIsDeleting(false);
     }
@@ -91,10 +100,10 @@ export function AccountDetailsPage() {
   async function handleSetActive(active: boolean) {
     if (!account) return;
     setLoading(true)
-    try{
+    try {
       await updateMutation.mutateAsync({ id: account.id, code: account.code, name: account.name, isActive: active });
       refetch();
-    }finally{
+    } finally {
       setLoading(false)
     }
   }
@@ -107,11 +116,18 @@ export function AccountDetailsPage() {
   async function handleSaveEdit() {
     if (!account || !form) return;
     setLoading(true)
-    try{
+    try {
       await updateMutation.mutateAsync({ id: account.id, ...form });
       setIsEditing(false);
+      toast.success(t("accounts.success.updated", {
+        name: form.name
+      }))
       refetch();
-    }finally{
+    }catch(error){
+      if(axios.isAxiosError(error)){
+        handleErrors(error.response?.data.errors);
+      }
+    } finally {
       setLoading(false);
     }
   }
@@ -171,46 +187,51 @@ export function AccountDetailsPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {!isEditing && (
-              <button
-                type="button"
-                onClick={() => setIsEditing(true)}
-                className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-              >
-                <Pencil size={14} />
-                {t("accounts.actions.edit")}
-              </button>
-            )}
-            {account.isActive ? (
-              <button
-                type="button"
-                onClick={() => handleSetActive(false)}
-                disabled={loading}
-                className="rounded-[10px] disabled:cursor-not-allowed border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-              >
-                {loading? t("users.roles.saving"): t("accounts.actions.activate")}
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => handleSetActive(true)}
-                disabled={loading}
-                className="rounded-[10px] border disabled:cursor-not-allowed border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-              >
-                {loading? t("users.roles.saving"): t("accounts.actions.activate")}
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={handleDeleteClick}
-              disabled={hasChildren}
-              title={hasChildren ? t("accounts.dialogs.delete.blockedHasChildren") : undefined}
-              className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
-            >
-              {t("accounts.actions.delete")}
-            </button>
-          </div>
+          {
+            canManageAccess && (
+              <div className="flex items-center gap-2">
+                {!isEditing && (
+                  <button
+                    type="button"
+                    onClick={() => setIsEditing(true)}
+                    className="inline-flex items-center gap-1.5 rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                  >
+                    <Pencil size={14} />
+                    {t("accounts.actions.edit")}
+                  </button>
+                )}
+                {account.isActive ? (
+                  <button
+                    type="button"
+                    onClick={() => handleSetActive(false)}
+                    disabled={loading}
+                    className="rounded-[10px] disabled:cursor-not-allowed border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                  >
+                    {loading ? t("users.roles.saving") : t("accounts.actions.activate")}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleSetActive(true)}
+                    disabled={loading}
+                    className="rounded-[10px] border disabled:cursor-not-allowed border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                  >
+                    {loading ? t("users.roles.saving") : t("accounts.actions.activate")}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={handleDeleteClick}
+                  disabled={hasChildren}
+                  title={hasChildren ? t("accounts.dialogs.delete.blockedHasChildren") : undefined}
+                  className="rounded-[10px] border border-[var(--hairline)] px-3 py-2 text-sm font-medium text-[var(--error)] hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
+                >
+                  {t("accounts.actions.delete")}
+                </button>
+              </div>
+            )
+          }
+
         </div>
       </div>
 

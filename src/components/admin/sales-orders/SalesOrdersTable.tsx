@@ -12,6 +12,7 @@ import { StockWarningsBadge } from "./StockWarningsBadge";
 import { SalesOrderActionMenu } from "./SalesOrderActionMenu";
 import { canPerform } from "../../../utils/salesOrderWorkflow";
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 interface SalesOrdersTableProps {
   orders: SalesOrderResponse[];
@@ -51,12 +52,23 @@ export function SalesOrdersTable({
   onBulkCancel,
   onCreate,
 }: SalesOrdersTableProps) {
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"])
+
+  const access = {
+    canCancelAccess,
+    canShipAccess,
+    canApproveAccess,
+    canCreateAccess
+  }
   const { t } = useTranslation();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const selectedOrders = orders.filter((o) => selectedIds.includes(o.id));
   const canBulkCancel =
-    selectedOrders.length > 0 && selectedOrders.every((o) => canPerform("cancel", o.status));
+    selectedOrders.length > 0 && selectedOrders.every((o) => canPerform("cancel", o.status, access));
 
   const columns: DataTableColumn<SalesOrderResponse>[] = [
     {

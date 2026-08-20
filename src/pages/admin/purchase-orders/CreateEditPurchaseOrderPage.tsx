@@ -28,6 +28,7 @@ import { useSuppliers } from "../../../hooks/useSuppliers"; // existing module
 import { useWarehouses } from "../../../hooks/useWarehouses"; // existing module
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 const EMPTY_LINE = { productId: "", quantity: 0, unitPrice: 0 };
 
@@ -64,7 +65,6 @@ export function CreateEditPurchaseOrderPage() {
       supplierId: "",
       warehouseId: "",
       orderDate: new Date().toISOString().slice(0, 10),
-      expectedDate: new Date().toISOString().slice(0, 10),
       notes: "",
       lines: [EMPTY_LINE],
     },
@@ -76,7 +76,6 @@ export function CreateEditPurchaseOrderPage() {
         supplierId: existingOrder.supplierId,
         warehouseId: existingOrder.warehouseId,
         orderDate: existingOrder.orderDate.slice(0, 10),
-        expectedDate: existingOrder?.expectedDate?.slice(0, 10),
         notes: existingOrder.notes,
         lines: existingOrder.lines.map((l) => ({
           productId: l.productId,
@@ -100,15 +99,16 @@ export function CreateEditPurchaseOrderPage() {
   };
 
   const onSubmit = async (values: PurchaseOrderFormValues) => {
+    console.log(values)
     try {
       if (isEdit && id) {
         await updateOrder.mutateAsync(values);
         toast.success(t("purchaseOrders.toasts.updated"));
-        navigate(`/inventory/purchase-orders/${id}`);
+        navigate(`/purchasing/purchase-orders/${id}`);
       } else {
         const created = await createOrder.mutateAsync(values);
         toast.success(t("purchaseOrders.toasts.created"));
-        navigate(`/inventory/purchase-orders/${created.id}`);
+        navigate(`/purchasing/purchase-orders/${created.id}`);
       }
     } catch (error) {
       if(axios.isAxiosError(error)){
@@ -127,7 +127,9 @@ export function CreateEditPurchaseOrderPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+    <form onSubmit={handleSubmit(onSubmit, (validationErrors) => {
+      console.log("FORM VALIDATION ERRORS:", validationErrors);
+    })} className="flex flex-col">
       <div className="flex flex-col gap-6 p-6 pb-28">
         <button
           type="button"
@@ -185,20 +187,10 @@ export function CreateEditPurchaseOrderPage() {
           </div>
 
           <div>
-            <label className="mb-1 block text-sm text-[--ink-secondary]">{t("purchaseOrders.fields.expectedDate")}</label>
-            <input
-              type="date"
-              {...register("expectedDate")}
-              className="w-full rounded-md border border-[--hairline] bg-[--sunken] px-3 py-2 text-sm outline-none focus:border-[--signal] focus:ring-2 focus:ring-[--synapse]/30"
-            />
-            {errors.expectedDate && <p className="mt-1 text-xs text-[--error]">{t(errors.expectedDate.message as string)}</p>}
-          </div>
-
-          <div className="sm:col-span-2">
-            <label className="mb-1 block text-sm text-[--ink-secondary]">{t("purchaseOrders.fields.notes")}</label>
+            <label className="mb-1 block text-sm text-[--ink-secondary]">{t("purchaseOrders.fields.notes")}<Optional/></label>
             <textarea
               {...register("notes")}
-              rows={2}
+              rows={1}
               className="w-full rounded-md border border-[--hairline] bg-[--sunken] px-3 py-2 text-sm outline-none focus:border-[--signal] focus:ring-2 focus:ring-[--synapse]/30"
             />
           </div>
@@ -216,8 +208,11 @@ export function CreateEditPurchaseOrderPage() {
               setValue("lines", copy, { shouldDirty: true });
             }}
           />
-          {errors.lines?.message && (
-            <p className="mt-2 text-sm text-[--error]">{t(errors.lines.message as string)}</p>
+          {errors?.lines?.[0] && (
+            <ul>
+              <li className="mt-2 text-sm text-[--error]">{t(errors?.lines?.[0]?.productId?.message as string)}</li>
+              <li className="mt-2 text-sm text-[--error]">{t(errors?.lines?.[0]?.quantity?.message as string)}</li>
+            </ul>
           )}
         </section>
       </div>

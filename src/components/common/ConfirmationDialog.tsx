@@ -17,7 +17,10 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-export type ConfirmationDialogTone = "neutral" | "destructive" | "default";
+export type ConfirmationDialogTone =
+  | "neutral"
+  | "destructive"
+  | "default";
 
 export interface ConfirmationDialogProps {
   open: boolean;
@@ -27,8 +30,9 @@ export interface ConfirmationDialogProps {
   confirmLabel: string;
   cancelLabel: string;
   isSubmitting?: boolean;
-  onConfirm: () => void;
+  onConfirm: (name: string) => void;
   onCancel: () => void;
+  accountName?: string;
 }
 
 export function ConfirmationDialog({
@@ -41,54 +45,93 @@ export function ConfirmationDialog({
   isSubmitting = false,
   onConfirm,
   onCancel,
+  accountName
 }: ConfirmationDialogProps) {
-  const cancelButtonRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
+  const cancelButtonRef =
+    useRef<HTMLButtonElement>(null);
 
-  // Focus management: land on Cancel on open, restore the triggering
-  // element's focus on close.
+  const dialogRef =
+    useRef<HTMLDivElement>(null);
+
+  const previouslyFocusedElement =
+    useRef<HTMLElement | null>(null);
+
+  // Focus management: land on Cancel on open, restore
+  // the triggering element's focus on close.
   useEffect(() => {
     if (open) {
-      previouslyFocusedElement.current = document.activeElement as HTMLElement;
-      // Defer to the next tick so the button exists in the DOM to focus.
-      const id = requestAnimationFrame(() => cancelButtonRef.current?.focus());
+      previouslyFocusedElement.current =
+        document.activeElement as HTMLElement;
+
+      // Defer to the next tick so the button exists
+      // in the DOM to focus.
+      const id = requestAnimationFrame(() =>
+        cancelButtonRef.current?.focus(),
+      );
+
       return () => cancelAnimationFrame(id);
     } else {
       previouslyFocusedElement.current?.focus();
     }
   }, [open]);
 
-  // Escape to cancel, and a basic focus trap within the dialog.
+  // Escape to cancel, and a basic focus trap within
+  // the dialog.
   useEffect(() => {
     if (!open) return;
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+
         onCancel();
         return;
       }
-      if (e.key !== "Tab" || !dialogRef.current) return;
 
-      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
+      if (
+        e.key !== "Tab" ||
+        !dialogRef.current
+      ) {
+        return;
+      }
+
+      const focusable =
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+
       if (focusable.length === 0) return;
 
       const first = focusable[0]!;
-      const last = focusable[focusable.length - 1]!;
+      const last =
+        focusable[focusable.length - 1]!;
 
-      if (e.shiftKey && document.activeElement === first) {
+      if (
+        e.shiftKey &&
+        document.activeElement === first
+      ) {
         e.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
+      } else if (
+        !e.shiftKey &&
+        document.activeElement === last
+      ) {
         e.preventDefault();
         first.focus();
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener(
+      "keydown",
+      handleKeyDown,
+    );
+
+    return () =>
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown,
+      );
   }, [open, onCancel]);
 
   if (!open) return null;
@@ -99,11 +142,34 @@ export function ConfirmationDialog({
       : "bg-[var(--signal)] hover:bg-[var(--signal-hover)]";
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={(e) => {
+        // IMPORTANT:
+        // Prevent clicks inside the portal from bubbling
+        // back to parent React elements such as <Link>.
+        e.stopPropagation();
+      }}
+      onMouseDown={(e) => {
+        // Also prevent mouse events from reaching a
+        // possible parent Link / clickable row.
+        e.stopPropagation();
+      }}
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/40"
-        onClick={isSubmitting ? undefined : onCancel}
+        onClick={
+          isSubmitting
+            ? undefined
+            : (e) => {
+                e.stopPropagation();
+                onCancel();
+              }
+        }
+        onMouseDown={(e) => {
+          e.stopPropagation();
+        }}
         aria-hidden="true"
       />
 
@@ -114,6 +180,14 @@ export function ConfirmationDialog({
         aria-modal="true"
         aria-labelledby="confirmation-dialog-title"
         aria-describedby="confirmation-dialog-body"
+        onClick={(e) => {
+          // Prevent the dialog click from reaching a
+          // parent Link or clickable product row.
+          e.stopPropagation();
+        }}
+        onMouseDown={(e) => {
+          e.stopPropagation();
+        }}
         className="relative z-10 w-full max-w-sm rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5 shadow-[var(--elevation-1)] transition-all duration-[280ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
       >
         <h2
@@ -122,7 +196,11 @@ export function ConfirmationDialog({
         >
           {title}
         </h2>
-        <p id="confirmation-dialog-body" className="mt-2 text-sm text-[var(--ink-secondary)]">
+
+        <p
+          id="confirmation-dialog-body"
+          className="mt-2 text-sm text-[var(--ink-secondary)]"
+        >
           {body}
         </p>
 
@@ -130,15 +208,26 @@ export function ConfirmationDialog({
           <button
             ref={cancelButtonRef}
             type="button"
-            onClick={onCancel}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              onCancel();
+            }}
             disabled={isSubmitting}
             className="rounded-[10px] px-4 py-2 text-sm font-medium text-[var(--ink-secondary)] transition-colors duration-150 hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {cancelLabel}
           </button>
+
           <button
             type="button"
-            onClick={onConfirm}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              onConfirm(accountName|| "");
+            }}
             disabled={isSubmitting}
             className={`rounded-[10px] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50 ${confirmButtonColorClasses}`}
           >

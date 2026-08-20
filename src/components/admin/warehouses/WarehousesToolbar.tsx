@@ -30,6 +30,7 @@ interface WarehousesToolbarProps {
   onRefresh: () => void;
   onCreate: () => void;
   isRefreshing?: boolean;
+  canManageAccess: boolean;
 }
 
 const DEFAULT_FILTERS: WarehousesFilters = {
@@ -47,6 +48,7 @@ export function WarehousesToolbar({
   onRefresh,
   onCreate,
   isRefreshing,
+  canManageAccess
 }: WarehousesToolbarProps) {
   const { t } = useTranslation();
   const patch = (partial: Partial<WarehousesFilters>) =>
@@ -119,34 +121,32 @@ export function WarehousesToolbar({
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={onRefresh}
-            title={t("common.actions.refresh")}
-            className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
-          >
-            <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
-          </button>
+
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => toast(t("warehouses.toolbar.exportNotAvailable"))}
-            className="inline-flex items-center justify-center gap-2 rounded-md border border-[--hairline] px-3 py-2 text-sm font-medium text-[--ink-secondary] hover:bg-[--sunken]"
-          >
-            <Download size={16} />
-            {t("common.actions.export")}
-          </button>
-          <button
-            type="button"
-            onClick={onCreate}
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
-          >
-            <Plus size={16} />
-            {t("warehouses.actions.create")}
-          </button>
-        </div>
+        {
+          canManageAccess && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={onRefresh}
+                title={t("common.actions.refresh")}
+                className="inline-flex items-center justify-center rounded-md border border-[--hairline] p-2 text-[--ink-secondary] hover:bg-[--sunken]"
+              >
+                <RefreshCw size={16} className={isRefreshing ? "animate-spin" : undefined} />
+              </button>
+              <button
+                type="button"
+                onClick={onCreate}
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
+              >
+                <Plus size={16} />
+                {t("warehouses.actions.create")}
+              </button>
+            </div>
+          )
+        }
+
       </div>
     </div>
   );

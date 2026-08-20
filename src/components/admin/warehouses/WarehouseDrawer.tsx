@@ -19,6 +19,7 @@ import type { WarehouseResponse } from "../../../types/warehouses.types";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 interface BranchOption {
   id: string;
@@ -58,7 +59,6 @@ export function WarehouseDrawer({
   const createWarehouse = useCreateWarehouse();
   const updateWarehouse = useUpdateWarehouse(warehouse?.id ?? "");
   const [confirmCloseOpen, setConfirmCloseOpen] = useState(false);
-  const [isValid, setIsValid] = useState(false);
 
   const {
     register,
@@ -99,6 +99,7 @@ export function WarehouseDrawer({
   };
 
   const onSubmit = async (values: WarehouseFormValues) => {
+   
     try {
       if (mode === "create") {
         await createWarehouse.mutateAsync({

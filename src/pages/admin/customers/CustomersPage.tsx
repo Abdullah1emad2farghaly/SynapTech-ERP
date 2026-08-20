@@ -29,6 +29,9 @@ import {
   useUpdateCustomer,
   useDeleteCustomer,
 } from "../../../hooks/useCustomers.crud";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 type DrawerTarget =
   | { kind: "create" }
@@ -49,6 +52,7 @@ export function CustomersPage() {
   const [isConfirmSubmitting, setIsConfirmSubmitting] = useState(false);
 
   const { data: customers = [], isLoading, isError, refetch } = useCustomersList();
+  const canManageAccess = hasAnyPermission(['sales.customers.manage']);
   const createMutation = useCreateCustomer();
   const updateMutation = useUpdateCustomer();
   const deleteMutation = useDeleteCustomer();
@@ -87,7 +91,7 @@ export function CustomersPage() {
         case "name":
           return a.name.localeCompare(b.name) * factor;
         case "contactName":
-          return a.contactName.localeCompare(b.contactName) * factor;
+          return a?.contactName?.localeCompare(b.contactName) * factor;
         case "status":
           return (Number(a.isActive) - Number(b.isActive)) * factor;
         default:
@@ -105,6 +109,7 @@ export function CustomersPage() {
     [customers],
   );
 
+  
   function handleClearFilters() {
     setSearchText("");
     setStatusFilter(null);
@@ -118,12 +123,25 @@ export function CustomersPage() {
   }
 
   async function handleDrawerSubmit(values: CustomerFormValues, id?: string) {
+
     if (id) {
-      await updateMutation.mutateAsync({ id, ...values });
+      await updateMutation.mutateAsync({ id, ...values }, {
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            handleErrors(error.response?.data.errors);
+          }
+        }
+      });
       setDrawerTarget(null);
     } else {
       const { isActive: _isActive, ...createValues } = values;
-      await createMutation.mutateAsync(createValues);
+      await createMutation.mutateAsync(createValues, {
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            handleErrors(error.response?.data.errors);
+          }
+        }
+      });
     }
     refetch();
   }
@@ -196,13 +214,19 @@ export function CustomersPage() {
             {t("customers.list.subtitleCount", { count: kpis.total })}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setDrawerTarget({ kind: "create" })}
-          className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
-        >
-          {t("customers.list.createCustomer")}
-        </button>
+        {/*  */}
+        {
+          canManageAccess && (
+            <button
+              type="button"
+              onClick={() => setDrawerTarget({ kind: "create" })}
+              className="rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)]"
+            >
+              {t("customers.list.createCustomer")}
+            </button>
+          )
+        }
+
       </div>
 
       <CustomersKpiRow total={kpis.total} active={kpis.active} inactive={kpis.inactive} />
@@ -283,15 +307,15 @@ export function CustomersPage() {
         initialValues={
           editingCustomer
             ? {
-                id: editingCustomer.id,
-                name: editingCustomer.name,
-                contactName: editingCustomer.contactName,
-                phone: editingCustomer.phone,
-                email: editingCustomer.email,
-                address: editingCustomer.address,
-                taxNumber: editingCustomer.taxNumber,
-                isActive: editingCustomer.isActive,
-              }
+              id: editingCustomer.id,
+              name: editingCustomer.name,
+              contactName: editingCustomer.contactName,
+              phone: editingCustomer.phone,
+              email: editingCustomer.email,
+              address: editingCustomer.address,
+              taxNumber: editingCustomer.taxNumber,
+              isActive: editingCustomer.isActive,
+            }
             : null
         }
         onSubmit={handleDrawerSubmit}
@@ -305,6 +329,7 @@ export function CustomersPage() {
         onSetActive={handleSetActive}
         onDeactivateRequest={requestDeactivate}
         onDeleteRequest={requestDelete}
+        canManageAccess={canManageAccess}
       />
 
       <ConfirmationDialog

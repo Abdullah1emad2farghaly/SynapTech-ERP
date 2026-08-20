@@ -13,13 +13,8 @@ export const purchaseOrderFormSchema = z
     supplierId: z.string().min(1, "purchaseOrders.validation.supplierRequired"),
     warehouseId: z.string().min(1, "purchaseOrders.validation.warehouseRequired"),
     orderDate: z.string().min(1, "purchaseOrders.validation.orderDateRequired"),
-    expectedDate: z.string().min(1, "purchaseOrders.validation.expectedDateRequired"),
     notes: z.string().max(1000).optional().default(""),
     lines: z.array(lineSchema).min(1, "purchaseOrders.validation.minOneLine"),
   })
-  .refine((data) => data.expectedDate >= data.orderDate, {
-    message: "purchaseOrders.validation.expectedBeforeOrder",
-    path: ["expectedDate"],
-  });
 
 export type PurchaseOrderFormValues = z.infer<typeof purchaseOrderFormSchema>;

@@ -23,6 +23,7 @@ import { useRoles } from "@/hooks/useRoles";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { hasAnyPermission } from "@/utils/permissions";
 
 type TabId = "overview" | "employment" | "contact" | "compensation" | "access";
 
@@ -54,6 +55,7 @@ export function EmployeeDetailsPage() {
   const [searchParams] = useSearchParams();
   const { data: employee, isLoading, isError } = useEmployee(id);
   const deleteEmployee = useDeleteEmployee();
+  const canManageAccess = hasAnyPermission(["hr.employees.manage"]);
 
   const [activeTab, setActiveTab] = useState<TabId>(
     (searchParams.get("tab") as TabId) || "overview"
@@ -61,14 +63,14 @@ export function EmployeeDetailsPage() {
   const [grantAccessOpen, setGrantAccessOpen] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const {data: roleOptions = []} = useRoles()
+  const { data: roleOptions = [] } = useRoles()
 
   const options: MultiSelectOption[] = roleOptions.map((opt) => {
     return {
       value: opt.id,
       label: opt.name
     }
-    
+
   })
 
   if (isLoading) {
@@ -110,7 +112,7 @@ export function EmployeeDetailsPage() {
       toast.success(t("employees.toast.deleted", "Employee deleted"));
       navigate("/hr/employees");
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors)
       }
     }
@@ -145,56 +147,60 @@ export function EmployeeDetailsPage() {
             </div>
           </div>
 
-          <div className="relative flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => navigate(`edit`)}
-              className="inline-flex h-9 items-center gap-1.5 rounded-md border border-[var(--hairline)] px-3 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-            >
-              <Pencil size={14} aria-hidden="true" />
-              {t("employees.actions.edit", "Edit Employee")}
-            </button>
-            <button
-              type="button"
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label={t("common.moreActions", "More actions")}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
-            >
-              <MoreVertical size={16} aria-hidden="true" />
-            </button>
-
-            {menuOpen && (
-              <div
-                role="menu"
-                className="absolute end-0 top-11 z-20 w-48 overflow-hidden rounded-md border border-[var(--hairline)] bg-[var(--panel)] shadow-[var(--elevation-1)]"
-              >
-                {!hasAccess && (
-                  <button
-                    role="menuitem"
-                    type="button"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      setGrantAccessOpen(true);
-                    }}
-                    className="flex w-full px-3 py-2.5 text-start text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-                  >
-                    {t("employees.actions.grantAccess", "Grant Access")}
-                  </button>
-                )}
+          {
+            canManageAccess && (
+              <div className="relative flex items-center gap-2">
                 <button
-                  role="menuitem"
                   type="button"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setConfirmDeleteOpen(true);
-                  }}
-                  className="flex w-full px-3 py-2.5 text-start text-sm text-[var(--error)] hover:bg-[var(--error)]/5"
+                  onClick={() => navigate(`edit`)}
+                  className="inline-flex h-9 items-center gap-1.5 rounded-md border border-[var(--hairline)] px-3 text-sm font-medium text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
                 >
-                  {t("employees.actions.delete", "Delete Employee")}
+                  <Pencil size={14} aria-hidden="true" />
+                  {t("employees.actions.edit", "Edit Employee")}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen((v) => !v)}
+                  aria-label={t("common.moreActions", "More actions")}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
+                >
+                  <MoreVertical size={16} aria-hidden="true" />
+                </button>
+
+                {menuOpen && (
+                  <div
+                    role="menu"
+                    className="absolute end-0 top-11 z-20 w-48 overflow-hidden rounded-md border border-[var(--hairline)] bg-[var(--panel)] shadow-[var(--elevation-1)]"
+                  >
+                    {!hasAccess && (
+                      <button
+                        role="menuitem"
+                        type="button"
+                        onClick={() => {
+                          setMenuOpen(false);
+                          setGrantAccessOpen(true);
+                        }}
+                        className="flex w-full px-3 py-2.5 text-start text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
+                      >
+                        {t("employees.actions.grantAccess", "Grant Access")}
+                      </button>
+                    )}
+                    <button
+                      role="menuitem"
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        setConfirmDeleteOpen(true);
+                      }}
+                      className="flex w-full px-3 py-2.5 text-start text-sm text-[var(--error)] hover:bg-[var(--error)]/5"
+                    >
+                      {t("employees.actions.delete", "Delete Employee")}
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            )
+          }
         </div>
       </div>
 
@@ -207,11 +213,10 @@ export function EmployeeDetailsPage() {
               role="tab"
               aria-selected={activeTab === tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`whitespace-nowrap border-b-2 px-1 py-3 text-sm font-medium ${
-                activeTab === tab.id
+              className={`whitespace-nowrap border-b-2 px-1 py-3 text-sm font-medium ${activeTab === tab.id
                   ? "border-[var(--signal)] text-[var(--signal)]"
                   : "border-transparent text-[var(--ink-tertiary)] hover:text-[var(--ink-primary)]"
-              }`}
+                }`}
             >
               {tab.label}
             </button>

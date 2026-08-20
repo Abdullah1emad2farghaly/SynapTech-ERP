@@ -14,7 +14,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const TABS = [
-  { to: 'hr', end: true, key: 'overview' },
+  { to: '/hr', end: true, key: 'overview' },
   { to: 'employees', end: false, key: 'employees' },
   { to: 'leave-requests', end: false, key: 'leaveRequests' },
 ] as const;

@@ -7,6 +7,7 @@ import { useDeleteRole } from "../../../hooks/useRoleMutations";
 import type { RoleResponse } from "../../../types/roles.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { useNavigate } from "react-router-dom";
 
 interface DeleteRoleDialogProps {
   role: RoleResponse | null;
@@ -21,6 +22,7 @@ export function DeleteRoleDialog({
 }: DeleteRoleDialogProps) {
   const { t } = useTranslation();
   const deleteRole = useDeleteRole();
+  const navigate = useNavigate();
 
   const handleConfirm = async () => {
     if (!role) return;
@@ -28,6 +30,7 @@ export function DeleteRoleDialog({
       await deleteRole.mutateAsync(role.id);
       toast.success(t("roles.toasts.deleted"));
       onClose();
+      navigate("/administration/roles")
     } catch (error) {
       if(axios.isAxiosError(error)){
         handleErrors(error.response?.data.errors)

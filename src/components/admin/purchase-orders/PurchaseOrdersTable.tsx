@@ -15,6 +15,7 @@ import { WarningsBadge } from "./WarningsBadge";
 import { PurchaseOrderActionMenu } from "./PurchaseOrderActionMenu";
 import { canPerform } from "../../../utils/purchaseOrderWorkflow";
 import type { PurchaseOrderResponse } from "../../../types/purchaseOrders.types";
+import { hasAnyPermission } from "@/utils/permissions";
 
 interface PurchaseOrdersTableProps {
   orders: PurchaseOrderResponse[];
@@ -56,10 +57,23 @@ export function PurchaseOrdersTable({
 }: PurchaseOrdersTableProps) {
   const { t } = useTranslation();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const canManageAccess = hasAnyPermission(["purchasing.orders.manage"])
+    const canCteateAccess = hasAnyPermission(["purchasing.orders.create"])
+    const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"])
+    const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"])
+    const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"])
+  
+    const access = {
+      canApproveAccess,
+      canManageAccess,
+      canCteateAccess,
+      canCancelAccess,
+      canReceiveAccess
+    }
 
   const selectedOrders = orders.filter((o) => selectedIds.includes(o.id));
   const canBulkCancel =
-    selectedOrders.length > 0 && selectedOrders.every((o) => canPerform("cancel", o.status));
+    selectedOrders.length > 0 && selectedOrders.every((o) => canPerform("cancel", o.status, access));
 
   const columns: DataTableColumn<PurchaseOrderResponse>[] = [
     {
@@ -100,13 +114,6 @@ export function PurchaseOrdersTable({
         <span className="text-sm text-[--ink-secondary]">{new Date(order.orderDate).toLocaleDateString()}</span>
       ),
     },
-    // {
-    //   id: "expectedDate",
-    //   header: t("purchaseOrders.table.expectedDate"),
-    //   cell: (order) => (
-    //     <span className="text-sm text-[--ink-secondary]">{new Date(order.expectedDate).toLocaleDateString()}</span>
-    //   ),
-    // },
     {
       id: "totalAmount",
       header: t("purchaseOrders.table.total"),

@@ -38,6 +38,7 @@ export interface CategoriesTableProps {
   onSelectionChange?: (ids: Set<string>) => void;
   onRowClick?: (row: CategoryFlatRow) => void;
   renderRowActions?: (row: CategoryFlatRow) => React.ReactNode;
+  canManageAccess: boolean;
 }
 
 export function CategoriesTable({
@@ -54,6 +55,7 @@ export function CategoriesTable({
   onSelectionChange,
   onRowClick,
   renderRowActions,
+  canManageAccess
 }: CategoriesTableProps) {
   const { t } = useTranslation();
 
@@ -96,7 +98,7 @@ export function CategoriesTable({
       header: t("categories.column.childrenCount"),
       cell: (row) => row.childrenCount,
     },
-    ...(renderRowActions
+    ...(canManageAccess && renderRowActions
       ? [
           {
             id: "actions",

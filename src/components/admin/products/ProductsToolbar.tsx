@@ -24,6 +24,7 @@ export interface ProductsToolbarProps {
   onAddProduct: () => void;
   isRefreshing?: boolean;
   className?: string;
+  canManageAccess: boolean
 }
 
 export function ProductsToolbar({
@@ -38,6 +39,7 @@ export function ProductsToolbar({
   onAddProduct,
   isRefreshing = false,
   className = "",
+  canManageAccess
 }: ProductsToolbarProps) {
   const { t } = useTranslation();
 
@@ -112,32 +114,35 @@ export function ProductsToolbar({
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onRefresh}
-            disabled={isRefreshing}
-            aria-label={t("common.actions.refresh") ?? ""}
-            title={t("common.actions.refresh") ?? ""}
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--hairline)] bg-[var(--panel)] text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40 disabled:opacity-50"
-          >
-            <RefreshCw
-              size={16}
-              className={isRefreshing ? "animate-spin" : undefined}
-            />
-          </button>
+        {
+          canManageAccess &&
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              aria-label={t("common.actions.refresh") ?? ""}
+              title={t("common.actions.refresh") ?? ""}
+              className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--hairline)] bg-[var(--panel)] text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:bg-[var(--sunken)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40 disabled:opacity-50"
+            >
+              <RefreshCw
+                size={16}
+                className={isRefreshing ? "animate-spin" : undefined}
+              />
+            </button>
 
-          <button
-            type="button"
-            onClick={onAddProduct}
-            className="flex h-10 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white transition-colors duration-150 ease-out hover:bg-[var(--signal-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40"
-          >
-            <Plus size={16} />
-            <span className="hidden sm:inline">
-              {t("products.toolbar.addProduct")}
-            </span>
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={onAddProduct}
+              className="flex h-10 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white transition-colors duration-150 ease-out hover:bg-[var(--signal-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40"
+            >
+              <Plus size={16} />
+              <span className="hidden sm:inline">
+                {t("products.toolbar.addProduct")}
+              </span>
+            </button>
+          </div>
+        }
       </div>
 
       {activeChips.length > 0 && (

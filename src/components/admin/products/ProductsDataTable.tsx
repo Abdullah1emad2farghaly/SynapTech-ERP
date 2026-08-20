@@ -25,6 +25,7 @@ export interface ProductsDataTableProps {
   onDuplicate: (product: Product) => void;
   onDelete: (product: Product) => void;
   className?: string;
+  canManageAccess: boolean;
 }
 
 function formatCurrency(value: number): string {
@@ -48,6 +49,7 @@ export function ProductsDataTable({
   onDuplicate,
   onDelete,
   className = "",
+  canManageAccess
 }: ProductsDataTableProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -78,7 +80,7 @@ export function ProductsDataTable({
       header: t("products.table.category"),
       sortable: true,
       cell: (row) => (
-        <span className="text-[var(--ink-secondary)]">{row.categoryId}</span>
+        <span className="text-[var(--ink-secondary)]">{row.categoryId || "__"}</span>
       ),
     },
     {
@@ -105,7 +107,7 @@ export function ProductsDataTable({
       header: t("products.table.salePrice"),
       sortable: true,
       cell: (row) => (
-        <span className="tabular-nums font-medium text-[var(--ink-primary)]">
+        <span className="tabular-nums font-medium text-[var(--accent-emerald)]">
           {formatCurrency(row.salePrice)}
         </span>
       ),
@@ -125,13 +127,15 @@ export function ProductsDataTable({
       id: "actions",
       header: "",
       cell: (row) => (
-        <ProductActionMenu
-          product={row}
-          onEdit={() => onEdit(row)}
-          onDuplicate={() => onDuplicate(row)}
-          onDelete={() => onDelete(row)}
-          onViewDetails={() => navigate(`/products/${row.id}`)}
-        />
+        canManageAccess && (
+          <ProductActionMenu
+            product={row}
+            onEdit={() => onEdit(row)}
+            onDuplicate={() => onDuplicate(row)}
+            onDelete={() => onDelete(row)}
+            onViewDetails={() => navigate(`${row.id}`)}
+          />
+        )
       ),
     },
   ];
@@ -142,7 +146,7 @@ export function ProductsDataTable({
       rows={products}
       getRowId={(row) => row.id}
       isLoading={isLoading}
-      onRowClick={(row) => navigate(`/inventory/products/${row.id}`)}
+      onRowClick={(row) => navigate(`${row.id}`)}
       sortColumnId={sortColumnId}
       sortDirection={sortDirection}
       // onSortChange={onSortChange}

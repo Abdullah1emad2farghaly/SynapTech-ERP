@@ -58,6 +58,11 @@ import PurchasingOverviewPage from "./pages/admin/purchasing/PurchasingOverviewP
 import InventoryOverviewPage from "./pages/admin/inventory/InventoryOverviewPage";
 import AccountingOverviewPage from "./pages/admin/accounting/AccountingOverviewPage";
 import HrOverviewPage from "./pages/admin/hr/HrOverviewPage";
+import { getMyPermissions } from "./services/api/roles.crud.api";
+import { useEffect } from "react";
+import OrganizationOverviewPage from "./pages/admin/organization/OrganizationOverviewPage";
+import AdministrationOverviewPage from "./pages/admin/administration/AdministrationOverviewPage";
+// import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +76,18 @@ function DashboardLayout() {
 }
 
 export default function App() {
+
+  useEffect(() => {
+    const fn = async () => {
+      try {
+        const res = await getMyPermissions()
+        // console.log(res);
+      } catch {
+        console.log('ay7ga')
+      }
+    }
+    fn();
+  }, [])
 
 
   return (
@@ -89,15 +106,17 @@ export default function App() {
 
           {/* Shelled pages — everything nested here renders inside AppShell */}
           <Route element={<DashboardLayout />}>
-            <Route path={ROUTES.DASHBOARD} />
-            <Route path="settings" element={<CompanySettingsPage />} />
+
+            <Route path="/settings" element={<CompanySettingsPage />} />
             <Route path="/organization">
+              <Route path="/organization" element={<OrganizationOverviewPage />} />
               <Route path="branches" element={<BranchesPage />} />
               <Route path="branches/:id" element={<BranchDetailsPage />} />
               <Route path="departments" element={<DepartmentsPage />} />
             </Route>
 
             <Route path="/administration">
+              <Route path="/administration" element={<AdministrationOverviewPage />} />
               <Route path="users" element={<UsersListPage />} />
               <Route path="users/:id" element={<UserDetailsPage />} />
               <Route path="roles" element={<RolesListPage />} />
@@ -140,6 +159,7 @@ export default function App() {
               <Route path="employees/:id/edit" element={<EditEmployeePage />} />
 
               <Route path="attendance" element={<AttendancePage />} />
+              <Route path="my-attendance" element={<MyAttendancePage />} />
               <Route path="my-attendance" element={<MyAttendancePage />} />
 
               <Route path="leave-requests" element={<LeaveRequestsDashboardPage />} />

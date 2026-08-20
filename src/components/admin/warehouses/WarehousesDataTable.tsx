@@ -30,6 +30,7 @@ interface WarehousesDataTableProps {
   onDelete: (warehouse: WarehouseResponse) => void;
   onCreate: () => void;
   onResetFilters: () => void;
+  canManageAccess: boolean;
 }
 
 export function WarehousesDataTable({
@@ -45,6 +46,7 @@ export function WarehousesDataTable({
   onDelete,
   onCreate,
   onResetFilters,
+  canManageAccess
 }: WarehousesDataTableProps) {
   const { t } = useTranslation();
   const branchById = new Map(branches.map((b) => [b.value, b]));
@@ -100,13 +102,15 @@ export function WarehousesDataTable({
       id: "actions",
       header: "",
       cell: (warehouse) => (
-        <WarehouseActionMenu
-          warehouse={warehouse}
-          onView={onView}
-          onEdit={onEdit}
-          onToggleActive={onToggleActive}
-          onDelete={onDelete}
-        />
+        canManageAccess && (
+          <WarehouseActionMenu
+            warehouse={warehouse}
+            onView={onView}
+            onEdit={onEdit}
+            onToggleActive={onToggleActive}
+            onDelete={onDelete}
+          />
+        )
       ),
     },
   ];

@@ -19,12 +19,16 @@ import {
   RejectLeaveRequestDialog,
 } from "../../../components/admin/leaveRequests/LeaveRequestActionDialogs";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
+import { hasAnyPermission } from "@/utils/permissions";
 
 export function LeaveRequestDetailsPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { data: request, isLoading, isError, refetch } = useLeaveRequest(id);
+
+  const canApproveAccess = hasAnyPermission(["hr.leaves.approve"]);
+  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"]);
 
   const [approveTarget, setApproveTarget] = useState<LeaveRequestResponse | null>(null);
   const [rejectTarget, setRejectTarget] = useState<LeaveRequestResponse | null>(null);
@@ -147,7 +151,7 @@ export function LeaveRequestDetailsPage() {
                 <h2 className="text-sm font-semibold mb-2" style={{ color: "var(--ink-primary)" }}>
                   {t("leaveRequests.details.quickActions")}
                 </h2>
-                {actions.includes("approve") && (
+                {(actions.includes("approve") && canApproveAccess) && (
                   <button
                     type="button"
                     onClick={() => setApproveTarget(request)}
@@ -158,7 +162,7 @@ export function LeaveRequestDetailsPage() {
                     {t("leaveRequests.actions.approve")}
                   </button>
                 )}
-                {actions.includes("reject") && (
+                {(actions.includes("reject") && canApproveAccess) && (
                   <button
                     type="button"
                     onClick={() => setRejectTarget(request)}
@@ -169,7 +173,7 @@ export function LeaveRequestDetailsPage() {
                     {t("leaveRequests.actions.reject")}
                   </button>
                 )}
-                {actions.includes("cancel") && (
+                {(actions.includes("cancel") && canSubmitAccess) && (
                   <button
                     type="button"
                     onClick={() => setCancelTarget(request)}

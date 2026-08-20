@@ -18,7 +18,7 @@ export interface PermissionResponse {
 /** Body for POST /api/Roles */
 export interface CreateRolePayload {
   name: string;
-  description: string;
+  description?: string | null;
   permissionCodes: string[];
 }
 
@@ -26,7 +26,7 @@ export interface CreateRolePayload {
  *  Permission changes go through the separate PUT /api/Roles/{id}/permissions endpoint. */
 export interface UpdateRolePayload {
   name: string;
-  description: string;
+  description?: string | null;
 }
 
 /** Body for PUT /api/Roles/{id}/permissions */

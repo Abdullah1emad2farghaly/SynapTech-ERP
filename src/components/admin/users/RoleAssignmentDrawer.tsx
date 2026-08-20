@@ -19,6 +19,7 @@ import { MultiSelectOption, MultiSelectSearchable } from "../../common/MultiSele
 import { RoleResponse } from "@/types/roles.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import toast from "react-hot-toast";
 
 export interface RoleAssignmentDrawerProps {
   open: boolean;
@@ -60,7 +61,6 @@ export function RoleAssignmentDrawer({
     if (open) setSelected(currentRoleIds);
   }, [open, currentRoleIds]);
 
-  // console.log(currentRoleIds)
   const isUnchanged = useMemo(() => sameSet(selected, currentRoleIds), [selected, currentRoleIds]);
   const isEmpty = selected.length === 0;
   const saveDisabled = isUnchanged || isEmpty || isSubmitting;
@@ -74,6 +74,7 @@ export function RoleAssignmentDrawer({
     setIsSubmitting(true);
     try {
       await onSubmit(userId, selected);
+      toast.success(t(""))
       onClose();
     } catch (error) {
       if(axios.isAxiosError(error)){

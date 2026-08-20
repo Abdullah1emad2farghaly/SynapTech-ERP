@@ -71,21 +71,21 @@ export function SuppliersTable({
       id: "contactName",
       header: t("suppliers.table.contactPerson"),
       cell: (supplier) => (
-        <span className="text-sm text-[--ink-secondary]">{supplier.contactName}</span>
+        <span className="text-sm text-[--ink-secondary]">{supplier.contactName || "__"}</span>
       ),
     },
     {
       id: "phone",
       header: t("suppliers.table.phone"),
       cell: (supplier) => (
-        <span className="text-sm text-[--ink-secondary]">{supplier.phone}</span>
+        <span className="text-sm text-[--ink-secondary]">{supplier.phone || "__"}</span>
       ),
     },
     {
       id: "email",
       header: t("suppliers.table.email"),
       cell: (supplier) => (
-        <span className="text-sm text-[--ink-secondary]">{supplier.email}</span>
+        <span className="text-sm text-[--ink-secondary]">{supplier.email || "__"}</span>
       ),
     },
     {
@@ -93,7 +93,7 @@ export function SuppliersTable({
       header: t("suppliers.table.taxNumber"),
       cell: (supplier) => (
         <span className="font-mono text-xs text-[--ink-secondary]">
-          {supplier.taxNumber}
+          {supplier.taxNumber || "__"}
         </span>
       ),
     },
@@ -147,9 +147,6 @@ export function SuppliersTable({
         getRowId={(supplier) => supplier.id}
         isLoading={isLoading}
         skeletonRowCount={6}
-        // selectable
-        // selectedIds={selectedIds}
-        // onSelectionChange={setSelectedIds}
         emptyState={
           hasActiveFilters ? (
             <div className="flex flex-col items-center gap-3 py-12 text-center">

@@ -23,6 +23,9 @@ import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
 import { TreeSelect, type TreeSelectNode } from "../../common/TreeSelect";
 import { ACCOUNT_TYPES } from "../../../constants/accountTypes";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 export interface AccountFormValues {
   code: string;
@@ -104,6 +107,10 @@ export function AccountDrawer({
         parentAccountId: values.parentAccountId,
       });
       handleClose();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -112,81 +119,84 @@ export function AccountDrawer({
   return (
     <Drawer open={open} onClose={handleClose} title={t("accounts.create.title")}>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div>
-          <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
-            {t("accounts.create.fields.code")}
-          </label>
-          <input
-            value={values.code}
-            onChange={(e) => setValues((v) => ({ ...v, code: e.target.value }))}
-            onBlur={() => setTouched((tt) => ({ ...tt, code: true }))}
-            className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 font-mono text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
-          />
-          {touched.code && values.code.trim().length === 0 && (
-            <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
-          )}
-          {serverError?.field === "code" && (
-            <p className="mt-1 text-xs text-[var(--error)]">{t(serverError.messageKey)}</p>
-          )}
+        <div className="flex flex-col gap-3 pb-3">
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]">
+              {t("accounts.create.fields.code")}
+            </label>
+            <input
+              value={values.code}
+              onChange={(e) => setValues((v) => ({ ...v, code: e.target.value }))}
+              onBlur={() => setTouched((tt) => ({ ...tt, code: true }))}
+              className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 font-mono text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
+            />
+            {touched.code && values.code.trim().length === 0 && (
+              <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
+            )}
+            {serverError?.field === "code" && (
+              <p className="mt-1 text-xs text-[var(--error)]">{t(serverError.messageKey)}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]">
+              {t("accounts.create.fields.name")}
+            </label>
+            <input
+              value={values.name}
+              onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
+              onBlur={() => setTouched((tt) => ({ ...tt, name: true }))}
+              className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
+            />
+            {touched.name && values.name.trim().length === 0 && (
+              <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]">
+              {t("accounts.create.fields.type")}
+            </label>
+            <select
+              value={values.accountType}
+              onChange={(e) => setValues((v) => ({ ...v, accountType: e.target.value }))}
+              onBlur={() => setTouched((tt) => ({ ...tt, accountType: true }))}
+              className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
+            >
+              <option value="">—</option>
+              {ACCOUNT_TYPES.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            {touched.accountType && values.accountType.trim().length === 0 && (
+              <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
+            )}
+            <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
+              {t("accounts.details.typeCannotChange")}
+            </p>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]">
+              {t("accounts.create.fields.parentAccount")}
+              <Optional/>
+            </label>
+            <TreeSelect
+              nodes={treeNodes}
+              value={values.parentAccountId}
+              onChange={(value) => setValues((v) => ({ ...v, parentAccountId: value }))}
+              searchPlaceholder={t("accounts.create.parentSearchPlaceholder")}
+              noneLabel={t("accounts.details.noParent")}
+            />
+            <p className="mt-2 rounded-[10px] bg-[var(--warning)]/10 px-3 py-2 text-xs font-medium text-[var(--warning)]">
+              {t("accounts.create.parentWarning")}
+            </p>
+          </div>
         </div>
 
-        <div>
-          <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
-            {t("accounts.create.fields.name")}
-          </label>
-          <input
-            value={values.name}
-            onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
-            onBlur={() => setTouched((tt) => ({ ...tt, name: true }))}
-            className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
-          />
-          {touched.name && values.name.trim().length === 0 && (
-            <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
-            {t("accounts.create.fields.type")}
-          </label>
-          <select
-            value={values.accountType}
-            onChange={(e) => setValues((v) => ({ ...v, accountType: e.target.value }))}
-            onBlur={() => setTouched((tt) => ({ ...tt, accountType: true }))}
-            className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
-          >
-            <option value="">—</option>
-            {ACCOUNT_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          {touched.accountType && values.accountType.trim().length === 0 && (
-            <p className="mt-1 text-xs text-[var(--error)]">{t("accounts.create.errors.required")}</p>
-          )}
-          <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
-            {t("accounts.details.typeCannotChange")}
-          </p>
-        </div>
-
-        <div>
-          <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
-            {t("accounts.create.fields.parentAccount")}
-          </label>
-          <TreeSelect
-            nodes={treeNodes}
-            value={values.parentAccountId}
-            onChange={(value) => setValues((v) => ({ ...v, parentAccountId: value }))}
-            searchPlaceholder={t("accounts.create.parentSearchPlaceholder")}
-            noneLabel={t("accounts.details.noParent")}
-          />
-          <p className="mt-2 rounded-[10px] bg-[var(--warning)]/10 px-3 py-2 text-xs font-medium text-[var(--warning)]">
-            {t("accounts.create.parentWarning")}
-          </p>
-        </div>
-
-        <div className="mt-2 flex justify-end gap-2 border-t border-[var(--hairline)] pt-4">
+        <div className="mt-2 flex absolute bottom-5 right-0 pr-5 w-full justify-end gap-2 border-t border-[var(--hairline)] pt-4">
           <button
             type="button"
             onClick={handleClose}

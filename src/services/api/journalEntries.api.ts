@@ -28,7 +28,6 @@ export async function getJournalEntryById(
 export async function createJournalEntry(
   payload: CreateJournalEntryPayload
 ): Promise<JournalEntryResponse> {
-  console.log(payload)
   const { data } = await apiClient.post<JournalEntryResponse>(
     "/JournalEntries",
     payload

@@ -24,6 +24,7 @@ import { useCategories } from "../../../hooks/useCategories";
 import type { Product } from "../../../services/api/products.api";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 export type ProductDrawerMode = "create" | "edit" | "duplicate";
 
@@ -87,7 +88,6 @@ export function ProductDrawer({
   async function onSubmit(values: ProductFormValues): Promise<void> {
     try {
       if (isEditing && product) {
-        console.log(product)
         await updateProduct.mutateAsync({
           id: product.id,
           payload: {
@@ -117,7 +117,6 @@ export function ProductDrawer({
       onClose();
     } catch (error){
       if(axios.isAxiosError(error)){
-        console.log(error.response?.data.errors)
         handleErrors(error.response?.data.errors)
       }
     }
@@ -145,14 +144,10 @@ export function ProductDrawer({
       >
         <div className="flex-1 space-y-6 overflow-y-auto px-6 py-6">
           <fieldset className="space-y-4">
-            <legend className="text-sm font-semibold text-[var(--ink-primary)]">
-              {t("products.drawer.sections.basicInfo")}
-            </legend>
-
             <div>
               <label
                 htmlFor="product-sku"
-                className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
               >
                 {t("products.form.sku")}
                 <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
@@ -184,7 +179,7 @@ export function ProductDrawer({
             <div>
               <label
                 htmlFor="product-name"
-                className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
               >
                 {t("products.form.name")}
                 <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
@@ -210,9 +205,9 @@ export function ProductDrawer({
             <div>
               <label
                 htmlFor="product-description"
-                className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
               >
-                {t("products.form.description")}
+                {t("products.form.description")}<Optional/> 
               </label>
               <textarea
                 id="product-description"
@@ -230,19 +225,13 @@ export function ProductDrawer({
           </fieldset>
 
           <fieldset className="space-y-4">
-            <legend className="text-sm font-semibold text-[var(--ink-primary)]">
-              {t("products.drawer.sections.classification")}
-            </legend>
-
             <div>
               <label
                 htmlFor="product-category"
-                className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
               >
                 {t("products.form.category")}
-                <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
-                  *
-                </span>
+                <Optional/>
               </label>
               <select
                 id="product-category"
@@ -295,7 +284,7 @@ export function ProductDrawer({
             <div>
               <label
                 htmlFor="product-uom"
-                className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
               >
                 {t("products.form.unitOfMeasure")}
                 <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
@@ -322,15 +311,11 @@ export function ProductDrawer({
           </fieldset>
 
           <fieldset className="space-y-4">
-            <legend className="text-sm font-semibold text-[var(--ink-primary)]">
-              {t("products.drawer.sections.pricing")}
-            </legend>
-
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label
                   htmlFor="product-cost-price"
-                  className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                  className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
                 >
                   {t("products.form.costPrice")}
                   <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
@@ -357,7 +342,7 @@ export function ProductDrawer({
               <div>
                 <label
                   htmlFor="product-sale-price"
-                  className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]"
+                  className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]"
                 >
                   {t("products.form.salePrice")}
                   <span className="ml-0.5 text-[var(--error)]" aria-hidden="true">
@@ -384,7 +369,7 @@ export function ProductDrawer({
           </fieldset>
 
           <fieldset className="space-y-3">
-            <legend className="text-sm font-semibold text-[var(--ink-primary)]">
+            <legend className="text-sm font-semibold text-[var(--ink-secondary)]">
               {t("products.drawer.sections.status")}
             </legend>
             <label
