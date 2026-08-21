@@ -24,6 +24,7 @@ import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 type TabId = "overview" | "employment" | "contact" | "compensation" | "access";
 
@@ -55,7 +56,7 @@ export function EmployeeDetailsPage() {
   const [searchParams] = useSearchParams();
   const { data: employee, isLoading, isError } = useEmployee(id);
   const deleteEmployee = useDeleteEmployee();
-  const canManageAccess = hasAnyPermission(["hr.employees.manage"]);
+  const canManageAccess = hasAnyPermission(["hr.employees.manage"], getUserPermissions());
 
   const [activeTab, setActiveTab] = useState<TabId>(
     (searchParams.get("tab") as TabId) || "overview"

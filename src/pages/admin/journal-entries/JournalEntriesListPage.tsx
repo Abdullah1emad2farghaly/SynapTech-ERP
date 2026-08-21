@@ -16,7 +16,6 @@ import { PostJournalDialog } from "../../../components/admin/journal-entries/Pos
 import { ReverseJournalDialog } from "../../../components/admin/journal-entries/ReverseJournalDialog";
 import { DeleteJournalDialog } from "../../../components/admin/journal-entries/DeleteJournalDialog";
 import type { JournalEntryResponse } from "../../../types/journalEntries.types";
-import { hasAnyPermission } from "@/utils/permissions";
 
 const DEFAULT_FILTERS: JournalEntriesFilters = {
   search: "",

@@ -1,14 +1,25 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { LogOut, Moon, Sun, User } from "lucide-react";
 import { Avatar } from "@/components/admin/hr/Avatar";
-import { useThemeStore } from "@/store/themeStore";
 import { useAuthStore } from "@/store/authStore";
 import { ROUTES } from "@/constants/routes";
 
+export function signOut(): void {
+  // Clear Zustand session
+  useAuthStore.getState().clearSession();
+
+  // Clear localStorage
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("currentUser");
+  localStorage.removeItem("userPermissions");
+
+  // Navigate to login
+  window.location.replace(ROUTES.LOGIN);
+}
+
 export function UserMenu() {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,8 +30,7 @@ export function UserMenu() {
     role: string;
     accessToken: string;
     refreshToken: string;
-  } = JSON.parse( window.localStorage.getItem('currentUser') || "") || "";
-  const clearSession = useAuthStore((s) => s.clearSession);
+  } = JSON.parse(window.localStorage.getItem('currentUser') || "") || "";
 
   useEffect(() => {
     function onClickOutside(event: MouseEvent) {
@@ -33,8 +43,7 @@ export function UserMenu() {
   }, []);
 
   const handleSignOut = () => {
-    clearSession();
-    navigate(ROUTES.LOGIN);
+    signOut()
   };
 
   return (
@@ -62,8 +71,8 @@ export function UserMenu() {
           </div>
           <div className="my-1 border-t border-hairline" />
 
-          
-          
+
+
 
           <button
             role="menuitem"

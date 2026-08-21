@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { getAvailableLeaveRequestActions } from "../../../utils/leaveRequestActions";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface LeaveRequestActionMenuProps {
   request: LeaveRequestResponse;
@@ -29,11 +30,11 @@ export function LeaveRequestActionMenu({
 
   const canSubmitAccess = hasAnyPermission([
     "hr.leaves.request",
-  ]);
+  ], getUserPermissions());
 
   const canApproveAccess = hasAnyPermission([
     "hr.leaves.approve",
-  ]);
+  ], getUserPermissions());
 
   const actions = getAvailableLeaveRequestActions(
     request.status,

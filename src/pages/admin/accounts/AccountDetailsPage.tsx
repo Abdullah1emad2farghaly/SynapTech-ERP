@@ -35,6 +35,7 @@ import { hasAnyPermission } from "@/utils/permissions";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface EditFormState {
   code: string;
@@ -54,7 +55,7 @@ export function AccountDetailsPage() {
 
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
-  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"]);
+  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"], getUserPermissions());
 
 
   const [isEditing, setIsEditing] = useState(false);

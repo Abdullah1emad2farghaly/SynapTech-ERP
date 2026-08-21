@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Search, RefreshCw, Plus, Download } from "lucide-react";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface PurchaseOrdersToolbarProps {
   searchValue: string;
@@ -23,7 +24,7 @@ export function PurchaseOrdersToolbar({
   isRefreshing,
 }: PurchaseOrdersToolbarProps) {
   const { t } = useTranslation();
-  const canCreateAccess = hasAnyPermission(["purchasing.orders.create"])
+  const canCreateAccess = hasAnyPermission(["purchasing.orders.create"], getUserPermissions())
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -55,15 +56,21 @@ export function PurchaseOrdersToolbar({
           <Download size={16} />
           {t("common.actions.export")}
         </button> */}
-        
-        <button
-          type="button"
-          onClick={onCreate}
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
-        >
-          <Plus size={16} />
-          {t("purchaseOrders.actions.create")}
-        </button>
+
+        {
+          canCreateAccess && (
+
+            <button
+              type="button"
+              onClick={onCreate}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[--signal] px-4 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]"
+            >
+              <Plus size={16} />
+              {t("purchaseOrders.actions.create")}
+            </button>
+          )
+        }
+
       </div>
     </div>
   );

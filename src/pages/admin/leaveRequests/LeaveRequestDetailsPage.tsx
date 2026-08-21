@@ -20,6 +20,7 @@ import {
 } from "../../../components/admin/leaveRequests/LeaveRequestActionDialogs";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function LeaveRequestDetailsPage() {
   const { t, i18n } = useTranslation();
@@ -27,8 +28,8 @@ export function LeaveRequestDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const { data: request, isLoading, isError, refetch } = useLeaveRequest(id);
 
-  const canApproveAccess = hasAnyPermission(["hr.leaves.approve"]);
-  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"]);
+  const canApproveAccess = hasAnyPermission(["hr.leaves.approve"], getUserPermissions());
+  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"], getUserPermissions());
 
   const [approveTarget, setApproveTarget] = useState<LeaveRequestResponse | null>(null);
   const [rejectTarget, setRejectTarget] = useState<LeaveRequestResponse | null>(null);

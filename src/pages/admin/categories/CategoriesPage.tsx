@@ -43,6 +43,7 @@ import {
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 type ViewMode = "tree" | "table";
 type DrawerTarget =
@@ -78,7 +79,7 @@ export function CategoriesPage() {
   const updateMutation = useUpdateCategory();
   const deleteMutation = useDeleteCategory();
 
-  const canManageAccess = hasAnyPermission(["inventory.categories.manage"])
+  const canManageAccess = hasAnyPermission(["inventory.categories.manage"], getUserPermissions())
 
   const categoryById = useMemo(() => {
     const map = new Map<string, (typeof categories)[number]>();

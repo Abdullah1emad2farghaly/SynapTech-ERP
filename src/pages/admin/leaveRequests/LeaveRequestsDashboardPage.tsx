@@ -19,6 +19,7 @@ import { Skeleton } from "../../../components/common/Skeleton";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function LeaveRequestsDashboardPage() {
   const { t } = useTranslation();
@@ -33,7 +34,7 @@ export function LeaveRequestsDashboardPage() {
   const [rejectTarget, setRejectTarget] = useState<LeaveRequestResponse | null>(null);
   const [cancelTarget, setCancelTarget] = useState<LeaveRequestResponse | null>(null);
 
-  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"]);
+  const canSubmitAccess = hasAnyPermission(["hr.leaves.request"], getUserPermissions());
   
 
   const pendingRequests = useMemo(() => {

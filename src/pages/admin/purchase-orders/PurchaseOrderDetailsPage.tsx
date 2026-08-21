@@ -16,6 +16,7 @@ import {
 } from "../../../components/admin/purchase-orders/PurchaseOrderActionDialog";
 import { canPerform } from "../../../utils/purchaseOrderWorkflow";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function PurchaseOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -24,11 +25,11 @@ export function PurchaseOrderDetailsPage() {
   const { data: order, isLoading } = usePurchaseOrder(id);
   const [dialogAction, setDialogAction] = useState<PurchaseOrderDialogAction | null>(null);
 
-  const canManageAccess = hasAnyPermission(["purchasing.orders.manage"])
-  const canCteateAccess = hasAnyPermission(["purchasing.orders.create"])
-  const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"])
-  const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"])
-  const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"])
+  const canManageAccess = hasAnyPermission(["purchasing.orders.manage"], getUserPermissions())
+  const canCteateAccess = hasAnyPermission(["purchasing.orders.create"], getUserPermissions())
+  const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"], getUserPermissions())
+  const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"], getUserPermissions())
+  const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"], getUserPermissions())
 
   const access = {
     canManageAccess,

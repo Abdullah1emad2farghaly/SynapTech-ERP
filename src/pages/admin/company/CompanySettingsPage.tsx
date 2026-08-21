@@ -97,26 +97,10 @@ export function CompanySettingsPage() {
     });
   });
 
-  const handleCancelClick = () => {
-    if (isDirty) {
-      setDiscardDialogOpen(true);
-      return;
-    }
-    if (company) {
-      reset(toFormValues(company));
-    }
-  };
-
-  const handleDiscardConfirm = () => {
-    if (company) {
-      reset(toFormValues(company));
-    }
-    setDiscardDialogOpen(false);
-  };
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <CompanySettingsSkeleton />
       </div>
     );
@@ -145,24 +129,25 @@ export function CompanySettingsPage() {
 
           <div className='flex flex-col gap-3'>
             <CompanyStatusCard
-            isActive={isActive}
-            onChange={(checked) => setValue('isActive', checked, { shouldDirty: true })}
-            disabled={updateCompany.isPending}
-          />
+              isActive={isActive}
+              onChange={(checked) => setValue('isActive', checked, { shouldDirty: true })}
+              disabled={updateCompany.isPending}
+            />
 
-          <CompanySystemInfoCard id={company.id} />
+            <CompanySystemInfoCard id={company.id} />
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button
+                type="submit"
+                disabled={!isDirty || updateCompany.isPending}
+                className="w-full rounded-[10px] bg-[var(--signal)] px-4 py-2.5 text-sm font-medium text-white transition-colors duration-[160ms] hover:bg-[var(--signal-hover)] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+              >
+                {updateCompany.isPending ? t('company.actions.saving') : t('company.actions.save')}
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-          <button
-            type="submit"
-            disabled={!isDirty || updateCompany.isPending}
-            className="w-full rounded-[10px] bg-[var(--signal)] px-4 py-2.5 text-sm font-medium text-white transition-colors duration-[160ms] hover:bg-[var(--signal-hover)] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-          >
-            {updateCompany.isPending ? t('company.actions.saving') : t('company.actions.save')}
-          </button>
-        </div>
+
       </form>
 
       {/* <ConfirmationDialog

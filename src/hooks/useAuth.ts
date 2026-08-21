@@ -10,6 +10,7 @@ export function useLogin() {
     onSuccess: (session) => {
       setSession(session); 
       window.localStorage.setItem('currentUser', JSON.stringify(session))
+      window.localStorage.setItem('accessToken', session.accessToken);
     },
   });
 }

@@ -17,6 +17,7 @@ import type { ShipGoodsLineRequest } from "../../../types/salesOrders.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function ShipGoodsPage() {
   const { id } = useParams<{ id: string }>();
@@ -33,10 +34,10 @@ export function ShipGoodsPage() {
     setShippingNow((prev) => ({ ...prev, [lineId]: clamped }));
   };
 
-  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
-  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
-  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
-  const canCreateAccess = hasAnyPermission(["sales.orders.create"])
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"], getUserPermissions());
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"], getUserPermissions());
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"], getUserPermissions());
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions())
 
   const access = {
     canCancelAccess,

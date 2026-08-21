@@ -16,6 +16,7 @@ import {
 } from "../../../components/admin/sales-orders/SalesOrderActionDialog";
 import { canPerform } from "../../../utils/salesOrderWorkflow";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function SalesOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -23,10 +24,10 @@ export function SalesOrderDetailsPage() {
   const { t } = useTranslation();
   const { data: order, isLoading } = useSalesOrder(id);
   const [dialogAction, setDialogAction] = useState<SalesOrderDialogAction | null>(null);
-  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
-  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
-  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
-  const canCreateAccess = hasAnyPermission(["sales.orders.create"])
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"], getUserPermissions());
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"], getUserPermissions());
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"], getUserPermissions());
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions())
 
   const access = {
     canCancelAccess,

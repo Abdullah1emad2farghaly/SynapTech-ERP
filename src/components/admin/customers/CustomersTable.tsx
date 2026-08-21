@@ -14,6 +14,7 @@ import {
   type SortDirection,
 } from "../../common/DataTable";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export interface CustomerRow {
   id: string;
@@ -65,7 +66,7 @@ export function CustomersTable({
    */
   const canManageCustomers = hasAnyPermission([
     "sales.customers.manage",
-  ]);
+  ], getUserPermissions());
 
   const columns: DataTableColumn<CustomerRow>[] = [
     {

@@ -14,6 +14,7 @@ import { SupplierStatusBadge } from "../../../components/admin/suppliers/Supplie
 import { SupplierDrawer } from "../../../components/admin/suppliers/SupplierDrawer";
 import { SupplierDeleteDialog } from "../../../components/admin/suppliers/SupplierDeleteDialog";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 function DetailRow({ label, value }: { label: string; value: string }) {
   return (
@@ -32,7 +33,7 @@ export function SupplierDetailsPage() {
 
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"]);
+  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"], getUserPermissions());
 
   if (isLoading) {
     return (

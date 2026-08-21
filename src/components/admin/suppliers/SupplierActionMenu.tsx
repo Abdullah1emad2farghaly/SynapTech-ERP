@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { MoreVertical, Eye, Pencil, Trash2 } from "lucide-react";
 import type { SupplierResponse } from "../../../types/suppliers.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface SupplierActionMenuProps {
   supplier: SupplierResponse;
@@ -22,7 +23,7 @@ export function SupplierActionMenu({
 }: SupplierActionMenuProps) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"]);
+  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"], getUserPermissions());
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 

@@ -26,6 +26,7 @@ import { AccountTypes } from "@/services/api/accounts.crud.api";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function AccountsListPage() {
   const { t } = useTranslation();
@@ -45,7 +46,7 @@ export function AccountsListPage() {
   const updateMutation = useUpdateAccount();
   const deleteMutation = useDeleteAccount();
   const { data: accountTypes = [] } = useAccountTypes();
-  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"]);
+  const canManageAccess = hasAnyPermission(["accounting.accounts.manage"], getUserPermissions());
 
   const accountById = useMemo(() => {
     const map = new Map<string, (typeof accounts)[number]>();

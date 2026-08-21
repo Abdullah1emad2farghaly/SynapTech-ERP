@@ -9,7 +9,6 @@
 import { useTranslation } from "react-i18next";
 import { Drawer } from "../../common/Drawer";
 import { StatusBadge } from "../../common/StatusBadge";
-import { hasAnyPermission } from "@/utils/permissions";
 
 export interface CustomerDetailsData {
   id: string;

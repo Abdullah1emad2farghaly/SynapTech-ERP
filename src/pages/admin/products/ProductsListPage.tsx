@@ -18,6 +18,7 @@ import {
 import { DataTablePagination } from "../../../components/common/DataTable";
 import type { Product } from "../../../services/api/products.api";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 const PAGE_SIZE = 20;
 
@@ -32,7 +33,7 @@ export function ProductsListPage() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc" | undefined>(
     "asc"
   );
-  const canManageAccess = hasAnyPermission(['inventory.products.manage'])
+  const canManageAccess = hasAnyPermission(['inventory.products.manage'], getUserPermissions())
 
   const [drawerMode, setDrawerMode] = useState<ProductDrawerMode>("create");
   const [drawerOpen, setDrawerOpen] = useState(false);

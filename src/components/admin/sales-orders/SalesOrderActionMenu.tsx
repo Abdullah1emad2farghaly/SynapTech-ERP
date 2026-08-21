@@ -17,6 +17,7 @@ import {
 import { getAvailableSalesOrderActions } from "../../../utils/salesOrderWorkflow";
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface SalesOrderActionMenuProps {
   order: SalesOrderResponse;
@@ -52,10 +53,10 @@ export function SalesOrderActionMenu({
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-   const canCreateAccess = hasAnyPermission(["sales.orders.create"]);
-  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"]);
-  const canShipAccess = hasAnyPermission(["sales.orders.ship"]);
-  const canApproveAccess = hasAnyPermission(["sales.orders.approve"]);
+   const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions());
+  const canCancelAccess = hasAnyPermission(["sales.orders.cancel"], getUserPermissions());
+  const canShipAccess = hasAnyPermission(["sales.orders.ship"], getUserPermissions());
+  const canApproveAccess = hasAnyPermission(["sales.orders.approve"], getUserPermissions());
 
   const available = getAvailableSalesOrderActions(order.status,{
     canCreateAccess,

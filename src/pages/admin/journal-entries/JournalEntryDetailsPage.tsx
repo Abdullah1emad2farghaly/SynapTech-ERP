@@ -13,6 +13,7 @@ import { PostJournalDialog } from "../../../components/admin/journal-entries/Pos
 import { ReverseJournalDialog } from "../../../components/admin/journal-entries/ReverseJournalDialog";
 import { DeleteJournalDialog } from "../../../components/admin/journal-entries/DeleteJournalDialog";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function JournalEntryDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -23,9 +24,9 @@ export function JournalEntryDetailsPage() {
   const [postOpen, setPostOpen] = useState(false);
   const [reverseOpen, setReverseOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const canPostAccess = hasAnyPermission(["accounting.journal.post"]);
-  const canReverseAccess = hasAnyPermission(["accounting.journal.reverse"]);
-  const canCreateAccess = hasAnyPermission(["accounting.journal.create"]);
+  const canPostAccess = hasAnyPermission(["accounting.journal.post"], getUserPermissions());
+  const canReverseAccess = hasAnyPermission(["accounting.journal.reverse"], getUserPermissions());
+  const canCreateAccess = hasAnyPermission(["accounting.journal.create"], getUserPermissions());
 
 
 

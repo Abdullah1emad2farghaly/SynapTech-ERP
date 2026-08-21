@@ -6,6 +6,7 @@
 import { useTranslation } from "react-i18next";
 import { Search, RefreshCw, Plus, SlidersHorizontal } from "lucide-react";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export interface JournalEntriesFilters {
   search: string;
@@ -41,7 +42,7 @@ export function JournalEntriesToolbar({
   isRefreshing,
 }: JournalEntriesToolbarProps) {
   const { t } = useTranslation();
-  const canCreateAccess = hasAnyPermission(["accounting.journal.create"]);
+  const canCreateAccess = hasAnyPermission(["accounting.journal.create"], getUserPermissions());
 
 
   const patch = (partial: Partial<JournalEntriesFilters>) =>

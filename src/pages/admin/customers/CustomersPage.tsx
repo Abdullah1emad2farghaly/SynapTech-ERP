@@ -32,6 +32,7 @@ import {
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 type DrawerTarget =
   | { kind: "create" }
@@ -52,7 +53,7 @@ export function CustomersPage() {
   const [isConfirmSubmitting, setIsConfirmSubmitting] = useState(false);
 
   const { data: customers = [], isLoading, isError, refetch } = useCustomersList();
-  const canManageAccess = hasAnyPermission(['sales.customers.manage']);
+  const canManageAccess = hasAnyPermission(['sales.customers.manage'], getUserPermissions());
   const createMutation = useCreateCustomer();
   const updateMutation = useUpdateCustomer();
   const deleteMutation = useDeleteCustomer();

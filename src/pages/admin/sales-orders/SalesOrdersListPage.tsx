@@ -21,6 +21,7 @@ import {
 } from "../../../components/admin/sales-orders/SalesOrderActionDialog";
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export function SalesOrdersListPage() {
   const { t } = useTranslation();
@@ -40,7 +41,7 @@ export function SalesOrdersListPage() {
     return counts;
   }, [orders]);
 
-  const canCreateAccess = hasAnyPermission(["sales.orders.create"]);
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions());
 
   const hasActiveFilters =
     search !== "" ||

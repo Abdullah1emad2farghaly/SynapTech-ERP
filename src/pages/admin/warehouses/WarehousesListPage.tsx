@@ -21,6 +21,7 @@ import {
 import { DeleteWarehouseDialog } from "../../../components/admin/warehouses/DeleteWarehouseDialog";
 import type { WarehouseResponse } from "../../../types/warehouses.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 const DEFAULT_FILTERS: WarehousesFilters = {
   search: "",
@@ -42,7 +43,7 @@ export function WarehousesListPage() {
   const [drawer, setDrawer] = useState<DrawerState>(null);
   const [deleteTarget, setDeleteTarget] = useState<WarehouseResponse | null>(null);
 
-  const canManageAccess = hasAnyPermission(["inventory.warehouses.manage"]);
+  const canManageAccess = hasAnyPermission(["inventory.warehouses.manage"], getUserPermissions());
 
   const hasActiveFilters =
     filters.search !== "" || filters.branchId !== "all" || filters.status !== "all";

@@ -22,7 +22,6 @@ import {
 import { Drawer } from "../../../components/common/Drawer";
 import { ErrorState } from "../../../components/common/ErrorState";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
-import { hasAnyPermission } from "@/utils/permissions";
 
 export function LeaveRequestsListPage() {
   const { t } = useTranslation();

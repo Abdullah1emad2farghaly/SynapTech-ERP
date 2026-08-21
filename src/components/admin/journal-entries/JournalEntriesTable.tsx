@@ -24,6 +24,7 @@ import { DataTable, type DataTableColumn } from "../../common/DataTable";
 import { JournalEntryStatusBadge } from "./JournalEntryStatusBadge";
 import type { JournalEntryResponse } from "../../../types/journalEntries.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface JournalEntriesTableProps {
   entries: JournalEntryResponse[];
@@ -75,9 +76,9 @@ function RowActions({
   const canPost = entry.status === "Draft";
   const canReverse = entry.status === "Posted";
   const canDelete = entry.status === "Draft";
-  const canPostAccess = hasAnyPermission(["accounting.journal.post"]);
-  const canCreateAccess = hasAnyPermission(["accounting.journal.create"]);
-  const canReverseAccess = hasAnyPermission(["accounting.journal.reverse"]);
+  const canPostAccess = hasAnyPermission(["accounting.journal.post"], getUserPermissions());
+  const canCreateAccess = hasAnyPermission(["accounting.journal.create"], getUserPermissions());
+  const canReverseAccess = hasAnyPermission(["accounting.journal.reverse"], getUserPermissions());
 
   const closeMenu = () => {
     setOpen(false);

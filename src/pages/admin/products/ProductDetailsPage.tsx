@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 function formatCurrency(value: number): string {
   return value.toLocaleString(undefined, {
@@ -34,7 +35,7 @@ export function ProductDetailsPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerMode] = useState<ProductDrawerMode>("edit");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const canManageAccess = hasAnyPermission(['inventory.products.manage'])
+  const canManageAccess = hasAnyPermission(['inventory.products.manage'], getUserPermissions())
   
 
   async function handleConfirmDelete(): Promise<void> {

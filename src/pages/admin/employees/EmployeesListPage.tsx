@@ -19,6 +19,7 @@ import type { EmployeeResponse } from "../../../types/employee.types";
 import { useRoles } from "@/hooks/useRoles";
 import { MultiSelectOption } from "@/components/common/MultiSelectSearchable";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 
 const PAGE_SIZE = 10;
@@ -60,7 +61,7 @@ export function EmployeesListPage() {
   // Existing lookup hooks — reused as-is, not recreated.
   const { data: departmentOptions = [] } = useDepartments();
   const { data: branchOptions = [] } = useBranches();
-  const canManageAccess = hasAnyPermission(["hr.employees.manage"]);
+  const canManageAccess = hasAnyPermission(["hr.employees.manage"], getUserPermissions());
 
   // ASSUMPTION: role options still pending the unconfirmed GET /api/Roles
   // endpoint (see Roles module notes) — swap in the real useRoles() hook

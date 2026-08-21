@@ -16,6 +16,7 @@ import { PurchaseOrderActionMenu } from "./PurchaseOrderActionMenu";
 import { canPerform } from "../../../utils/purchaseOrderWorkflow";
 import type { PurchaseOrderResponse } from "../../../types/purchaseOrders.types";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface PurchaseOrdersTableProps {
   orders: PurchaseOrderResponse[];
@@ -57,11 +58,11 @@ export function PurchaseOrdersTable({
 }: PurchaseOrdersTableProps) {
   const { t } = useTranslation();
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-    const canManageAccess = hasAnyPermission(["purchasing.orders.manage"])
-    const canCteateAccess = hasAnyPermission(["purchasing.orders.create"])
-    const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"])
-    const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"])
-    const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"])
+    const canManageAccess = hasAnyPermission(["purchasing.orders.manage"], getUserPermissions())
+    const canCteateAccess = hasAnyPermission(["purchasing.orders.create"], getUserPermissions())
+    const canApproveAccess = hasAnyPermission(["purchasing.orders.approve"], getUserPermissions())
+    const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"], getUserPermissions())
+    const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"], getUserPermissions())
   
     const access = {
       canApproveAccess,

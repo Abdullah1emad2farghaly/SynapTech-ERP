@@ -8,6 +8,7 @@ import { LeaveRequestActionMenu } from "./LeaveRequestActionMenu";
 import { getLeaveTypeOption } from "../../../constants/leaveTypes";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
 import { hasAnyPermission } from "@/utils/permissions";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 interface LeaveRequestCardProps {
   request: LeaveRequestResponse;
@@ -31,7 +32,7 @@ export function LeaveRequestCard({
   const option = getLeaveTypeOption(request.leaveType);
   const canApproveAccess = hasAnyPermission([
     "hr.leaves.approve",
-  ]);
+  ], getUserPermissions());
 
   const formatDate = (d: string) =>
     new Date(d).toLocaleDateString(i18n.language, { month: "short", day: "numeric" });
