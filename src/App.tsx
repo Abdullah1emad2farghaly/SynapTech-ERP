@@ -58,13 +58,12 @@ import PurchasingOverviewPage from "./pages/admin/purchasing/PurchasingOverviewP
 import InventoryOverviewPage from "./pages/admin/inventory/InventoryOverviewPage";
 import AccountingOverviewPage from "./pages/admin/accounting/AccountingOverviewPage";
 import HrOverviewPage from "./pages/admin/hr/HrOverviewPage";
-import { getMyPermissions } from "./services/api/roles.crud.api";
-import { useEffect } from "react";
 import OrganizationOverviewPage from "./pages/admin/organization/OrganizationOverviewPage";
 import AdministrationOverviewPage from "./pages/admin/administration/AdministrationOverviewPage";
 import { RouteGuard } from "./components/common/RouteGuard";
 import { NotFoundPage } from "./pages/common/NotFoundPage";
 import { ProtectedRoute, PublicOnlyRoute } from "./components/common/AuthGuard";
+import { Seo } from "./components/common/Seo";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -72,11 +71,17 @@ const queryClient = new QueryClient();
 // Layout route — renders AppShell once, <Outlet /> swaps the page inside it
 function DashboardLayout() {
   return (
-    <AppShell notifications={[]} onSearchFocus={() => {/* wire in step 2 */ }}>
-      <RouteGuard>
-        <Outlet />
-      </RouteGuard>
-    </AppShell>
+    <>
+      <Seo
+        title="SynapTech ERP"
+        robots="noindex, nofollow"
+      />
+      <AppShell notifications={[]} onSearchFocus={() => {/* wire in step 2 */ }}>
+        <RouteGuard>
+          <Outlet />
+        </RouteGuard>
+      </AppShell>
+    </>
   );
 }
 export const getCurrentUser = (): boolean => {
@@ -103,19 +108,19 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PublicOnlyRoute />}>
-            <Route 
+            <Route
               path={ROUTES.LOGIN} // "/"
               element={<LoginPage />} />
-            <Route 
+            <Route
               path={ROUTES.REGISTER} // "/register"
               element={<RegisterPage />} />
-            <Route 
+            <Route
               path={ROUTES.FORGOT_PASSWORD} // "/forgot-password"
               element={<ForgotPasswordPage />} />
-            <Route 
+            <Route
               path={ROUTES.RESET_PASSWORD} // "/auth/forgetPassword"
               element={<ResetPasswordPage />} />
-            <Route 
+            <Route
               path={ROUTES.EMAIL_CONFIRMATION} // "/auth/emailConfirmation"
               element={<EmailConfirmationPage />} />
           </Route>
