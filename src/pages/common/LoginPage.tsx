@@ -31,34 +31,28 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const navItems = useNavItems();
   const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://synaptech-erp.vercel.app/#organization",
-        name: "SynapTech ERP",
-        url: "https://synaptech-erp.vercel.app/",
-      },
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://synaptech-erp.vercel.app/#software",
-        name: "SynapTech ERP",
-        applicationCategory: "BusinessApplication",
-        applicationSubCategory:
-          "Enterprise Resource Planning",
-        operatingSystem: "Web",
-        description:
-          "SynapTech ERP is a modern enterprise resource planning system for managing accounting, inventory, purchasing, sales, human resources, and business operations.",
-        url: "https://synaptech-erp.vercel.app/",
-        image:
-          "https://synaptech-erp.vercel.app/og-image.jpg",
-        brand: {
-          "@id":
-            "https://synaptech-erp.vercel.app/#organization",
-        },
-      },
-    ],
-  };
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://synaptech-erp.vercel.app/#organization",
+      name: "SynapTech ERP",
+      url: "https://synaptech-erp.vercel.app/",
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://synaptech-erp.vercel.app/#software",
+      name: "SynapTech ERP",
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Enterprise Resource Planning",
+      operatingSystem: "Web",
+      description:
+        "SynapTech ERP is a modern enterprise resource planning system for managing accounting, inventory, purchasing, sales, human resources, and business operations.",
+      url: "https://synaptech-erp.vercel.app/",
+      image: "https://synaptech-erp.vercel.app/og-image.jpg",
+    },
+  ],
+};
 
   return (
     <>
