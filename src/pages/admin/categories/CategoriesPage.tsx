@@ -202,11 +202,17 @@ export function CategoriesPage() {
     try {
       if (id) {
         await updateMutation.mutateAsync({ id, ...values });
+        toast.success(t("categories.toast.updated" ,{
+          name: values.name
+        }))
       } else {
         await createMutation.mutateAsync({
           name: values.name,
           parentCategoryId: values.parentCategoryId,
         });
+        toast.success(t("categories.toast.created", {
+          name: values.name
+        }))
       }
       setDrawerTarget(null);
       refetch();

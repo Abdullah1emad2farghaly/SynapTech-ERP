@@ -872,7 +872,9 @@
       "deactivated": "{{name}} deactivated",
       "deleted": "{{name}} deleted",
       "activated": "{{name}} activated",
-      "idCopied": "Category ID copied"
+      "idCopied": "Category ID copied",
+      "created": "{{name}} created",
+      "updated": "{{name}} updated"
     },
     "details": {
       "nothingSelected": "Select a category to see its details",
