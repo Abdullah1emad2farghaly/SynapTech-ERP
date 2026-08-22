@@ -1,15 +1,3 @@
-// Intended path: src/components/common/RouteGuard.tsx
-//
-// Wrap this around <Outlet /> (inside AppShell, NOT around AppShell
-// itself) so the sidebar/navbar stay visible while a route is being
-// checked, and only the content area is gated.
-//
-// Key behavior change from a plain "redirect on mismatch" guard: the
-// disallowed page is never rendered at all. The permission check happens
-// during render (not just in an effect), so `children` is only ever
-// returned once we know the current route is allowed — there's no frame
-// where the forbidden page's component tree mounts and paints before the
-// redirect fires.
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -47,10 +35,7 @@ export function RouteGuard({ children }: RouteGuardProps) {
 
   const blockedStreak = useRef(0);
 
-  // Computed during render, not in an effect — this is what actually
-  // prevents the flash. `allowed` is false both while permissions are
-  // still loading and when the route genuinely isn't accessible; either
-  // way, `children` (the real page) does not render below.
+  
   const allowed =
     !isLoading && isRouteAllowed(location.pathname, allowedRoutes, isAdmin);
 

@@ -20,7 +20,6 @@ export function signOut(): void {
 }
 
 export function UserMenu() {
-  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const user: {
