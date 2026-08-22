@@ -103,11 +103,21 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PublicOnlyRoute />}>
-            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-            <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
-            <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
-            <Route path={ROUTES.RESET_PASSWORD} element={<ResetPasswordPage />} />
-            <Route path={ROUTES.EMAIL_CONFIRMATION} element={<EmailConfirmationPage />} />
+            <Route 
+              path={ROUTES.LOGIN} // "/"
+              element={<LoginPage />} />
+            <Route 
+              path={ROUTES.REGISTER} // "/register"
+              element={<RegisterPage />} />
+            <Route 
+              path={ROUTES.FORGOT_PASSWORD} // "/forgot-password"
+              element={<ForgotPasswordPage />} />
+            <Route 
+              path={ROUTES.RESET_PASSWORD} // "/auth/forgetPassword"
+              element={<ResetPasswordPage />} />
+            <Route 
+              path={ROUTES.EMAIL_CONFIRMATION} // "/auth/emailConfirmation"
+              element={<EmailConfirmationPage />} />
           </Route>
 
 

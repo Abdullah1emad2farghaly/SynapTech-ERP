@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /register
+
+Disallow: /settings
+Disallow: /organization
+Disallow: /administration
+Disallow: /accounting
+Disallow: /inventory
+Disallow: /hr
+Disallow: /purchasing
+Disallow: /sales
+
+Sitemap: https://synaptech-erp.vercel.app/sitemap.xml
