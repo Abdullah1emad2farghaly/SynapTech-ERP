@@ -30,7 +30,6 @@ export interface CategoryMenuItemsProps {
   onEdit: () => void;
   onMove: () => void;
   onAddChild: () => void;
-  onCopyId: () => void;
   onActivate: () => void;
   onDeactivateRequest: () => void;
   onDeleteRequest: () => void;
@@ -44,7 +43,6 @@ export function CategoryMenuItems({
   onEdit,
   onMove,
   onAddChild,
-  onCopyId,
   onActivate,
   onDeactivateRequest,
   onDeleteRequest,
@@ -91,16 +89,6 @@ export function CategoryMenuItems({
       >
         <FolderPlus size={15} />
         {t("categories.actions.addChild")}
-      </button>
-
-      <button
-        role="menuitem"
-        type="button"
-        onClick={onCopyId}
-        className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-      >
-        <Copy size={15} />
-        {t("categories.actions.copyId")}
       </button>
 
       {isActive ? (

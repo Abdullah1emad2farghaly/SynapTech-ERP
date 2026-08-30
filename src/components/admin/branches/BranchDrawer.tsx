@@ -9,7 +9,7 @@ export interface BranchFormValues {
   name: string;
   code: string;
   address: string;
-  phone: string;
+  phone: string | null;
   isMain: boolean;
   isActive: boolean;
 }
@@ -99,14 +99,15 @@ export function BranchDrawer({
   const codeError =
     touched.code && values.code.trim().length === 0;
 
-  const phoneError =
-    touched.phone && values.phone.trim().length === 0;
+  // const phoneError =
+  //   touched.phone && values.phone.trim().length === 0;
 
   const isValid =
     values.name.trim().length > 0 &&
-    values.code.trim().length > 0 &&
-    values.phone.trim().length > 0;
+    values.code.trim().length > 0 
 
+  if(values?.phone?.trim().length === 0)
+    values.phone = null;
   // ============================================================
   // Close
   // ============================================================
@@ -263,12 +264,13 @@ export function BranchDrawer({
         <div>
           <label className="mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]">
             {t("branches.create.fields.phone")}
+            <Optional/>
           </label>
 
           <input
             type="tel"
             dir="ltr"
-            value={values.phone}
+            value={values.phone || ""}
             onChange={(e) =>
               setValues((v) => ({
                 ...v,
@@ -284,11 +286,11 @@ export function BranchDrawer({
             className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-start text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
           />
 
-          {phoneError && (
+          {/* {phoneError && (
             <p className="mt-1 text-xs text-[var(--error)]">
               {t("branches.create.errors.required")}
             </p>
-          )}
+          )} */}
         </div>
 
         {/* ======================================================

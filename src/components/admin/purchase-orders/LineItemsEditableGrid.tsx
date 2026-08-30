@@ -3,15 +3,27 @@
 // Receiving-related columns (Received Quantity, Remaining) are intentionally
 // absent — those only exist on the response, not the create/edit request; a
 // pre-receiving grid can't show them (see spec §11).
+//
+// CHANGED: no longer fetches products itself via useProductsLookup. Products
+// (and their loading state) are now passed in as props so the parent page
+// can control whether the full product list or a warehouse-filtered list is
+// shown.
 
 import { useTranslation } from "react-i18next";
 import { Plus, Copy, Trash2 } from "lucide-react";
 import { SearchableEntitySelect } from "./SearchableEntitySelect";
-import { useProductsLookup } from "../../../hooks/usePurchaseOrders";
 import type { PurchaseOrderLineRequest } from "../../../types/purchaseOrders.types";
+import { useNavigate } from "react-router-dom";
+
+interface ProductOption {
+  id: string;
+  name: string;
+}
 
 interface LineItemsEditableGridProps {
   lines: PurchaseOrderLineRequest[];
+  products: ProductOption[];
+  productsLoading?: boolean;
   onChange: (index: number, field: keyof PurchaseOrderLineRequest, value: string | number) => void;
   onAdd: () => void;
   onRemove: (index: number) => void;
@@ -21,13 +33,15 @@ interface LineItemsEditableGridProps {
 
 export function LineItemsEditableGrid({
   lines,
+  products,
+  productsLoading,
   onChange,
   onAdd,
   onRemove,
   onDuplicate,
 }: LineItemsEditableGridProps) {
   const { t } = useTranslation();
-  const { data: products = [], isLoading: productsLoading } = useProductsLookup();
+  const navigate = useNavigate();
 
   const grandTotal = lines.reduce((sum, l) => sum + (Number(l.quantity) || 0) * (Number(l.unitPrice) || 0), 0);
 
@@ -63,6 +77,15 @@ export function LineItemsEditableGrid({
                 searchPlaceholder={t("purchaseOrders.lines.searchProducts")}
                 noResultsLabel={t("purchaseOrders.lines.noProductsFound")}
                 isLoading={productsLoading}
+                button={
+                  <button
+                    type="button"
+                    onClick={() => navigate("/inventory/products")}
+                    className="w-full rounded-md px-3 py-2 text-sm font-medium border border-[var(--signal)] text-[--signal] hover:bg-[--sunken]"
+                  >
+                    {t("products.toolbar.addProduct")}
+                  </button>
+                }
               />
               <input
                 type="number"

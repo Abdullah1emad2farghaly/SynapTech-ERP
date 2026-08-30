@@ -63,6 +63,7 @@ export function LeaveRequestsOverTimeChart({
             />
 
             <YAxis
+              direction={"ltr"}
               allowDecimals={false}
               tick={{
                 fontSize: 12,

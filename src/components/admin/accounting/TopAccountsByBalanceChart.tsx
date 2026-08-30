@@ -39,7 +39,7 @@ export function TopAccountsByBalanceChart({
   }));
 
   return (
-    <div className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
+    <div  className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
       <h3 className="text-sm font-medium text-ink-primary mb-3">
         {t('accounting.overview.topAccounts.title')}
       </h3>
@@ -82,6 +82,7 @@ export function TopAccountsByBalanceChart({
             />
 
             <YAxis
+              direction={"ltr"}
               type="category"
               dataKey="label"
               width={140}

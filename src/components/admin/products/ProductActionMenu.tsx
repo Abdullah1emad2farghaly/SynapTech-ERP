@@ -20,7 +20,6 @@ import { handleErrors } from "@/utils/HandleErrors";
 export interface ProductActionMenuProps {
   product: Product;
   onEdit: () => void;
-  onDuplicate: () => void;
   onViewDetails: () => void;
   onDelete?: () => void;
 }
@@ -28,7 +27,6 @@ export interface ProductActionMenuProps {
 export function ProductActionMenu({
   product,
   onEdit,
-  onDuplicate,
   onViewDetails,
 }: ProductActionMenuProps) {
   const { t } = useTranslation();
@@ -222,19 +220,6 @@ export function ProductActionMenu({
             >
               <Pencil size={14} />
               {t("common.actions.edit")}
-            </button>
-
-            <button
-              type="button"
-              role="menuitem"
-              onClick={() => {
-                closeMenu();
-                onDuplicate();
-              }}
-              className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)]"
-            >
-              <Copy size={14} />
-              {t("common.actions.duplicate")}
             </button>
 
             <div className="my-1 border-t border-[var(--hairline)]" />

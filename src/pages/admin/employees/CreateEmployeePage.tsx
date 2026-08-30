@@ -44,8 +44,8 @@ export function CreateEmployeePage() {
   );
 
   const handleSubmit = async (values: CreateEmployeeFormValues) => {
-    console.log("CreateEmployeePage.handleSubmit", values);
-    // return
+    
+    
     try {
       
       const created = await createEmployee.mutateAsync({
@@ -81,12 +81,12 @@ export function CreateEmployeePage() {
         className="inline-flex w-fit items-center gap-1.5 text-sm text-[var(--ink-secondary)] hover:text-[var(--ink-primary)]"
       >
         <ArrowLeft size={16} aria-hidden="true" />
-        {t("common.back", "Back")}
+        {t("common.back")}
       </button>
 
       <div>
         <h1 className="text-2xl font-bold text-[var(--ink-primary)]">
-          {t("employees.addEmployee", "Add Employee")}
+          {t("employees.addEmployee")}
         </h1>
       </div>
 

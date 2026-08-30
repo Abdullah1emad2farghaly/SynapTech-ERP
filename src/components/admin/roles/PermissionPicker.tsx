@@ -3,11 +3,21 @@
 // Groups the confirmed permissions-catalog response by `module` client-side
 // (the catalog endpoint returns a flat list — grouping is derived, not a
 // server shape). Used by both CreateRoleDrawer and ManagePermissionsDrawer.
+//
+// UPDATE: selecting a permission transitively auto-selects any permissions
+// it `requires` (see constants/permissionDependencies.ts). A permission
+// currently required by another SELECTED permission is "locked" — toggle()
+// no-ops on it, and `lockedBy` (required code -> codes that need it) is
+// passed down so PermissionModuleGroup can render it disabled with a
+// tooltip naming what still depends on it. Locks are recalculated from the
+// current selection on every render, so a permission unlocks automatically
+// once nothing selected still needs it.
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Search } from "lucide-react";
 import { PermissionModuleGroup } from "./PermissionModuleGroup";
+import { getRequiredPermissions } from "../../../constants/permissionDependencies";
 import type { PermissionResponse } from "../../../types/roles.types";
 
 interface PermissionPickerProps {
@@ -24,6 +34,21 @@ export function PermissionPicker({
   const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const selectedSet = useMemo(() => new Set(selectedCodes), [selectedCodes]);
+
+  // requiredCode -> selected codes that still need it. Any key in this map
+  // is locked: it can't be unchecked until every code listed for it is
+  // unchecked first.
+  const lockedBy = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const code of selectedCodes) {
+      for (const required of getRequiredPermissions(code)) {
+        const dependents = map.get(required) ?? [];
+        dependents.push(code);
+        map.set(required, dependents);
+      }
+    }
+    return map;
+  }, [selectedCodes]);
 
   const filteredCatalog = useMemo(() => {
     if (!search.trim()) return catalog;
@@ -50,20 +75,33 @@ export function PermissionPicker({
   }, [filteredCatalog]);
 
   const toggle = (code: string) => {
-    onChange(
-      selectedSet.has(code)
-        ? selectedCodes.filter((c) => c !== code)
-        : [...selectedCodes, code]
+    if (selectedSet.has(code)) {
+      if (lockedBy.has(code)) return; // locked — can't unselect directly
+      onChange(selectedCodes.filter((c) => c !== code));
+      return;
+    }
+
+    const required = getRequiredPermissions(code).filter(
+      (c) => !selectedSet.has(c)
     );
+    onChange([...selectedCodes, code, ...required]);
   };
 
   const selectAll = (codes: string[]) => {
-    const merged = new Set([...selectedCodes, ...codes]);
+    const merged = new Set(selectedCodes);
+    for (const code of codes) {
+      merged.add(code);
+      for (const required of getRequiredPermissions(code)) {
+        merged.add(required);
+      }
+    }
     onChange(Array.from(merged));
   };
 
   const clearAll = (codes: string[]) => {
-    const remove = new Set(codes);
+    // Locked codes (needed by a selection possibly outside this group)
+    // are preserved; everything else in the group is removed.
+    const remove = new Set(codes.filter((c) => !lockedBy.has(c)));
     onChange(selectedCodes.filter((c) => !remove.has(c)));
   };
 
@@ -120,6 +158,7 @@ export function PermissionPicker({
               module={module}
               permissions={permissions}
               selectedCodes={selectedSet}
+              lockedBy={lockedBy}
               onToggle={toggle}
               onSelectAll={selectAll}
               onClearAll={clearAll}

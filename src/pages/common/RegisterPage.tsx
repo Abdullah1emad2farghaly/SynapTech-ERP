@@ -14,6 +14,7 @@ export default function RegisterPage() {
         description="Create your SynapTech ERP account and start managing your business operations, accounting, inventory, sales, purchasing, and human resources."
         robots="index, follow"
       />
+      
       <AuthLayout tagline="Set up your workspace.">
         <AuthContainer heading={t("auth.register.heading")} subtitle={t("auth.register.subtitle")}>
           <RegisterForm />

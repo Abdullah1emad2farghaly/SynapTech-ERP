@@ -187,6 +187,7 @@ export function DepartmentsPage() {
       if(axios.isAxiosError(error)){
         handleErrors(error.response?.data.errors);
       }
+      throw error
     }
   }
 

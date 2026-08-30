@@ -20,9 +20,6 @@ import { ErrorState } from "../../../components/common/ErrorState";
 import { Skeleton } from "../../../components/common/Skeleton";
 import type { LeaveRequestResponse } from "../../../services/api/leaveRequests.api";
 
-// ASSUMPTION: current employee id for pre-filling/locking the Create form's
-// Employee field is not yet resolvable — no confirmed auth/session context
-// exposing it exists in this project yet. See leave-requests-ux-spec.md
 // Section 17, open question #1. Left undefined here; wire in once available.
 const CURRENT_EMPLOYEE_ID: string | undefined = undefined;
 

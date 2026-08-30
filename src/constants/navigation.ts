@@ -290,15 +290,7 @@ export const useNavItems = (): NavItem[] => {
           permissions: [
             "core.departments.manage",
           ],
-        },
-        {
-          id: "companies",
-          label: t("sidebar.companies"),
-          to: "/organization/companies",
-          permissions: [
-            "core.companies.manage",
-          ],
-        },
+        }
       ],
     },
 

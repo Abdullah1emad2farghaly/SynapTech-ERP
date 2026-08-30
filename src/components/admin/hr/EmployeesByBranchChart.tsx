@@ -69,6 +69,7 @@ export function EmployeesByBranchChart({ data, isLoading }: Props) {
             />
 
             <YAxis
+              direction={"ltr"}
               type="category"
               dataKey="label"
               width={110}

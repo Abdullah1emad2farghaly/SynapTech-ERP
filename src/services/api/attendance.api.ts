@@ -1,10 +1,8 @@
 // src/services/api/attendance.api.ts
 
-import {apiClient} from "./axiosClient"; // ASSUMPTION: existing shared axios instance, unverified — see project handoff notes
+import {apiClient} from "./axiosClient";
 import { AttendanceRecordResponse } from "../../types/attendance.types";
 
-// GET /api/Attendance  or  GET /api/Attendance?employeeId={id}
-// No other query params are documented — do not add search/date/status/pagination here.
 export async function getAttendance(employeeId?: string): Promise<AttendanceRecordResponse[]> {
   const { data } = await apiClient.get<AttendanceRecordResponse[]>("/Attendance", {
     params: employeeId ? { employeeId } : undefined,

@@ -6,25 +6,33 @@
 // the brief explicitly calls for a Review step. Steps: Product -> Source
 // Warehouse -> Destination Warehouse -> Quantity+Reference -> Review.
 //
-// Source and Destination Warehouse use the SAME SearchableSelect
-// component but mutually exclude each other's current selection (source
-// removes itself from destination's options and vice versa) — a
-// client-side guard against a transfer-to-itself request, since whether
-// the backend rejects that on its own is unconfirmed. Same category of
-// caution as Departments/Categories' circular-hierarchy guards, applied
-// here to warehouse identity instead of hierarchy.
+// Source Warehouse is scoped to warehouses that actually hold stock of
+// the selected product (via StockLevel[] passed in by the page, fetched
+// from GET /api/Stock/products/{id} through the existing useProductStock
+// hook) — picking a source with zero stock of the product is a
+// guaranteed backend failure, so it's not offered as an option at all.
+// Destination Warehouse deliberately stays the FULL warehouse list:
+// transferring into a warehouse that doesn't yet stock this product is a
+// legitimate "first stock" scenario, so it's not filtered the same way.
+// Both still use the SAME SearchableSelect component and mutually
+// exclude each other's current selection — a client-side guard against a
+// transfer-to-itself request, since whether the backend rejects that on
+// its own is unconfirmed. Same category of caution as
+// Departments/Categories' circular-hierarchy guards, applied here to
+// warehouse identity instead of hierarchy.
 //
 // This component owns step state and field values; the page hosting it
-// owns the actual mutation call and success/error handling (matching
-// how every other module's forms separate "the form" from "the page
-// that submits it").
+// owns the actual mutation call, the product-stock fetch, and
+// success/error handling (matching how every other module's forms
+// separate "the form" from "the page that submits it").
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SearchableSelect } from "../../common/SearchableSelect";
 import type { Product } from "@/services/api/products.api";
 import type { WarehouseResponse } from "@/types/warehouses.types";
+import type { StockLevel } from "@/services/api/stock.api";
 
 export interface TransferFormValues {
   productId: string | null;
@@ -37,9 +45,18 @@ export interface TransferFormValues {
 export interface TransferStockWizardProps {
   products: Product[];
   warehouses: WarehouseResponse[];
+  // Per-warehouse stock levels for the currently selected product
+  // (from GET /api/Stock/products/{id} via useProductStock). Undefined
+  // while nothing is selected yet or the fetch hasn't resolved.
+  sourceStock: StockLevel[] | undefined;
+  isLoadingSourceStock: boolean;
   initialValues?: Partial<TransferFormValues>;
   isSubmitting: boolean;
   submitError: string | null;
+  // Fired whenever the selected product changes (including to null), so
+  // the hosting page can trigger/cancel the stock fetch. The wizard
+  // itself never calls the API.
+  onProductChange: (productId: string | null) => void;
   onSubmit: (values: {
     productId: string;
     fromWarehouseId: string;
@@ -61,9 +78,12 @@ const STEP_LABELS_KEYS = [
 export function TransferStockWizard({
   products,
   warehouses,
+  sourceStock,
+  isLoadingSourceStock,
   initialValues,
   isSubmitting,
   submitError,
+  onProductChange,
   onSubmit,
   onCancel,
 }: TransferStockWizardProps) {
@@ -77,15 +97,56 @@ export function TransferStockWizard({
     reference: initialValues?.reference ?? "",
   });
 
+  // Fire once on mount if we were pre-filled with a productId (e.g. from
+  // a row action elsewhere), so the page starts fetching stock right away.
+  useEffect(() => {
+    if (initialValues?.productId) onProductChange(initialValues.productId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Only warehouses that actually hold stock (> 0) of the selected
+  // product are eligible as Source. Zero-stock rows are excluded rather
+  // than shown-and-disabled, since the product picker already narrows
+  // the world down to one product and a long "unavailable" list adds
+  // noise without adding safety.
+  const eligibleSourceEntries = (sourceStock ?? []).filter((s) => s.quantityOnHand > 0);
+  const sourceWarehouseOptions = eligibleSourceEntries.map((s) => ({
+    value: s.warehouseId,
+    label: s.warehouseName,
+    secondaryLabel: t("stock.transfer.fields.quantityAvailable", { count: s.quantityOnHand }),
+  }));
+
+  // If the previously selected source warehouse is no longer in the
+  // eligible set (product changed, or stock ran out), clear it so the
+  // user can't silently carry forward a stale/invalid selection.
+  useEffect(() => {
+    if (
+      values.fromWarehouseId &&
+      sourceStock !== undefined &&
+      !eligibleSourceEntries.some((s) => s.warehouseId === values.fromWarehouseId)
+    ) {
+      setValues((v) => ({ ...v, fromWarehouseId: null }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sourceStock]);
+
   const productOptions = products.map((p) => ({ value: p.id, label: p.name, secondaryLabel: p.sku }));
-  const warehouseOptions = warehouses.map((w) => ({ value: w.id, label: w.name }));
+  // Destination is deliberately NOT filtered by stock — see file header.
+  const destWarehouseOptions = warehouses.map((w) => ({ value: w.id, label: w.name }));
 
   const selectedProduct = products.find((p) => p.id === values.productId);
   const sourceWarehouse = warehouses.find((w) => w.id === values.fromWarehouseId);
   const destWarehouse = warehouses.find((w) => w.id === values.toWarehouseId);
+  const sourceWarehouseStockEntry = eligibleSourceEntries.find((s) => s.warehouseId === values.fromWarehouseId);
 
   const quantityNumber = Number(values.quantity);
-  const isQuantityValid = values.quantity.trim().length > 0 && quantityNumber > 0;
+  const isQuantityValid =
+    values.quantity.trim().length > 0 &&
+    quantityNumber > 0 &&
+    (sourceWarehouseStockEntry === undefined || quantityNumber <= sourceWarehouseStockEntry.quantityOnHand);
+
+  const hasNoEligibleSourceWarehouses =
+    !!values.productId && sourceStock !== undefined && !isLoadingSourceStock && eligibleSourceEntries.length === 0;
 
   const stepIsValid = [
     !!values.productId,
@@ -123,6 +184,11 @@ export function TransferStockWizard({
   function goToStep(index: number) {
     // Only allow jumping to a step that's already been validly completed.
     if (index < stepIndex) setStepIndex(index);
+  }
+
+  function handleProductChange(productId: string | null) {
+    setValues((v) => ({ ...v, productId, fromWarehouseId: null }));
+    onProductChange(productId);
   }
 
   return (
@@ -169,7 +235,7 @@ export function TransferStockWizard({
             <SearchableSelect
               options={productOptions}
               value={values.productId}
-              onChange={(value) => setValues((v) => ({ ...v, productId: value }))}
+              onChange={handleProductChange}
               placeholder={t("stock.movement.fields.productPlaceholder")}
               searchPlaceholder={t("stock.movement.fields.searchProducts")}
             />
@@ -184,14 +250,22 @@ export function TransferStockWizard({
             <p className="mb-4 text-sm text-[var(--ink-tertiary)]">
               {t("stock.transfer.stepHints.source")}
             </p>
-            <SearchableSelect
-              options={warehouseOptions}
-              value={values.fromWarehouseId}
-              onChange={(value) => setValues((v) => ({ ...v, fromWarehouseId: value }))}
-              placeholder={t("stock.movement.fields.warehousePlaceholder")}
-              searchPlaceholder={t("stock.movement.fields.searchWarehouses")}
-              excludedValues={values.toWarehouseId ? new Set([values.toWarehouseId]) : undefined}
-            />
+            {isLoadingSourceStock ? (
+              <p className="text-sm text-[var(--ink-tertiary)]">{t("common.loading")}</p>
+            ) : hasNoEligibleSourceWarehouses ? (
+              <p className="text-sm text-[var(--error)]">
+                {t("stock.transfer.errors.noStockAnywhere", { product: selectedProduct?.name ?? "" })}
+              </p>
+            ) : (
+              <SearchableSelect
+                options={sourceWarehouseOptions}
+                value={values.fromWarehouseId}
+                onChange={(value) => setValues((v) => ({ ...v, fromWarehouseId: value }))}
+                placeholder={t("stock.movement.fields.warehousePlaceholder")}
+                searchPlaceholder={t("stock.movement.fields.searchWarehouses")}
+                excludedValues={values.toWarehouseId ? new Set([values.toWarehouseId]) : undefined}
+              />
+            )}
           </div>
         )}
 
@@ -204,7 +278,7 @@ export function TransferStockWizard({
               {t("stock.transfer.stepHints.destination")}
             </p>
             <SearchableSelect
-              options={warehouseOptions}
+              options={destWarehouseOptions}
               value={values.toWarehouseId}
               onChange={(value) => setValues((v) => ({ ...v, toWarehouseId: value }))}
               placeholder={t("stock.movement.fields.warehousePlaceholder")}
@@ -231,10 +305,16 @@ export function TransferStockWizard({
               <input
                 type="number"
                 min={1}
+                max={sourceWarehouseStockEntry?.quantityOnHand}
                 value={values.quantity}
                 onChange={(e) => setValues((v) => ({ ...v, quantity: e.target.value }))}
                 className="w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] px-3 py-2 text-sm text-[var(--ink-primary)] focus:border-[var(--signal)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/30"
               />
+              {sourceWarehouseStockEntry && (
+                <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
+                  {t("stock.transfer.fields.quantityAvailable", { count: sourceWarehouseStockEntry.quantityOnHand })}
+                </p>
+              )}
               {values.quantity.trim().length > 0 && !isQuantityValid && (
                 <p className="mt-1 text-xs text-[var(--error)]">
                   {t("stock.movement.errors.quantityInvalid")}
@@ -302,7 +382,7 @@ export function TransferStockWizard({
           <button
             type="button"
             onClick={goNext}
-            disabled={!stepIsValid[stepIndex] || isSubmitting}
+            disabled={!stepIsValid[stepIndex] || isSubmitting || (stepIndex === 1 && hasNoEligibleSourceWarehouses)}
             className="inline-flex items-center gap-1.5 rounded-[10px] bg-[var(--signal)] px-4 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-[var(--signal-hover)] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isLastStep

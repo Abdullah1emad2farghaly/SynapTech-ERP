@@ -22,7 +22,6 @@ export interface ProductsDataTableProps {
   selectedIds?: string[];
   onSelectionChange?: (ids: string[]) => void;
   onEdit: (product: Product) => void;
-  onDuplicate: (product: Product) => void;
   onDelete: (product: Product) => void;
   className?: string;
   canManageAccess: boolean;
@@ -46,7 +45,6 @@ export function ProductsDataTable({
   // selectedIds,
   // onSelectionChange,
   onEdit,
-  onDuplicate,
   onDelete,
   className = "",
   canManageAccess
@@ -131,7 +129,6 @@ export function ProductsDataTable({
           <ProductActionMenu
             product={row}
             onEdit={() => onEdit(row)}
-            onDuplicate={() => onDuplicate(row)}
             onDelete={() => onDelete(row)}
             onViewDetails={() => navigate(`${row.id}`)}
           />

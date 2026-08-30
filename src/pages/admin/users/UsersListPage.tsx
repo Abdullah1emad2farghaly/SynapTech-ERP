@@ -93,7 +93,7 @@ export function UsersListPage() {
     email: string;
     branchId: string | null;
     departmentId: string | null;
-    roleNames: string[];
+    roleNames: string[] | null;
   }) {
     try {
       await createUserMutation.mutateAsync(values);

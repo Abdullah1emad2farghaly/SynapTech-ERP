@@ -20,7 +20,7 @@ export interface CreateUserPayload {
   email: string;
   branchId: string | null;
   departmentId: string | null;
-  roleNames: string[];
+  roleNames: string[] | null;
 }
 
 export interface UpdateUserPayload {

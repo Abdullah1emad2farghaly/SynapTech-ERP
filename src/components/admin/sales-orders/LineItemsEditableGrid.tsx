@@ -1,21 +1,25 @@
 // Project path: src/components/admin/sales-orders/LineItemsEditableGrid.tsx
 //
-// Reuses SearchableEntitySelect from the Purchase Orders module rather than
-// duplicating it — it's generic and already built. Flagged as a promotion
-// candidate to components/common/ now that two feature folders depend on it;
-// import path below assumes it stays where Purchase Orders put it.
-//
-// Shipped-related columns intentionally absent — those only exist on the
-// response, not the create/edit request.
+// CHANGED: no longer fetches products itself via useSalesOrderProductsLookup.
+// Products (and their loading state) are now passed in as props so the
+// parent page can control whether the full product list or a
+// warehouse-filtered list is shown.
 
 import { useTranslation } from "react-i18next";
 import { Plus, Copy, Trash2 } from "lucide-react";
 import { SearchableEntitySelect } from "../purchase-orders/SearchableEntitySelect";
-import { useSalesOrderProductsLookup } from "../../../hooks/useSalesOrders";
 import type { SalesOrderLineRequest } from "../../../types/salesOrders.types";
+import { useNavigate } from "react-router-dom";
+
+interface ProductOption {
+  id: string;
+  name: string;
+}
 
 interface LineItemsEditableGridProps {
   lines: SalesOrderLineRequest[];
+  products: ProductOption[];
+  productsLoading?: boolean;
   onChange: (index: number, field: keyof SalesOrderLineRequest, value: string | number) => void;
   onAdd: () => void;
   onRemove: (index: number) => void;
@@ -24,14 +28,15 @@ interface LineItemsEditableGridProps {
 
 export function LineItemsEditableGrid({
   lines,
+  products,
+  productsLoading,
   onChange,
   onAdd,
   onRemove,
   onDuplicate,
 }: LineItemsEditableGridProps) {
   const { t } = useTranslation();
-  const { data: products = [], isLoading: productsLoading } = useSalesOrderProductsLookup();
-
+  const navigate = useNavigate();
   const grandTotal = lines.reduce((sum, l) => sum + (Number(l.quantity) || 0) * (Number(l.unitPrice) || 0), 0);
 
   return (
@@ -61,11 +66,19 @@ export function LineItemsEditableGrid({
                 searchPlaceholder={t("salesOrders.lines.searchProducts")}
                 noResultsLabel={t("salesOrders.lines.noProductsFound")}
                 isLoading={productsLoading}
+                button={
+                  <button
+                    type="button"
+                    onClick={() => navigate("/inventory/products")}
+                    className="w-full rounded-md px-3 py-2 text-sm font-medium border border-[var(--signal)] text-[--signal] hover:bg-[--sunken]"
+                  >
+                    {t("products.toolbar.addProduct")}
+                  </button>
+                }
               />
               <input
                 type="number"
                 min={0}
-                dir="ltr"
                 step="1"
                 value={line.quantity || ""}
                 onChange={(e) => onChange(index, "quantity", Number(e.target.value))}

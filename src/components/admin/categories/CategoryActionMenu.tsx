@@ -141,10 +141,6 @@ export function CategoryActionMenu({
                 closeMenu();
                 onAddChild(categoryId);
               }}
-              onCopyId={() => {
-                closeMenu();
-                handleCopyId(categoryId);
-              }}
               onActivate={() => {
                 closeMenu();
                 handleActivate(categoryId, categoryName);

@@ -100,7 +100,7 @@ export function StockOverviewPage() {
         warehouseId={row.warehouseId}
         warehouseName={row.warehouseName}
         onRecordMovement={(productId, warehouseId) =>
-          navigate(`/inventory/movements/new?productId=${productId}&warehouseId=${warehouseId}`)
+          navigate(`/inventory/stock/new-movement?productId=${productId}&warehouseId=${warehouseId}`)
         }
         onTransfer={(productId, warehouseId) =>
           navigate(`/inventory/stock/transfer?productId=${productId}&fromWarehouseId=${warehouseId}`)

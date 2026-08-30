@@ -80,6 +80,7 @@ export function JournalEntriesOverTimeChart({
             />
 
             <YAxis
+              direction={"ltr"}
               allowDecimals={false}
               tick={{
                 fontSize: 12,

@@ -141,7 +141,9 @@ export function BranchesPage() {
     try {
       if (id) {
       await updateMutation.mutateAsync({ id, ...values });
-      toast.success(t("branches.toast.updated"))
+      toast.success(t("branches.toast.updated", {
+        name: values.name
+      }))
     } else {
       await createMutation.mutateAsync({
         name: values.name,
@@ -150,16 +152,17 @@ export function BranchesPage() {
         phone: values.phone,
         isMain: values.isMain,
       });
-      toast.success(t("branches.toast.created"))
+      toast.success(t("branches.toast.created", {
+        name: values.name
+      }))
     }
     setDrawerTarget(null);
     refetch();
     } catch (error) {
       if(axios.isAxiosError(error)){
         handleErrors(error.response?.data.errors);
-        console.log(error)
       }
-      
+      throw error      
     }
   }
 

@@ -21,7 +21,7 @@ export interface CreateBranchPayload {
   name: string;
   code: string;
   address: string;
-  phone: string;
+  phone: string | null;
   isMain: boolean;
 }
 
@@ -30,7 +30,7 @@ export interface UpdateBranchPayload {
   name: string;
   code: string;
   address: string;
-  phone: string;
+  phone: string | null;
   isMain: boolean;
   isActive: boolean;
 }

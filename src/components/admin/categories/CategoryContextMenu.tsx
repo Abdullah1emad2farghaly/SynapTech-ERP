@@ -84,10 +84,6 @@ export function CategoryContextMenu({
             onClose();
             onAddChild(categoryId);
           }}
-          onCopyId={() => {
-            onClose();
-            handleCopyId(categoryId);
-          }}
           onActivate={() => {
             onClose();
             handleActivate(categoryId, categoryName);

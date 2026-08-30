@@ -1,12 +1,24 @@
 // Project path: src/pages/admin/purchase-orders/CreateEditPurchaseOrderPage.tsx
-// Routes: /purchase-orders/create, /purchase-orders/:id/edit
 //
-// Full page, not a Drawer — the one exception to this project's Drawer-for-
-// all-forms convention, justified by the line-items grid needing real width
-// (see spec §7). Edit only reachable for Draft orders — gated by the caller
-// (route/list/details all check canPerform("edit", status) before linking here).
+// CHANGED: warehouse↔product cross-filtering added, mirroring Sales Orders'
+// implementation on hooks/useStock.ts (useWarehouseStock / useProductStock).
+// - Selecting a warehouse narrows every line's product selector to products
+//   with quantityOnHand > 0 at that warehouse.
+// - Before any warehouse is chosen, selecting a product on the FIRST line
+//   that has one narrows the warehouse dropdown to warehouses stocking it.
+// - Changing warehouse after lines have products clears any line's product
+//   no longer stocked at the new warehouse.
+//
+// FLAGGED: unlike Sales Orders (shipping stock OUT, so "only show what's in
+// stock" is the correct constraint), a Purchase Order brings stock IN — the
+// most common real case is ordering a product that is NOT yet stocked (or
+// is at zero) at the destination warehouse. Filtering the product picker
+// down to "already stocked here" may actively block that case. Built as
+// requested (mirroring Sales Orders exactly), but this is worth revisiting
+// — e.g. showing all products with a "not currently stocked here" hint
+// instead of hiding options — before relying on it in production.
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
@@ -17,11 +29,12 @@ import {
   purchaseOrderFormSchema,
   type PurchaseOrderFormValues,
 } from "../../../schemas/purchaseOrders.schema";
-import { usePurchaseOrder } from "../../../hooks/usePurchaseOrders";
+import { usePurchaseOrder, useProductsLookup } from "../../../hooks/usePurchaseOrders";
 import {
   useCreatePurchaseOrder,
   useUpdatePurchaseOrder,
 } from "../../../hooks/usePurchaseOrderMutations";
+import { useWarehouseStock, useProductStock } from "../../../hooks/useStock";
 import { SearchableEntitySelect } from "../../../components/admin/purchase-orders/SearchableEntitySelect";
 import { LineItemsEditableGrid } from "../../../components/admin/purchase-orders/LineItemsEditableGrid";
 import { useSuppliers } from "../../../hooks/useSuppliers"; // existing module
@@ -42,6 +55,7 @@ export function CreateEditPurchaseOrderPage() {
   const { data: existingOrder, isLoading: orderLoading } = usePurchaseOrder(id);
   const { data: suppliers = [] } = useSuppliers();
   const { data: warehouses = [] } = useWarehouses();
+  const { data: products = [], isLoading: productsLoading } = useProductsLookup();
 
   const createOrder = useCreatePurchaseOrder();
   const updateOrder = useUpdatePurchaseOrder(id ?? "");
@@ -89,6 +103,66 @@ export function CreateEditPurchaseOrderPage() {
   const supplierId = watch("supplierId");
   const warehouseId = watch("warehouseId");
   const lines = watch("lines");
+
+  // Product driving the warehouse narrowing — only relevant while no
+  // warehouse has been chosen yet. First line with a product wins.
+  const productIdForWarehouseFilter = !warehouseId
+    ? lines.find((l) => l.productId)?.productId
+    : undefined;
+
+  const { data: warehouseStockLevels, isLoading: warehouseStockLoading } =
+    useWarehouseStock(warehouseId || undefined);
+
+  const { data: productStockLevels, isLoading: productStockLoading } =
+    useProductStock(productIdForWarehouseFilter);
+
+  const rawWarehouseOptions = useMemo(
+    () => warehouses.map((w) => ({ id: w.id, name: w.name })),
+    [warehouses]
+  );
+
+  const productFilteredWarehouseOptions = useMemo(() => {
+    if (!productStockLevels) return undefined;
+    return productStockLevels
+      .filter((s) => s.quantityOnHand > 0)
+      .map((s) => ({ id: s.warehouseId, name: s.warehouseName }));
+  }, [productStockLevels]);
+
+  const warehouseOptions = productFilteredWarehouseOptions ?? rawWarehouseOptions;
+  const warehouseOptionsLoading = Boolean(productIdForWarehouseFilter) && productStockLoading;
+
+  const warehouseFilteredProducts = useMemo(() => {
+    if (!warehouseStockLevels) return undefined;
+    return warehouseStockLevels
+      .filter((s) => s.quantityOnHand > 0)
+      .map((s) => ({ id: s.productId, name: s.productName }));
+  }, [warehouseStockLevels]);
+
+  const gridProducts = warehouseId ? (warehouseFilteredProducts ?? []) : products;
+  const gridProductsLoading = warehouseId ? warehouseStockLoading : productsLoading;
+
+  // Clear any line's product that no longer belongs to the newly-selected
+  // warehouse — only on an actual user-driven warehouse change, never on
+  // initial mount / edit-mode populate.
+  const prevWarehouseIdRef = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    if (!warehouseId || !warehouseFilteredProducts) return;
+
+    const isUserChange =
+      prevWarehouseIdRef.current !== undefined && prevWarehouseIdRef.current !== warehouseId;
+    prevWarehouseIdRef.current = warehouseId;
+    if (!isUserChange) return;
+
+    const allowedIds = new Set(warehouseFilteredProducts.map((p) => p.id));
+    const updated = lines.map((l) =>
+      l.productId && !allowedIds.has(l.productId) ? { ...l, productId: "" } : l
+    );
+    const changed = updated.some((l, i) => l.productId !== lines[i].productId);
+    if (changed) {
+      setValue("lines", updated, { shouldDirty: true, shouldValidate: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [warehouseId, warehouseFilteredProducts]);
 
   const handleLineChange = (
     index: number,
@@ -165,15 +239,19 @@ export function CreateEditPurchaseOrderPage() {
           <div>
             <label className="mb-1 block text-sm text-[--ink-secondary]">{t("purchaseOrders.fields.warehouse")}</label>
             <SearchableEntitySelect
-              options={warehouses.map((w) => ({ id: w.id, name: w.name }))}
+              options={warehouseOptions}
               value={warehouseId}
               onChange={(v) => setValue("warehouseId", v, { shouldValidate: true, shouldDirty: true })}
               placeholder={t("purchaseOrders.form.selectWarehouse")}
               searchPlaceholder={t("purchaseOrders.form.searchWarehouses")}
               noResultsLabel={t("purchaseOrders.form.noWarehousesFound")}
               hasError={Boolean(errors.warehouseId)}
+              isLoading={warehouseOptionsLoading}
             />
             {errors.warehouseId && <p className="mt-1 text-xs text-[--error]">{t(errors.warehouseId.message as string)}</p>}
+            {productIdForWarehouseFilter && (
+              <p className="mt-1 text-xs text-[--ink-tertiary]">{t("purchaseOrders.form.warehouseFilteredHint")}</p>
+            )}
           </div>
 
           <div>
@@ -197,8 +275,13 @@ export function CreateEditPurchaseOrderPage() {
         </section>
 
         <section className="rounded-lg border border-[--hairline] bg-[--panel] p-5">
+          {!warehouseId && (
+            <p className="mb-3 text-xs text-[--ink-tertiary]">{t("purchaseOrders.lines.selectWarehouseHint")}</p>
+          )}
           <LineItemsEditableGrid
             lines={lines}
+            products={gridProducts}
+            productsLoading={gridProductsLoading}
             onChange={handleLineChange}
             onAdd={() => setValue("lines", [...lines, EMPTY_LINE], { shouldDirty: true })}
             onRemove={(i) => setValue("lines", lines.filter((_, idx) => idx !== i), { shouldDirty: true, shouldValidate: true })}

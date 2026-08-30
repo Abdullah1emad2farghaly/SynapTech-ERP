@@ -38,6 +38,7 @@ export function StockByWarehouseChart({ data, isLoading }: Props) {
             <YAxis
               type="category"
               dataKey="warehouseName"
+              direction={"ltr"}
               width={100}
               tick={{ fontSize: 12, fill: 'var(--ink-secondary)' }}
             />

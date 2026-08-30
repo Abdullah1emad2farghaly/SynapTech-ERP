@@ -68,6 +68,7 @@ export function BalanceByAccountTypeBarChart({
             />
 
             <YAxis
+              direction={"ltr"}
               tick={{
                 fontSize: 12,
                 fill: 'var(--ink-tertiary)',

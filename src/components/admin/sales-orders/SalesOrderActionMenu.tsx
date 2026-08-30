@@ -53,7 +53,7 @@ export function SalesOrderActionMenu({
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-   const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions());
+  const canCreateAccess = hasAnyPermission(["sales.orders.create"], getUserPermissions());
   const canCancelAccess = hasAnyPermission(["sales.orders.cancel"], getUserPermissions());
   const canShipAccess = hasAnyPermission(["sales.orders.ship"], getUserPermissions());
   const canApproveAccess = hasAnyPermission(["sales.orders.approve"], getUserPermissions());
@@ -102,12 +102,7 @@ export function SalesOrderActionMenu({
       icon: Printer,
       onClick: onPrint,
     },
-    {
-      key: "duplicate",
-      label: t("salesOrders.actions.duplicate"),
-      icon: Copy,
-      onClick: onDuplicate,
-    },
+  
     {
       key: "cancel",
       label: t("salesOrders.actions.cancel"),

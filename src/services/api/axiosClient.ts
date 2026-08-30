@@ -90,7 +90,7 @@ apiClient.interceptors.response.use(
     // 403 - Forbidden
     // =================================================
 
-    if (status === 403) {
+    if (status === 403 && !isRefreshRequest) {
       toast.error(
         i18n.t("errors.actionNotAllowed")
       );
@@ -118,7 +118,9 @@ apiClient.interceptors.response.use(
       const currentUser = getCurrentUser();
 
       // -----------------------------------------------
-      // No refresh token
+      // No refresh token stored at all.
+      // There is nothing left to refresh with, so this
+      // is genuinely "both tokens gone" — sign out.
       // -----------------------------------------------
 
       if (!currentUser?.refreshToken) {
@@ -147,8 +149,10 @@ apiClient.interceptors.response.use(
         // ---------------------------------------------
 
         if (!response.data?.accessToken) {
-          signOut();
-
+          // Backend responded 2xx but gave no token back.
+          // This is a malformed/unexpected response, not
+          // a confirmed "refresh token expired" signal —
+          // don't sign out, just surface the error.
           return Promise.reject(
             new Error("Access token was not returned")
           );
@@ -189,10 +193,25 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch (refreshError) {
         // ---------------------------------------------
-        // Refresh token is invalid/expired
+        // Refresh call failed. Only sign out if the
+        // backend explicitly rejected the refresh token
+        // itself (401/403 from /Auth/refresh-token).
+        // Any other failure — network error, timeout,
+        // 5xx, CORS, etc. — does NOT confirm the refresh
+        // token is expired, so don't sign out for those;
+        // just reject and let the caller/UI handle it.
         // ---------------------------------------------
 
-        signOut();
+        const refreshStatus = axios.isAxiosError(refreshError)
+          ? refreshError.response?.status
+          : undefined;
+
+        const refreshTokenRejected =
+          refreshStatus === 401 || refreshStatus === 403;
+
+        if (refreshTokenRejected) {
+          signOut();
+        }
 
         return Promise.reject(refreshError);
       }
@@ -201,9 +220,31 @@ apiClient.interceptors.response.use(
     // =================================================
     // 401 From Refresh Token Request
     // =================================================
+    // Fires when /Auth/refresh-token itself returns 401
+    // outside the retry flow above. This unambiguously
+    // means the refresh token is expired/invalid, so
+    // signing out here is correct.
+    // =================================================
 
     if (
       isUnauthorized &&
+      isRefreshRequest
+    ) {
+      signOut();
+
+      return Promise.reject(error);
+    }
+
+    // =================================================
+    // 403 From Refresh Token Request
+    // =================================================
+    // Some backends return 403 instead of 401 for an
+    // invalid/expired refresh token. Treat it the same
+    // way — this is also "refresh token confirmed dead".
+    // =================================================
+
+    if (
+      status === 403 &&
       isRefreshRequest
     ) {
       signOut();

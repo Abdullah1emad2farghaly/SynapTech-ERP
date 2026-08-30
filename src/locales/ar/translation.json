@@ -106,7 +106,8 @@
     "status": {
       "active": "نشط",
       "inactive": "غير نشط",
-      "updating": "جارٍ التحديث..."
+      "updating": "جارٍ التحديث...",
+      "loading": "جارٍ التحميل..."
     },
     "actions": {
       "edit": "تعديل",
@@ -1353,7 +1354,7 @@
     },
     "column": {
       "name": "اسم العميل",
-      "contactName": "الشخص المسؤول",
+      "contactName": "اسم التواصل",
       "phone": "الهاتف",
       "email": "البريد الإلكتروني",
       "taxNumber": "الرقم الضريبي",
@@ -1377,7 +1378,7 @@
       },
       "fields": {
         "name": "اسم العميل",
-        "contactName": "الشخص المسؤول",
+        "contactName": "اسم التواصل",
         "phone": "الهاتف",
         "email": "البريد الإلكتروني",
         "address": "العنوان",
@@ -1484,6 +1485,7 @@
       "filteredTitle": "لا توجد أوامر مطابقة لبحثك أو فلاترك"
     },
     "form": {
+      "warehouseFilteredHint": "عرض المخازن التي تتوفر بها المنتج المحدد فقط",
       "createTitle": "أمر بيع جديد",
       "editTitle": "تعديل أمر البيع",
       "subtitle": "أدخل تفاصيل الأمر وأضف بنود الأصناف.",
@@ -1501,6 +1503,7 @@
       "notes": "ملاحظات"
     },
     "lines": {
+      "selectWarehouseHint": "اختر مخزنًا لعرض المنتجات المتاحة فيه",
       "title": "بنود الأصناف",
       "addRow": "إضافة سطر",
       "removeRow": "حذف السطر",
@@ -1585,26 +1588,27 @@
   },
   "employees": {
     "pageTitle": "الموظفون",
-    "pageDescription": "إدارة القوى العاملة في مؤسستك، وبيانات الموظفين، والهيكل التنظيمي، وصلاحيات الدخول إلى النظام.",
+    "pageDescription": "إدارة القوى العاملة في مؤسستك، ومعلومات الموظفين، والهيكل التنظيمي، وصلاحيات الوصول إلى النظام.",
     "addEmployee": "إضافة موظف",
-    "editEmployee": "تعديل بيانات الموظف",
-    "unnamed": "موظف بدون اسم",
+    "editEmployee": "تعديل الموظف",
+    "unnamed": "موظف غير مُسمى",
+    
     "kpi": {
       "total": "إجمالي الموظفين",
       "active": "الموظفون النشطون",
-      "withAccess": "الموظفون الذين لديهم صلاحية دخول",
+      "withAccess": "الموظفون الذين لديهم صلاحية وصول",
       "departments": "الأقسام"
     },
     "filters": {
-      "searchPlaceholder": "ابحث بالاسم أو الرقم الوظيفي أو البريد الإلكتروني أو الهاتف",
+      "searchPlaceholder": "البحث بالاسم أو الكود أو البريد الإلكتروني أو رقم الهاتف",
       "status": "الحالة",
       "department": "القسم",
       "branch": "الفرع",
       "jobTitle": "المسمى الوظيفي",
-      "access": "صلاحية الدخول للنظام",
-      "accessAll": "جميع حالات الصلاحية",
-      "accessWith": "لديه صلاحية دخول",
-      "accessWithout": "بدون صلاحية دخول"
+      "access": "الوصول إلى النظام",
+      "accessAll": "جميع حالات الوصول",
+      "accessWith": "لديه صلاحية وصول",
+      "accessWithout": "لا توجد صلاحية وصول"
     },
     "table": {
       "employee": "الموظف",
@@ -1614,28 +1618,31 @@
       "hireDate": "تاريخ التعيين",
       "baseSalary": "الراتب الأساسي",
       "status": "الحالة",
-      "access": "صلاحية النظام",
+      "access": "صلاحية الوصول إلى النظام",
       "actionsFor": "إجراءات {{name}}"
     },
     "status": {
-      "unspecified": "غير محدد"
+      "unspecified": "غير محددة",
+      "active": "نشط",
+      "onleave": "في إجازة",
+      "terminated": "منتهي الخدمة"
     },
     "access": {
-      "enabled": "الدخول مفعّل",
-      "none": "لا توجد صلاحية دخول",
-      "notEnabledTitle": "صلاحية الدخول للنظام غير مفعّلة",
-      "notEnabledBody": "لا يملك هذا الموظف حاليًا صلاحية الدخول إلى نظام SynapTech ERP.",
-      "title": "صلاحية النظام",
+      "enabled": "صلاحية الوصول مفعلة",
+      "none": "لا توجد صلاحية وصول",
+      "notEnabledTitle": "صلاحية الوصول إلى النظام غير مفعلة",
+      "notEnabledBody": "هذا الموظف لا يملك حاليًا صلاحية الوصول إلى نظام SynapTech ERP.",
+      "title": "صلاحية الوصول إلى النظام",
       "status": "الحالة",
       "active": "نشط",
       "inactive": "غير نشط",
-      "grantedNoDetail": "يملك هذا الموظف صلاحية دخول للنظام، لكن تفاصيل الحساب غير متاحة من هذه الشاشة."
+      "grantedNoDetail": "يمتلك هذا الموظف صلاحية الوصول إلى النظام، ولكن معلومات الحساب التفصيلية غير متاحة من هذا العرض."
     },
     "actions": {
       "viewDetails": "عرض التفاصيل",
-      "edit": "تعديل بيانات الموظف",
-      "viewAccess": "عرض صلاحية النظام",
-      "grantAccess": "منح صلاحية الدخول",
+      "edit": "تعديل الموظف",
+      "viewAccess": "عرض صلاحية الوصول إلى النظام",
+      "grantAccess": "منح صلاحية الوصول",
       "delete": "حذف الموظف"
     },
     "deleteDialog": {
@@ -1644,62 +1651,83 @@
       "confirm": "حذف الموظف"
     },
     "grantAccess": {
-      "title": "منح صلاحية الدخول للنظام",
+      "title": "منح صلاحية الوصول إلى النظام",
       "emailPlaceholder": "employee@company.com",
       "roles": "الأدوار",
-      "searchRoles": "ابحث عن الأدوار",
-      "granting": "جارٍ المنح…",
-      "submit": "منح الصلاحية",
-      "success": "تم منح صلاحية الدخول للنظام بنجاح"
+      "searchRoles": "البحث عن الأدوار",
+      "granting": "جارٍ منح الصلاحية…",
+      "submit": "منح صلاحية الوصول",
+      "success": "تم منح صلاحية الوصول إلى النظام بنجاح"
     },
     "empty": {
-      "noResultsTitle": "لا يوجد موظفون",
+      "noResultsTitle": "لم يتم العثور على موظفين",
       "noResultsBody": "حاول تعديل البحث أو عوامل التصفية.",
-      "noneYetTitle": "لا يوجد موظفون بعد",
-      "noneYetBody": "ابدأ ببناء فريق عملك بإضافة أول موظف."
+      "noneYetTitle": "لا يوجد موظفون حتى الآن",
+      "noneYetBody": "ابدأ في بناء فريق العمل الخاص بك بإضافة أول موظف."
     },
     "errors": {
-      "loadFailed": "تعذّر تحميل بيانات الموظفين حاليًا."
+      "emailRequired": "أدخل بريدك الإلكتروني",
+      "loadFailed": "تعذر تحميل الموظفين في الوقت الحالي.",
+      "employeeCodeRequired": "كود الموظف مطلوب",
+      "fullNameRequired": "الاسم الكامل مطلوب",
+      "hireDateRequired": "تاريخ التعيين مطلوب",
+      "jobTitleRequired": "المسمى الوظيفي مطلوب",
+      "baseSalaryRequired": "الراتب الأساسي مطلوب",
+      "baseSalaryInvalid": "يجب أن يكون الراتب الأساسي رقمًا صحيحًا",
+      "baseSalaryNegative": "لا يمكن أن يكون الراتب الأساسي سالبًا",
+      "baseSalaryRange": "يجب أن يكون الراتب الأساسي بين 1 و50000",
+      "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
+      "selectRole": "اختر دورًا واحدًا على الأقل"
     },
     "toast": {
       "created": "تم إنشاء الموظف",
-      "updated": "تم تحديث بيانات الموظف",
+      "updated": "تم تحديث الموظف",
       "deleted": "تم حذف الموظف"
     },
     "tabs": {
       "overview": "نظرة عامة",
-      "employment": "الوظيفة",
-      "contact": "التواصل",
+      "employment": "التوظيف",
+      "contact": "بيانات الاتصال",
       "compensation": "التعويضات",
-      "access": "صلاحية النظام"
+      "access": "صلاحية الوصول إلى النظام"
     },
     "overview": {
-      "personal": "البيانات الشخصية",
-      "employmentSummary": "ملخص الوظيفة"
+      "personal": "المعلومات الشخصية",
+      "employmentSummary": "ملخص التوظيف"
     },
     "form": {
       "section": {
-        "basic": "البيانات الأساسية",
-        "employment": "بيانات الوظيفة",
+        "selectBranch": "اختر الفرع",
+        "selectDepartment": "اختر القسم",
+        "basic": "المعلومات الأساسية",
+        "employment": "معلومات التوظيف",
         "compensation": "التعويضات",
-        "contact": "بيانات التواصل"
+        "contact": "معلومات الاتصال",
+        "personal": "المعلومات الشخصية"
       },
+      "employeeCodePlaceholder": "أدخل كود الموظف",
       "fullName": "الاسم الكامل",
-      "employeeCode": "الرقم الوظيفي",
-      "employeeCodeAuto": "يُولَّد تلقائيًا إذا تُرك فارغًا",
+      "fullNamePlaceholder": "أدخل الاسم الكامل",
+      "employeeCode": "كود الموظف",
+      "employeeCodeAuto": "يتم إنشاؤه تلقائيًا إذا تُرك فارغًا",
       "nationalId": "الرقم القومي",
+      "nationalIdPlaceholder": "أدخل الرقم القومي",
       "dateOfBirth": "تاريخ الميلاد",
       "jobTitle": "المسمى الوظيفي",
+      "jobTitlePlaceholder": "أدخل المسمى الوظيفي",
       "hireDate": "تاريخ التعيين",
       "status": "الحالة",
       "statusPlaceholder": "مثال: نشط، غير نشط",
       "department": "القسم",
+      "noDepartmentsForBranch": "لا توجد أقسام تابعة للفرع المحدد.",
       "branch": "الفرع",
-      "manager": "المدير المباشر",
-      "searchManager": "ابحث عن موظف",
+      "branchLockedByDepartment": "يتم تحديده تلقائيًا بناءً على القسم المحدد.",
+      "manager": "المدير",
+      "searchManager": "البحث عن الموظفين",
       "baseSalary": "الراتب الأساسي",
+      "baseSalaryPlaceholder": "أدخل الراتب الأساسي",
       "email": "البريد الإلكتروني",
-      "phone": "الهاتف",
+      "phone": "رقم الهاتف",
       "address": "العنوان",
       "saveChanges": "حفظ التغييرات",
       "createEmployee": "إنشاء موظف"
@@ -2062,6 +2090,96 @@
       }
     }
   },
+  "suppliers": {
+    "page": {
+      "title": "الموردون",
+      "description": "إدارة البيانات الأساسية للموردين المستخدمة في عمليات الشراء."
+    },
+    "toolbar": {
+      "searchPlaceholder": "البحث بالاسم أو جهة الاتصال أو البريد الإلكتروني أو الرقم الضريبي...",
+      "allStatuses": "جميع الحالات",
+      "sortNameAsc": "الاسم (أ–ي)",
+      "sortNameDesc": "الاسم (ي–أ)"
+    },
+    "table": {
+      "name": "اسم المورد",
+      "contactPerson": "اسم التواصل",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "taxNumber": "الرقم الضريبي",
+      "status": "الحالة"
+    },
+    "actions": {
+      "create": "مورد جديد",
+      "view": "عرض",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "save": "حفظ",
+      "saveAndNew": "حفظ وإضافة جديد"
+    },
+    "bulk": {
+      "selectedCount": "تم تحديد مورد واحد",
+      "selectedCount_other": "تم تحديد {{count}} مورد",
+      "deleteSelected": "حذف المحدد"
+    },
+    "pagination": {
+      "summary": "عرض {{from}}–{{to}} من {{total}}"
+    },
+    "empty": {
+      "title": "لا يوجد موردون بعد",
+      "description": "أضف أول مورد لبدء إدارة عمليات الشراء.",
+      "filteredTitle": "لا يوجد موردون مطابقون للبحث أو عوامل التصفية"
+    },
+    "drawer": {
+      "createTitle": "مورد جديد",
+      "editTitle": "تعديل المورد",
+      "supplierInfo": "معلومات المورد",
+      "businessInfo": "معلومات النشاط التجاري",
+      "unsavedChangesTitle": "هل تريد تجاهل التغييرات غير المحفوظة؟",
+      "unsavedChangesBody": "لديك تغييرات غير محفوظة. إذا أغلقت الآن، فسيتم فقدانها.",
+      "discardChanges": "تجاهل التغييرات",
+      "keepEditing": "متابعة التعديل"
+    },
+    "fields": {
+      "name": "اسم المورد",
+      "contactName": "جهة الاتصال",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "taxNumber": "الرقم الضريبي",
+      "status": "الحالة"
+    },
+    "validation": {
+      "nameMin": "يجب ألا يقل اسم المورد عن حرفين.",
+      "nameMax": "يجب ألا يزيد اسم المورد عن 120 حرفًا.",
+      "contactNameRequired": "جهة الاتصال مطلوبة.",
+      "contactNameMax": "يجب ألا يزيد اسم جهة الاتصال عن 80 حرفًا.",
+      "phoneRequired": "رقم الهاتف مطلوب.",
+      "phoneMax": "يجب ألا يزيد رقم الهاتف عن 30 حرفًا.",
+      "emailInvalid": "أدخل عنوان بريد إلكتروني صالحًا.",
+      "addressMax": "يجب ألا يزيد العنوان عن 240 حرفًا.",
+      "taxNumberRequired": "الرقم الضريبي مطلوب.",
+      "taxNumberMax": "يجب ألا يزيد الرقم الضريبي عن 40 حرفًا."
+    },
+    "deleteDialog": {
+      "title": "حذف المورد",
+      "body": "سيؤدي هذا إلى حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+    },
+    "details": {
+      "back": "العودة إلى الموردين",
+      "notFound": "المورد غير موجود.",
+      "purchaseOrdersTitle": "مُشار إليه في أوامر الشراء",
+      "purchaseOrdersDescription": "سجل أوامر الشراء الخاص بهذا المورد غير متاح في هذا العرض حاليًا."
+    },
+    "toasts": {
+      "created": "تم إنشاء المورد.",
+      "updated": "تم تحديث المورد.",
+      "deleted": "تم حذف المورد.",
+      "bulkDeleted": "تم حذف مورد واحد.",
+      "bulkDeleted_other": "تم حذف {{count}} مورد.",
+      "bulkDeletePartial": "تم حذف {{succeeded}}، وفشل حذف {{failed}}."
+    }
+  },
   "purchasing": {
     "overview": {
       "pageTitle": "نظرة عامة على المشتريات",
@@ -2209,7 +2327,6 @@
       }
     }
   },
-
   "accounting": {
     "overview": {
       "pageTitle": "نظرة عامة على الحسابات",
@@ -2294,7 +2411,6 @@
       }
     }
   },
-
   "hr": {
     "overview": {
       "pageTitle": "نظرة عامة على الموارد البشرية",
@@ -2403,7 +2519,6 @@
       }
     }
   },
-
   "organization": {
     "overview": {
       "pageTitle": "نظرة عامة على المؤسسة",
@@ -2487,7 +2602,6 @@
       }
     }
   },
-
   "administration": {
     "overview": {
       "pageTitle": "نظرة عامة على الإدارة",
@@ -2580,45 +2694,36 @@
       }
     }
   },
-
   "sidebar": {
     "dashboard": "لوحة التحكم",
     "sales": "المبيعات",
     "customers": "العملاء",
     "salesOrders": "أوامر البيع",
-
     "purchasing": "المشتريات",
     "suppliers": "الموردون",
     "purchaseOrders": "أوامر الشراء",
-
     "inventory": "المخزون",
     "warehouses": "المخازن",
     "categories": "الفئات",
     "products": "المنتجات",
     "stock": "الأصناف بالمخزون",
-
     "accounting": "المحاسبة",
     "chartOfAccounts": "دليل الحسابات",
     "journalEntries": "قيود اليومية",
-
     "hr": "الموارد البشرية ",
     "employees": "الموظفون",
     "attendance": "الحضور والانصراف",
     "myAttendance": "حضوري الشخصي",
     "leaveRequests": "طلبات الإجازات",
     "myRequests": "أجازاتي الشخصيه",
-
     "organization": "الهيكل التنظيمي",
     "branches": "الفروع",
     "departments": "الأقسام",
-
     "administration": "الإدارة",
     "users": "المستخدمون",
     "rolesAndPermissions": "الأدوار والصلاحيات",
-
     "companySettings": "إعدادات الشركة"
   },
-
   "dashboard": {
     "overview": {
       "pageTitle": "نظرة عامة على الأعمال",

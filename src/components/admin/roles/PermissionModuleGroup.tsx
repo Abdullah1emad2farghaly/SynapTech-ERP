@@ -1,14 +1,20 @@
 // Project path: src/components/admin/roles/PermissionModuleGroup.tsx
+//
+// UPDATE: accepts `lockedBy` (requiredCode -> selected codes that need it).
+// A locked row's checkbox is disabled and visually muted, with a title
+// tooltip listing what still depends on it, so unchecking it requires
+// first unchecking whatever requires it.
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Lock } from "lucide-react";
 import type { PermissionResponse } from "../../../types/roles.types";
 
 interface PermissionModuleGroupProps {
   module: string;
   permissions: PermissionResponse[];
   selectedCodes: Set<string>;
+  lockedBy: Map<string, string[]>;
   onToggle: (code: string) => void;
   onSelectAll: (codes: string[]) => void;
   onClearAll: (codes: string[]) => void;
@@ -19,6 +25,7 @@ export function PermissionModuleGroup({
   module,
   permissions,
   selectedCodes,
+  lockedBy,
   onToggle,
   onSelectAll,
   onClearAll,
@@ -74,10 +81,22 @@ export function PermissionModuleGroup({
         <div className="grid grid-cols-1 gap-2 p-3 sm:grid-cols-2">
           {permissions.map((permission) => {
             const checked = selectedCodes.has(permission.code);
+            const dependents = lockedBy.get(permission.code);
+            const locked = checked && !!dependents?.length;
+
             return (
               <label
                 key={permission.code}
-                className={`flex cursor-pointer items-start gap-2 rounded-md border p-2.5 text-sm transition-colors ${
+                title={
+                  locked
+                    ? t("roles.permissions.lockedTooltip", {
+                        codes: dependents!.join(", "),
+                      })
+                    : undefined
+                }
+                className={`flex items-start gap-2 rounded-md border p-2.5 text-sm transition-colors ${
+                  locked ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+                } ${
                   checked
                     ? "border-[--signal] bg-[--signal]/5"
                     : "border-[--hairline] hover:bg-[--sunken]"
@@ -86,12 +105,19 @@ export function PermissionModuleGroup({
                 <input
                   type="checkbox"
                   checked={checked}
+                  disabled={locked}
                   onChange={() => onToggle(permission.code)}
-                  className="mt-0.5 accent-[--signal]"
+                  className="mt-0.5 accent-[--signal] disabled:cursor-not-allowed"
                 />
                 <span>
-                  <span className="block font-medium text-[--ink-primary]">
+                  <span className="flex items-center gap-1 font-medium text-[--ink-primary]">
                     {permission.description}
+                    {locked && (
+                      <Lock
+                        size={11}
+                        className="shrink-0 text-[--ink-tertiary]"
+                      />
+                    )}
                   </span>
                   <span className="block font-mono text-xs text-[--ink-tertiary]">
                     {permission.code}

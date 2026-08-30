@@ -61,6 +61,7 @@ export function LeaveRequestsByTypeChart({
             />
 
             <YAxis
+              direction={"ltr"}
               allowDecimals={false}
               tick={{
                 fontSize: 12,

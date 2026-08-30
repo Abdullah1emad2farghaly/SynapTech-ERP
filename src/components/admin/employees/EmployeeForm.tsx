@@ -1,5 +1,3 @@
-
-
 import { useEffect, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,6 +51,11 @@ interface EditProps extends EmployeeFormBaseProps {
 
 type EmployeeFormProps = CreateProps | EditProps;
 
+// Provisional — EmployeeResponse.status has no confirmed backend enum yet.
+// Keep this in sync with EmployeeStatusBadge's known-value map if that
+// list changes.
+const EMPLOYEE_STATUS_OPTIONS = ["Active", "OnLeave", "Terminated"] as const;
+
 const inputClass =
   "h-10 w-full rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-3 text-sm text-[var(--ink-primary)] placeholder:text-[var(--ink-tertiary)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]";
 const labelClass = "mb-1.5 block text-sm font-medium text-[var(--ink-secondary)]";
@@ -69,7 +72,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
   const isEdit = props.mode === "edit";
 
   const form = useForm<CreateEmployeeFormValues | UpdateEmployeeFormValues>({
-    resolver: zodResolver(isEdit ? UpdateEmployeeSchema : CreateEmployeeSchema),
+    resolver: zodResolver(isEdit ? UpdateEmployeeSchema(t) : CreateEmployeeSchema(t)),
     defaultValues: isEdit
       ? {
         fullName: props.employee.fullName ?? "",
@@ -83,7 +86,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
         email: props.employee.email ?? "",
         phone: props.employee.phone ?? "",
         address: props.employee.address ?? "",
-        status: props.employee.status ?? "",
+        status: props.employee.status ?? "Active",
       }
       : {
         employeeCode: "",
@@ -174,14 +177,14 @@ export function EmployeeForm(props: EmployeeFormProps) {
           {/* Personal Information */}
           <section className="rounded-lg border  border-[var(--hairline)] bg-[var(--panel)] p-6">
             <SectionTitle>
-              {t("employees.form.section.personal", "Personal Information")}
+              {t("employees.form.section.personal")}
             </SectionTitle>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {/* Employee Code */}
               <div>
                 <label className={labelClass}>
-                  {t("employees.form.employeeCode", "Employee Code")}
+                  {t("employees.form.employeeCode")}
                   <span className="ml-1 text-red-500">*</span>
                 </label>
 
@@ -198,7 +201,6 @@ export function EmployeeForm(props: EmployeeFormProps) {
                       className={inputClass}
                       placeholder={t(
                         "employees.form.employeeCodePlaceholder",
-                        "Enter employee code"
                       )}
                     />
 
@@ -260,7 +262,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               {/* Date of Birth */}
               <div>
                 <label className={labelClass}>
-                  {t("employees.form.dateOfBirth", "Date of Birth")}
+                  {t("employees.form.dateOfBirth")}
                   <Optional/>
                 </label>
 
@@ -284,7 +286,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 {/* Email */}
                 <div>
                   <label className={labelClass}>
-                    {t("employees.form.email", "Email")}
+                    {t("employees.form.email")}
                     <Optional/>
                   </label>
 
@@ -304,7 +306,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 {/* Phone */}
                 <div>
                   <label className={labelClass}>
-                    {t("employees.form.phone", "Phone")}
+                    {t("employees.form.phone")}
                     <Optional/>
                   </label>
 
@@ -324,7 +326,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                 {/* Address */}
                 <div className="md:col-span-2">
                   <label className={labelClass}>
-                    {t("employees.form.address", "Address")}
+                    {t("employees.form.address")}
                     <Optional/>
                   </label>
 
@@ -348,8 +350,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
           <section className="rounded-lg border border-[var(--hairline)] bg-[var(--panel)] p-6">
             <SectionTitle>
               {t(
-                "employees.form.section.employment",
-                "Employment Information"
+                "employees.form.section.employment"
               )}
             </SectionTitle>
 
@@ -381,7 +382,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               {!isEdit && (
                 <div>
                   <label className={labelClass}>
-                    {t("employees.form.hireDate", "Hire Date")}
+                    {t("employees.form.hireDate")}
                     <span className="ml-1 text-red-500">*</span>
                   </label>
 
@@ -403,15 +404,23 @@ export function EmployeeForm(props: EmployeeFormProps) {
               {isEdit && (
                 <div>
                   <label className={labelClass}>
-                    {t("employees.form.status", "Status")}
+                    {t("employees.form.status")}
                   </label>
 
-                  <input
-                    {...register("status" as keyof UpdateEmployeeFormValues)}
-                    className={inputClass}
-                    placeholder={t(
-                      "employees.form.statusPlaceholder",
-                      "e.g. Active, Inactive"
+                  <Controller
+                    control={control}
+                    name={"status" as keyof UpdateEmployeeFormValues}
+                    render={({ field }) => (
+                      <select {...field} className={inputClass}>
+                        {EMPLOYEE_STATUS_OPTIONS.map((status) => (
+                          <option key={status} value={status}>
+                            {t(
+                              `employees.status.${status.toLowerCase()}`,
+                              status
+                            )}
+                          </option>
+                        ))}
+                      </select>
                     )}
                   />
 
@@ -426,7 +435,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               {/* Department */}
               <div>
                 <label className={labelClass}>
-                  {t("employees.form.department", "Department")}
+                  {t("employees.form.department")}
                   <Optional/>
                 </label>
 
@@ -442,7 +451,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                       <option value="">
                         {props.departmentOptionsLoading
                           ? t("common.loading", "Loading…")
-                          : t("common.none", "None")}
+                          : t("employees.form.section.selectDepartment")}
                       </option>
 
                       {visibleDepartmentOptions.map((o) => (
@@ -474,7 +483,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
               {/* Branch */}
               <div>
                 <label className={labelClass}>
-                  {t("employees.form.branch", "Branch")}
+                  {t("employees.form.branch")}
                   <Optional/>
                 </label>
 
@@ -490,7 +499,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
                       <option value="">
                         {props.branchOptionsLoading
                           ? t("common.loading", "Loading…")
-                          : t("common.none", "None")}
+                          : t("employees.form.section.selectBranch")}
                       </option>
 
                       {visibleBranchOptions.map((o) => (
@@ -523,7 +532,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
 
               <div>
                 <label className={labelClass}>
-                  {t("employees.form.manager", "Manager")}
+                  {t("employees.form.manager")}
                   <Optional/>
                 </label>
 
@@ -603,10 +612,6 @@ export function EmployeeForm(props: EmployeeFormProps) {
 
         </div>
 
-
-
-
-
         {/* Form Actions */}
         <div className="flex items-center justify-end gap-3 mt-5">
           <button
@@ -614,7 +619,7 @@ export function EmployeeForm(props: EmployeeFormProps) {
             onClick={props.onCancel}
             className="h-10 rounded-md px-5 text-sm font-medium text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
           >
-            {t("common.cancel", "Cancel")}
+            {t("common.actions.cancel", "Cancel")}
           </button>
 
           <button

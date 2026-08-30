@@ -92,6 +92,7 @@ export function CreateJournalEntryPage() {
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {
+        console.log(err.response?.data)
         handleErrors(err.response?.data.errors)
       } else {
         console.error(err);

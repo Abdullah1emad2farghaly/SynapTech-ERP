@@ -47,10 +47,10 @@ export function SuppliersListPage() {
       const q = filters.search.trim().toLowerCase();
       result = result.filter(
         (s) =>
-          s.name.toLowerCase().includes(q) ||
-          s.contactName.toLowerCase().includes(q) ||
-          s.email.toLowerCase().includes(q) ||
-          s.taxNumber.toLowerCase().includes(q)
+          s.name?.toLowerCase()?.includes(q) ||
+          s.contactName?.toLowerCase()?.includes(q) ||
+          s.email?.toLowerCase()?.includes(q) ||
+          s.taxNumber?.toLowerCase()?.includes(q)
       );
     }
     if (filters.status !== "all") {

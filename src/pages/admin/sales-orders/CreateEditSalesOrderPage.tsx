@@ -1,11 +1,26 @@
 // Project path: src/pages/admin/sales-orders/CreateEditSalesOrderPage.tsx
 // Routes: /sales-orders/create, /sales-orders/:id/edit
 //
+// CHANGED: warehouse↔product cross-filtering added, built on the real
+// hooks/useStock.ts (useWarehouseStock / useProductStock over
+// GET /api/Stock/warehouses/{id} and GET /api/Stock/products/{id}).
+// - Selecting a warehouse narrows every line's product selector to
+//   products with quantityOnHand > 0 at that warehouse.
+// - Before any warehouse is chosen, selecting a product on the FIRST line
+//   that has one narrows the warehouse dropdown to warehouses stocking it.
+//   This only drives the warehouse options in the product->warehouse
+//   direction; once a warehouse is actually selected, the
+//   warehouse->product direction takes over and is authoritative.
+// - If the warehouse is changed by the user after lines already have
+//   products picked, any line whose product isn't stocked at the new
+//   warehouse gets its product cleared (same pattern as Employees'
+//   Branch/Department cross-filter clearing).
+//
 // Full page, not a Drawer — same exception as Purchase Orders' Create/Edit,
 // justified by the line-items grid. No Expected Date field — this order has
 // no equivalent to Purchase Orders' expectedDate.
 
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
@@ -13,13 +28,15 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import { salesOrderFormSchema, type SalesOrderFormValues } from "../../../schemas/salesOrders.schema";
-import { useSalesOrder, useCustomersLookup } from "../../../hooks/useSalesOrders";
+import { useSalesOrder, useCustomersLookup, useSalesOrderProductsLookup } from "../../../hooks/useSalesOrders";
 import { useCreateSalesOrder, useUpdateSalesOrder } from "../../../hooks/useSalesOrderMutations";
+import { useWarehouseStock, useProductStock } from "../../../hooks/useStock";
 import { SearchableEntitySelect } from "../../../components/admin/purchase-orders/SearchableEntitySelect";
 import { LineItemsEditableGrid } from "../../../components/admin/sales-orders/LineItemsEditableGrid";
 import { useWarehouses } from "../../../hooks/useWarehouses"; // existing module
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import Optional from "@/components/common/Optional";
 
 const EMPTY_LINE = { productId: "", quantity: 0, unitPrice: 0 };
 
@@ -33,6 +50,7 @@ export function CreateEditSalesOrderPage() {
   const { data: existingOrder, isLoading: orderLoading } = useSalesOrder(id);
   const { data: customers = [] } = useCustomersLookup();
   const { data: warehouses = [] } = useWarehouses();
+  const { data: products = [], isLoading: productsLoading } = useSalesOrderProductsLookup();
 
   const createOrder = useCreateSalesOrder();
   const updateOrder = useUpdateSalesOrder(id ?? "");
@@ -77,6 +95,66 @@ export function CreateEditSalesOrderPage() {
   const customerId = watch("customerId");
   const warehouseId = watch("warehouseId");
   const lines = watch("lines");
+
+  // Product driving the warehouse narrowing — only relevant while no
+  // warehouse has been chosen yet. First line with a product wins.
+  const productIdForWarehouseFilter = !warehouseId
+    ? lines.find((l) => l.productId)?.productId
+    : undefined;
+
+  const { data: warehouseStockLevels, isLoading: warehouseStockLoading } =
+    useWarehouseStock(warehouseId || undefined);
+
+  const { data: productStockLevels, isLoading: productStockLoading } =
+    useProductStock(productIdForWarehouseFilter);
+
+  const rawWarehouseOptions = useMemo(
+    () => warehouses.map((w) => ({ id: w.id, name: w.name })),
+    [warehouses]
+  );
+
+  const productFilteredWarehouseOptions = useMemo(() => {
+    if (!productStockLevels) return undefined;
+    return productStockLevels
+      .filter((s) => s.quantityOnHand > 0)
+      .map((s) => ({ id: s.warehouseId, name: s.warehouseName }));
+  }, [productStockLevels]);
+
+  const warehouseOptions = productFilteredWarehouseOptions ?? rawWarehouseOptions;
+  const warehouseOptionsLoading = Boolean(productIdForWarehouseFilter) && productStockLoading;
+
+  const warehouseFilteredProducts = useMemo(() => {
+    if (!warehouseStockLevels) return undefined;
+    return warehouseStockLevels
+      .filter((s) => s.quantityOnHand > 0)
+      .map((s) => ({ id: s.productId, name: s.productName }));
+  }, [warehouseStockLevels]);
+
+  const gridProducts = warehouseId ? (warehouseFilteredProducts ?? []) : products;
+  const gridProductsLoading = warehouseId ? warehouseStockLoading : productsLoading;
+
+  // Clear any line's product that no longer belongs to the newly-selected
+  // warehouse — only on an actual user-driven warehouse change, never on
+  // initial mount / edit-mode populate.
+  const prevWarehouseIdRef = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    if (!warehouseId || !warehouseFilteredProducts) return;
+
+    const isUserChange =
+      prevWarehouseIdRef.current !== undefined && prevWarehouseIdRef.current !== warehouseId;
+    prevWarehouseIdRef.current = warehouseId;
+    if (!isUserChange) return;
+
+    const allowedIds = new Set(warehouseFilteredProducts.map((p) => p.id));
+    const updated = lines.map((l) =>
+      l.productId && !allowedIds.has(l.productId) ? { ...l, productId: "" } : l
+    );
+    const changed = updated.some((l, i) => l.productId !== lines[i].productId);
+    if (changed) {
+      setValue("lines", updated, { shouldDirty: true, shouldValidate: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [warehouseId, warehouseFilteredProducts]);
 
   const handleLineChange = (
     index: number,
@@ -150,15 +228,19 @@ export function CreateEditSalesOrderPage() {
           <div>
             <label className="mb-1 block text-sm text-[--ink-secondary]">{t("salesOrders.fields.warehouse")}</label>
             <SearchableEntitySelect
-              options={warehouses.map((w) => ({ id: w.id, name: w.name }))}
+              options={warehouseOptions}
               value={warehouseId}
               onChange={(v) => setValue("warehouseId", v, { shouldValidate: true, shouldDirty: true })}
               placeholder={t("salesOrders.form.selectWarehouse")}
               searchPlaceholder={t("salesOrders.form.searchWarehouses")}
               noResultsLabel={t("salesOrders.form.noWarehousesFound")}
               hasError={Boolean(errors.warehouseId)}
+              isLoading={warehouseOptionsLoading}
             />
             {errors.warehouseId && <p className="mt-1 text-xs text-[--error]">{t(errors.warehouseId.message as string)}</p>}
+            {productIdForWarehouseFilter && (
+              <p className="mt-1 text-xs text-[--ink-tertiary]">{t("salesOrders.form.warehouseFilteredHint")}</p>
+            )}
           </div>
 
           <div>
@@ -174,7 +256,7 @@ export function CreateEditSalesOrderPage() {
           <div>
             <label className="mb-1 block text-sm text-[--ink-secondary]">
               {t("salesOrders.fields.notes")}{" "}
-              <span className="text-[var(--ink-tertiary)]">{t("common.optional")}</span>
+              <Optional/>
             </label>
             <textarea
               {...register("notes")}
@@ -185,8 +267,13 @@ export function CreateEditSalesOrderPage() {
         </section>
 
         <section className="rounded-lg border border-[--hairline] bg-[--panel] p-5">
+          {!warehouseId && (
+            <p className="mb-3 text-xs text-[--ink-tertiary]">{t("salesOrders.lines.selectWarehouseHint")}</p>
+          )}
           <LineItemsEditableGrid
             lines={lines}
+            products={gridProducts}
+            productsLoading={gridProductsLoading}
             onChange={handleLineChange}
             onAdd={() => setValue("lines", [...lines, EMPTY_LINE], { shouldDirty: true })}
             onRemove={(i) => setValue("lines", lines.filter((_, idx) => idx !== i), { shouldDirty: true, shouldValidate: true })}

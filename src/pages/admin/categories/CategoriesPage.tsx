@@ -220,6 +220,7 @@ export function CategoriesPage() {
       if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors)
       }
+      throw error
     }
   }
 

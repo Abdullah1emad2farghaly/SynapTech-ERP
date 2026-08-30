@@ -52,7 +52,7 @@ export function CustomersPage() {
   const [confirmTarget, setConfirmTarget] = useState<ConfirmTarget>(null);
   const [isConfirmSubmitting, setIsConfirmSubmitting] = useState(false);
 
-  const { data: customers = [], isLoading, isError, refetch } = useCustomersList();
+  const { data: customers = [], isLoading, isFetching,  isError, refetch } = useCustomersList();
   const canManageAccess = hasAnyPermission(['sales.customers.manage'], getUserPermissions());
   const createMutation = useCreateCustomer();
   const updateMutation = useUpdateCustomer();
@@ -71,10 +71,10 @@ export function CustomersPage() {
     return customers.filter((c) => {
       if (
         query &&
-        !c.name.toLowerCase().includes(query) &&
-        !c.contactName.toLowerCase().includes(query) &&
-        !c.email.toLowerCase().includes(query) &&
-        !c.phone.toLowerCase().includes(query)
+        !c.name?.toLowerCase()?.includes(query) &&
+        !c.contactName?.toLowerCase()?.includes(query) &&
+        !c.email?.toLowerCase()?.includes(query) &&
+        !c.phone?.toLowerCase()?.includes(query)
       ) {
         return false;
       }
@@ -127,6 +127,11 @@ export function CustomersPage() {
 
     if (id) {
       await updateMutation.mutateAsync({ id, ...values }, {
+        onSuccess: ()=> {
+          toast.success(t("customers.toast.updated", {
+            name: values.name
+          }))
+        },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
             handleErrors(error.response?.data.errors);
@@ -137,6 +142,11 @@ export function CustomersPage() {
     } else {
       const { isActive: _isActive, ...createValues } = values;
       await createMutation.mutateAsync(createValues, {
+        onSuccess: ()=> {
+          toast.success(t("customers.toast.created", {
+            name: createValues.name
+          }))
+        },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
             handleErrors(error.response?.data.errors);
@@ -266,7 +276,7 @@ export function CustomersPage() {
             aria-label={t("common.actions.retry")}
             className="flex h-9 w-9 items-center justify-center rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
           >
-            <RefreshCw size={16} />
+            <RefreshCw size={16} className={isFetching ? "animate-spin" : undefined} />
           </button>
         </div>
       </div>

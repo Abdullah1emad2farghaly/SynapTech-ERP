@@ -1,17 +1,13 @@
 // Project path: src/components/admin/employees/GrantAccessDrawer.tsx
 //
-// The brief calls this a "modal/sheet" — built as a Drawer instead, per the
-// project's fixed Drawer-for-all-forms convention (overriding brief wording,
-// same precedent as Branches/Departments' "modal" requests becoming Drawers).
+// Grant Employee Access workflow.
 //
-// Role options reuse the same roles-catalog gap already flagged project-wide:
-// GET /api/Roles is unconfirmed (see Roles module notes). This form expects
-// a `roleOptions: {value; label}[]` prop so the parent page can supply it
-// however the real roles source ends up working — not re-guessing the
-// endpoint a second time inside this component.
-//
-// States handled explicitly: idle / submitting (isSubmitting) / success
-// (toast, close, invalidate via the hook's onSuccess) / error (toast).
+// Behavior:
+//   - Email is required.
+//   - roleNames is optional and nullable.
+//   - No roles selected -> roleNames: null.
+//   - Roles selected -> roleNames: string[].
+//   - MultiSelectSearchable receives [] for its UI when roleNames is null.
 
 import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -49,20 +45,26 @@ export function GrantAccessDrawer({
 }: GrantAccessDrawerProps) {
   const { t } = useTranslation();
   const grantAccess = useGrantEmployeeAccess();
-  
+
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<GrantEmployeeAccessFormValues>({
-    resolver: zodResolver(GrantEmployeeAccessSchema),
-    defaultValues: { email: employee?.email ?? "", roleNames: [] },
+    resolver: zodResolver(GrantEmployeeAccessSchema(t)),
+    defaultValues: {
+      email: "",
+      roleNames: null,
+    },
   });
 
   useEffect(() => {
     if (open) {
-      reset({ email: employee?.email ?? "", roleNames: [] });
+      reset({
+        email: employee?.email ?? "",
+        roleNames: null,
+      });
     }
   }, [open, employee, reset]);
 
@@ -73,15 +75,22 @@ export function GrantAccessDrawer({
       await grantAccess.mutateAsync({
         id: employee.id,
         payload: {
-          email: values.email || undefined,
+          email: values.email.trim(),
           roleNames: values.roleNames,
         },
       });
-      toast.success(t("employees.grantAccess.success", "System access granted successfully"));
+
+      toast.success(
+        t(
+          "employees.grantAccess.success",
+          "System access granted successfully"
+        )
+      );
+
       onClose();
-    } catch(error) {
-      if(axios.isAxiosError(error)){
-        handleErrors(error.response?.data.errors)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        handleErrors(error.response?.data.errors);
       }
     }
   };
@@ -90,14 +99,26 @@ export function GrantAccessDrawer({
     <Drawer
       open={open}
       onClose={onClose}
-      title={t("employees.grantAccess.title", "Grant System Access")}
-      subtitle={employee.fullName || employee.employeeCode || undefined}
+      title={t(
+        "employees.grantAccess.title",
+        "Grant System Access"
+      )}
+      subtitle={
+        employee.fullName ||
+        employee.employeeCode ||
+        undefined
+      }
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 p-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-5 p-4"
+      >
+        {/* Email */}
         <div>
           <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
             {t("employees.form.email", "Email")}
           </label>
+
           <Controller
             control={control}
             name="email"
@@ -105,55 +126,88 @@ export function GrantAccessDrawer({
               <input
                 {...field}
                 type="email"
-                className="h-10 w-full rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]"
-                placeholder={t("employees.grantAccess.emailPlaceholder", "employee@company.com")}
+                className="h-10 w-full rounded-md border border-[var(--hairline)] bg-[var(--panel)] px-3 text-sm text-[var(--ink-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]"
+                placeholder={t(
+                  "employees.grantAccess.emailPlaceholder",
+                  "employee@company.com"
+                )}
               />
             )}
           />
+
           {errors.email && (
-            <p className="mt-1 text-xs text-[var(--error)]">{errors.email.message}</p>
+            <p className="mt-1 text-xs text-[var(--error)]">
+              {errors.email.message}
+            </p>
           )}
         </div>
 
+        {/* Roles */}
         <div>
           <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
-            {t("employees.grantAccess.roles", "Roles")}
+            {t(
+              "employees.grantAccess.roles",
+              "Roles"
+            )}
           </label>
+
           <Controller
             control={control}
             name="roleNames"
             render={({ field }) => (
               <MultiSelectSearchable
                 options={roleOptions}
-                selected={field.value}
-                onChange={field.onChange}
-                searchPlaceholder={t("employees.grantAccess.searchRoles", "Search roles")}
+                selected={field.value ?? []}
+                onChange={(selected) => {
+                  field.onChange(
+                    selected.length > 0 ? selected : null
+                  );
+                }}
+                searchPlaceholder={t(
+                  "employees.grantAccess.searchRoles",
+                  "Search roles"
+                )}
                 showSelectedSummary
-                emptyResultsLabel={t("common.noResults", "No results found")}
+                emptyResultsLabel={t(
+                  "common.noResults",
+                  "No results found"
+                )}
               />
             )}
           />
+
           {errors.roleNames && (
-            <p className="mt-1 text-xs text-[var(--error)]">{errors.roleNames.message}</p>
+            <p className="mt-1 text-xs text-[var(--error)]">
+              {errors.roleNames.message}
+            </p>
           )}
         </div>
 
+        {/* Actions */}
         <div className="mt-2 flex items-center justify-end gap-2 border-t border-[var(--hairline)] pt-4">
           <button
             type="button"
             onClick={onClose}
-            className="h-10 rounded-md px-4 text-sm font-medium text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
+            disabled={grantAccess.isPending}
+            className="h-10 rounded-md px-4 text-sm font-medium text-[var(--ink-secondary)] hover:bg-[var(--sunken)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {t("common.cancel", "Cancel")}
           </button>
+
           <button
             type="submit"
             disabled={grantAccess.isPending}
-            className="h-10 rounded-md disabled:cursor-not-allowed bg-[var(--signal)] px-4 text-sm font-medium text-white hover:bg-[var(--signal-hover)] disabled:opacity-60"
+            className="h-10 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white hover:bg-[var(--signal-hover)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {grantAccess.isPending
-              ? t("employees.grantAccess.granting", "Granting…")
-              : t("employees.grantAccess.submit", "Grant Access")}
+              ? t(
+                  "employees.grantAccess.granting",
+                  "Granting…"
+                )
+              : t(
+                  "employees.grantAccess.submit",
+                  "Grant Access"
+                )}
           </button>
         </div>
       </form>

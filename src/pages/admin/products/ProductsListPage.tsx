@@ -143,7 +143,6 @@ export function ProductsListPage() {
             sortDirection={sortDirection}
             onSortChange={handleSortChange}
             onEdit={openEditDrawer}
-            onDuplicate={openDuplicateDrawer}
             onDelete={() => {
               
             }}

@@ -7,7 +7,7 @@
 //   - email is required and must be a valid email.
 //   - branchId is optional and is sent as null when empty.
 //   - departmentId is optional and is sent as null when empty.
-//   - roleNames is optional and is sent as an empty array when no roles are selected.
+//   - roleNames is optional and is sent as null when no roles are selected.
 
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +35,9 @@ const createUserSchema = z.object({
   departmentId: z.string().nullable(),
 
   // Optional
-  roleNames: z.array(z.string()),
+  // The form uses [] internally, but it will be converted to null
+  // before being submitted when no roles are selected.
+  roleNames: z.array(z.string()).nullable(),
 });
 
 export type CreateUserFormValues = z.infer<typeof createUserSchema>;
@@ -111,7 +113,12 @@ export function CreateUserDrawer({
       email: values.email.trim(),
       branchId: values.branchId || null,
       departmentId: values.departmentId || null,
-      roleNames: values.roleNames ?? [],
+
+      // Send null when no roles are selected.
+      roleNames:
+        values.roleNames && values.roleNames.length > 0
+          ? values.roleNames
+          : null,
     };
 
     await onSubmit(submitValues);
@@ -183,14 +190,13 @@ export function CreateUserDrawer({
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--ink-tertiary)]">
             {t("users.details.sections.organization")}
-            
           </legend>
 
           {/* Branch - Optional */}
           <div>
             <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
               {t("users.create.fields.branch")}
-              <Optional/>
+              <Optional />
             </label>
 
             <select
@@ -202,10 +208,7 @@ export function CreateUserDrawer({
               <option value="">—</option>
 
               {branchOptions.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                >
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
@@ -216,7 +219,7 @@ export function CreateUserDrawer({
           <div>
             <label className="mb-1.5 block text-sm font-medium text-[var(--ink-primary)]">
               {t("users.create.fields.department")}
-              <Optional/>
+              <Optional />
             </label>
 
             <select
@@ -228,10 +231,7 @@ export function CreateUserDrawer({
               <option value="">—</option>
 
               {departmentOptions.map((option) => (
-                <option
-                  key={option.value}
-                  value={option.value}
-                >
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
@@ -241,8 +241,9 @@ export function CreateUserDrawer({
 
         {/* Access group */}
         <fieldset className="flex flex-col gap-2">
-          <legend className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--ink-tertiary)]">
+          <legend className="mb-1 text-xs font-medium uppercase tracking-wide text-[var(--ink-scondary)]">
             {t("users.details.sections.roles")}
+            <Optional/>
           </legend>
 
           <Controller

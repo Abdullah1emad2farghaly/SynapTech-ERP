@@ -93,6 +93,8 @@
     "passwordSymbol": "Add a symbol"
   },
   "common": {
+    "none": "None",
+    "back": " Back",
     "optional": "optional",
     "loading": "Loading...",
     "unknown": "Unknown",
@@ -113,7 +115,8 @@
     "status": {
       "active": "Active",
       "inactive": "Inactive",
-      "updating": "Updating..."
+      "updating": "Updating...",
+      "loading": "Loading..."
     },
     "actions": {
       "edit": "Edit",
@@ -1110,6 +1113,8 @@
       }
     },
     "movement": {
+      "warehouseFilteredHint": "Showing products in stock at the selected warehouse",
+      "productFilteredHint": "Showing warehouses that stock the selected product",
       "In": "In",
       "Out": "Out",
       "AdjustmentIncrease": "Adjustment Increase",
@@ -1161,12 +1166,18 @@
         "quantity": "Quantity",
         "review": "Review"
       },
+      "fields": {
+        "quantityAvailable": "{{count}} available"
+      },
       "stepHints": {
         "product": "Which product are you transferring?",
         "source": "Which warehouse is it moving from?",
         "destination": "Which warehouse is it moving to?",
         "quantity": "How many units, and an optional reference.",
         "review": "Check every detail before confirming — this can't be undone."
+      },
+      "errors": {
+        "noStockAnywhere": "\"{{product}}\" has no stock in any warehouse"
       }
     }
   },
@@ -1183,7 +1194,7 @@
     },
     "table": {
       "name": "Supplier Name",
-      "contactPerson": "Contact Person",
+      "contactPerson": "Contact Name",
       "phone": "Phone",
       "email": "Email",
       "taxNumber": "Tax Number",
@@ -1327,6 +1338,7 @@
       "filteredTitle": "No orders match your search or filters"
     },
     "form": {
+      "warehouseFilteredHint": "Showing warehouses that stock the selected product",
       "createTitle": "New Purchase Order",
       "editTitle": "Edit Purchase Order",
       "subtitle": "Fill in order details and add line items.",
@@ -1345,6 +1357,7 @@
       "notes": "Notes"
     },
     "lines": {
+      "selectWarehouseHint": "Select a warehouse to see products available there",
       "title": "Line Items",
       "addRow": "Add Row",
       "removeRow": "Remove row",
@@ -1583,6 +1596,7 @@
       "filteredTitle": "No orders match your search or filters"
     },
     "form": {
+      "warehouseFilteredHint": "Showing warehouses that stock the selected product",
       "createTitle": "New Sales Order",
       "editTitle": "Edit Sales Order",
       "subtitle": "Fill in order details and add line items.",
@@ -1600,6 +1614,7 @@
       "notes": "Notes"
     },
     "lines": {
+      "selectWarehouseHint": "Select a warehouse to see products available there",
       "title": "Line Items",
       "addRow": "Add Row",
       "removeRow": "Remove row",
@@ -1717,7 +1732,10 @@
       "actionsFor": "Actions for {{name}}"
     },
     "status": {
-      "unspecified": "Not set"
+      "unspecified": "Not set",
+      "active": "Active",
+      "onleave": "On Leave",
+      "terminated": "Terminated"
     },
     "access": {
       "enabled": "Access enabled",
@@ -1758,7 +1776,18 @@
       "noneYetBody": "Start building your workforce by adding your first employee."
     },
     "errors": {
-      "loadFailed": "We couldn't load employees right now."
+        "emailRequired":"Enter your email",
+        "loadFailed": "We couldn't load employees right now.",
+        "employeeCodeRequired": "Employee code is required",
+        "fullNameRequired": "Full name is required",
+        "hireDateRequired": "Hire date is required",
+        "jobTitleRequired": "Job title is required",
+        "baseSalaryRequired": "Base salary is required",
+        "baseSalaryInvalid": "Base salary must be a valid number",
+        "baseSalaryNegative": "Base salary cannot be negative",
+        "baseSalaryRange": "Base salary must be between 1 and 50000",
+        "emailInvalid": "Enter a valid email",
+        "selectRole": "Select at least one role"
     },
     "toast": {
       "created": "Employee created",
@@ -1778,30 +1807,41 @@
     },
     "form": {
       "section": {
+        "selectBranch": "Select a branch",
+        "selectDepartment": "Select a department",
         "basic": "Basic Information",
         "employment": "Employment Information",
         "compensation": "Compensation",
-        "contact": "Contact Information"
+        "contact": "Contact Information",
+        "personal": "Personal Information"
       },
+      "employeeCodePlaceholder": "Enter employee code",
       "fullName": "Full Name",
+      "fullNamePlaceholder": "Enter full name",
       "employeeCode": "Employee Code",
       "employeeCodeAuto": "Auto-generated if left blank",
       "nationalId": "National ID",
+      "nationalIdPlaceholder": "Enter national ID",
       "dateOfBirth": "Date of Birth",
       "jobTitle": "Job Title",
+      "jobTitlePlaceholder": "Enter job title",
       "hireDate": "Hire Date",
       "status": "Status",
       "statusPlaceholder": "e.g. Active, Inactive",
       "department": "Department",
+      "noDepartmentsForBranch": "No departments belong to the selected branch.",
       "branch": "Branch",
+      "branchLockedByDepartment": "Set automatically from the selected department.",
       "manager": "Manager",
       "searchManager": "Search employees",
       "baseSalary": "Base Salary",
+      "baseSalaryPlaceholder": "Enter base salary",
       "email": "Email",
       "phone": "Phone",
       "address": "Address",
       "saveChanges": "Save Changes",
-      "createEmployee": "Create Employee"
+      "createEmployee": "Create Employee",
+      "cancel": "Cancel"
     }
   },
   "attendance": {
