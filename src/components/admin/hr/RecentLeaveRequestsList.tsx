@@ -48,7 +48,7 @@ export function RecentLeaveRequestsList({ data, isLoading }: Props) {
                 <div className="min-w-0">
                   <p className="text-sm text-ink-primary truncate">{request.employeeName}</p>
                   <p className="text-xs text-ink-tertiary truncate">
-                    {request.leaveType} · {new Date(request.startDate).toLocaleDateString()} –{' '}
+                    {t(`leaveRequests.types.${request.leaveType.toLocaleLowerCase()}`)} · {new Date(request.startDate).toLocaleDateString()} –{' '}
                     {new Date(request.endDate).toLocaleDateString()}
                   </p>
                 </div>

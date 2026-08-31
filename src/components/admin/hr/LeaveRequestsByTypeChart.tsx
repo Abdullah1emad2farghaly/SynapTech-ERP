@@ -1,6 +1,10 @@
 // Intended path: src/components/admin/hr/LeaveRequestsByTypeChart.tsx
 // Real distribution — every LeaveRequestResponse has a leaveType field.
+// leaveType has no confirmed backend enum. Translated directly against the
+// existing leaveRequests.types.<value> namespace, no local map/new file —
+// unrecognized values fall back to the raw string via i18next's defaultValue.
 
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BarChart,
@@ -20,11 +24,22 @@ interface Props {
   isLoading: boolean;
 }
 
-export function LeaveRequestsByTypeChart({
-  data,
-  isLoading,
-}: Props) {
-  const { t } = useTranslation();
+export function LeaveRequestsByTypeChart({ data, isLoading }: Props) {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.dir() === 'rtl';
+
+  const chartData = useMemo(() => {
+    if (!data) return [];
+    const translated = data.map(d => ({
+      ...d,
+      label: t(`leaveRequests.types.${d.label.toLocaleLowerCase()}`, { defaultValue: d.label }),
+    }
+    
+  ));
+  
+    return isRtl ? [...translated].reverse() : translated;
+  }, [data, t, isRtl]);
+  console.log(chartData)
 
   return (
     <div className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
@@ -37,36 +52,20 @@ export function LeaveRequestsByTypeChart({
       ) : !data || data.length === 0 ? (
         <EmptyState
           title={t('hr.overview.leaveByType.emptyTitle')}
-          description={t(
-            'hr.overview.leaveByType.emptyDescription'
-          )}
+          description={t('hr.overview.leaveByType.emptyDescription')}
         />
       ) : (
         <ResponsiveContainer width="100%" height={240}>
-          <BarChart
-            data={data}
-            margin={{ top: 8, right: 8 }}
-          >
-            <CartesianGrid
-              vertical={false}
-              stroke="var(--hairline)"
-            />
+          <BarChart data={chartData} margin={{ top: 8, right: 8 }}>
+            <CartesianGrid vertical={false} stroke="var(--hairline)" />
 
-            <XAxis
-              dataKey="label"
-              tick={{
-                fontSize: 11,
-                fill: 'var(--ink-tertiary)',
-              }}
-            />
+            <XAxis dataKey="label" tick={{ fontSize: 11, fill: 'var(--ink-tertiary)' }} />
 
+            {/* Numbers always stay LTR regardless of locale */}
             <YAxis
-              direction={"ltr"}
+              direction="ltr"
               allowDecimals={false}
-              tick={{
-                fontSize: 12,
-                fill: 'var(--ink-tertiary)',
-              }}
+              tick={{ fontSize: 12, fill: 'var(--ink-tertiary)' }}
             />
 
             <Tooltip
@@ -82,25 +81,15 @@ export function LeaveRequestsByTypeChart({
                 fontWeight: 500,
                 marginBottom: '4px',
               }}
-              itemStyle={{
-                color: 'rgb(var(--color-ink-secondary))',
-              }}
-              cursor={{
-                stroke: 'rgb(var(--color-hairline))',
-              }}
-              formatter={(value) => [
-                typeof value === 'number'
-                  ? value
-                  : Number(value ?? 0),
+              itemStyle={{ color: 'rgb(var(--color-ink-secondary))' }}
+              cursor={{ stroke: 'rgb(var(--color-hairline))' }}
+              formatter={value => [
+                typeof value === 'number' ? value : Number(value ?? 0),
                 t('hr.overview.leaveByType.countLabel'),
               ]}
             />
 
-            <Bar
-              dataKey="count"
-              fill="var(--synapse)"
-              radius={[4, 4, 0, 0]}
-            />
+            <Bar dataKey="count" fill="var(--synapse)" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       )}

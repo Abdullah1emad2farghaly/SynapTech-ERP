@@ -118,7 +118,7 @@ export function LeaveRequestsByStatusChart({
                     : String(value ?? '');
 
                 return t(
-                  `leaveRequests.status.${statusName}`,
+                  `leaveRequests.status.${statusName.toLocaleLowerCase()}`,
                   statusName
                 );
               }}

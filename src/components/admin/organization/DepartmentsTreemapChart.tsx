@@ -17,8 +17,10 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { ReactElement } from 'react';
+
 import { Skeleton } from '../../common/Skeleton';
 import { EmptyState } from '../../common/EmptyState';
+
 import type { TreemapNode } from '../../../hooks/useOrganizationOverviewStats';
 
 const PALETTE = [
@@ -127,15 +129,39 @@ export function DepartmentsTreemapChart({
 }: Props) {
   const { t } = useTranslation();
 
+  /**
+   * Translate the special Unassigned bucket.
+   *
+   * Depending on how the data is produced by the hook, the Treemap's
+   * `name` can be either "__unassigned__" or "Unassigned".
+   *
+   * Handle both values so the UI always uses the i18n translation.
+   */
+  const resolved = (data ?? []).map((d) => {
+    const isUnassigned =
+      d.name === '__unassigned__' ||
+      d.name?.trim().toLowerCase() === 'unassigned';
+
+    return {
+      ...d,
+      name: isUnassigned
+        ? t('organization.overview.unassigned')
+        : d.name,
+    };
+  });
+
   return (
-    <div className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
+    <div
+      dir="ltr"
+      className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1"
+    >
       <h3 className="text-sm font-medium text-ink-primary mb-3">
         {t('organization.overview.departmentsTreemap.title')}
       </h3>
 
       {isLoading ? (
         <Skeleton className="h-64 w-full" />
-      ) : !data || data.length === 0 ? (
+      ) : resolved.length === 0 ? (
         <EmptyState
           title={t(
             'organization.overview.departmentsTreemap.emptyTitle'
@@ -147,7 +173,7 @@ export function DepartmentsTreemapChart({
       ) : (
         <ResponsiveContainer width="100%" height={260}>
           <TypedTreemap
-            data={data}
+            data={resolved}
             dataKey="size"
             nameKey="name"
             content={<CustomCell />}

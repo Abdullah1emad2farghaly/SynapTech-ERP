@@ -82,6 +82,7 @@ export function HeadcountGrowthChart({ data, isLoading }: Props) {
             />
 
             <YAxis
+              direction={"ltr"}
               allowDecimals={false}
               tick={{
                 fontSize: 12,

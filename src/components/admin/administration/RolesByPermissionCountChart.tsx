@@ -76,6 +76,7 @@ export function RolesByPermissionCountChart({
             />
 
             <YAxis
+              direction={"ltr"}
               type="category"
               dataKey="roleName"
               width={120}

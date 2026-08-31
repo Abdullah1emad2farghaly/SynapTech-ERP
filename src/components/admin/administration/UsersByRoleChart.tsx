@@ -74,6 +74,7 @@ export function UsersByRoleChart({
             />
 
             <YAxis
+              direction={"ltr"}
               type="category"
               dataKey="label"
               width={110}

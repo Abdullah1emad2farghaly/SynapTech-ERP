@@ -1,55 +1,55 @@
 {
   "auth": {
-    "tagline": "نظام تخطيط موارد ذكي للفرق الحديثة.",
+    "tagline": "نظام ERP ذكي للفرق الحديثة.",
     "login": {
-      "heading": "مرحبًا بعودتك",
-      "subtitle": "سجّل الدخول إلى مساحة عمل Synaptech",
+      "heading": "أهلاً بعودتك",
+      "subtitle": "سجّل الدخول إلى مساحة عمل Synaptech الخاصة بك",
       "emailLabel": "البريد الإلكتروني",
       "passwordLabel": "كلمة المرور",
       "rememberMe": "تذكرني",
-      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "forgotPassword": "نسيت كلمة المرور؟",
       "submit": "تسجيل الدخول",
-      "genericError": "تعذّر تسجيل الدخول. تحقق من البريد الإلكتروني وكلمة المرور وحاول مرة أخرى.",
+      "genericError": "تعذّر تسجيل الدخول. يرجى التأكد من البريد الإلكتروني وكلمة المرور والمحاولة مرة أخرى.",
       "noAccount": "ليس لديك حساب؟",
       "signUp": "إنشاء حساب"
     },
     "register": {
-      "heading": "إنشاء مساحة عملك",
-      "subtitle": "أنشئ حساب Synaptech ERP الخاص بك",
-      "fullNameLabel": "الاسم الكامل",
+      "heading": "أنشئ مساحة عملك",
+      "subtitle": "جهّز حساب Synaptech ERP الخاص بشركتك",
+      "fullNameLabel": "الاسم بالكامل",
       "companyNameLabel": "اسم الشركة",
       "emailLabel": "البريد الإلكتروني للعمل",
       "passwordLabel": "كلمة المرور",
       "submit": "إنشاء حساب",
-      "genericError": "تعذّر إنشاء حسابك. حاول مرة أخرى.",
+      "genericError": "تعذّر إنشاء الحساب. يرجى المحاولة مرة أخرى.",
       "haveAccount": "لديك حساب بالفعل؟",
       "signIn": "تسجيل الدخول",
-      "backToLogin": "العودة لتسجيل الدخول",
-      "successHeading": "تحقق من بريدك الإلكتروني",
-      "successBody": "أرسلنا رابط التحقق إلى {{email}}"
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "successHeading": "فعّل بريدك الإلكتروني",
+      "successBody": "تم إرسال رابط تفعيل إلى {{email}}"
     },
     "emailConfirmation": {
-      "heading": "تأكيد بريدك الإلكتروني",
-      "subtitle": "يرجى الانتظار بينما نتحقق من حسابك.",
+      "heading": "تأكيد البريد الإلكتروني",
+      "subtitle": "يرجى الانتظار قليلاً حتى نتحقق من حسابك.",
       "confirming": "جارٍ التحقق من الرابط...",
       "successHeading": "تم تأكيد البريد الإلكتروني",
-      "successBody": "تم التحقق من بريدك الإلكتروني. يمكنك الآن تسجيل الدخول.",
-      "continueToLogin": "المتابعة لتسجيل الدخول",
+      "successBody": "تم تأكيد بريدك الإلكتروني بنجاح، ويمكنك الآن تسجيل الدخول.",
+      "continueToLogin": "المتابعة إلى تسجيل الدخول",
       "expiredHeading": "انتهت صلاحية هذا الرابط",
-      "expiredBody": "روابط التحقق صالحة لفترة محدودة فقط.",
+      "expiredBody": "روابط التفعيل صالحة لفترة محدودة فقط.",
       "resend": "طلب رابط جديد",
-      "backToLogin": "العودة لتسجيل الدخول"
+      "backToLogin": "العودة إلى تسجيل الدخول"
     },
     "forgotPassword": {
-      "heading": "إعادة تعيين كلمة المرور",
-      "subtitle": "أدخل البريد الإلكتروني المرتبط بحسابك وسنرسل لك رابط إعادة التعيين.",
+      "heading": "استرجاع كلمة المرور",
+      "subtitle": "أدخل البريد الإلكتروني المسجّل وسنرسل لك رابط إعادة التعيين.",
       "emailLabel": "البريد الإلكتروني",
       "submit": "إرسال رابط إعادة التعيين",
-      "backToLogin": "العودة لتسجيل الدخول",
-      "successHeading": "تحقق من بريدك الوارد",
-      "successBody": "أرسلنا رابط إعادة التعيين إلى {{email}}",
+      "backToLogin": "العودة إلى تسجيل الدخول",
+      "successHeading": "تحقق من بريدك الإلكتروني",
+      "successBody": "تم إرسال رابط إعادة التعيين إلى {{email}}",
       "resend": "إعادة الإرسال",
-      "resendIn": "إعادة الإرسال خلال {{seconds}} ثانية"
+      "resendIn": "يمكنك إعادة الإرسال بعد {{seconds}} ثانية"
     },
     "resetPassword": {
       "heading": "تعيين كلمة مرور جديدة",
@@ -58,14 +58,14 @@
       "confirmPasswordLabel": "تأكيد كلمة المرور",
       "submit": "إعادة تعيين كلمة المرور",
       "successHeading": "تم تحديث كلمة المرور",
-      "successBody": "جارٍ تحويلك لتسجيل الدخول خلال {{seconds}} ثانية",
-      "continueToLogin": "المتابعة لتسجيل الدخول",
+      "successBody": "سيتم تحويلك إلى صفحة تسجيل الدخول خلال {{seconds}} ثانية",
+      "continueToLogin": "المتابعة إلى تسجيل الدخول",
       "expiredHeading": "انتهت صلاحية هذا الرابط",
       "expiredBody": "روابط إعادة التعيين صالحة لفترة محدودة فقط.",
       "requestNewLink": "طلب رابط جديد",
       "strength": {
         "weak": "ضعيفة",
-        "fair": "مقبولة",
+        "fair": "متوسطة",
         "good": "جيدة",
         "strong": "قوية"
       },
@@ -78,58 +78,60 @@
     }
   },
   "validation": {
-    "emailRequired": "أدخل بريدك الإلكتروني",
-    "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
-    "passwordRequired": "أدخل كلمة المرور",
+    "emailRequired": "اكتب بريدك الإلكتروني",
+    "emailInvalid": "اكتب بريد إلكتروني صحيح",
+    "passwordRequired": "اكتب كلمة المرور",
     "confirmPasswordRequired": "أكّد كلمة المرور",
-    "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
-    "fullNameRequired": "أدخل اسمك الكامل",
-    "fullNameMinLength": "أدخل حرفين على الأقل",
-    "companyNameRequired": "أدخل اسم شركتك",
-    "passwordMinLength": "استخدم 8 أحرف على الأقل",
-    "passwordLowercase": "أضف حرفًا صغيرًا",
-    "passwordUppercase": "أضف حرفًا كبيرًا",
-    "passwordNumber": "أضف رقمًا",
-    "passwordSymbol": "أضف رمزًا"
+    "passwordsDoNotMatch": "كلمتا المرور مش متطابقتين",
+    "fullNameRequired": "اكتب اسمك بالكامل",
+    "fullNameMinLength": "اكتب حرفين على الأقل",
+    "companyNameRequired": "اكتب اسم الشركة",
+    "passwordMinLength": "استخدم 8 حروف على الأقل",
+    "passwordLowercase": "ضيف حرف صغير",
+    "passwordUppercase": "ضيف حرف كبير",
+    "passwordNumber": "ضيف رقم",
+    "passwordSymbol": "ضيف رمز"
   },
   "common": {
+    "none": "بدون",
+    "back": " رجوع",
     "optional": "اختياري",
-    "loading": "جارٍ التحميل...",
+    "loading": "جاري التحميل...",
     "unknown": "غير معروف",
     "view": "عرض",
     "refresh": "تحديث",
-    "tryAgain": "حاول مرة أخرى",
-    "errors": {
-      "loadFailed": "تعذر تحميل البيانات",
-      "actionFailed": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
-    },
-    "status": {
-      "active": "نشط",
-      "inactive": "غير نشط",
-      "updating": "جارٍ التحديث...",
-      "loading": "جارٍ التحميل..."
-    },
-    "actions": {
-      "edit": "تعديل",
-      "create": "إنشاء",
-      "creating": "جاري الإنشاء ...",
-      "retry": "إعادة المحاولة",
-      "refresh": "تحديث",
-      "cancel": "إلغاء",
-      "delete": "حذف",
-      "viewDetails": "عرض التفاصيل",
-      "duplicate": "تكرار",
-      "saveChanges": "حفظ التغييرات",
-      "saving": "جارٍ الحفظ...",
-      "export": "تصدير"
-    },
+    "tryAgain": "حاول تاني",
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "language": "اللغة",
     "theme": "المظهر",
     "light": "فاتح",
-    "dark": "داكن",
-    "copyright": "© {{year}} Synaptech"
+    "dark": "غامق",
+    "copyright": "© {{year}} Synaptech",
+    "errors": {
+      "loadFailed": "مقدرناش نحمّل البيانات",
+      "actionFailed": "حصل خطأ. من فضلك حاول تاني."
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "updating": "جاري التحديث...",
+      "loading": "جاري التحميل..."
+    },
+    "actions": {
+      "edit": "تعديل",
+      "create": "إنشاء",
+      "creating": "جاري الإنشاء...",
+      "retry": "إعادة المحاولة",
+      "refresh": "تحديث",
+      "cancel": "إلغاء",
+      "delete": "حذف",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جاري الحفظ...",
+      "viewDetails": "عرض التفاصيل",
+      "duplicate": "نسخ",
+      "export": "تصدير"
+    }
   },
   "users": {
     "status": {
@@ -138,17 +140,19 @@
     },
     "toast": {
       "activated": "تم تفعيل {{name}}",
-      "deactivated": "تم إلغاء تفعيل {{name}}",
-      "deleted": "تم حذف {{name}}"
+      "deactivated": "تم إيقاف {{name}}",
+      "deleted": "تم حذف {{name}}",
+      "created": "تم إضافة {{name}}",
+      "updated": "تم تحديث {{name}}"
     },
     "list": {
-      "title": "المستخدمون",
-      "subtitleCount": "مستخدم واحد",
-      "subtitleCount_other": "{{count}} مستخدم",
-      "createUser": "إنشاء مستخدم",
       "columnVisibility": "إظهار/إخفاء الأعمدة",
+      "title": "المستخدمين",
+      "subtitleCount": "{{count}} مستخدم",
+      "subtitleCount_other": "{{count}} مستخدمين",
+      "createUser": "إضافة مستخدم",
       "search": {
-        "placeholder": "ابحث بالاسم أو البريد الإلكتروني"
+        "placeholder": "دوّر بالاسم أو البريد الإلكتروني"
       },
       "filters": {
         "branch": "الفرع",
@@ -159,9 +163,9 @@
         "apply": "تطبيق"
       },
       "empty": {
-        "noUsers": "لا يوجد مستخدمون بعد",
-        "noMatches": "لا يوجد مستخدمون مطابقون لعوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noUsers": "لسه مفيش مستخدمين",
+        "noMatches": "مفيش مستخدمين مطابقين للفلاتر",
+        "clearFilters": "مسح الفلاتر"
       },
       "column": {
         "user": "المستخدم",
@@ -173,9 +177,9 @@
       "rolesOverflow": "+{{count}}"
     },
     "actions": {
-      "moreActions": "المزيد من الإجراءات",
-      "assignRoles": "تعيين الأدوار",
-      "deactivate": "إلغاء التفعيل",
+      "moreActions": "إجراءات تانية",
+      "assignRoles": "تعيين أدوار",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف",
       "edit": "تعديل",
@@ -184,73 +188,73 @@
     },
     "details": {
       "sections": {
-        "basicInfo": "المعلومات الأساسية",
-        "contactInfo": "معلومات التواصل",
+        "basicInfo": "البيانات الأساسية",
+        "contactInfo": "بيانات التواصل",
         "organization": "الهيكل التنظيمي",
         "roles": "الأدوار",
         "status": "الحالة"
       },
-      "emailNotEditable": "لا يمكن تغيير البريد الإلكتروني",
-      "notFound": "المستخدم غير موجود",
-      "backToList": "العودة إلى المستخدمين"
+      "emailNotEditable": "مينفعش تغيّر البريد الإلكتروني",
+      "notFound": "المستخدم مش موجود",
+      "backToList": "رجوع لقائمة المستخدمين"
     },
     "create": {
-      "title": "إنشاء مستخدم",
+      "submitting": "جاري الإضافة...",
+      "title": "إضافة مستخدم",
       "fields": {
-        "fullName": "الاسم الكامل",
+        "fullName": "الاسم بالكامل",
         "email": "البريد الإلكتروني",
         "branch": "الفرع",
         "department": "القسم",
         "roles": "الأدوار"
       },
-      "submitting": "جارٍ الإنشاء...",
-      "success": "تم إنشاء المستخدم بنجاح",
+      "success": "تم إضافة المستخدم بنجاح",
       "errors": {
-        "required": "هذا الحقل مطلوب",
-        "invalidEmail": "أدخل بريدًا إلكترونيًا صالحًا",
-        "emailTaken": "هذا البريد الإلكتروني مستخدم بالفعل"
+        "required": "الحقل ده مطلوب",
+        "invalidEmail": "اكتب بريد إلكتروني صحيح",
+        "emailTaken": "البريد الإلكتروني ده مستخدم بالفعل"
       }
     },
     "roles": {
-      "assignTitle": "تعيين الأدوار",
-      "searchPlaceholder": "ابحث عن الأدوار",
-      "selectedSummary": "تم تحديد دور واحد",
-      "selectedSummary_other": "تم تحديد {{count}} أدوار",
-      "saveDisabledEmpty": "اختر دورًا واحدًا على الأقل",
-      "saving": "جارٍ الحفظ..."
+      "assignTitle": "تعيين أدوار",
+      "searchPlaceholder": "دوّر في الأدوار",
+      "selectedSummary": "تم اختيار {{count}} دور",
+      "selectedSummary_other": "تم اختيار {{count}} أدوار",
+      "saveDisabledEmpty": "اختار دور واحد على الأقل",
+      "saving": "جاري الحفظ..."
     },
     "dialogs": {
       "deactivate": {
-        "title": "هل تريد إلغاء تفعيل هذا المستخدم؟",
-        "body": "سيفقد الوصول إلى النظام فورًا."
+        "title": "هل تريد إيقاف هذا المستخدم؟",
+        "body": "هيفقد وصوله للنظام على طول."
       },
       "activate": {
         "title": "هل تريد تفعيل هذا المستخدم؟",
-        "body": "ستسمح بالوصول إلى النظام فورًا."
+        "body": "هيقدر يدخل على النظام على طول."
       },
       "delete": {
         "title": "حذف المستخدم",
-        "body": "سيؤدي هذا إلى إزالة وصول {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+        "body": "هيتشال وصول {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه.",
         "confirmLabel": "حذف المستخدم"
       }
     },
     "bulk": {
-      "deactivateSelected": "إلغاء تفعيل المحدد",
-      "selectedCount": "تم تحديد {{count}}",
-      "deactivateSuccess": "تم إلغاء تفعيل مستخدم واحد",
-      "deactivateSuccess_other": "تم إلغاء تفعيل {{count}} مستخدمين",
-      "deactivateTitle": "إلغاء تفعيل مستخدم واحد؟",
-      "deactivateTitle_other": "إلغاء تفعيل {{count}} مستخدمين؟"
+      "deactivateSelected": "إيقاف المحدد",
+      "selectedCount": "تم اختيار {{count}}",
+      "deactivateSuccess": "تم إيقاف {{count}} مستخدم",
+      "deactivateSuccess_other": "تم إيقاف {{count}} مستخدمين",
+      "deactivateTitle": "هل تريد إيقاف {{count}} مستخدم؟",
+      "deactivateTitle_other": "هل تريد إيقاف {{count}} مستخدمين؟"
     }
   },
   "departments": {
     "list": {
       "title": "الأقسام",
-      "subtitleCount": "قسم واحد",
-      "subtitleCount_other": "{{count}} قسم",
-      "createDepartment": "إنشاء قسم",
+      "subtitleCount": "{{count}} قسم",
+      "subtitleCount_other": "{{count}} أقسام",
+      "createDepartment": "إضافة قسم",
       "search": {
-        "placeholder": "ابحث باسم القسم"
+        "placeholder": "دوّر باسم القسم"
       },
       "filters": {
         "branch": "الفرع",
@@ -261,9 +265,9 @@
         "flat": "قائمة"
       },
       "empty": {
-        "noDepartments": "لا توجد أقسام بعد",
-        "noMatches": "لا توجد أقسام مطابقة لعوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noDepartments": "لسه مفيش أقسام",
+        "noMatches": "مفيش أقسام مطابقة للفلاتر",
+        "clearFilters": "مسح الفلاتر"
       }
     },
     "kpi": {
@@ -275,37 +279,37 @@
     "column": {
       "department": "القسم",
       "branch": "الفرع",
-      "parentDepartment": "القسم الرئيسي",
+      "parentDepartment": "القسم الأب",
       "status": "الحالة"
     },
     "actions": {
       "viewDetails": "عرض التفاصيل",
       "edit": "تعديل",
       "move": "نقل",
-      "duplicate": "تكرار",
-      "deactivate": "إلغاء التفعيل",
+      "duplicate": "نسخ",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف",
-      "moreActions": "المزيد من الإجراءات"
+      "moreActions": "إجراءات تانية"
     },
     "create": {
-      "title": "إنشاء قسم",
+      "title": "إضافة قسم",
       "editTitle": "تعديل القسم",
       "fields": {
         "name": "اسم القسم",
         "branch": "الفرع",
-        "parentDepartment": "القسم الرئيسي",
-        "parentDepartmentNone": "بدون قسم رئيسي (مستوى أعلى)"
+        "parentDepartment": "القسم الأب",
+        "parentDepartmentNone": "بدون قسم أب (رئيسي)"
       },
       "errors": {
-        "required": "هذا الحقل مطلوب"
+        "required": "الحقل ده مطلوب"
       },
-      "submitting": "جارٍ الحفظ...",
-      "success": "تم إنشاء القسم بنجاح"
+      "submitting": "جاري الحفظ...",
+      "success": "تم إضافة القسم بنجاح"
     },
     "move": {
       "title": "نقل القسم",
-      "searchPlaceholder": "ابحث عن الأقسام"
+      "searchPlaceholder": "دوّر في الأقسام"
     },
     "duplicate": {
       "copySuffix": "{{name}} (نسخة)"
@@ -315,24 +319,24 @@
         "overview": "نظرة عامة",
         "children": "الأقسام الفرعية"
       },
-      "noChildren": "لا توجد أقسام فرعية"
+      "noChildren": "مفيش أقسام فرعية"
     },
     "dialogs": {
       "deactivate": {
-        "title": "هل تريد إلغاء تفعيل هذا القسم؟",
-        "body": "لن يظهر بعد الآن في قوائم اختيار الأقسام النشطة في باقي أجزاء المنتج."
+        "title": "هل تريد إيقاف هذا القسم؟",
+        "body": "مش هيظهر تاني في قوائم الأقسام النشطة في أي مكان تاني بالنظام."
       },
       "delete": {
         "title": "حذف القسم",
-        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
-        "blockedHasChildren": "يحتوي هذا القسم على أقسام فرعية. يرجى نقلها أو حذفها أولاً.",
-        "blockedHasUsers": "لا يزال هناك مستخدمون مرتبطون بهذا القسم. يرجى إعادة تعيينهم أولاً."
+        "body": "هيتشال {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه.",
+        "blockedHasChildren": "القسم ده عنده أقسام فرعية. انقلها أو احذفها الأول.",
+        "blockedHasUsers": "لسه فيه مستخدمين متعينين على القسم ده. حوّلهم لقسم تاني الأول."
       }
     },
     "toast": {
-      "created": "تم إنشاء {{name}}",
+      "created": "تم إضافة {{name}}",
       "updated": "تم تحديث {{name}}",
-      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "deactivated": "تم إيقاف {{name}}",
       "activated": "تم تفعيل {{name}}",
       "deleted": "تم حذف {{name}}",
       "moved": "تم نقل {{name}}"
@@ -341,19 +345,19 @@
   "branches": {
     "list": {
       "title": "الفروع",
-      "subtitleCount": "فرع واحد",
+      "subtitleCount": "{{count}} فرع",
       "subtitleCount_other": "{{count}} فروع",
-      "createBranch": "إنشاء فرع",
+      "createBranch": "إضافة فرع",
       "search": {
-        "placeholder": "ابحث بالاسم أو الرمز"
+        "placeholder": "دوّر بالاسم أو الكود"
       },
       "filters": {
         "status": "الحالة"
       },
       "empty": {
-        "noBranches": "لا توجد فروع بعد",
-        "noMatches": "لا توجد فروع مطابقة لعوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noBranches": "لسه مفيش فروع",
+        "noMatches": "مفيش فروع مطابقة للفلاتر",
+        "clearFilters": "مسح الفلاتر"
       }
     },
     "kpi": {
@@ -365,7 +369,7 @@
     "column": {
       "branch": "الفرع",
       "address": "العنوان",
-      "phone": "الهاتف",
+      "phone": "التليفون",
       "status": "الحالة"
     },
     "badge": {
@@ -374,63 +378,63 @@
     "actions": {
       "viewDetails": "عرض التفاصيل",
       "edit": "تعديل",
-      "duplicate": "تكرار",
-      "deactivate": "إلغاء التفعيل",
+      "duplicate": "نسخ",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف",
-      "moreActions": "المزيد من الإجراءات"
+      "moreActions": "إجراءات تانية"
     },
     "create": {
-      "title": "إنشاء فرع",
+      "title": "إضافة فرع",
       "editTitle": "تعديل الفرع",
       "fields": {
         "name": "اسم الفرع",
-        "code": "رمز الفرع",
+        "code": "كود الفرع",
         "address": "العنوان",
-        "phone": "الهاتف",
+        "phone": "التليفون",
         "isMain": "تعيين كفرع رئيسي",
         "isMainHint": "{{name}} معيّن حاليًا كفرع رئيسي"
       },
       "errors": {
-        "required": "هذا الحقل مطلوب"
+        "required": "الحقل ده مطلوب"
       },
-      "submitting": "جارٍ الحفظ..."
+      "submitting": "جاري الحفظ..."
     },
     "duplicate": {
       "copySuffix": "{{name}} (نسخة)"
     },
     "details": {
       "back": "رجوع",
-      "notFound": "الفرع غير موجود",
-      "backToList": "العودة إلى الفروع",
-      "noDepartments": "لا توجد أقسام في هذا الفرع",
-      "noUsersInDepartment": "لا يوجد مستخدمون مرتبطون بهذا القسم.",
+      "notFound": "الفرع مش موجود",
+      "backToList": "رجوع لقائمة الفروع",
+      "noDepartments": "مفيش أقسام في الفرع ده",
+      "noUsersInDepartment": "مفيش مستخدمين متعينين على القسم ده.",
       "sections": {
         "departments": "الأقسام",
         "overview": "نظرة عامة",
-        "contact": "معلومات التواصل",
-        "relatedData": "البيانات المرتبطة"
+        "contact": "بيانات التواصل",
+        "relatedData": "بيانات مرتبطة"
       },
       "departmentsCount": "الأقسام",
-      "usersCount": "المستخدمون"
+      "usersCount": "المستخدمين"
     },
     "dialogs": {
       "deactivate": {
-        "title": "هل تريد إلغاء تفعيل هذا الفرع؟",
-        "body": "لن يظهر بعد الآن في قوائم اختيار الفروع النشطة في باقي أجزاء المنتج."
+        "title": "هل تريد إيقاف هذا الفرع؟",
+        "body": "مش هيظهر تاني في قوائم الفروع النشطة في أي مكان تاني بالنظام."
       },
       "delete": {
         "title": "حذف الفرع",
-        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
-        "mainBranchWarning": "هذا هو الفرع الرئيسي حاليًا — قد يؤثر حذفه على أجزاء أخرى من المنتج تعتمد على وجود فرع رئيسي محدد.",
-        "blockedHasDepartments": "يحتوي هذا الفرع على أقسام مرتبطة به. يرجى إعادة تعيينها أو إزالتها أولاً.",
-        "blockedHasUsers": "لا يزال هناك مستخدمون مرتبطون بهذا الفرع. يرجى إعادة تعيينهم أولاً."
+        "body": "هيتشال {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه.",
+        "mainBranchWarning": "الفرع ده معيّن حاليًا كفرع رئيسي — حذفه ممكن يأثر على أجزاء تانية في النظام بتعتمد على وجود فرع رئيسي.",
+        "blockedHasDepartments": "الفرع ده عنده أقسام متعينة عليه. حوّلها أو احذفها الأول.",
+        "blockedHasUsers": "لسه فيه مستخدمين متعينين على الفرع ده. حوّلهم لفرع تاني الأول."
       }
     },
     "toast": {
-      "created": "تم إنشاء {{name}}",
+      "created": "تم إضافة {{name}}",
       "updated": "تم تحديث {{name}}",
-      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "deactivated": "تم إيقاف {{name}}",
       "activated": "تم تفعيل {{name}}",
       "deleted": "تم حذف {{name}}"
     }
@@ -438,15 +442,15 @@
   "roles": {
     "page": {
       "title": "الأدوار",
-      "description": "إدارة الأدوار والصلاحيات الممنوحة لكل دور."
+      "description": "إدارة الأدوار والصلاحيات المعينة لكل دور."
     },
     "stats": {
       "totalRoles": "إجمالي الأدوار",
       "availablePermissions": "الصلاحيات المتاحة",
-      "totalAssignedPermissions": "إجمالي الصلاحيات الممنوحة"
+      "totalAssignedPermissions": "إجمالي الصلاحيات المعينة"
     },
     "toolbar": {
-      "searchPlaceholder": "ابحث عن الأدوار...",
+      "searchPlaceholder": "دوّر في الأدوار...",
       "sort": {
         "nameAsc": "الاسم (أ–ي)",
         "nameDesc": "الاسم (ي–أ)",
@@ -457,13 +461,13 @@
       "role": "الدور",
       "description": "الوصف",
       "permissions": "الصلاحيات",
-      "permissionsCount": "صلاحية واحدة",
-      "permissionsCount_other": "{{count}} صلاحية",
-      "noPermissions": "لا توجد صلاحيات ممنوحة",
-      "more": "المزيد"
+      "permissionsCount": "{{count}} صلاحية",
+      "permissionsCount_other": "{{count}} صلاحيات",
+      "noPermissions": "مفيش صلاحيات معينة",
+      "more": "أكتر"
     },
     "actions": {
-      "createRole": "إنشاء دور",
+      "createRole": "إضافة دور",
       "view": "عرض",
       "edit": "تعديل",
       "managePermissions": "إدارة الصلاحيات",
@@ -471,14 +475,14 @@
       "delete": "حذف"
     },
     "empty": {
-      "title": "لا توجد أدوار",
-      "description": "أنشئ أول دور لبدء منح الصلاحيات لفريقك."
+      "title": "مفيش أدوار",
+      "description": "أضف أول دور عشان تبدأ تعيّن صلاحيات لفريقك."
     },
     "create": {
-      "title": "إنشاء دور",
+      "title": "إضافة دور",
       "duplicateTitle": "نسخ الدور",
-      "subtitle": "حدد الدور والصلاحيات التي يمنحها.",
-      "generalInfo": "معلومات عامة",
+      "subtitle": "حدد الدور والصلاحيات اللي هيمنحها.",
+      "generalInfo": "بيانات عامة",
       "permissions": "الصلاحيات"
     },
     "edit": {
@@ -492,55 +496,60 @@
       "description": "الوصف"
     },
     "permissions": {
-      "selectAll": "تحديد الكل",
-      "clearAll": "إلغاء التحديد",
-      "searchPlaceholder": "ابحث عن الصلاحيات...",
-      "selectedCount": "تم تحديد صلاحية واحدة",
-      "selectedCount_other": "تم تحديد {{count}} صلاحية",
-      "noResults": "لا توجد صلاحيات مطابقة لبحثك."
+      "selectAll": "اختيار الكل",
+      "clearAll": "إلغاء اختيار الكل",
+      "searchPlaceholder": "دوّر في الصلاحيات...",
+      "selectedCount": "تم اختيار {{count}} صلاحية",
+      "selectedCount_other": "تم اختيار {{count}} صلاحيات",
+      "noResults": "مفيش صلاحيات مطابقة لبحثك."
     },
     "delete": {
       "title": "حذف الدور",
-      "body": "سيتم حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+      "body": "هيتم حذف \"{{name}}\" نهائيًا. الإجراء ده مينفعش يترجع فيه."
     },
     "details": {
-      "back": "العودة إلى الأدوار",
-      "notFound": "الدور غير موجود.",
-      "permissionsCount": "صلاحية واحدة ممنوحة",
-      "permissionsCount_other": "{{count}} صلاحية ممنوحة",
-      "assignedPermissions": "الصلاحيات الممنوحة",
-      "activityComingSoon": "سجل النشاط غير متاح بعد."
+      "back": "رجوع للأدوار",
+      "notFound": "الدور مش موجود.",
+      "permissionsCount": "{{count}} صلاحية معينة",
+      "permissionsCount_other": "{{count}} صلاحيات معينة",
+      "assignedPermissions": "الصلاحيات المعينة",
+      "activityComingSoon": "سجل النشاط مش متاح لسه."
     },
     "validation": {
-      "nameMin": "يجب أن يتكون اسم الدور من حرفين على الأقل.",
-      "nameMax": "يجب ألا يتجاوز اسم الدور 60 حرفًا.",
+      "nameMin": "اسم الدور لازم يكون حرفين على الأقل.",
+      "nameMax": "اسم الدور لازم يكون 60 حرف أو أقل.",
       "descriptionRequired": "الوصف مطلوب.",
-      "descriptionMax": "يجب ألا يتجاوز الوصف 240 حرفًا.",
-      "permissionsMin": "اختر صلاحية واحدة على الأقل."
+      "descriptionMax": "الوصف لازم يكون 240 حرف أو أقل.",
+      "permissionsMin": "اختار صلاحية واحدة على الأقل."
     },
     "toasts": {
-      "created": "تم إنشاء الدور.",
+      "created": "تم إضافة الدور.",
       "updated": "تم تحديث الدور.",
       "deleted": "تم حذف الدور.",
       "permissionsUpdated": "تم تحديث الصلاحيات."
     }
   },
   "accounts": {
+    "success": {
+      "created": "تم إضافة {{name}}",
+      "updated": "تم تحديث {{name}}",
+      "deleted": "تم حذف {{name}}"
+    },
     "breadcrumb": {
-      "dashboard": "لوحة التحكم"
+      "dashboard": "الرئيسية"
     },
     "list": {
       "title": "دليل الحسابات",
-      "subtitleCount": "حساب واحد",
+      "subtitleCount": "{{count}} حساب",
       "subtitleCount_other": "{{count}} حسابات",
-      "createAccount": "إنشاء حساب",
+      "createAccount": "إضافة حساب",
       "search": {
-        "placeholder": "ابحث بالرمز أو الاسم"
+        "placeholder": "دوّر بالكود أو الاسم"
       },
       "filters": {
         "type": "نوع الحساب",
         "status": "الحالة",
-        "rootOnly": "الحسابات الرئيسية فقط"
+        "rootOnly": "الحسابات الرئيسية بس"
       }
     },
     "kpi": {
@@ -556,55 +565,55 @@
       "status": "الحالة"
     },
     "tree": {
-      "empty": "لا توجد حسابات بعد",
-      "noMatches": "لا توجد حسابات مطابقة لبحثك"
+      "empty": "لسه مفيش حسابات",
+      "noMatches": "مفيش حسابات مطابقة لبحثك"
     },
     "preview": {
-      "emptySelection": "اختر حسابًا لعرض تفاصيله",
+      "emptySelection": "اختار حساب عشان تشوف تفاصيله",
       "balanceSummary": "ملخص الرصيد",
       "openDetails": "فتح التفاصيل"
     },
     "actions": {
       "edit": "تعديل",
-      "deactivate": "إلغاء التفعيل",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف"
     },
     "create": {
-      "title": "إنشاء حساب",
+      "title": "إضافة حساب",
       "fields": {
-        "code": "الرمز",
+        "code": "الكود",
         "name": "الاسم",
         "type": "نوع الحساب",
-        "parentAccount": "الحساب الرئيسي"
+        "parentAccount": "الحساب الأب"
       },
       "errors": {
-        "required": "هذا الحقل مطلوب"
+        "required": "الحقل ده مطلوب"
       },
-      "submitting": "جارٍ الإنشاء...",
-      "parentSearchPlaceholder": "ابحث عن الحسابات",
-      "parentWarning": "لا يمكن تغيير الحساب الرئيسي بعد الإنشاء — اختر بعناية."
+      "submitting": "جاري الإضافة...",
+      "parentSearchPlaceholder": "دوّر في الحسابات",
+      "parentWarning": "مينفعش تغيّر الحساب الأب بعد الإنشاء — اختار صح من الأول."
     },
     "details": {
       "back": "رجوع",
-      "notFound": "الحساب غير موجود",
-      "backToList": "العودة إلى الحسابات",
-      "parent": "الحساب الرئيسي",
+      "notFound": "الحساب مش موجود",
+      "backToList": "رجوع لدليل الحسابات",
+      "parent": "الحساب الأب",
       "sections": {
-        "general": "المعلومات العامة",
+        "general": "البيانات العامة",
         "financial": "الملخص المالي",
         "hierarchy": "التسلسل الهرمي",
         "children": "الحسابات الفرعية",
         "activity": "سجل النشاط"
       },
-      "noParent": "لا يوجد حساب رئيسي",
-      "childrenCount": "حساب فرعي واحد",
+      "noParent": "بدون حساب أب",
+      "childrenCount": "{{count}} حساب فرعي",
       "childrenCount_other": "{{count}} حسابات فرعية",
-      "noChildAccounts": "لا توجد حسابات فرعية",
-      "typeCannotChange": "لا يمكن تغيير نوع الحساب بعد إنشائه",
-      "parentCannotChange": "لا يمكن تغيير الحساب الرئيسي بعد إنشائه",
-      "activityPlaceholderTitle": "سجل النشاط غير متاح بعد",
-      "activityPlaceholderBody": "هذا القسم جاهز لعرض النشاط عند إضافته إلى الواجهة الخلفية مستقبلاً.",
+      "noChildAccounts": "مفيش حسابات فرعية",
+      "typeCannotChange": "مينفعش تغيّر نوع الحساب بعد الإنشاء",
+      "parentCannotChange": "مينفعش تغيّر الحساب الأب بعد الإنشاء",
+      "activityPlaceholderTitle": "سجل النشاط مش متاح لسه",
+      "activityPlaceholderBody": "القسم ده هيتفعل لما تتبع النشاط يتضاف على السيرفر.",
       "totalDebit": "إجمالي المدين",
       "totalCredit": "إجمالي الدائن",
       "currentBalance": "الرصيد الحالي"
@@ -612,19 +621,19 @@
     "dialogs": {
       "delete": {
         "title": "حذف الحساب",
-        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
-        "hasBalanceWarning": "يحتوي هذا الحساب على نشاط مالي مسجل.",
+        "body": "هيتشال {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه.",
+        "hasBalanceWarning": "الحساب ده عليه حركات مالية مسجلة.",
         "typedConfirmLabel": "اكتب {{code}} للتأكيد",
-        "typedConfirmPlaceholder": "رمز الحساب",
-        "typedConfirmMismatch": "لا يطابق رمز الحساب",
-        "blockedHasChildren": "يحتوي هذا الحساب على حسابات فرعية. يرجى إزالتها أو إعادة تعيينها أولاً."
+        "typedConfirmPlaceholder": "كود الحساب",
+        "typedConfirmMismatch": "مش مطابق لكود الحساب",
+        "blockedHasChildren": "الحساب ده عنده حسابات فرعية. احذفها أو انقلها الأول."
       }
     }
   },
   "journalEntries": {
     "page": {
-      "title": "القيود اليومية",
-      "description": "تسجيل وإدارة كل معاملة محاسبية."
+      "title": "قيود اليومية",
+      "description": "تسجيل وإدارة كل الحركات المحاسبية."
     },
     "status": {
       "Draft": "مسودة",
@@ -636,20 +645,20 @@
       "draft": "مسودة",
       "posted": "مرحّل",
       "reversed": "معكوس",
-      "today": "اليوم",
-      "thisMonth": "هذا الشهر",
+      "today": "النهارده",
+      "thisMonth": "الشهر ده",
       "totalDebit": "إجمالي المدين",
       "totalCredit": "إجمالي الدائن"
     },
     "toolbar": {
-      "searchPlaceholder": "ابحث برقم القيد أو الوصف..."
+      "searchPlaceholder": "دوّر برقم القيد أو الوصف..."
     },
     "filters": {
-      "allStatuses": "جميع الحالات",
+      "allStatuses": "كل الحالات",
       "to": "إلى",
       "reversalAny": "أي قيد",
-      "reversalYes": "له عكس",
-      "reversalNo": "بدون عكس",
+      "reversalYes": "عليه عكس قيد",
+      "reversalNo": "من غير عكس قيد",
       "sortNewest": "الأحدث أولاً",
       "sortOldest": "الأقدم أولاً",
       "sortEntryNumber": "رقم القيد",
@@ -667,24 +676,24 @@
       "diffShort": "الفرق"
     },
     "actions": {
-      "create": "إنشاء قيد يومية",
-      "creating": "جاري الإنشاء ...",
+      "create": "إضافة قيد يومية",
+      "creating": "جاري الإضافة...",
       "viewDetails": "عرض التفاصيل",
       "post": "ترحيل",
-      "reverse": "عكس",
+      "reverse": "عكس القيد",
       "delete": "حذف",
       "print": "طباعة"
     },
     "empty": {
-      "title": "لا توجد قيود يومية",
-      "description": "أنشئ أول قيد يومية لبدء تسجيل المعاملات."
+      "title": "مفيش قيود يومية",
+      "description": "أضف أول قيد يومية عشان تبدأ تسجّل الحركات."
     },
     "create": {
-      "title": "إنشاء قيد يومية",
-      "subtitle": "سجّل معاملة محاسبية متوازنة.",
-      "autoGenerated": "يُنشأ بعد الحفظ",
+      "title": "إضافة قيد يومية",
+      "subtitle": "سجّل حركة محاسبية متوازنة.",
+      "autoGenerated": "بيتولد بعد الحفظ",
       "journalLines": "بنود القيد",
-      "stayAndCreateAnother": "البقاء وإنشاء قيد آخر"
+      "stayAndCreateAnother": "ابقى هنا وأضف قيد تاني"
     },
     "fields": {
       "entryNumber": "رقم القيد",
@@ -695,12 +704,12 @@
       "addRow": "إضافة سطر",
       "removeRow": "حذف السطر",
       "duplicateRow": "نسخ السطر",
-      "selectAccount": "اختر الحساب",
-      "loadingAccounts": "جارٍ تحميل الحسابات...",
+      "selectAccount": "اختار الحساب",
+      "loadingAccounts": "جاري تحميل الحسابات...",
       "descriptionPlaceholder": "وصف السطر (اختياري)",
       "debit": "مدين",
       "credit": "دائن",
-      "accountCode": "رمز الحساب",
+      "accountCode": "كود الحساب",
       "accountName": "اسم الحساب",
       "rowTotal": "إجمالي السطر"
     },
@@ -716,211 +725,213 @@
     },
     "validation": {
       "dateRequired": "تاريخ القيد مطلوب.",
-      "minTwoLines": "يلزم وجود سطرين على الأقل.",
-      "notBalanced": "يجب أن يتساوى إجمالي المدين مع إجمالي الدائن.",
-      "accountRequired": "اختر حسابًا.",
-      "negativeValue": "لا يمكن أن تكون القيمة سالبة.",
-      "debitAndCreditSameRow": "لا يمكن أن يحتوي السطر على مدين ودائن معًا.",
-      "lineNeedsAmount": "أدخل قيمة مدين أو دائن."
+      "minTwoLines": "لازم سطرين على الأقل في القيد.",
+      "notBalanced": "إجمالي المدين لازم يساوي إجمالي الدائن.",
+      "accountRequired": "اختار حساب.",
+      "negativeValue": "القيمة مينفعش تكون سالبة.",
+      "debitAndCreditSameRow": "السطر مينفعش يكون فيه مدين ودائن مع بعض.",
+      "lineNeedsAmount": "اكتب قيمة مدين أو دائن."
     },
     "postDialog": {
-      "title": "ترحيل القيد",
-      "body": "سيؤدي ترحيل \"{{entryNumber}}\" إلى إنهاء هذه المعاملة نهائيًا. لن يمكن تعديلها أو حذفها بعد الترحيل، فقط عكسها."
+      "title": "ترحيل قيد اليومية",
+      "body": "ترحيل \"{{entryNumber}}\" بيثبّت الحركة دي نهائيًا. مش هيتعدل أو يتحذف بعد كده، ممكن بس تعمله عكس قيد."
     },
     "reverseDialog": {
-      "title": "عكس القيد",
-      "body": "سيتم إنشاء قيد يومية جديد يعكس \"{{entryNumber}}\"."
+      "title": "عكس قيد اليومية",
+      "body": "هيتعمل قيد يومية جديد بيعكس \"{{entryNumber}}\"."
     },
     "deleteDialog": {
-      "title": "حذف القيد",
-      "body": "سيتم حذف \"{{entryNumber}}\" ({{status}}) نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+      "title": "حذف قيد اليومية",
+      "body": "هيتم حذف \"{{entryNumber}}\" ({{status}}) نهائيًا. الإجراء ده مينفعش يترجع فيه."
     },
     "details": {
-      "back": "العودة إلى القيود اليومية",
-      "notFound": "القيد غير موجود.",
+      "back": "رجوع لقيود اليومية",
+      "notFound": "قيد اليومية مش موجود.",
       "lineCount": "البنود",
       "lines": "بنود القيد",
-      "timelineComingSoon": "سجل القيد غير متاح بعد."
+      "timelineComingSoon": "سجل القيد مش متاح لسه."
     },
     "toasts": {
-      "created": "تم إنشاء القيد.",
-      "posted": "تم ترحيل القيد.",
-      "reversed": "تم عكس القيد.",
-      "deleted": "تم حذف القيد."
+      "created": "تم إضافة قيد اليومية.",
+      "posted": "تم ترحيل قيد اليومية.",
+      "reversed": "تم عكس قيد اليومية.",
+      "deleted": "تم حذف قيد اليومية."
     }
   },
   "warehouses": {
     "page": {
-      "title": "المستودعات",
-      "description": "إدارة مستودعات الشركة عبر جميع الفروع."
+      "title": "المخازن",
+      "description": "إدارة مخازن الشركة في كل الفروع."
     },
     "stats": {
-      "total": "إجمالي المستودعات",
-      "totalDescription": "عبر جميع الفروع",
+      "total": "إجمالي المخازن",
+      "totalDescription": "في كل الفروع",
       "active": "نشط",
-      "activeDescription": "قيد التشغيل حاليًا",
+      "activeDescription": "شغّال حاليًا",
       "inactive": "غير نشط",
-      "inactiveDescription": "معطّل حاليًا",
-      "branchesWithWarehouses": "الفروع التي لها مستودعات",
+      "inactiveDescription": "متوقف حاليًا",
+      "branchesWithWarehouses": "الفروع اللي بيها مخازن",
       "branchesWithWarehousesDescription": "عدد الفروع المستخدمة"
     },
     "toolbar": {
-      "searchPlaceholder": "ابحث بالاسم أو الرمز...",
-      "allBranches": "جميع الفروع",
-      "allStatuses": "جميع الحالات",
+      "searchPlaceholder": "دوّر بالاسم أو الكود...",
+      "allBranches": "كل الفروع",
+      "allStatuses": "كل الحالات",
       "sortNameAsc": "الاسم (أ–ي)",
       "sortNameDesc": "الاسم (ي–أ)",
-      "sortCode": "الرمز",
+      "sortCode": "الكود",
       "reset": "إعادة تعيين الفلاتر",
-      "exportNotAvailable": "التصدير غير متاح حاليًا."
+      "exportNotAvailable": "التصدير مش متاح لسه."
     },
     "table": {
-      "name": "اسم المستودع",
-      "code": "الرمز",
+      "name": "اسم المخزن",
+      "code": "الكود",
       "branch": "الفرع",
       "status": "الحالة",
       "unknownBranch": "فرع غير معروف"
     },
     "actions": {
-      "create": "مستودع جديد",
+      "create": "مخزن جديد",
       "view": "عرض",
       "edit": "تعديل",
       "activate": "تفعيل",
-      "deactivate": "تعطيل",
+      "deactivate": "إيقاف",
       "delete": "حذف"
     },
     "empty": {
-      "title": "لا توجد مستودعات بعد",
-      "description": "أنشئ أول مستودع لبدء إدارة المخزون.",
-      "filteredTitle": "لا توجد مستودعات مطابقة لفلاترك"
+      "title": "لسه مفيش مخازن",
+      "description": "أضف أول مخزن عشان تبدأ تدير المخزون.",
+      "filteredTitle": "مفيش مخازن مطابقة للفلاتر"
     },
     "drawer": {
-      "createTitle": "مستودع جديد",
-      "editTitle": "تعديل المستودع",
-      "viewTitle": "تفاصيل المستودع",
-      "generalInfo": "معلومات عامة",
-      "unsavedChangesTitle": "تجاهل التغييرات غير المحفوظة؟",
-      "unsavedChangesBody": "لديك تغييرات غير محفوظة. إذا أغلقت الآن، ستُفقد.",
+      "createTitle": "مخزن جديد",
+      "editTitle": "تعديل المخزن",
+      "viewTitle": "تفاصيل المخزن",
+      "generalInfo": "بيانات عامة",
+      "unsavedChangesTitle": "تجاهل التغييرات اللي متحفظتش؟",
+      "unsavedChangesBody": "عندك تغييرات متحفظتش. لو قفلت دلوقتي هتضيع.",
       "discardChanges": "تجاهل",
-      "keepEditing": "الاستمرار في التعديل"
+      "keepEditing": "استمرار في التعديل"
     },
     "fields": {
-      "name": "اسم المستودع",
-      "code": "رمز المستودع",
+      "name": "اسم المخزن",
+      "code": "كود المخزن",
       "branch": "الفرع",
       "status": "الحالة",
-      "statusSwitchToDeactivate": "نشط، بدّل للتعطيل",
-      "statusSwitchToActivate": "غير نشط، بدّل للتفعيل"
+      "statusSwitchToDeactivate": "نشط، اضغط عشان توقفه",
+      "statusSwitchToActivate": "غير نشط، اضغط عشان تفعّله"
     },
     "form": {
-      "selectBranch": "اختر فرعًا",
-      "loadingBranches": "جارٍ تحميل الفروع...",
-      "searchBranches": "ابحث عن الفروع...",
-      "noBranchesFound": "لا توجد فروع"
+      "selectBranch": "اختار فرع",
+      "loadingBranches": "جاري تحميل الفروع...",
+      "searchBranches": "دوّر في الفروع...",
+      "noBranchesFound": "مفيش فروع"
     },
     "validation": {
-      "nameMin": "يجب أن يتكون اسم المستودع من حرفين على الأقل.",
-      "nameMax": "يجب ألا يتجاوز اسم المستودع 80 حرفًا.",
-      "codeRequired": "رمز المستودع مطلوب.",
-      "codeMax": "يجب ألا يتجاوز رمز المستودع 20 حرفًا.",
-      "branchRequired": "اختر فرعًا."
+      "nameMin": "اسم المخزن لازم يكون حرفين على الأقل.",
+      "nameMax": "اسم المخزن لازم يكون 80 حرف أو أقل.",
+      "codeRequired": "كود المخزن مطلوب.",
+      "codeMax": "كود المخزن لازم يكون 20 حرف أو أقل.",
+      "branchRequired": "اختار فرع."
     },
     "deleteDialog": {
-      "title": "حذف المستودع",
-      "body": "سيتم حذف \"{{name}}\" ({{code}}) نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+      "title": "حذف المخزن",
+      "body": "هيتم حذف \"{{name}}\" ({{code}}) نهائيًا. الإجراء ده مينفعش يترجع فيه."
     },
     "toasts": {
-      "created": "تم إنشاء المستودع.",
-      "updated": "تم تحديث المستودع.",
-      "deleted": "تم حذف المستودع.",
-      "activated": "تم تفعيل المستودع.",
-      "deactivated": "تم تعطيل المستودع."
+      "created": "تم إضافة المخزن.",
+      "updated": "تم تحديث المخزن.",
+      "deleted": "تم حذف المخزن.",
+      "activated": "تم تفعيل المخزن.",
+      "deactivated": "تم إيقاف المخزن."
     }
   },
   "categories": {
+    "create": {
+      "title": "إضافة تصنيف",
+      "editTitle": "تعديل التصنيف",
+      "fields": {
+        "name": "اسم التصنيف",
+        "parentCategory": "التصنيف الأب",
+        "parentCategoryNone": "بدون تصنيف أب (رئيسي)"
+      },
+      "errors": {
+        "required": "الحقل ده مطلوب"
+      },
+      "submitting": "جاري الحفظ..."
+    },
     "actions": {
       "viewDetails": "عرض التفاصيل",
       "edit": "تعديل",
       "move": "نقل",
-      "addChild": "إضافة فئة فرعية",
-      "copyId": "نسخ المعرف",
-      "deactivate": "إلغاء التفعيل",
+      "addChild": "إضافة تصنيف فرعي",
+      "copyId": "نسخ المعرّف",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف",
-      "moreActions": "المزيد من الإجراءات"
+      "moreActions": "إجراءات تانية"
     },
     "toast": {
+      "deactivated": "تم إيقاف {{name}}",
+      "deleted": "تم حذف {{name}}",
       "activated": "تم تفعيل {{name}}",
-      "idCopied": "تم نسخ معرف الفئة",
-      "deactivated": "تم إلغاء تفعيل {{name}}",
-      "deleted": "تم حذف {{name}}"
+      "idCopied": "تم نسخ معرّف التصنيف",
+      "created": "تم إضافة {{name}}",
+      "updated": "تم تحديث {{name}}"
     },
     "details": {
-      "nothingSelected": "اختر فئة لعرض تفاصيلها",
+      "nothingSelected": "اختار تصنيف عشان تشوف تفاصيله",
       "sections": {
         "hierarchy": "التسلسل الهرمي",
-        "children": "الفئات الفرعية",
+        "children": "التصنيفات الفرعية",
         "comingSoon": "قريبًا"
       },
-      "noChildren": "لا توجد فئات فرعية",
-      "childrenCount": "فئة فرعية واحدة",
-      "childrenCount_other": "{{count}} فئات فرعية"
+      "noChildren": "مفيش تصنيفات فرعية",
+      "childrenCount": "{{count}} تصنيف فرعي",
+      "childrenCount_other": "{{count}} تصنيفات فرعية"
     },
     "comingSoon": {
       "productCount": "عدد المنتجات",
       "createdDate": "تاريخ الإنشاء",
       "createdBy": "أُنشئ بواسطة",
       "updatedDate": "تاريخ التحديث",
-      "recentActivity": "النشاط الأخير",
-      "auditTimeline": "سجل التدقيق",
+      "recentActivity": "آخر النشاطات",
+      "auditTimeline": "سجل المراجعة",
       "permissions": "الصلاحيات",
-      "body": "غير متاح بعد — هذا القسم جاهز لعرض البيانات عند إضافتها من الواجهة الخلفية."
+      "body": "مش متاح لسه — القسم ده هيتفعل لما السيرفر يدعمه."
     },
     "kpi": {
-      "total": "إجمالي الفئات",
-      "root": "الفئات الرئيسية",
-      "child": "الفئات الفرعية",
-      "active": "الفئات النشطة",
-      "inactive": "الفئات غير النشطة"
+      "total": "إجمالي التصنيفات",
+      "root": "التصنيفات الرئيسية",
+      "child": "التصنيفات الفرعية",
+      "active": "التصنيفات النشطة",
+      "inactive": "التصنيفات غير النشطة"
     },
     "column": {
-      "category": "الفئة",
-      "parent": "الفئة الرئيسية",
+      "category": "التصنيف",
+      "parent": "التصنيف الأب",
       "hierarchyLevel": "المستوى الهرمي",
       "status": "الحالة",
-      "childrenCount": "الفئات الفرعية"
+      "childrenCount": "التصنيفات الفرعية"
     },
     "bulk": {
-      "selectedCount": "تم تحديد {{count}}",
+      "selectedCount": "تم اختيار {{count}}",
       "activateSelected": "تفعيل المحدد",
-      "deactivateSelected": "إلغاء تفعيل المحدد",
-      "activateSuccess": "تم تفعيل فئة واحدة",
-      "activateSuccess_other": "تم تفعيل {{count}} فئات",
-      "deactivateSuccess": "تم إلغاء تفعيل فئة واحدة",
-      "deactivateSuccess_other": "تم إلغاء تفعيل {{count}} فئات",
-      "deactivateTitle": "إلغاء تفعيل فئة واحدة؟",
-      "deactivateTitle_other": "إلغاء تفعيل {{count}} فئات؟"
-    },
-    "create": {
-      "title": "إنشاء فئة",
-      "editTitle": "تعديل الفئة",
-      "fields": {
-        "name": "اسم الفئة",
-        "parentCategory": "الفئة الرئيسية",
-        "parentCategoryNone": "بدون فئة رئيسية (مستوى أعلى)"
-      },
-      "errors": {
-        "required": "هذا الحقل مطلوب"
-      },
-      "submitting": "جارٍ الحفظ..."
+      "deactivateSelected": "إيقاف المحدد",
+      "activateSuccess": "تم تفعيل {{count}} تصنيف",
+      "activateSuccess_other": "تم تفعيل {{count}} تصنيفات",
+      "deactivateSuccess": "تم إيقاف {{count}} تصنيف",
+      "deactivateSuccess_other": "تم إيقاف {{count}} تصنيفات",
+      "deactivateTitle": "هل تريد إيقاف {{count}} تصنيف؟",
+      "deactivateTitle_other": "هل تريد إيقاف {{count}} تصنيفات؟"
     },
     "list": {
-      "createCategory": "إنشاء فئة",
-      "title": "الفئات",
-      "subtitleCount": "فئة واحدة",
-      "subtitleCount_other": "{{count}} فئات",
+      "createCategory": "إضافة تصنيف",
+      "title": "التصنيفات",
+      "subtitleCount": "{{count}} تصنيف",
+      "subtitleCount_other": "{{count}} تصنيفات",
       "search": {
-        "placeholder": "ابحث باسم الفئة"
+        "placeholder": "دوّر باسم التصنيف"
       },
       "filters": {
         "status": "الحالة",
@@ -931,45 +942,45 @@
         "table": "جدول"
       },
       "empty": {
-        "noCategories": "لا توجد فئات بعد",
-        "noMatches": "لا توجد فئات مطابقة لعوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noCategories": "لسه مفيش تصنيفات",
+        "noMatches": "مفيش تصنيفات مطابقة للفلاتر",
+        "clearFilters": "مسح الفلاتر"
       }
-    },
-    "move": {
-      "searchPlaceholder": "ابحث عن الفئات"
     },
     "dialogs": {
       "deactivate": {
-        "title": "هل تريد إلغاء تفعيل هذه الفئة؟",
-        "body": "لن تظهر بعد الآن في قوائم اختيار الفئات النشطة في باقي أجزاء المنتج."
+        "title": "هل تريد إيقاف هذا التصنيف؟",
+        "body": "مش هيظهر تاني في قوائم التصنيفات النشطة في أي مكان تاني بالنظام."
       },
       "delete": {
-        "title": "حذف الفئة",
-        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
-        "blockedHasChildren": "تحتوي هذه الفئة على فئات فرعية. يرجى نقلها أو حذفها أولاً."
+        "title": "حذف التصنيف",
+        "body": "هيتشال {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه.",
+        "blockedHasChildren": "التصنيف ده عنده تصنيفات فرعية. انقلها أو احذفها الأول."
       }
+    },
+    "move": {
+      "searchPlaceholder": "دوّر في التصنيفات"
     }
   },
   "products": {
     "pageTitle": "المنتجات",
-    "pageSubtitle": "إدارة كتالوج المنتجات والتسعير والتصنيف.",
+    "pageSubtitle": "إدارة كتالوج المنتجات والأسعار والتصنيف.",
     "kpi": {
       "total": "إجمالي المنتجات",
       "active": "نشط",
       "inactive": "غير نشط",
-      "categories": "الفئات"
+      "categories": "التصنيفات"
     },
     "toolbar": {
-      "searchPlaceholder": "بحث عن منتج...",
-      "categoryFilter": "تصفية حسب الفئة",
-      "statusFilter": "تصفية حسب الحالة",
-      "allCategories": "جميع الفئات",
-      "allStatuses": "جميع الحالات",
+      "searchPlaceholder": "دوّر في المنتجات...",
+      "categoryFilter": "فلترة حسب التصنيف",
+      "statusFilter": "فلترة حسب الحالة",
+      "allCategories": "كل التصنيفات",
+      "allStatuses": "كل الحالات",
       "addProduct": "إضافة منتج",
       "chips": {
         "search": "بحث: {{value}}",
-        "category": "الفئة: {{value}}",
+        "category": "التصنيف: {{value}}",
         "status": {
           "active": "الحالة: نشط",
           "inactive": "الحالة: غير نشط"
@@ -977,233 +988,331 @@
       }
     },
     "table": {
-      "sku": "رمز المنتج",
+      "sku": "SKU",
       "name": "اسم المنتج",
-      "category": "الفئة",
+      "category": "التصنيف",
       "unit": "الوحدة",
       "costPrice": "سعر التكلفة",
       "salePrice": "سعر البيع",
       "status": "الحالة",
-      "emptyTitle": "لا توجد منتجات بعد",
-      "emptyBody": "أضف أول منتج لبدء بناء الكتالوج الخاص بك.",
-      "errorTitle": "تعذر تحميل المنتجات",
-      "errorBody": "حدث خطأ أثناء تحميل قائمة المنتجات."
+      "emptyTitle": "لسه مفيش منتجات",
+      "emptyBody": "أضف أول منتج عشان تبدأ تبني الكتالوج بتاعك.",
+      "errorTitle": "مقدرناش نحمّل المنتجات",
+      "errorBody": "حصل خطأ أثناء تحميل قائمة المنتجات."
     },
     "drawer": {
       "createTitle": "إضافة منتج",
       "editTitle": "تعديل المنتج",
       "duplicateTitle": "نسخ المنتج",
-      "subtitle": "الحقول المميزة بـ * مطلوبة.",
+      "subtitle": "الحقول اللي عليها * مطلوبة.",
       "sections": {
-        "basicInfo": "المعلومات الأساسية",
+        "basicInfo": "البيانات الأساسية",
         "classification": "التصنيف",
         "pricing": "التسعير",
         "status": "الحالة"
       }
     },
     "form": {
-      "sku": "رمز المنتج",
+      "sku": "SKU",
       "name": "اسم المنتج",
       "description": "الوصف",
-      "category": "الفئة",
-      "categoryPlaceholder": "اختر فئة",
-      "categoryLoading": "جارٍ تحميل الفئات...",
-      "categoryLoadError": "تعذر تحميل الفئات.",
+      "category": "التصنيف",
+      "categoryPlaceholder": "اختار تصنيف",
+      "categoryLoading": "جاري تحميل التصنيفات...",
+      "categoryLoadError": "مقدرناش نحمّل التصنيفات.",
       "unitOfMeasure": "وحدة القياس",
       "costPrice": "سعر التكلفة",
       "salePrice": "سعر البيع",
       "active": "نشط",
       "hints": {
-        "skuLocked": "لا يمكن تغيير رمز المنتج بعد إنشائه."
+        "skuLocked": "مينفعش تغيّر الـ SKU بعد إنشاء المنتج."
       },
       "errors": {
-        "skuRequired": "رمز المنتج مطلوب.",
-        "skuTooLong": "يجب ألا يتجاوز رمز المنتج 64 حرفًا.",
+        "skuRequired": "الـ SKU مطلوب.",
+        "skuTooLong": "الـ SKU لازم يكون 64 حرف أو أقل.",
         "nameRequired": "اسم المنتج مطلوب.",
-        "nameTooLong": "يجب ألا يتجاوز اسم المنتج 200 حرف.",
-        "descriptionTooLong": "يجب ألا يتجاوز الوصف 2000 حرف.",
-        "categoryRequired": "الفئة مطلوبة.",
+        "nameTooLong": "اسم المنتج لازم يكون 200 حرف أو أقل.",
+        "descriptionTooLong": "الوصف لازم يكون 2000 حرف أو أقل.",
+        "categoryRequired": "التصنيف مطلوب.",
         "unitOfMeasureRequired": "وحدة القياس مطلوبة.",
         "costPriceRequired": "سعر التكلفة مطلوب.",
-        "costPriceNonNegative": "لا يمكن أن يكون سعر التكلفة سالبًا.",
+        "costPriceNonNegative": "سعر التكلفة مينفعش يكون سالب.",
         "salePriceRequired": "سعر البيع مطلوب.",
-        "salePriceNonNegative": "لا يمكن أن يكون سعر البيع سالبًا.",
-        "salePriceBelowCost": "سعر البيع أقل من سعر التكلفة — يرجى التحقق."
+        "salePriceNonNegative": "سعر البيع مينفعش يكون سالب.",
+        "salePriceBelowCost": "سعر البيع أقل من سعر التكلفة — راجع الرقم ده."
       }
     },
     "details": {
-      "back": "العودة إلى المنتجات",
+      "back": "رجوع للمنتجات",
       "description": "الوصف",
       "classification": "التصنيف",
       "pricing": "التسعير",
-      "margin": "الهامش",
-      "errorTitle": "تعذر تحميل هذا المنتج",
-      "errorBody": "حدث خطأ أثناء تحميل تفاصيل المنتج."
+      "margin": "هامش الربح",
+      "errorTitle": "مقدرناش نحمّل المنتج ده",
+      "errorBody": "حصل خطأ أثناء تحميل تفاصيل المنتج."
     },
     "deleteDialog": {
       "title": "حذف المنتج؟",
-      "body": "سيؤدي هذا إلى حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+      "body": "هيتم حذف \"{{name}}\" نهائيًا. الإجراء ده مينفعش يترجع فيه."
     },
     "toasts": {
-      "createSuccess": "تم إنشاء المنتج.",
+      "createSuccess": "تم إضافة المنتج.",
       "updateSuccess": "تم تحديث المنتج.",
       "deleteSuccess": "تم حذف المنتج."
     }
   },
   "stock": {
-    "new-movement": "حركة جديده",
+    "new-movement": "حركة جديدة",
     "column": {
       "product": "المنتج",
-      "warehouse": "المستودع",
-      "quantityOnHand": "الكمية المتوفرة"
+      "warehouse": "المخزن",
+      "quantityOnHand": "الكمية المتاحة"
     },
     "list": {
       "empty": {
-        "noStock": "لا توجد سجلات مخزون بعد",
-        "noMatches": "لا توجد نتائج مطابقة لبحثك أو عوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noStock": "لسه مفيش سجلات مخزون",
+        "noMatches": "مفيش نتائج مطابقة لبحثك أو فلاترك",
+        "clearFilters": "مسح الفلاتر"
       }
     },
     "actions": {
-      "moreActions": "المزيد من الإجراءات لـ {{product}}",
+      "moreActions": "إجراءات تانية لـ {{product}}",
       "recordMovement": "تسجيل حركة",
-      "transfer": "نقل",
+      "transfer": "تحويل",
       "viewProduct": "عرض {{name}}",
       "viewWarehouse": "عرض {{name}}"
     },
     "kpi": {
       "totalProducts": "إجمالي المنتجات",
-      "totalWarehouses": "إجمالي المستودعات",
-      "totalUnitsOnHand": "إجمالي الوحدات المتوفرة"
+      "totalWarehouses": "إجمالي المخازن",
+      "totalUnitsOnHand": "إجمالي الوحدات المتاحة"
     },
     "overview": {
       "title": "نظرة عامة على المخزون",
-      "subtitleCount": "سجل مخزون واحد",
+      "subtitleCount": "{{count}} سجل مخزون",
       "subtitleCount_other": "{{count}} سجلات مخزون",
       "search": {
-        "placeholder": "ابحث بالمنتج أو الرمز أو المستودع"
+        "placeholder": "دوّر بالمنتج أو الـ SKU أو المخزن"
       },
       "filters": {
-        "warehouse": "المستودع",
+        "warehouse": "المخزن",
         "product": "المنتج"
       },
-      "composing": "تم تحميل {{loaded}} من {{total}} مستودعات...",
-      "warehouseLoadFailed": "تعذر تحميل المخزون لـ {{name}}"
+      "composing": "تم تحميل {{loaded}} من {{total}} مخزن...",
+      "warehouseLoadFailed": "مقدرناش نحمّل مخزون {{name}}"
     },
     "product": {
-      "noStock": "لا يوجد مخزون مسجل لهذا المنتج بعد",
-      "backToOverview": "العودة إلى نظرة عامة على المخزون",
-      "totalQuantity": "الكمية الإجمالية"
+      "noStock": "مفيش مخزون مسجل للمنتج ده لسه",
+      "backToOverview": "رجوع لنظرة عامة على المخزون",
+      "totalQuantity": "إجمالي الكمية"
     },
     "warehouse": {
       "totalUnits": "إجمالي الوحدات",
       "search": {
-        "placeholder": "ابحث بالمنتج أو الرمز"
+        "placeholder": "دوّر بالمنتج أو الـ SKU"
       }
     },
     "movement": {
-      "In": "إدخال",
-      "Out": "إخراج",
-      "AdjustmentIncrease": "تعديل زيادة",
-      "AdjustmentDecrease": "تعديل نقصان",
+      "warehouseFilteredHint": "بيعرض المنتجات المتوفرة في المخزن المحدد",
+      "productFilteredHint": "بيعرض المخازن اللي فيها المنتج المحدد",
+      "In": "وارد",
+      "Out": "صادر",
+      "AdjustmentIncrease": "تسوية بالزيادة",
+      "AdjustmentDecrease": "تسوية بالنقص",
       "title": "تسجيل حركة مخزون",
-      "subtitle": "سجّل تغييرًا في الكمية لمنتج في أحد المستودعات.",
+      "subtitle": "سجّل تغيير في كمية منتج في مخزن معين.",
       "back": "رجوع",
       "submit": "تسجيل الحركة",
-      "submitting": "جارٍ التسجيل...",
-      "movementTypeNote": "قيم نوع الحركة بانتظار تأكيد الواجهة الخلفية — تُدخل حاليًا كنص حر.",
+      "submitting": "جاري التسجيل...",
+      "movementTypeNote": "قيم نوع الحركة لسه مش متأكدة من السيرفر — بتتكتب كنص حر مؤقتًا.",
       "fields": {
         "product": "المنتج",
-        "productPlaceholder": "اختر منتجًا",
-        "searchProducts": "ابحث عن المنتجات",
-        "warehouse": "المستودع",
-        "warehousePlaceholder": "اختر مستودعًا",
-        "searchWarehouses": "ابحث عن المستودعات",
+        "productPlaceholder": "اختار منتج",
+        "searchProducts": "دوّر في المنتجات",
+        "warehouse": "المخزن",
+        "warehousePlaceholder": "اختار مخزن",
+        "searchWarehouses": "دوّر في المخازن",
         "movementType": "نوع الحركة",
-        "movementTypePlaceholder": "مثال: استلام، صرف، تصحيح",
+        "movementTypePlaceholder": "مثلاً: استلام، صرف، تصحيح",
         "quantity": "الكمية",
         "reference": "المرجع",
-        "referencePlaceholder": "رقم أمر الشراء أو ملاحظة (اختياري)"
+        "referencePlaceholder": "رقم أمر الشراء، ملاحظة، إلخ (اختياري)"
       },
       "errors": {
-        "required": "هذا الحقل مطلوب",
-        "quantityInvalid": "أدخل كمية أكبر من 0"
+        "required": "الحقل ده مطلوب",
+        "quantityInvalid": "اكتب كمية أكبر من 0"
       },
       "success": {
         "title": "تم تسجيل الحركة",
-        "saveNotice": "احفظ أو دوّن هذا التأكيد — لا يوجد سجل حركات للرجوع إليه لاحقًا.",
+        "saveNotice": "احفظ أو دوّن التأكيد ده — مفيش سجل حركات ترجع تدوّر فيه تاني.",
         "date": "التاريخ",
         "movementId": "معرّف الحركة",
-        "recordAnother": "تسجيل حركة أخرى",
+        "recordAnother": "تسجيل حركة تانية",
         "done": "تم"
       }
     },
     "transfer": {
-      "title": "نقل المخزون",
-      "subtitle": "انقل كمية من منتج من مستودع إلى آخر.",
+      "title": "تحويل مخزون",
+      "subtitle": "انقل كمية من منتج من مخزن لمخزن تاني.",
       "backStep": "رجوع",
       "nextStep": "التالي",
-      "confirmTransfer": "تأكيد النقل",
-      "submitting": "جارٍ النقل...",
+      "confirmTransfer": "تأكيد التحويل",
+      "submitting": "جاري التحويل...",
       "reviewSentence": "نقل <strong>{{quantity}} وحدة</strong> من <strong>{{product}}</strong> من <strong>{{source}}</strong> إلى <strong>{{destination}}</strong>.",
       "steps": {
         "product": "المنتج",
         "source": "المصدر",
         "destination": "الوجهة",
         "quantity": "الكمية",
-        "review": "مراجعة"
+        "review": "المراجعة"
+      },
+      "fields": {
+        "quantityAvailable": "{{count}} متاح"
       },
       "stepHints": {
-        "product": "ما هو المنتج الذي تنقله؟",
-        "source": "من أي مستودع؟",
-        "destination": "إلى أي مستودع؟",
-        "quantity": "كم عدد الوحدات، ومرجع اختياري.",
-        "review": "تحقق من كل التفاصيل قبل التأكيد — لا يمكن التراجع عن هذا الإجراء."
+        "product": "بتحوّل أنهي منتج؟",
+        "source": "بيتنقل من أنهي مخزن؟",
+        "destination": "هيتنقل لأنهي مخزن؟",
+        "quantity": "كام وحدة، ومرجع اختياري.",
+        "review": "راجع كل التفاصيل قبل ما تأكد — ده مينفعش يترجع فيه."
+      },
+      "errors": {
+        "noStockAnywhere": "\"{{product}}\" مفيهوش مخزون في أي مخزن"
       }
+    }
+  },
+  "suppliers": {
+    "page": {
+      "title": "الموردين",
+      "description": "إدارة بيانات الموردين المستخدمة في كل عمليات الشراء."
+    },
+    "toolbar": {
+      "searchPlaceholder": "دوّر بالاسم أو جهة الاتصال أو البريد الإلكتروني أو الرقم الضريبي...",
+      "allStatuses": "كل الحالات",
+      "sortNameAsc": "الاسم (أ–ي)",
+      "sortNameDesc": "الاسم (ي–أ)"
+    },
+    "table": {
+      "name": "اسم المورد",
+      "contactPerson": "اسم جهة الاتصال",
+      "phone": "التليفون",
+      "email": "البريد الإلكتروني",
+      "taxNumber": "الرقم الضريبي",
+      "status": "الحالة"
+    },
+    "actions": {
+      "create": "مورد جديد",
+      "view": "عرض",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "save": "حفظ",
+      "saveAndNew": "حفظ وإضافة جديد"
+    },
+    "bulk": {
+      "selectedCount": "تم اختيار {{count}} مورد",
+      "selectedCount_other": "تم اختيار {{count}} موردين",
+      "deleteSelected": "حذف المحدد"
+    },
+    "pagination": {
+      "summary": "بيعرض {{from}}–{{to}} من {{total}}"
+    },
+    "empty": {
+      "title": "لسه مفيش موردين",
+      "description": "أضف أول مورد عشان تبدأ تدير المشتريات.",
+      "filteredTitle": "مفيش موردين مطابقين لبحثك أو فلاترك"
+    },
+    "drawer": {
+      "createTitle": "مورد جديد",
+      "editTitle": "تعديل المورد",
+      "supplierInfo": "بيانات المورد",
+      "businessInfo": "بيانات النشاط التجاري",
+      "unsavedChangesTitle": "تجاهل التغييرات اللي متحفظتش؟",
+      "unsavedChangesBody": "عندك تغييرات متحفظتش. لو قفلت دلوقتي هتضيع.",
+      "discardChanges": "تجاهل",
+      "keepEditing": "استمرار في التعديل"
+    },
+    "fields": {
+      "name": "اسم المورد",
+      "contactName": "جهة الاتصال",
+      "phone": "التليفون",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "taxNumber": "الرقم الضريبي",
+      "status": "الحالة"
+    },
+    "validation": {
+      "nameMin": "اسم المورد لازم يكون حرفين على الأقل.",
+      "nameMax": "اسم المورد لازم يكون 120 حرف أو أقل.",
+      "contactNameRequired": "جهة الاتصال مطلوبة.",
+      "contactNameMax": "جهة الاتصال لازم تكون 80 حرف أو أقل.",
+      "phoneRequired": "رقم التليفون مطلوب.",
+      "phoneMax": "رقم التليفون لازم يكون 30 حرف أو أقل.",
+      "emailInvalid": "اكتب بريد إلكتروني صحيح.",
+      "addressMax": "العنوان لازم يكون 240 حرف أو أقل.",
+      "taxNumberRequired": "الرقم الضريبي مطلوب.",
+      "taxNumberMax": "الرقم الضريبي لازم يكون 40 حرف أو أقل."
+    },
+    "deleteDialog": {
+      "title": "حذف المورد",
+      "body": "هيتم حذف \"{{name}}\" نهائيًا. الإجراء ده مينفعش يترجع فيه."
+    },
+    "details": {
+      "back": "رجوع للموردين",
+      "notFound": "المورد مش موجود.",
+      "purchaseOrdersTitle": "أوامر الشراء المرتبطة",
+      "purchaseOrdersDescription": "سجل أوامر الشراء بتاع المورد ده مش متاح في العرض ده لسه."
+    },
+    "toasts": {
+      "created": "تم إضافة المورد.",
+      "updated": "تم تحديث المورد.",
+      "deleted": "تم حذف المورد.",
+      "bulkDeleted": "تم حذف {{count}} مورد.",
+      "bulkDeleted_other": "تم حذف {{count}} موردين.",
+      "bulkDeletePartial": "تم حذف {{succeeded}}، وفشل حذف {{failed}}."
     }
   },
   "purchaseOrders": {
     "page": {
       "title": "أوامر الشراء",
-      "description": "إدارة المشتريات من المسودة حتى الاستلام."
+      "description": "إدارة المشتريات من المسودة لحد الاستلام."
     },
     "status": {
       "Draft": "مسودة",
       "Submitted": "مُرسل",
-      "Approved": "مُعتمد",
-      "PartiallyReceived": "مُستلم جزئيًا",
-      "Received": "مُستلم",
-      "Cancelled": "ملغى"
+      "Approved": "معتمد",
+      "PartiallyReceived": "مستلم جزئيًا",
+      "Received": "مستلم",
+      "Cancelled": "ملغي"
     },
     "stats": {
       "total": "إجمالي الأوامر",
-      "withWarnings": "بها تحذيرات",
-      "totalValue": "إجمالي قيمة الشراء",
-      "outstandingValue": "القيمة المستحقة"
+      "withWarnings": "بها تنبيهات",
+      "totalValue": "إجمالي قيمة المشتريات",
+      "outstandingValue": "القيمة المتبقية"
     },
     "toolbar": {
-      "searchPlaceholder": "ابحث برقم الأمر أو المورد...",
-      "exportNotAvailable": "التصدير غير متاح حاليًا."
+      "searchPlaceholder": "دوّر برقم الأمر أو المورد...",
+      "exportNotAvailable": "التصدير مش متاح لسه."
     },
     "filters": {
-      "allSuppliers": "جميع الموردين",
-      "allWarehouses": "جميع المستودعات",
+      "allSuppliers": "كل الموردين",
+      "allWarehouses": "كل المخازن",
       "to": "إلى",
       "warningsAny": "الكل",
-      "warningsYes": "به تحذيرات",
-      "warningsNo": "بدون تحذيرات",
+      "warningsYes": "بها تنبيهات",
+      "warningsNo": "بدون تنبيهات",
       "reset": "إعادة تعيين الفلاتر"
     },
     "table": {
       "orderNumber": "رقم الأمر",
       "supplier": "المورد",
-      "warehouse": "المستودع",
+      "warehouse": "المخزن",
       "status": "الحالة",
       "orderDate": "تاريخ الأمر",
       "expectedDate": "التاريخ المتوقع",
       "total": "الإجمالي",
       "receiving": "الاستلام",
-      "warnings": "التحذيرات"
+      "warnings": "التنبيهات"
     },
     "actions": {
       "create": "أمر شراء جديد",
@@ -1218,42 +1327,44 @@
       "saveDraft": "حفظ كمسودة"
     },
     "bulk": {
-      "selectedCount": "تم تحديد أمر واحد",
-      "selectedCount_other": "تم تحديد {{count}} أمر",
+      "selectedCount": "تم اختيار {{count}} أمر",
+      "selectedCount_other": "تم اختيار {{count}} أوامر",
       "cancelSelected": "إلغاء المحدد",
-      "cancelDisabledHint": "يجب أن تكون جميع الأوامر المحددة قابلة للإلغاء (مسودة أو مُرسلة أو مُعتمدة)."
+      "cancelDisabledHint": "لازم كل الأوامر المحددة تكون قابلة للإلغاء (مسودة، مُرسل، أو معتمد)."
     },
     "empty": {
-      "title": "لا توجد أوامر شراء بعد",
-      "description": "أنشئ أول أمر شراء لبدء المشتريات.",
-      "filteredTitle": "لا توجد أوامر مطابقة لبحثك أو فلاترك"
+      "title": "لسه مفيش أوامر شراء",
+      "description": "أضف أول أمر شراء عشان تبدأ عملية الشراء.",
+      "filteredTitle": "مفيش أوامر مطابقة لبحثك أو فلاترك"
     },
     "form": {
+      "warehouseFilteredHint": "بيعرض المخازن اللي فيها المنتج المحدد",
       "createTitle": "أمر شراء جديد",
       "editTitle": "تعديل أمر الشراء",
-      "subtitle": "أدخل تفاصيل الأمر وأضف بنود الأصناف.",
-      "selectSupplier": "اختر موردًا",
-      "searchSuppliers": "ابحث عن الموردين...",
-      "noSuppliersFound": "لا يوجد موردون",
-      "selectWarehouse": "اختر مستودعًا",
-      "searchWarehouses": "ابحث عن المستودعات...",
-      "noWarehousesFound": "لا توجد مستودعات"
+      "subtitle": "املأ بيانات الأمر وضيف بنود الأصناف.",
+      "selectSupplier": "اختار مورد",
+      "searchSuppliers": "دوّر في الموردين...",
+      "noSuppliersFound": "مفيش موردين",
+      "selectWarehouse": "اختار مخزن",
+      "searchWarehouses": "دوّر في المخازن...",
+      "noWarehousesFound": "مفيش مخازن"
     },
     "fields": {
       "supplier": "المورد",
-      "warehouse": "المستودع",
+      "warehouse": "المخزن",
       "orderDate": "تاريخ الأمر",
       "expectedDate": "التاريخ المتوقع",
       "notes": "ملاحظات"
     },
     "lines": {
+      "selectWarehouseHint": "اختار مخزن عشان تشوف المنتجات المتاحة فيه",
       "title": "بنود الأصناف",
       "addRow": "إضافة سطر",
       "removeRow": "حذف السطر",
       "duplicateRow": "نسخ السطر",
-      "selectProduct": "اختر منتجًا",
-      "searchProducts": "ابحث عن المنتجات...",
-      "noProductsFound": "لا توجد منتجات",
+      "selectProduct": "اختار منتج",
+      "searchProducts": "دوّر في المنتجات...",
+      "noProductsFound": "مفيش منتجات",
       "product": "المنتج",
       "quantity": "الكمية",
       "unitPrice": "سعر الوحدة",
@@ -1263,99 +1374,99 @@
       "grandTotal": "الإجمالي الكلي"
     },
     "validation": {
-      "supplierRequired": "اختر موردًا.",
-      "warehouseRequired": "اختر مستودعًا.",
+      "supplierRequired": "اختار مورد.",
+      "warehouseRequired": "اختار مخزن.",
       "orderDateRequired": "تاريخ الأمر مطلوب.",
       "expectedDateRequired": "التاريخ المتوقع مطلوب.",
-      "expectedBeforeOrder": "يجب أن يكون التاريخ المتوقع بعد أو يساوي تاريخ الأمر.",
-      "minOneLine": "يلزم وجود بند واحد على الأقل.",
-      "productRequired": "اختر منتجًا.",
-      "quantityPositive": "يجب أن تكون الكمية أكبر من صفر.",
-      "priceNonNegative": "لا يمكن أن يكون سعر الوحدة سالبًا."
+      "expectedBeforeOrder": "التاريخ المتوقع لازم يكون في نفس تاريخ الأمر أو بعده.",
+      "minOneLine": "لازم بند واحد على الأقل.",
+      "productRequired": "اختار منتج.",
+      "quantityPositive": "الكمية لازم تكون أكبر من 0.",
+      "priceNonNegative": "سعر الوحدة مينفعش يكون سالب."
     },
     "tracker": {
-      "title": "تقدّم الأمر",
-      "completion": "اكتمال {{percent}}%",
-      "noTimestamp": "لا يوجد وقت مسجل لهذه المرحلة",
-      "expectedDate": "تاريخ التسليم المتوقع",
-      "cancelledNote": "تم إلغاء هذا الأمر. لا يسجل الـ API المرحلة التي تم الإلغاء منها."
+      "title": "مراحل الأمر",
+      "completion": "اكتمل {{percent}}%",
+      "noTimestamp": "مفيش توقيت متاح للمرحلة دي",
+      "expectedDate": "موعد التسليم المتوقع",
+      "cancelledNote": "الأمر ده اتلغى. النظام مش بيسجل من أنهي مرحلة اتلغى."
     },
     "warnings": {
-      "count": "تحذير واحد",
-      "count_other": "{{count}} تحذير",
-      "panelTitle": "تحذير واحد على هذا الأمر",
-      "panelTitle_other": "{{count}} تحذيرات على هذا الأمر"
+      "count": "{{count}} تنبيه",
+      "count_other": "{{count}} تنبيهات",
+      "panelTitle": "{{count}} تنبيه على الأمر ده",
+      "panelTitle_other": "{{count}} تنبيهات على الأمر ده"
     },
     "dialogs": {
       "submitTitle": "إرسال للاعتماد",
-      "submitBody": "إرسال \"{{orderNumber}}\" للاعتماد؟ بمجرد الإرسال، لن يمكن تعديله.",
+      "submitBody": "هل تريد إرسال \"{{orderNumber}}\" للاعتماد؟ بعد الإرسال مش هيتعدل تاني.",
       "approveTitle": "اعتماد الأمر",
-      "approveBody": "اعتماد \"{{orderNumber}}\"؟ هذا يؤكد أن الأمر جاهز للاستلام.",
+      "approveBody": "هل تريد اعتماد \"{{orderNumber}}\"؟ ده بيأكد إن الأمر جاهز للاستلام.",
       "cancelTitle": "إلغاء الأمر",
-      "cancelBody": "سيتم وضع علامة \"ملغى\" على \"{{orderNumber}}\". لن يمكن إرساله أو اعتماده أو استلامه بعد ذلك. لا يمكن التراجع عن هذا الإجراء."
+      "cancelBody": "هيتم تحويل \"{{orderNumber}}\" لحالة ملغي. مش هيتقدر يترسل أو يتعتمد أو يتستلم تاني. الإجراء ده مينفعش يترجع فيه."
     },
     "receive": {
       "title": "استلام البضاعة",
       "ordered": "المطلوب",
       "previouslyReceived": "المستلم سابقًا",
       "remaining": "المتبقي",
-      "receivingNow": "الاستلام الآن",
+      "receivingNow": "المستلم الآن",
       "newTotal": "الإجمالي الجديد",
-      "summary": "استلام {{receiving}} من أصل {{remaining}} وحدة متبقية",
+      "summary": "بيتم استلام {{receiving}} من {{remaining}} وحدة متبقية",
       "confirm": "تأكيد الاستلام",
-      "nothingToReceive": "أدخل كمية لسطر واحد على الأقل.",
-      "notReceivable": "لا يمكن استلام البضاعة لهذا الأمر في حالته الحالية."
+      "nothingToReceive": "اكتب كمية لسطر واحد على الأقل.",
+      "notReceivable": "الأمر ده مينفعش يستلم بضاعة في حالته الحالية."
     },
     "details": {
-      "back": "العودة إلى أوامر الشراء",
-      "notFound": "أمر الشراء غير موجود.",
-      "totalAmount": "الإجمالي",
+      "back": "رجوع لأوامر الشراء",
+      "notFound": "أمر الشراء مش موجود.",
+      "totalAmount": "المبلغ الإجمالي",
       "totalOrdered": "إجمالي المطلوب",
       "totalReceived": "إجمالي المستلم",
       "linesCount": "بنود الأصناف",
       "lineItems": "بنود الأصناف",
-      "activityComingSoon": "سجل النشاط غير متاح من الـ API بعد.",
-      "auditComingSoon": "معلومات الإنشاء والتعديل غير متاحة من الـ API بعد."
+      "activityComingSoon": "سجل النشاط مش متاح من السيرفر لسه.",
+      "auditComingSoon": "بيانات الإنشاء/التعديل مش متاحة من السيرفر لسه."
     },
     "toasts": {
-      "created": "تم إنشاء أمر الشراء.",
+      "created": "تم إضافة أمر الشراء.",
       "updated": "تم تحديث أمر الشراء.",
       "submitted": "تم إرسال أمر الشراء للاعتماد.",
       "approved": "تم اعتماد أمر الشراء.",
       "received": "تم استلام البضاعة.",
       "cancelled": "تم إلغاء أمر الشراء.",
-      "bulkCancelled": "تم إلغاء أمر واحد.",
-      "bulkCancelled_other": "تم إلغاء {{count}} أمر.",
-      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
+      "bulkCancelled": "تم إلغاء {{count}} أمر.",
+      "bulkCancelled_other": "تم إلغاء {{count}} أوامر.",
+      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل إلغاء {{failed}}."
     }
   },
   "customers": {
     "list": {
       "title": "العملاء",
-      "subtitleCount": "عميل واحد",
+      "subtitleCount": "{{count}} عميل",
       "subtitleCount_other": "{{count}} عملاء",
-      "createCustomer": "إنشاء عميل",
+      "createCustomer": "إضافة عميل",
       "search": {
-        "placeholder": "ابحث بالاسم أو الشخص المسؤول أو الهاتف أو البريد الإلكتروني"
+        "placeholder": "دوّر بالاسم أو جهة الاتصال أو التليفون أو البريد الإلكتروني"
       },
       "filters": {
         "status": "الحالة"
       },
       "empty": {
-        "noCustomers": "لا يوجد عملاء بعد",
-        "noMatches": "لا يوجد عملاء مطابقون لبحثك أو عوامل التصفية",
-        "clearFilters": "مسح عوامل التصفية"
+        "noCustomers": "لسه مفيش عملاء",
+        "noMatches": "مفيش عملاء مطابقين لبحثك أو فلاترك",
+        "clearFilters": "مسح الفلاتر"
       }
     },
     "kpi": {
       "total": "إجمالي العملاء",
-      "active": "العملاء النشطون",
+      "active": "العملاء النشطين",
       "inactive": "العملاء غير النشطين"
     },
     "column": {
       "name": "اسم العميل",
-      "contactName": "اسم التواصل",
-      "phone": "الهاتف",
+      "contactName": "جهة الاتصال",
+      "phone": "التليفون",
       "email": "البريد الإلكتروني",
       "taxNumber": "الرقم الضريبي",
       "status": "الحالة"
@@ -1363,59 +1474,59 @@
     "actions": {
       "viewDetails": "عرض التفاصيل",
       "edit": "تعديل",
-      "deactivate": "إلغاء التفعيل",
+      "deactivate": "إيقاف",
       "activate": "تفعيل",
       "delete": "حذف",
-      "moreActions": "المزيد من الإجراءات"
+      "moreActions": "إجراءات تانية"
     },
     "create": {
-      "title": "إنشاء عميل",
+      "title": "إضافة عميل",
       "editTitle": "تعديل العميل",
       "sections": {
-        "business": "معلومات النشاط التجاري",
-        "contact": "معلومات التواصل",
+        "business": "بيانات النشاط التجاري",
+        "contact": "بيانات التواصل",
         "address": "العنوان"
       },
       "fields": {
         "name": "اسم العميل",
-        "contactName": "اسم التواصل",
-        "phone": "الهاتف",
+        "contactName": "جهة الاتصال",
+        "phone": "التليفون",
         "email": "البريد الإلكتروني",
         "address": "العنوان",
         "taxNumber": "الرقم الضريبي"
       },
       "errors": {
-        "required": "هذا الحقل مطلوب",
-        "invalidEmail": "أدخل بريدًا إلكترونيًا صالحًا"
+        "required": "الحقل ده مطلوب",
+        "invalidEmail": "اكتب بريد إلكتروني صحيح"
       },
-      "submitting": "جارٍ الحفظ...",
+      "submitting": "جاري الحفظ...",
       "saveAndNew": "حفظ وإضافة جديد",
-      "unsavedChangesTitle": "تجاهل التغييرات غير المحفوظة؟",
-      "unsavedChangesBody": "لديك تغييرات غير محفوظة ستفقد إذا أغلقت هذا النموذج.",
+      "unsavedChangesTitle": "تجاهل التغييرات اللي متحفظتش؟",
+      "unsavedChangesBody": "عندك تغييرات هتضيع لو قفلت الفورم ده.",
       "discard": "تجاهل",
-      "keepEditing": "متابعة التعديل"
+      "keepEditing": "استمرار في التعديل"
     },
     "details": {
       "sections": {
-        "contact": "معلومات التواصل",
+        "contact": "بيانات التواصل",
         "address": "العنوان",
-        "tax": "المعلومات الضريبية"
+        "tax": "البيانات الضريبية"
       }
     },
     "dialogs": {
       "deactivate": {
-        "title": "هل تريد إلغاء تفعيل هذا العميل؟",
-        "body": "لن يظهر بعد الآن في قوائم اختيار العملاء النشطين في باقي أجزاء المنتج."
+        "title": "هل تريد إيقاف هذا العميل؟",
+        "body": "مش هيظهر تاني في قوائم العملاء النشطين في أي مكان تاني بالنظام."
       },
       "delete": {
         "title": "حذف العميل",
-        "body": "سيؤدي هذا إلى إزالة {{name}} نهائيًا. لا يمكن التراجع عن هذا الإجراء."
+        "body": "هيتشال {{name}} نهائيًا. الإجراء ده مينفعش يترجع فيه."
       }
     },
     "toast": {
-      "created": "تم إنشاء {{name}}",
+      "created": "تم إضافة {{name}}",
       "updated": "تم تحديث {{name}}",
-      "deactivated": "تم إلغاء تفعيل {{name}}",
+      "deactivated": "تم إيقاف {{name}}",
       "activated": "تم تفعيل {{name}}",
       "deleted": "تم حذف {{name}}"
     }
@@ -1423,43 +1534,43 @@
   "salesOrders": {
     "page": {
       "title": "أوامر البيع",
-      "description": "إدارة طلبات العملاء من المسودة حتى الشحن."
+      "description": "إدارة طلبات العملاء من المسودة لحد الشحن."
     },
     "status": {
       "Draft": "مسودة",
       "Submitted": "مُرسل",
-      "Approved": "مُعتمد",
+      "Approved": "معتمد",
       "PartiallyShipped": "مشحون جزئيًا",
       "Shipped": "مشحون",
-      "Cancelled": "ملغى"
+      "Cancelled": "ملغي"
     },
     "stats": {
       "total": "إجمالي الأوامر",
-      "withWarnings": "بها تحذيرات مخزون",
-      "totalValue": "إجمالي المبيعات"
+      "withWarnings": "بها تنبيهات مخزون",
+      "totalValue": "إجمالي قيمة المبيعات"
     },
     "toolbar": {
-      "searchPlaceholder": "ابحث برقم الأمر أو العميل...",
-      "exportNotAvailable": "التصدير غير متاح حاليًا."
+      "searchPlaceholder": "دوّر برقم الأمر أو العميل...",
+      "exportNotAvailable": "التصدير مش متاح لسه."
     },
     "filters": {
-      "allCustomers": "جميع العملاء",
-      "allWarehouses": "جميع المستودعات",
+      "allCustomers": "كل العملاء",
+      "allWarehouses": "كل المخازن",
       "to": "إلى",
       "warningsAny": "الكل",
-      "warningsYes": "به تحذيرات",
-      "warningsNo": "بدون تحذيرات",
+      "warningsYes": "بها تنبيهات",
+      "warningsNo": "بدون تنبيهات",
       "reset": "إعادة تعيين الفلاتر"
     },
     "table": {
       "orderNumber": "رقم الأمر",
       "customer": "العميل",
-      "warehouse": "المستودع",
+      "warehouse": "المخزن",
       "orderDate": "تاريخ الأمر",
       "status": "الحالة",
       "total": "الإجمالي",
       "shipping": "الشحن",
-      "warnings": "تحذيرات المخزون"
+      "warnings": "تنبيهات المخزون"
     },
     "actions": {
       "create": "أمر بيع جديد",
@@ -1474,45 +1585,45 @@
       "saveDraft": "حفظ كمسودة"
     },
     "bulk": {
-      "selectedCount": "تم تحديد أمر واحد",
-      "selectedCount_other": "تم تحديد {{count}} أمر",
+      "selectedCount": "تم اختيار {{count}} أمر",
+      "selectedCount_other": "تم اختيار {{count}} أوامر",
       "cancelSelected": "إلغاء المحدد",
-      "cancelDisabledHint": "يجب أن تكون جميع الأوامر المحددة قابلة للإلغاء (مسودة أو مُرسلة أو مُعتمدة)."
+      "cancelDisabledHint": "لازم كل الأوامر المحددة تكون قابلة للإلغاء (مسودة، مُرسل، أو معتمد)."
     },
     "empty": {
-      "title": "لا توجد أوامر بيع بعد",
-      "description": "أنشئ أول أمر بيع لبدء البيع.",
-      "filteredTitle": "لا توجد أوامر مطابقة لبحثك أو فلاترك"
+      "title": "لسه مفيش أوامر بيع",
+      "description": "أضف أول أمر بيع عشان تبدأ تبيع.",
+      "filteredTitle": "مفيش أوامر مطابقة لبحثك أو فلاترك"
     },
     "form": {
-      "warehouseFilteredHint": "عرض المخازن التي تتوفر بها المنتج المحدد فقط",
+      "warehouseFilteredHint": "بيعرض المخازن اللي فيها المنتج المحدد",
       "createTitle": "أمر بيع جديد",
       "editTitle": "تعديل أمر البيع",
-      "subtitle": "أدخل تفاصيل الأمر وأضف بنود الأصناف.",
-      "selectCustomer": "اختر عميلًا",
-      "searchCustomers": "ابحث عن العملاء...",
-      "noCustomersFound": "لا يوجد عملاء",
-      "selectWarehouse": "اختر مستودعًا",
-      "searchWarehouses": "ابحث عن المستودعات...",
-      "noWarehousesFound": "لا توجد مستودعات"
+      "subtitle": "املأ بيانات الأمر وضيف بنود الأصناف.",
+      "selectCustomer": "اختار عميل",
+      "searchCustomers": "دوّر في العملاء...",
+      "noCustomersFound": "مفيش عملاء",
+      "selectWarehouse": "اختار مخزن",
+      "searchWarehouses": "دوّر في المخازن...",
+      "noWarehousesFound": "مفيش مخازن"
     },
     "fields": {
       "customer": "العميل",
-      "warehouse": "المستودع",
+      "warehouse": "المخزن",
       "orderDate": "تاريخ الأمر",
       "notes": "ملاحظات"
     },
     "lines": {
-      "selectWarehouseHint": "اختر مخزنًا لعرض المنتجات المتاحة فيه",
+      "selectWarehouseHint": "اختار مخزن عشان تشوف المنتجات المتاحة فيه",
       "title": "بنود الأصناف",
       "addRow": "إضافة سطر",
       "removeRow": "حذف السطر",
       "duplicateRow": "نسخ السطر",
-      "selectProduct": "اختر منتجًا",
-      "searchProducts": "ابحث عن المنتجات...",
-      "noProductsFound": "لا توجد منتجات",
+      "selectProduct": "اختار منتج",
+      "searchProducts": "دوّر في المنتجات...",
+      "noProductsFound": "مفيش منتجات",
       "product": "المنتج",
-      "sku": "رمز الصنف",
+      "sku": "SKU",
       "quantity": "الكمية",
       "unitPrice": "سعر الوحدة",
       "lineTotal": "إجمالي السطر",
@@ -1521,33 +1632,33 @@
       "grandTotal": "الإجمالي الكلي"
     },
     "validation": {
-      "customerRequired": "اختر عميلًا.",
-      "warehouseRequired": "اختر مستودعًا.",
+      "customerRequired": "اختار عميل.",
+      "warehouseRequired": "اختار مخزن.",
       "orderDateRequired": "تاريخ الأمر مطلوب.",
-      "minOneLine": "يلزم وجود بند واحد على الأقل.",
-      "productRequired": "اختر منتجًا.",
-      "quantityPositive": "يجب أن تكون الكمية أكبر من صفر.",
-      "priceNonNegative": "لا يمكن أن يكون سعر الوحدة سالبًا."
+      "minOneLine": "لازم بند واحد على الأقل.",
+      "productRequired": "اختار منتج.",
+      "quantityPositive": "الكمية لازم تكون أكبر من 0.",
+      "priceNonNegative": "سعر الوحدة مينفعش يكون سالب."
     },
     "tracker": {
-      "title": "تقدّم الأمر",
-      "completion": "اكتمال {{percent}}%",
-      "noTimestamp": "لا يوجد وقت مسجل لهذه المرحلة",
-      "cancelledNote": "تم إلغاء هذا الأمر. لا يسجل الـ API المرحلة التي تم الإلغاء منها."
+      "title": "مراحل الأمر",
+      "completion": "اكتمل {{percent}}%",
+      "noTimestamp": "مفيش توقيت متاح للمرحلة دي",
+      "cancelledNote": "الأمر ده اتلغى. النظام مش بيسجل من أنهي مرحلة اتلغى."
     },
     "warnings": {
-      "count": "تحذير واحد",
-      "count_other": "{{count}} تحذير",
-      "panelTitle": "تحذير مخزون واحد على هذا الأمر",
-      "panelTitle_other": "{{count}} تحذيرات مخزون على هذا الأمر"
+      "count": "{{count}} تنبيه",
+      "count_other": "{{count}} تنبيهات",
+      "panelTitle": "{{count}} تنبيه مخزون على الأمر ده",
+      "panelTitle_other": "{{count}} تنبيهات مخزون على الأمر ده"
     },
     "dialogs": {
       "submitTitle": "إرسال الأمر",
-      "submitBody": "إرسال \"{{orderNumber}}\"؟ بمجرد الإرسال، لن يمكن تعديله.",
+      "submitBody": "هل تريد إرسال \"{{orderNumber}}\"؟ بعد الإرسال مش هيتعدل تاني.",
       "approveTitle": "اعتماد الأمر",
-      "approveBody": "اعتماد \"{{orderNumber}}\"؟ هذا يؤكد أنه جاهز للشحن.",
+      "approveBody": "هل تريد اعتماد \"{{orderNumber}}\"؟ ده بيأكد إنه جاهز للشحن.",
       "cancelTitle": "إلغاء الأمر",
-      "cancelBody": "سيتم وضع علامة \"ملغى\" على \"{{orderNumber}}\". لن يمكن إرساله أو اعتماده أو شحنه بعد ذلك. لا يمكن التراجع عن هذا الإجراء."
+      "cancelBody": "هيتم تحويل \"{{orderNumber}}\" لحالة ملغي. مش هيتقدر يترسل أو يتعتمد أو يتشحن تاني. الإجراء ده مينفعش يترجع فيه."
     },
     "ship": {
       "title": "شحن البضاعة",
@@ -1556,59 +1667,58 @@
       "remaining": "المتبقي",
       "shippingNow": "الشحن الآن",
       "newTotal": "الإجمالي الجديد",
-      "summary": "شحن {{shipping}} من أصل {{remaining}} وحدة متبقية",
+      "summary": "بيتم شحن {{shipping}} من {{remaining}} وحدة متبقية",
       "confirm": "تأكيد الشحن",
-      "nothingToShip": "أدخل كمية لسطر واحد على الأقل.",
-      "notShippable": "لا يمكن شحن البضاعة لهذا الأمر في حالته الحالية."
+      "nothingToShip": "اكتب كمية لسطر واحد على الأقل.",
+      "notShippable": "الأمر ده مينفعش يتشحن في حالته الحالية."
     },
     "details": {
-      "back": "العودة إلى أوامر البيع",
-      "notFound": "أمر البيع غير موجود.",
-      "totalAmount": "الإجمالي",
+      "back": "رجوع لأوامر البيع",
+      "notFound": "أمر البيع مش موجود.",
+      "totalAmount": "المبلغ الإجمالي",
       "totalOrdered": "إجمالي المطلوب",
       "totalShipped": "إجمالي المشحون",
       "linesCount": "بنود الأصناف",
       "lineItems": "بنود الأصناف",
-      "daysSinceOrder": "يوم واحد منذ الطلب",
-      "daysSinceOrder_other": "{{count}} يوم منذ الطلب",
-      "activityComingSoon": "سجل النشاط غير متاح من الـ API بعد.",
-      "auditComingSoon": "معلومات الإنشاء والتعديل غير متاحة من الـ API بعد."
+      "daysSinceOrder": "{{count}} يوم من تاريخ الأمر",
+      "daysSinceOrder_other": "{{count}} يوم من تاريخ الأمر",
+      "activityComingSoon": "سجل النشاط مش متاح من السيرفر لسه.",
+      "auditComingSoon": "بيانات الإنشاء/التعديل مش متاحة من السيرفر لسه."
     },
     "toasts": {
-      "created": "تم إنشاء أمر البيع.",
+      "created": "تم إضافة أمر البيع.",
       "updated": "تم تحديث أمر البيع.",
       "submitted": "تم إرسال أمر البيع.",
       "approved": "تم اعتماد أمر البيع.",
       "shipped": "تم شحن البضاعة.",
       "cancelled": "تم إلغاء أمر البيع.",
-      "bulkCancelled": "تم إلغاء أمر واحد.",
-      "bulkCancelled_other": "تم إلغاء {{count}} أمر.",
-      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل {{failed}}."
+      "bulkCancelled": "تم إلغاء {{count}} أمر.",
+      "bulkCancelled_other": "تم إلغاء {{count}} أوامر.",
+      "bulkCancelPartial": "تم إلغاء {{succeeded}}، وفشل إلغاء {{failed}}."
     }
   },
   "employees": {
-    "pageTitle": "الموظفون",
-    "pageDescription": "إدارة القوى العاملة في مؤسستك، ومعلومات الموظفين، والهيكل التنظيمي، وصلاحيات الوصول إلى النظام.",
+    "pageTitle": "الموظفين",
+    "pageDescription": "إدارة الكادر الوظيفي وبيانات الموظفين والهيكل التنظيمي وصلاحيات الدخول على النظام.",
     "addEmployee": "إضافة موظف",
     "editEmployee": "تعديل الموظف",
-    "unnamed": "موظف غير مُسمى",
-    
+    "unnamed": "موظف بدون اسم",
     "kpi": {
       "total": "إجمالي الموظفين",
-      "active": "الموظفون النشطون",
-      "withAccess": "الموظفون الذين لديهم صلاحية وصول",
+      "active": "الموظفين النشطين",
+      "withAccess": "الموظفين اللي عندهم دخول للنظام",
       "departments": "الأقسام"
     },
     "filters": {
-      "searchPlaceholder": "البحث بالاسم أو الكود أو البريد الإلكتروني أو رقم الهاتف",
+      "searchPlaceholder": "دوّر بالاسم أو الكود أو البريد الإلكتروني أو التليفون",
       "status": "الحالة",
       "department": "القسم",
       "branch": "الفرع",
       "jobTitle": "المسمى الوظيفي",
-      "access": "الوصول إلى النظام",
-      "accessAll": "جميع حالات الوصول",
-      "accessWith": "لديه صلاحية وصول",
-      "accessWithout": "لا توجد صلاحية وصول"
+      "access": "الدخول على النظام",
+      "accessAll": "كل حالات الدخول",
+      "accessWith": "عنده دخول",
+      "accessWithout": "بدون دخول"
     },
     "table": {
       "employee": "الموظف",
@@ -1618,131 +1728,132 @@
       "hireDate": "تاريخ التعيين",
       "baseSalary": "الراتب الأساسي",
       "status": "الحالة",
-      "access": "صلاحية الوصول إلى النظام",
-      "actionsFor": "إجراءات {{name}}"
+      "access": "الدخول على النظام",
+      "actionsFor": "إجراءات لـ {{name}}"
     },
     "status": {
-      "unspecified": "غير محددة",
+      "unspecified": "مش محدد",
       "active": "نشط",
       "onleave": "في إجازة",
       "terminated": "منتهي الخدمة"
     },
     "access": {
-      "enabled": "صلاحية الوصول مفعلة",
-      "none": "لا توجد صلاحية وصول",
-      "notEnabledTitle": "صلاحية الوصول إلى النظام غير مفعلة",
-      "notEnabledBody": "هذا الموظف لا يملك حاليًا صلاحية الوصول إلى نظام SynapTech ERP.",
-      "title": "صلاحية الوصول إلى النظام",
+      "enabled": "الدخول مفعّل",
+      "none": "بدون دخول",
+      "notEnabledTitle": "الدخول على النظام مش مفعّل",
+      "notEnabledBody": "الموظف ده معندوش دخول حاليًا على نظام SynapTech ERP.",
+      "title": "الدخول على النظام",
       "status": "الحالة",
       "active": "نشط",
       "inactive": "غير نشط",
-      "grantedNoDetail": "يمتلك هذا الموظف صلاحية الوصول إلى النظام، ولكن معلومات الحساب التفصيلية غير متاحة من هذا العرض."
+      "grantedNoDetail": "الموظف ده عنده دخول على النظام، لكن تفاصيل الحساب مش متاحة من العرض ده."
     },
     "actions": {
       "viewDetails": "عرض التفاصيل",
       "edit": "تعديل الموظف",
-      "viewAccess": "عرض صلاحية الوصول إلى النظام",
-      "grantAccess": "منح صلاحية الوصول",
+      "viewAccess": "عرض صلاحيات الدخول",
+      "grantAccess": "منح صلاحية دخول",
       "delete": "حذف الموظف"
     },
     "deleteDialog": {
       "title": "حذف الموظف؟",
-      "body": "أنت على وشك حذف {{name}} ({{code}}) نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+      "body": "هتشيل {{name}} ({{code}}) نهائيًا. الإجراء ده مينفعش يترجع فيه.",
       "confirm": "حذف الموظف"
     },
     "grantAccess": {
-      "title": "منح صلاحية الوصول إلى النظام",
+      "title": "منح صلاحية الدخول على النظام",
       "emailPlaceholder": "employee@company.com",
       "roles": "الأدوار",
-      "searchRoles": "البحث عن الأدوار",
-      "granting": "جارٍ منح الصلاحية…",
-      "submit": "منح صلاحية الوصول",
-      "success": "تم منح صلاحية الوصول إلى النظام بنجاح"
+      "searchRoles": "دوّر في الأدوار",
+      "granting": "جاري المنح…",
+      "submit": "منح الصلاحية",
+      "success": "تم منح صلاحية الدخول بنجاح"
     },
     "empty": {
-      "noResultsTitle": "لم يتم العثور على موظفين",
-      "noResultsBody": "حاول تعديل البحث أو عوامل التصفية.",
-      "noneYetTitle": "لا يوجد موظفون حتى الآن",
-      "noneYetBody": "ابدأ في بناء فريق العمل الخاص بك بإضافة أول موظف."
+      "noResultsTitle": "مفيش موظفين",
+      "noResultsBody": "جرّب تعدّل بحثك أو فلاترك.",
+      "noneYetTitle": "لسه مفيش موظفين",
+      "noneYetBody": "ابدأ ببناء الكادر الوظيفي بإضافة أول موظف."
     },
     "errors": {
-      "emailRequired": "أدخل بريدك الإلكتروني",
-      "loadFailed": "تعذر تحميل الموظفين في الوقت الحالي.",
+      "emailRequired": "اكتب بريدك الإلكتروني",
+      "loadFailed": "مقدرناش نحمّل الموظفين دلوقتي.",
       "employeeCodeRequired": "كود الموظف مطلوب",
-      "fullNameRequired": "الاسم الكامل مطلوب",
+      "fullNameRequired": "الاسم بالكامل مطلوب",
       "hireDateRequired": "تاريخ التعيين مطلوب",
       "jobTitleRequired": "المسمى الوظيفي مطلوب",
       "baseSalaryRequired": "الراتب الأساسي مطلوب",
-      "baseSalaryInvalid": "يجب أن يكون الراتب الأساسي رقمًا صحيحًا",
-      "baseSalaryNegative": "لا يمكن أن يكون الراتب الأساسي سالبًا",
-      "baseSalaryRange": "يجب أن يكون الراتب الأساسي بين 1 و50000",
-      "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا",
-      "selectRole": "اختر دورًا واحدًا على الأقل"
+      "baseSalaryInvalid": "الراتب الأساسي لازم يكون رقم صحيح",
+      "baseSalaryNegative": "الراتب الأساسي مينفعش يكون سالب",
+      "baseSalaryRange": "الراتب الأساسي لازم يكون بين 1 و50000",
+      "emailInvalid": "اكتب بريد إلكتروني صحيح",
+      "selectRole": "اختار دور واحد على الأقل"
     },
     "toast": {
-      "created": "تم إنشاء الموظف",
+      "created": "تم إضافة الموظف",
       "updated": "تم تحديث الموظف",
       "deleted": "تم حذف الموظف"
     },
     "tabs": {
       "overview": "نظرة عامة",
-      "employment": "التوظيف",
-      "contact": "بيانات الاتصال",
-      "compensation": "التعويضات",
-      "access": "صلاحية الوصول إلى النظام"
+      "employment": "بيانات التوظيف",
+      "contact": "بيانات التواصل",
+      "compensation": "الراتب والمزايا",
+      "access": "الدخول على النظام"
     },
     "overview": {
-      "personal": "المعلومات الشخصية",
+      "personal": "البيانات الشخصية",
       "employmentSummary": "ملخص التوظيف"
     },
     "form": {
       "section": {
-        "selectBranch": "اختر الفرع",
-        "selectDepartment": "اختر القسم",
-        "basic": "المعلومات الأساسية",
-        "employment": "معلومات التوظيف",
-        "compensation": "التعويضات",
-        "contact": "معلومات الاتصال",
-        "personal": "المعلومات الشخصية"
+        "selectBranch": "اختار فرع",
+        "selectDepartment": "اختار قسم",
+        "basic": "البيانات الأساسية",
+        "employment": "بيانات التوظيف",
+        "compensation": "الراتب والمزايا",
+        "contact": "بيانات التواصل",
+        "personal": "البيانات الشخصية"
       },
-      "employeeCodePlaceholder": "أدخل كود الموظف",
-      "fullName": "الاسم الكامل",
-      "fullNamePlaceholder": "أدخل الاسم الكامل",
+      "employeeCodePlaceholder": "اكتب كود الموظف",
+      "fullName": "الاسم بالكامل",
+      "fullNamePlaceholder": "اكتب الاسم بالكامل",
       "employeeCode": "كود الموظف",
-      "employeeCodeAuto": "يتم إنشاؤه تلقائيًا إذا تُرك فارغًا",
+      "employeeCodeAuto": "بيتولد أوتوماتيك لو سبته فاضي",
       "nationalId": "الرقم القومي",
-      "nationalIdPlaceholder": "أدخل الرقم القومي",
+      "nationalIdPlaceholder": "اكتب الرقم القومي",
       "dateOfBirth": "تاريخ الميلاد",
       "jobTitle": "المسمى الوظيفي",
-      "jobTitlePlaceholder": "أدخل المسمى الوظيفي",
+      "jobTitlePlaceholder": "اكتب المسمى الوظيفي",
       "hireDate": "تاريخ التعيين",
       "status": "الحالة",
-      "statusPlaceholder": "مثال: نشط، غير نشط",
+      "statusPlaceholder": "مثلاً: نشط، غير نشط",
       "department": "القسم",
-      "noDepartmentsForBranch": "لا توجد أقسام تابعة للفرع المحدد.",
+      "noDepartmentsForBranch": "مفيش أقسام تابعة للفرع المحدد.",
       "branch": "الفرع",
-      "branchLockedByDepartment": "يتم تحديده تلقائيًا بناءً على القسم المحدد.",
-      "manager": "المدير",
-      "searchManager": "البحث عن الموظفين",
+      "branchLockedByDepartment": "بيتحدد أوتوماتيك من القسم المختار.",
+      "manager": "المدير المباشر",
+      "searchManager": "دوّر في الموظفين",
       "baseSalary": "الراتب الأساسي",
-      "baseSalaryPlaceholder": "أدخل الراتب الأساسي",
+      "baseSalaryPlaceholder": "اكتب الراتب الأساسي",
       "email": "البريد الإلكتروني",
-      "phone": "رقم الهاتف",
+      "phone": "التليفون",
       "address": "العنوان",
       "saveChanges": "حفظ التغييرات",
-      "createEmployee": "إنشاء موظف"
+      "createEmployee": "إضافة موظف",
+      "cancel": "إلغاء"
     }
   },
   "attendance": {
-    "breadcrumb": "الموارد البشرية / الحضور",
-    "title": "الحضور",
-    "description": "متابعة حضور الموظفين والنشاط اليومي.",
+    "breadcrumb": "الموارد البشرية / الحضور والانصراف",
+    "title": "الحضور والانصراف",
+    "description": "متابعة حضور الموظفين ونشاطهم اليومي.",
     "viewDetails": "عرض التفاصيل",
     "columns": {
       "employee": "الموظف",
       "date": "التاريخ",
-      "checkIn": "تسجيل الدخول",
-      "checkOut": "تسجيل الخروج",
+      "checkIn": "الحضور",
+      "checkOut": "الانصراف",
       "status": "الحالة",
       "notes": "ملاحظات",
       "actions": "إجراءات"
@@ -1750,27 +1861,27 @@
     "summary": {
       "total": "إجمالي السجلات",
       "totalHint": "البيانات الحالية",
-      "checkedIn": "تم تسجيل الدخول",
-      "checkedInHint": "سجّل الدخول اليوم",
-      "completed": "مكتمل",
-      "completedHint": "تم تسجيل الدخول والخروج",
-      "attention": "يتطلب انتباه",
-      "attentionHint": "تسجيل خروج مفقود"
+      "checkedIn": "حضروا",
+      "checkedInHint": "عندهم حضور مسجل النهارده",
+      "completed": "اكتمل اليوم",
+      "completedHint": "حضور وانصراف",
+      "attention": "يحتاج مراجعة",
+      "attentionHint": "الانصراف مش مسجل"
     },
     "filters": {
       "title": "الفلاتر",
-      "searchPlaceholder": "ابحث عن الموظفين...",
+      "searchPlaceholder": "دوّر في الموظفين...",
       "employee": "الموظف",
-      "employeePlaceholder": "اختر موظفًا",
-      "employeeSearchPlaceholder": "ابحث بالاسم أو الرقم الوظيفي",
-      "noEmployeesFound": "لا يوجد موظفون مطابقون",
+      "employeePlaceholder": "اختار موظف",
+      "employeeSearchPlaceholder": "دوّر بالاسم أو الكود",
+      "noEmployeesFound": "مفيش موظفين",
       "date": "التاريخ",
       "dateAll": "كل الأوقات",
-      "dateToday": "اليوم",
-      "dateWeek": "هذا الأسبوع",
-      "dateMonth": "هذا الشهر",
+      "dateToday": "النهارده",
+      "dateWeek": "الأسبوع ده",
+      "dateMonth": "الشهر ده",
       "status": "الحالة",
-      "statusAll": "جميع الحالات",
+      "statusAll": "كل الحالات",
       "filtersButton": "الفلاتر",
       "clear": "مسح",
       "apply": "تطبيق الفلاتر"
@@ -1778,219 +1889,70 @@
     "status": {
       "none": "بدون حالة",
       "Present": "حاضر",
-      "Absent": "غائب",
+      "Absent": "غايب",
       "Late": "متأخر",
-      "HalfDay": "نصف يوم"
+      "HalfDay": "نص يوم"
     },
     "derived": {
-      "notCheckedIn": "لم يسجّل الدخول",
-      "checkedIn": "قيد التنفيذ",
-      "completed": "مكتمل"
+      "notCheckedIn": "لسه ماحضرش",
+      "checkedIn": "شغّال حاليًا",
+      "completed": "اكتمل"
     },
     "notes": {
-      "none": "لا توجد ملاحظات"
+      "none": "مفيش ملاحظات"
     },
     "details": {
       "title": "تفاصيل الحضور",
       "date": "تاريخ الحضور",
-      "checkIn": "تسجيل الدخول",
-      "checkOut": "تسجيل الخروج",
-      "duration": "مدة العمل",
+      "checkIn": "الحضور",
+      "checkOut": "الانصراف",
+      "duration": "ساعات العمل",
       "notes": "ملاحظات"
     },
     "empty": {
-      "title": "لا توجد سجلات حضور",
-      "description": "لا توجد سجلات حضور مطابقة للفلاتر الحالية."
+      "title": "مفيش سجلات حضور",
+      "description": "مفيش سجلات حضور مطابقة لفلاترك الحالية."
     },
     "error": {
-      "title": "تعذّر تحميل بيانات الحضور",
-      "description": "لم نتمكن من استرجاع سجلات الحضور في الوقت الحالي."
+      "title": "مقدرناش نحمّل الحضور",
+      "description": "مقدرناش نجيب سجلات الحضور دلوقتي."
     },
     "today": {
-      "label": "حضور اليوم",
-      "notCheckedIn": "لم يتم تسجيل الدخول بعد",
-      "checkIn": "تسجيل الدخول",
-      "checkingIn": "جارٍ تسجيل الدخول...",
-      "checkedIn": "تم تسجيل الدخول",
-      "checkOut": "تسجيل الخروج",
-      "checkingOut": "جارٍ تسجيل الخروج...",
+      "label": "حضور النهارده",
+      "notCheckedIn": "لسه ماحضرش",
+      "checkIn": "تسجيل حضور",
+      "checkingIn": "جاري تسجيل الحضور...",
+      "checkedIn": "تم الحضور",
+      "checkOut": "تسجيل انصراف",
+      "checkingOut": "جاري تسجيل الانصراف...",
       "duration": "المدة",
-      "completed": "مكتمل"
+      "completed": "اكتمل"
     },
     "toast": {
-      "checkInSuccess": "تم تسجيل الدخول بنجاح",
-      "checkInError": "تعذّر إتمام تسجيل الدخول. حاول مرة أخرى.",
-      "checkOutSuccess": "تم تسجيل الخروج بنجاح",
-      "checkOutError": "تعذّر إتمام تسجيل الخروج. حاول مرة أخرى."
+      "checkInSuccess": "تم تسجيل الحضور بنجاح",
+      "checkInError": "مقدرناش نسجّل حضورك. من فضلك حاول تاني.",
+      "checkOutSuccess": "تم تسجيل الانصراف بنجاح",
+      "checkOutError": "مقدرناش نسجّل انصرافك. من فضلك حاول تاني."
     },
     "myAttendance": {
       "title": "حضوري",
       "historyTitle": "سجل الحضور"
     },
     "myHistory": {
-      "emptyTitle": "لا يوجد سجل حضور بعد",
-      "emptyDescription": "ستظهر سجلات حضورك هنا بمجرد تسجيل أي نشاط حضور."
-    }
-  },
-  "leaveRequests": {
-    "dashboard": {
-      "title": "طلبات الإجازات",
-      "subtitle": "إدارة إجازات الموظفين",
-      "pendingPanel": "الطلبات المعلّقة",
-      "recentPanel": "الطلبات الأخيرة",
-      "noPending": "لا توجد طلبات معلّقة حاليًا."
-    },
-    "list": {
-      "title": "طلبات الإجازات"
-    },
-    "myRequests": {
-      "title": "طلبات إجازتي",
-      "requestLeave": "طلب إجازة",
-      "emptyTitle": "لم تقدّم أي طلب إجازة حتى الآن."
-    },
-    "create": {
-      "title": "إنشاء طلب إجازة",
-      "submit": "إرسال الطلب",
-      "submitting": "جارٍ الإرسال…"
-    },
-    "details": {
-      "backToList": "العودة إلى طلبات الإجازات",
-      "requestPeriod": "فترة الطلب",
-      "reason": "السبب",
-      "noReason": "لم يُذكر سبب",
-      "workflowStatus": "حالة سير العمل",
-      "approvalInformation": "معلومات الموافقة",
-      "notYetDecided": "لم يُتخذ القرار بعد",
-      "noAuditTrailNote": "تفاصيل الإنشاء والزمن غير متاحة من النظام الحالي.",
-      "quickActions": "إجراءات سريعة",
-      "noActionsAvailable": "لا توجد إجراءات متاحة لهذا الطلب."
-    },
-    "form": {
-      "employee": "الموظف",
-      "employeePlaceholder": "اختر موظفًا",
-      "employeeSearchPlaceholder": "ابحث عن موظف…",
-      "employeeNoResults": "لا يوجد موظفون مطابقون",
-      "you": "أنت",
-      "leaveType": "نوع الإجازة",
-      "leaveTypePlaceholder": "اختر نوع الإجازة",
-      "leaveTypeSearchPlaceholder": "ابحث عن نوع الإجازة…",
-      "leaveTypeNoResults": "لا توجد أنواع مطابقة",
-      "startDate": "تاريخ البدء",
-      "endDate": "تاريخ الانتهاء",
-      "duration": "المدة",
-      "reason": "السبب",
-      "reasonPlaceholder": "أضف أي تفاصيل إضافية لهذا الطلب…"
-    },
-    "duration": {
-      "days_zero": "بدون أيام",
-      "days_one": "يوم واحد",
-      "days_two": "يومان",
-      "days_few": "{{count}} أيام",
-      "days_many": "{{count}} يومًا",
-      "days_other": "{{count}} يوم"
-    },
-    "status": {
-      "pending": "معلّق",
-      "approved": "مُوافَق عليه",
-      "rejected": "مرفوض",
-      "cancelled": "ملغى",
-      "unknown": "غير معروف"
-    },
-    "tracker": {
-      "ariaLabel": "حالة طلب الإجازة",
-      "requested": "تم الطلب",
-      "pending": "معلّق",
-      "decision": "القرار",
-      "approved": "تمت الموافقة",
-      "rejected": "مرفوض",
-      "cancelled": "ملغى"
-    },
-    "kpi": {
-      "total": "إجمالي الطلبات",
-      "pending": "معلّقة",
-      "approved": "موافَق عليها",
-      "rejected": "مرفوضة"
-    },
-    "table": {
-      "employee": "الموظف",
-      "leaveType": "نوع الإجازة",
-      "startDate": "تاريخ البدء",
-      "endDate": "تاريخ الانتهاء",
-      "duration": "المدة",
-      "status": "الحالة",
-      "approvedAt": "تاريخ الموافقة"
-    },
-    "filters": {
-      "all": "الكل",
-      "filters": "عوامل التصفية",
-      "searchPlaceholder": "ابحث في الطلبات…",
-      "employee": "الموظف",
-      "leaveType": "نوع الإجازة",
-      "startDateFrom": "تاريخ البدء من",
-      "startDateTo": "تاريخ البدء إلى",
-      "clearAll": "مسح الكل"
-    },
-    "actions": {
-      "create": "إنشاء طلب",
-      "approve": "موافقة",
-      "reject": "رفض",
-      "cancel": "إلغاء"
-    },
-    "approve": {
-      "title": "الموافقة على طلب الإجازة؟",
-      "body": "هل تريد الموافقة على طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟"
-    },
-    "reject": {
-      "title": "رفض طلب الإجازة؟",
-      "body": "هل تريد رفض طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟ لا يتضمن هذا الإجراء سبب الرفض."
-    },
-    "cancel": {
-      "title": "إلغاء طلب الإجازة؟",
-      "body": "هل تريد إلغاء طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟",
-      "bodyApproved": "تمت الموافقة على هذا الطلب سابقًا — سيؤدي إلغاؤه إلى تغيير حالته إلى ملغى. هل تريد المتابعة؟"
-    },
-    "toast": {
-      "created": "تم إرسال طلب الإجازة",
-      "approved": "تمت الموافقة على طلب الإجازة",
-      "rejected": "تم رفض طلب الإجازة",
-      "cancelled": "تم إلغاء طلب الإجازة"
-    },
-    "empty": {
-      "noneTitle": "لا توجد طلبات إجازة بعد",
-      "noneDescription": "ستظهر الطلبات هنا بمجرد أن يبدأ الموظفون بتقديمها.",
-      "noMatchTitle": "لا توجد طلبات مطابقة",
-      "noMatchDescription": "حاول تعديل البحث أو عوامل التصفية."
-    },
-    "error": {
-      "loadFailed": "تعذّر تحميل طلبات الإجازات.",
-      "notFound": "تعذّر العثور على طلب الإجازة هذا."
-    },
-    "validation": {
-      "employeeRequired": "اختر موظفًا",
-      "leaveTypeRequired": "اختر نوع الإجازة",
-      "startDateRequired": "تاريخ البدء مطلوب",
-      "endDateRequired": "تاريخ الانتهاء مطلوب",
-      "endDateBeforeStartDate": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء أو مساويًا له"
-    },
-    "types": {
-      "annual": "إجازة سنوية",
-      "sick": "إجازة مرضية",
-      "unpaid": "إجازة بدون راتب",
-      "maternity": "إجازة أمومة",
-      "paternity": "إجازة أبوة",
-      "other": "أخرى"
+      "emptyTitle": "لسه مفيش سجل حضور",
+      "emptyDescription": "سجل حضورك هيظهر هنا لما تتسجل أي حركة حضور."
     }
   },
   "company": {
     "title": "الشركة",
-    "description": "إدارة بيانات شركتك الأساسية وحالتها.",
+    "description": "إدارة البيانات الأساسية لشركتك وحالتها.",
     "breadcrumb": {
       "settings": "الإعدادات",
       "company": "الشركة"
     },
     "profile": {
       "title": "بيانات الشركة",
-      "description": "المعلومات الأساسية التي تعرّف مؤسستك.",
+      "description": "البيانات الأساسية اللي بتعرّف شركتك.",
       "name": "اسم الشركة",
       "legalName": "الاسم القانوني",
       "taxNumber": "الرقم الضريبي",
@@ -1999,82 +1961,227 @@
     },
     "status": {
       "title": "حالة الشركة",
-      "active": "نشطة",
-      "inactive": "غير نشطة",
-      "helperText": "يتحكم في ما إذا كانت الشركة نشطة حاليًا في النظام."
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "helperText": "بيتحكم في هل الشركة دي نشطة حاليًا في النظام ولا لأ."
     },
     "systemInfo": {
-      "title": "معلومات النظام",
+      "title": "بيانات النظام",
       "companyId": "معرّف الشركة",
       "copy": "نسخ",
       "copied": "تم نسخ معرّف الشركة",
-      "copyFailed": "تعذّر نسخ معرّف الشركة",
+      "copyFailed": "مقدرناش ننسخ معرّف الشركة",
       "readOnly": "للقراءة فقط"
     },
     "actions": {
       "cancel": "إلغاء",
       "save": "حفظ التغييرات",
-      "saving": "جارٍ الحفظ..."
+      "saving": "جاري الحفظ..."
     },
     "discardDialog": {
       "title": "تجاهل التغييرات؟",
-      "description": "لديك تغييرات غير محفوظة. هل تريد بالتأكيد مغادرة الصفحة؟",
+      "description": "عندك تغييرات متحفظتش. متأكد إنك عايز تسيبها؟",
       "confirm": "تجاهل التغييرات",
-      "cancel": "متابعة التعديل"
+      "cancel": "استمرار في التعديل"
     },
     "toast": {
-      "saveSuccess": "تم حفظ بيانات الشركة بنجاح",
-      "saveError": "تعذّر حفظ بيانات الشركة. حاول مرة أخرى."
+      "saveSuccess": "تم حفظ بيانات الشركة",
+      "saveError": "مقدرناش نحفظ بيانات شركتك. من فضلك حاول تاني."
     },
     "error": {
-      "loadTitle": "تعذّر تحميل بيانات الشركة",
-      "loadDescription": "حدث خطأ أثناء تحميل بيانات الشركة."
+      "loadTitle": "مقدرناش نحمّل بيانات الشركة",
+      "loadDescription": "حصل خطأ أثناء تحميل بيانات شركتك."
     },
     "validation": {
-      "maxLength": "القيمة طويلة جدًا"
+      "maxLength": "القيمة دي طويلة أوي"
+    }
+  },
+  "leaveRequests": {
+    "dashboard": {
+      "title": "طلبات الإجازات",
+      "subtitle": "إدارة إجازات الموظفين",
+      "pendingPanel": "الطلبات المعلقة",
+      "recentPanel": "أحدث الطلبات",
+      "noPending": "مفيش طلبات معلقة دلوقتي."
+    },
+    "list": {
+      "title": "طلبات الإجازات"
+    },
+    "myRequests": {
+      "title": "طلبات إجازتي",
+      "requestLeave": "طلب إجازة",
+      "emptyTitle": "لسه ماقدمتش أي طلبات إجازة."
+    },
+    "create": {
+      "title": "إضافة طلب إجازة",
+      "submit": "إرسال الطلب",
+      "submitting": "جاري الإرسال…"
+    },
+    "details": {
+      "backToList": "رجوع لطلبات الإجازات",
+      "requestPeriod": "فترة الطلب",
+      "reason": "السبب",
+      "noReason": "مفيش سبب مكتوب",
+      "workflowStatus": "حالة الطلب",
+      "approvalInformation": "بيانات الاعتماد",
+      "notYetDecided": "لسه معلّق",
+      "noAuditTrailNote": "تفاصيل من قدّم الطلب والتوقيتات مش متاحة من النظام الحالي.",
+      "quickActions": "إجراءات سريعة",
+      "noActionsAvailable": "مفيش إجراءات متاحة للطلب ده."
+    },
+    "form": {
+      "employee": "الموظف",
+      "employeePlaceholder": "اختار موظف",
+      "employeeSearchPlaceholder": "دوّر في الموظفين…",
+      "employeeNoResults": "مفيش موظفين",
+      "you": "أنت",
+      "leaveType": "نوع الإجازة",
+      "leaveTypePlaceholder": "اختار نوع الإجازة",
+      "leaveTypeSearchPlaceholder": "دوّر في أنواع الإجازات…",
+      "leaveTypeNoResults": "مفيش أنواع إجازات",
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية",
+      "duration": "المدة",
+      "reason": "السبب",
+      "reasonPlaceholder": "ضيف أي تفاصيل إضافية للطلب ده…"
+    },
+    "duration": {
+      "days_one": "{{count}} يوم",
+      "days_other": "{{count}} أيام"
+    },
+    "status": {
+      "pending": "معلّق",
+      "approved": "معتمد",
+      "rejected": "مرفوض",
+      "cancelled": "ملغي",
+      "unknown": "غير معروف"
+    },
+    "tracker": {
+      "ariaLabel": "حالة طلب الإجازة",
+      "requested": "تم الطلب",
+      "pending": "معلّق",
+      "decision": "القرار",
+      "approved": "معتمد",
+      "rejected": "مرفوض",
+      "cancelled": "ملغي"
+    },
+    "kpi": {
+      "total": "إجمالي الطلبات",
+      "pending": "معلّق",
+      "approved": "معتمد",
+      "rejected": "مرفوض"
+    },
+    "table": {
+      "employee": "الموظف",
+      "leaveType": "نوع الإجازة",
+      "startDate": "تاريخ البداية",
+      "endDate": "تاريخ النهاية",
+      "duration": "المدة",
+      "status": "الحالة",
+      "approvedAt": "تاريخ الاعتماد"
+    },
+    "filters": {
+      "all": "الكل",
+      "filters": "الفلاتر",
+      "searchPlaceholder": "دوّر في الطلبات…",
+      "employee": "الموظف",
+      "leaveType": "نوع الإجازة",
+      "startDateFrom": "تاريخ البداية من",
+      "startDateTo": "تاريخ البداية إلى",
+      "clearAll": "مسح الكل"
+    },
+    "actions": {
+      "create": "إضافة طلب",
+      "approve": "اعتماد",
+      "reject": "رفض",
+      "cancel": "إلغاء"
+    },
+    "approve": {
+      "title": "اعتماد طلب الإجازة؟",
+      "body": "هل تريد اعتماد طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟"
+    },
+    "reject": {
+      "title": "رفض طلب الإجازة؟",
+      "body": "هل تريد رفض طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟ الإجراء ده مبيسجلش سبب الرفض."
+    },
+    "cancel": {
+      "title": "إلغاء طلب الإجازة؟",
+      "body": "هل تريد إلغاء طلب إجازة {{employee}} من {{startDate}} إلى {{endDate}}؟",
+      "bodyApproved": "الطلب ده كان معتمد قبل كده — إلغاؤه هيغيّر حالته لملغي. عايز تكمل؟"
+    },
+    "toast": {
+      "created": "تم إرسال طلب الإجازة",
+      "approved": "تم اعتماد طلب الإجازة",
+      "rejected": "تم رفض طلب الإجازة",
+      "cancelled": "تم إلغاء طلب الإجازة"
+    },
+    "empty": {
+      "noneTitle": "لسه مفيش طلبات إجازات",
+      "noneDescription": "الطلبات هتظهر هنا لما الموظفين يبدأوا يقدّموا طلبات.",
+      "noMatchTitle": "مفيش طلبات مطابقة",
+      "noMatchDescription": "جرّب تعدّل بحثك أو فلاترك."
+    },
+    "error": {
+      "loadFailed": "مقدرناش نحمّل طلبات الإجازات.",
+      "notFound": "طلب الإجازة ده مش موجود."
+    },
+    "validation": {
+      "employeeRequired": "اختار موظف",
+      "leaveTypeRequired": "اختار نوع إجازة",
+      "startDateRequired": "تاريخ البداية مطلوب",
+      "endDateRequired": "تاريخ النهاية مطلوب",
+      "endDateBeforeStartDate": "تاريخ النهاية لازم يكون في نفس تاريخ البداية أو بعده"
+    },
+    "types": {
+      "annual": "إجازة سنوية",
+      "sick": "إجازة مرضية",
+      "unpaid": "إجازة بدون مرتب",
+      "maternity": "إجازة وضع",
+      "paternity": "إجازة أبوة",
+      "other": "أخرى"
     }
   },
   "sales": {
     "overview": {
       "pageTitle": "نظرة عامة على المبيعات",
       "categoryNavLabel": "تنقل المبيعات",
-      "newOrder": "طلب جديد",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات المبيعات.",
+      "newOrder": "أمر جديد",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات المبيعات.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أنشئ أول عميل أو طلب مبيعات لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول عميل أو أمر بيع عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
         "customers": "العملاء",
-        "salesOrders": "طلبات المبيعات"
+        "salesOrders": "أوامر البيع"
       },
       "kpi": {
-        "totalOrders": "إجمالي الطلبات",
-        "totalOrdersCaption": "عبر جميع الحالات",
-        "totalOrderValue": "إجمالي قيمة الطلبات",
-        "totalOrderValueCaption": "مجموع إجماليات الطلبات",
+        "totalOrders": "إجمالي الأوامر",
+        "totalOrdersCaption": "في كل الحالات",
+        "totalOrderValue": "إجمالي قيمة الأوامر",
+        "totalOrderValueCaption": "مجموع كل إجماليات الأوامر",
         "totalCustomers": "إجمالي العملاء",
-        "totalCustomersCaption": "جميع سجلات العملاء",
-        "activeCustomers": "العملاء النشطون",
-        "activeCustomersCaption": "نشط حاليًا"
+        "totalCustomersCaption": "كل سجلات العملاء",
+        "activeCustomers": "العملاء النشطين",
+        "activeCustomersCaption": "نشطين حاليًا"
       },
       "ordersByStatus": {
-        "title": "الطلبات حسب الحالة",
-        "emptyTitle": "لا توجد طلبات بعد",
-        "emptyDescription": "سيظهر توزيع حالة الطلبات هنا بمجرد وجود طلبات."
+        "title": "الأوامر حسب الحالة",
+        "emptyTitle": "لسه مفيش أوامر",
+        "emptyDescription": "توزيع حالات الأوامر هيظهر هنا لما يبقى فيه أوامر."
       },
       "topCustomers": {
-        "title": "أفضل العملاء حسب القيمة",
-        "emptyTitle": "لا يوجد نشاط طلبات بعد",
-        "emptyDescription": "سيظهر أفضل العملاء هنا بمجرد تقديم الطلبات.",
-        "orderCount": "{{count}} طلب",
-        "orderCount_other": "{{count}} طلبات"
+        "title": "أكبر العملاء من حيث القيمة",
+        "emptyTitle": "لسه مفيش نشاط أوامر",
+        "emptyDescription": "أكبر العملاء هيظهروا هنا لما يتعمل أوامر.",
+        "orderCount": "{{count}} أمر",
+        "orderCount_other": "{{count}} أوامر"
       },
       "recentOrders": {
-        "title": "أحدث طلبات المبيعات",
+        "title": "أحدث أوامر البيع",
         "viewAll": "عرض الكل",
-        "emptyTitle": "لا توجد طلبات بعد",
-        "emptyDescription": "ستظهر الطلبات الأخيرة هنا."
+        "emptyTitle": "لسه مفيش أوامر",
+        "emptyDescription": "أحدث الأوامر هتظهر هنا."
       },
       "customersSnapshot": {
         "title": "العملاء",
@@ -2084,220 +2191,130 @@
         "inactive": "غير نشط"
       },
       "quickActions": {
-        "newOrder": "طلب مبيعات جديد",
+        "newOrder": "أمر بيع جديد",
         "newCustomer": "عميل جديد",
-        "viewAllOrders": "عرض جميع الطلبات"
+        "viewAllOrders": "عرض كل الأوامر"
       }
-    }
-  },
-  "suppliers": {
-    "page": {
-      "title": "الموردون",
-      "description": "إدارة البيانات الأساسية للموردين المستخدمة في عمليات الشراء."
-    },
-    "toolbar": {
-      "searchPlaceholder": "البحث بالاسم أو جهة الاتصال أو البريد الإلكتروني أو الرقم الضريبي...",
-      "allStatuses": "جميع الحالات",
-      "sortNameAsc": "الاسم (أ–ي)",
-      "sortNameDesc": "الاسم (ي–أ)"
-    },
-    "table": {
-      "name": "اسم المورد",
-      "contactPerson": "اسم التواصل",
-      "phone": "الهاتف",
-      "email": "البريد الإلكتروني",
-      "taxNumber": "الرقم الضريبي",
-      "status": "الحالة"
-    },
-    "actions": {
-      "create": "مورد جديد",
-      "view": "عرض",
-      "edit": "تعديل",
-      "delete": "حذف",
-      "save": "حفظ",
-      "saveAndNew": "حفظ وإضافة جديد"
-    },
-    "bulk": {
-      "selectedCount": "تم تحديد مورد واحد",
-      "selectedCount_other": "تم تحديد {{count}} مورد",
-      "deleteSelected": "حذف المحدد"
-    },
-    "pagination": {
-      "summary": "عرض {{from}}–{{to}} من {{total}}"
-    },
-    "empty": {
-      "title": "لا يوجد موردون بعد",
-      "description": "أضف أول مورد لبدء إدارة عمليات الشراء.",
-      "filteredTitle": "لا يوجد موردون مطابقون للبحث أو عوامل التصفية"
-    },
-    "drawer": {
-      "createTitle": "مورد جديد",
-      "editTitle": "تعديل المورد",
-      "supplierInfo": "معلومات المورد",
-      "businessInfo": "معلومات النشاط التجاري",
-      "unsavedChangesTitle": "هل تريد تجاهل التغييرات غير المحفوظة؟",
-      "unsavedChangesBody": "لديك تغييرات غير محفوظة. إذا أغلقت الآن، فسيتم فقدانها.",
-      "discardChanges": "تجاهل التغييرات",
-      "keepEditing": "متابعة التعديل"
-    },
-    "fields": {
-      "name": "اسم المورد",
-      "contactName": "جهة الاتصال",
-      "phone": "الهاتف",
-      "email": "البريد الإلكتروني",
-      "address": "العنوان",
-      "taxNumber": "الرقم الضريبي",
-      "status": "الحالة"
-    },
-    "validation": {
-      "nameMin": "يجب ألا يقل اسم المورد عن حرفين.",
-      "nameMax": "يجب ألا يزيد اسم المورد عن 120 حرفًا.",
-      "contactNameRequired": "جهة الاتصال مطلوبة.",
-      "contactNameMax": "يجب ألا يزيد اسم جهة الاتصال عن 80 حرفًا.",
-      "phoneRequired": "رقم الهاتف مطلوب.",
-      "phoneMax": "يجب ألا يزيد رقم الهاتف عن 30 حرفًا.",
-      "emailInvalid": "أدخل عنوان بريد إلكتروني صالحًا.",
-      "addressMax": "يجب ألا يزيد العنوان عن 240 حرفًا.",
-      "taxNumberRequired": "الرقم الضريبي مطلوب.",
-      "taxNumberMax": "يجب ألا يزيد الرقم الضريبي عن 40 حرفًا."
-    },
-    "deleteDialog": {
-      "title": "حذف المورد",
-      "body": "سيؤدي هذا إلى حذف \"{{name}}\" نهائيًا. لا يمكن التراجع عن هذا الإجراء."
-    },
-    "details": {
-      "back": "العودة إلى الموردين",
-      "notFound": "المورد غير موجود.",
-      "purchaseOrdersTitle": "مُشار إليه في أوامر الشراء",
-      "purchaseOrdersDescription": "سجل أوامر الشراء الخاص بهذا المورد غير متاح في هذا العرض حاليًا."
-    },
-    "toasts": {
-      "created": "تم إنشاء المورد.",
-      "updated": "تم تحديث المورد.",
-      "deleted": "تم حذف المورد.",
-      "bulkDeleted": "تم حذف مورد واحد.",
-      "bulkDeleted_other": "تم حذف {{count}} مورد.",
-      "bulkDeletePartial": "تم حذف {{succeeded}}، وفشل حذف {{failed}}."
     }
   },
   "purchasing": {
     "overview": {
       "pageTitle": "نظرة عامة على المشتريات",
       "categoryNavLabel": "تنقل المشتريات",
-      "newOrder": "طلب جديد",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات المشتريات.",
+      "newOrder": "أمر جديد",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات المشتريات.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أنشئ أول مورد أو طلب شراء لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول مورد أو أمر شراء عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
-        "suppliers": "الموردون",
-        "purchaseOrders": "طلبات الشراء"
+        "suppliers": "الموردين",
+        "purchaseOrders": "أوامر الشراء"
       },
       "kpi": {
-        "totalOrders": "إجمالي الطلبات",
-        "totalOrdersCaption": "عبر جميع الحالات",
-        "totalOrderValue": "إجمالي قيمة الطلبات",
-        "totalOrderValueCaption": "مجموع إجماليات الطلبات",
+        "totalOrders": "إجمالي الأوامر",
+        "totalOrdersCaption": "في كل الحالات",
+        "totalOrderValue": "إجمالي قيمة الأوامر",
+        "totalOrderValueCaption": "مجموع كل إجماليات الأوامر",
         "totalSuppliers": "إجمالي الموردين",
-        "totalSuppliersCaption": "جميع سجلات الموردين",
-        "activeSuppliers": "الموردون النشطون",
-        "activeSuppliersCaption": "نشط حاليًا"
+        "totalSuppliersCaption": "كل سجلات الموردين",
+        "activeSuppliers": "الموردين النشطين",
+        "activeSuppliersCaption": "نشطين حاليًا"
       },
       "ordersByStatus": {
-        "title": "الطلبات حسب الحالة",
-        "emptyTitle": "لا توجد طلبات بعد",
-        "emptyDescription": "سيظهر توزيع حالة الطلبات هنا بمجرد وجود طلبات."
+        "title": "الأوامر حسب الحالة",
+        "emptyTitle": "لسه مفيش أوامر",
+        "emptyDescription": "توزيع حالات الأوامر هيظهر هنا لما يبقى فيه أوامر."
       },
       "topSuppliers": {
-        "title": "أفضل الموردين حسب القيمة",
-        "emptyTitle": "لا يوجد نشاط طلبات بعد",
-        "emptyDescription": "سيظهر أفضل الموردين هنا بمجرد تقديم الطلبات.",
-        "orderCount": "{{count}} طلب",
-        "orderCount_other": "{{count}} طلبات"
+        "title": "أكبر الموردين من حيث القيمة",
+        "emptyTitle": "لسه مفيش نشاط أوامر",
+        "emptyDescription": "أكبر الموردين هيظهروا هنا لما يتعمل أوامر.",
+        "orderCount": "{{count}} أمر",
+        "orderCount_other": "{{count}} أوامر"
       },
       "recentOrders": {
-        "title": "أحدث طلبات الشراء",
+        "title": "أحدث أوامر الشراء",
         "viewAll": "عرض الكل",
-        "emptyTitle": "لا توجد طلبات بعد",
-        "emptyDescription": "ستظهر الطلبات الأخيرة هنا."
+        "emptyTitle": "لسه مفيش أوامر",
+        "emptyDescription": "أحدث الأوامر هتظهر هنا."
       },
       "overdueOrders": {
-        "title": "طلبات الشراء المتأخرة",
+        "title": "أوامر الشراء المتأخرة",
         "badge": "{{count}} متأخر",
         "badge_other": "{{count}} متأخرة",
-        "daysOverdue": "متأخر بـ {{count}} يوم",
-        "daysOverdue_other": "متأخر بـ {{count}} أيام",
-        "emptyDescription": "لا توجد طلبات شراء تجاوزت تاريخ التسليم المتوقع."
+        "daysOverdue": "متأخر {{count}} يوم",
+        "daysOverdue_other": "متأخر {{count}} يوم",
+        "emptyDescription": "مفيش أوامر شراء اتأخرت عن موعد التسليم المتوقع."
       },
       "suppliersSnapshot": {
-        "title": "الموردون",
+        "title": "الموردين",
         "manage": "إدارة الموردين",
         "total": "الإجمالي",
         "active": "نشط",
         "inactive": "غير نشط"
       },
       "quickActions": {
-        "newOrder": "طلب شراء جديد",
+        "newOrder": "أمر شراء جديد",
         "newSupplier": "مورد جديد",
-        "viewAllOrders": "عرض جميع الطلبات"
+        "viewAllOrders": "عرض كل الأوامر"
       }
     }
   },
   "inventory": {
     "overview": {
-      "pageSubtitle": "لمحة فورية عن منتجاتك وفئاتك ومستودعاتك ومخزونك.",
+      "pageSubtitle": "لقطة لحظية للمنتجات والتصنيفات والمخازن والمخزون بتاعك.",
       "inventoryValue": {
         "title": "إجمالي قيمة المخزون",
-        "caption": "بسعر التكلفة، عبر جميع المستودعات"
+        "caption": "بسعر التكلفة، في كل المخازن"
       },
       "productsByCategory": {
-        "title": "المنتجات حسب الفئة",
-        "uncategorized": "غير مصنف",
-        "emptyTitle": "لا توجد منتجات بعد",
-        "emptyDescription": "سيظهر توزيع الفئات هنا بمجرد وجود منتجات."
+        "title": "المنتجات حسب التصنيف",
+        "uncategorized": "بدون تصنيف",
+        "emptyTitle": "لسه مفيش منتجات",
+        "emptyDescription": "توزيع التصنيفات هيظهر هنا لما يبقى فيه منتجات."
       },
       "outOfStock": {
-        "title": "نفاد المخزون",
+        "title": "نافذ من المخزون",
         "badge": "{{count}} منتج",
         "badge_other": "{{count}} منتجات",
-        "emptyDescription": "لا توجد منتجات نشطة نفد مخزونها حاليًا.",
-        "viewAll": "عرض جميع المنتجات النافدة ({{count}})"
+        "emptyDescription": "مفيش منتجات نشطة نافذة من المخزون حاليًا.",
+        "viewAll": "عرض كل الـ {{count}} منتج النافذين من المخزون"
       },
       "pageTitle": "نظرة عامة على المخزون",
       "categoryNavLabel": "تنقل المخزون",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات المخزون.",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات المخزون.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أضف أول منتج أو مستودع لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول منتج أو مخزن عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
         "products": "المنتجات",
-        "categories": "الفئات",
-        "warehouses": "المستودعات"
+        "categories": "التصنيفات",
+        "warehouses": "المخازن"
       },
       "kpi": {
         "totalProducts": "إجمالي المنتجات",
-        "totalProductsCaption": "جميع سجلات المنتجات",
+        "totalProductsCaption": "كل سجلات المنتجات",
         "activeProducts": "المنتجات النشطة",
-        "activeProductsCaption": "نشط حاليًا",
-        "totalCategories": "إجمالي الفئات",
-        "totalCategoriesCaption": "جميع سجلات الفئات",
-        "totalWarehouses": "إجمالي المستودعات",
-        "totalWarehousesCaption": "جميع سجلات المستودعات"
+        "activeProductsCaption": "نشطة حاليًا",
+        "totalCategories": "إجمالي التصنيفات",
+        "totalCategoriesCaption": "كل سجلات التصنيفات",
+        "totalWarehouses": "إجمالي المخازن",
+        "totalWarehousesCaption": "كل سجلات المخازن"
       },
       "stockByWarehouse": {
-        "title": "المخزون حسب المستودع",
+        "title": "المخزون حسب المخزن",
         "unitsLabel": "الوحدات",
-        "emptyTitle": "لا توجد بيانات مخزون",
-        "emptyDescription": "ستظهر مستويات المخزون حسب المستودع هنا بمجرد وجود مخزون."
+        "emptyTitle": "مفيش بيانات مخزون",
+        "emptyDescription": "مستويات المخزون حسب المخزن هتظهر هنا لما يبقى فيه مخزون."
       },
       "topProductsByStock": {
-        "title": "أفضل المنتجات حسب المخزون",
+        "title": "أكبر المنتجات من حيث المخزون",
         "units": "{{count}} وحدة",
         "units_other": "{{count}} وحدات",
-        "emptyTitle": "لا توجد بيانات مخزون",
-        "emptyDescription": "ستظهر أفضل المنتجات حسب كمية المخزون هنا بمجرد وجود مخزون."
+        "emptyTitle": "مفيش بيانات مخزون",
+        "emptyDescription": "أكبر المنتجات من حيث كمية المخزون هتظهر هنا لما يبقى فيه مخزون."
       },
       "productsSnapshot": {
         "title": "المنتجات",
@@ -2307,52 +2324,52 @@
         "inactive": "غير نشط"
       },
       "categoriesSnapshot": {
-        "title": "الفئات",
-        "manage": "إدارة الفئات",
+        "title": "التصنيفات",
+        "manage": "إدارة التصنيفات",
         "total": "الإجمالي",
         "active": "نشط",
         "inactive": "غير نشط"
       },
       "warehousesSnapshot": {
-        "title": "المستودعات",
-        "manage": "إدارة المستودعات",
+        "title": "المخازن",
+        "manage": "إدارة المخازن",
         "total": "الإجمالي",
         "active": "نشط",
         "inactive": "غير نشط"
       },
       "quickActions": {
         "newProduct": "منتج جديد",
-        "newCategory": "فئة جديدة",
-        "manageWarehouses": "إدارة المستودعات"
+        "newCategory": "تصنيف جديد",
+        "manageWarehouses": "إدارة المخازن"
       }
     }
   },
   "accounting": {
     "overview": {
-      "pageTitle": "نظرة عامة على الحسابات",
-      "pageSubtitle": "دليل الحسابات والقيود اليومية وميزان المراجعة في لمحة واحدة.",
-      "categoryNavLabel": "تنقل الحسابات",
+      "pageTitle": "نظرة عامة على المحاسبة",
+      "pageSubtitle": "دليل الحسابات وقيود اليومية وميزان المراجعة في لمحة واحدة.",
+      "categoryNavLabel": "تنقل المحاسبة",
       "newEntry": "قيد جديد",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات الحسابات.",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات المحاسبة.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أنشئ أول حساب أو قيد يومية لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول حساب أو قيد يومية عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
         "accounts": "دليل الحسابات",
-        "journalEntries": "القيود اليومية",
+        "journalEntries": "قيود اليومية",
         "trialBalance": "ميزان المراجعة",
-        "settings": "إعدادات الحسابات"
+        "settings": "إعدادات المحاسبة"
       },
       "kpi": {
         "totalAccounts": "إجمالي الحسابات",
-        "totalAccountsCaption": "جميع سجلات الحسابات",
+        "totalAccountsCaption": "كل سجلات الحسابات",
         "activeAccounts": "الحسابات النشطة",
-        "activeAccountsCaption": "نشط حاليًا",
-        "totalJournalEntries": "إجمالي القيود اليومية",
-        "totalJournalEntriesCaption": "عبر جميع الحالات",
+        "activeAccountsCaption": "نشطة حاليًا",
+        "totalJournalEntries": "إجمالي قيود اليومية",
+        "totalJournalEntriesCaption": "في كل الحالات",
         "postedJournalEntries": "القيود المرحّلة",
-        "postedJournalEntriesCaption": "مُرحّلة في دفتر الأستاذ"
+        "postedJournalEntriesCaption": "مثبّتة في الدفتر"
       },
       "trialBalance": {
         "title": "ميزان المراجعة",
@@ -2365,37 +2382,37 @@
       "accountsByType": {
         "title": "الحسابات حسب النوع",
         "countLabel": "الحسابات",
-        "emptyTitle": "لا توجد حسابات بعد",
-        "emptyDescription": "سيظهر توزيع الحسابات هنا بمجرد وجود حسابات."
+        "emptyTitle": "لسه مفيش حسابات",
+        "emptyDescription": "توزيع الحسابات هيظهر هنا لما يبقى فيه حسابات."
       },
       "balanceByType": {
         "title": "الرصيد حسب نوع الحساب",
-        "netLabel": "الرصيد الصافي",
-        "emptyTitle": "لا توجد بيانات رصيد",
-        "emptyDescription": "ستظهر الأرصدة حسب النوع هنا بمجرد وجود قيود يومية."
+        "netLabel": "صافي الرصيد",
+        "emptyTitle": "مفيش بيانات رصيد",
+        "emptyDescription": "الأرصدة حسب النوع هتظهر هنا لما يبقى فيه قيود يومية."
       },
       "topAccounts": {
-        "title": "أفضل الحسابات حسب الرصيد",
+        "title": "أكبر الحسابات من حيث الرصيد",
         "balanceLabel": "الرصيد",
-        "emptyTitle": "لا توجد بيانات رصيد",
-        "emptyDescription": "ستظهر أفضل الحسابات هنا بمجرد وجود قيود يومية."
+        "emptyTitle": "مفيش بيانات رصيد",
+        "emptyDescription": "أكبر الحسابات هتظهر هنا لما يبقى فيه قيود يومية."
       },
       "entriesByStatus": {
-        "title": "القيود اليومية حسب الحالة",
-        "emptyTitle": "لا توجد قيود بعد",
-        "emptyDescription": "سيظهر توزيع حالة القيود هنا بمجرد وجود قيود."
+        "title": "قيود اليومية حسب الحالة",
+        "emptyTitle": "لسه مفيش قيود",
+        "emptyDescription": "توزيع حالات القيود هيظهر هنا لما يبقى فيه قيود."
       },
       "entriesOverTime": {
-        "title": "القيود اليومية عبر الزمن",
+        "title": "قيود اليومية عبر الوقت",
         "countLabel": "القيود",
-        "emptyTitle": "لا توجد قيود بعد",
-        "emptyDescription": "سيظهر نشاط القيود الشهري هنا بمجرد وجود قيود."
+        "emptyTitle": "لسه مفيش قيود",
+        "emptyDescription": "نشاط القيود الشهري هيظهر هنا لما يبقى فيه قيود."
       },
       "recentEntries": {
-        "title": "أحدث القيود اليومية",
+        "title": "أحدث قيود اليومية",
         "viewAll": "عرض الكل",
-        "emptyTitle": "لا توجد قيود بعد",
-        "emptyDescription": "ستظهر القيود الأخيرة هنا."
+        "emptyTitle": "لسه مفيش قيود",
+        "emptyDescription": "أحدث قيود اليومية هتظهر هنا."
       },
       "accountsSnapshot": {
         "title": "دليل الحسابات",
@@ -2407,93 +2424,93 @@
       "quickActions": {
         "newEntry": "قيد يومية جديد",
         "newAccount": "حساب جديد",
-        "viewAllEntries": "عرض جميع القيود"
+        "viewAllEntries": "عرض كل القيود"
       }
     }
   },
   "hr": {
     "overview": {
       "pageTitle": "نظرة عامة على الموارد البشرية",
-      "pageSubtitle": "القوى العاملة والإجازات والحضور في لمحة واحدة.",
+      "pageSubtitle": "الكادر الوظيفي والإجازات والحضور في لمحة واحدة.",
       "categoryNavLabel": "تنقل الموارد البشرية",
       "newEmployee": "موظف جديد",
-      "unassigned": "غير مُعيَّن",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات الموارد البشرية.",
+      "unassigned": "غير معيّن",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات الموارد البشرية.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أضف أول موظف لعرض النشاط.",
-      "attendanceSectionTitle": "الحضور",
-      "attendanceSectionCaption": "نشاط الحضور على مستوى الشركة.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول موظف عشان تشوف النشاط.",
+      "attendanceSectionTitle": "الحضور والانصراف",
+      "attendanceSectionCaption": "نشاط الحضور على مستوى الشركة كلها.",
       "tabs": {
         "overview": "نظرة عامة",
-        "employees": "الموظفون",
-        "leaveRequests": "طلبات الإجازة"
+        "employees": "الموظفين",
+        "leaveRequests": "طلبات الإجازات"
       },
       "kpi": {
         "totalEmployees": "إجمالي الموظفين",
-        "totalEmployeesCaption": "جميع سجلات الموظفين",
-        "activeEmployees": "الموظفون النشطون",
-        "activeEmployeesCaption": "نشط حاليًا",
-        "totalLeaveRequests": "إجمالي طلبات الإجازة",
-        "totalLeaveRequestsCaption": "عبر جميع الحالات",
-        "pendingLeaveRequests": "الطلبات المعلّقة",
-        "pendingLeaveRequestsCaption": "بانتظار القرار"
+        "totalEmployeesCaption": "كل سجلات الموظفين",
+        "activeEmployees": "الموظفين النشطين",
+        "activeEmployeesCaption": "نشطين حاليًا",
+        "totalLeaveRequests": "إجمالي طلبات الإجازات",
+        "totalLeaveRequestsCaption": "في كل الحالات",
+        "pendingLeaveRequests": "الطلبات المعلقة",
+        "pendingLeaveRequestsCaption": "في انتظار القرار"
       },
       "payroll": {
         "title": "إجمالي الرواتب الأساسية",
         "caption": "مجموع الرواتب الأساسية للموظفين النشطين",
-        "captionWithCount": "عبر {{count}} موظف نشط"
+        "captionWithCount": "لعدد {{count}} موظف نشط"
       },
       "pendingLeave": {
-        "title": "طلبات الإجازة المعلّقة",
+        "title": "طلبات الإجازات المعلقة",
         "badge": "{{count}} معلّق",
         "badge_other": "{{count}} معلّقة",
-        "emptyDescription": "لا توجد طلبات إجازة بانتظار القرار حاليًا.",
-        "viewAll": "عرض جميع الطلبات المعلّقة ({{count}})"
+        "emptyDescription": "مفيش طلبات إجازات في انتظار قرار حاليًا.",
+        "viewAll": "عرض كل الـ {{count}} طلب معلّق"
       },
       "employeesByDepartment": {
-        "title": "الموظفون حسب القسم",
-        "countLabel": "الموظفون",
-        "emptyTitle": "لا يوجد موظفون بعد",
-        "emptyDescription": "سيظهر توزيع الأقسام هنا بمجرد وجود موظفين."
+        "title": "الموظفين حسب القسم",
+        "countLabel": "الموظفين",
+        "emptyTitle": "لسه مفيش موظفين",
+        "emptyDescription": "توزيع الأقسام هيظهر هنا لما يبقى فيه موظفين."
       },
       "employeesByBranch": {
-        "title": "الموظفون حسب الفرع",
-        "countLabel": "الموظفون",
-        "emptyTitle": "لا يوجد موظفون بعد",
-        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود موظفين."
+        "title": "الموظفين حسب الفرع",
+        "countLabel": "الموظفين",
+        "emptyTitle": "لسه مفيش موظفين",
+        "emptyDescription": "توزيع الفروع هيظهر هنا لما يبقى فيه موظفين."
       },
       "headcountGrowth": {
         "title": "نمو عدد الموظفين",
-        "countLabel": "الموظفون",
-        "emptyTitle": "لا توجد تواريخ تعيين بعد",
-        "emptyDescription": "سيظهر إجمالي عدد الموظفين التراكمي هنا بمجرد وجود موظفين."
+        "countLabel": "الموظفين",
+        "emptyTitle": "لسه مفيش تواريخ تعيين",
+        "emptyDescription": "إجمالي عدد الموظفين المتراكم هيظهر هنا لما يبقى فيه موظفين."
       },
       "leaveByType": {
-        "title": "طلبات الإجازة حسب النوع",
+        "title": "طلبات الإجازات حسب النوع",
         "countLabel": "الطلبات",
-        "emptyTitle": "لا توجد طلبات إجازة بعد",
-        "emptyDescription": "سيظهر توزيع أنواع الإجازات هنا بمجرد وجود طلبات."
+        "emptyTitle": "لسه مفيش طلبات إجازات",
+        "emptyDescription": "توزيع أنواع الإجازات هيظهر هنا لما يبقى فيه طلبات."
       },
       "leaveByStatus": {
-        "title": "طلبات الإجازة حسب الحالة",
-        "emptyTitle": "لا توجد طلبات إجازة بعد",
-        "emptyDescription": "سيظهر توزيع الحالات هنا بمجرد وجود طلبات."
+        "title": "طلبات الإجازات حسب الحالة",
+        "emptyTitle": "لسه مفيش طلبات إجازات",
+        "emptyDescription": "توزيع الحالات هيظهر هنا لما يبقى فيه طلبات."
       },
       "leaveOverTime": {
-        "title": "طلبات الإجازة عبر الزمن",
+        "title": "طلبات الإجازات عبر الوقت",
         "countLabel": "الطلبات",
-        "emptyTitle": "لا توجد طلبات إجازة بعد",
-        "emptyDescription": "سيظهر نشاط الطلبات الشهري هنا بمجرد وجود طلبات."
+        "emptyTitle": "لسه مفيش طلبات إجازات",
+        "emptyDescription": "نشاط الطلبات الشهري هيظهر هنا لما يبقى فيه طلبات."
       },
       "recentLeave": {
-        "title": "أحدث طلبات الإجازة",
+        "title": "أحدث طلبات الإجازات",
         "viewAll": "عرض الكل",
-        "emptyTitle": "لا توجد طلبات إجازة بعد",
-        "emptyDescription": "ستظهر طلبات الإجازة الأخيرة هنا."
+        "emptyTitle": "لسه مفيش طلبات إجازات",
+        "emptyDescription": "أحدث طلبات الإجازات هتظهر هنا."
       },
       "employeesSnapshot": {
-        "title": "الموظفون",
+        "title": "الموظفين",
         "manage": "إدارة الموظفين",
         "total": "الإجمالي",
         "active": "نشط",
@@ -2501,57 +2518,57 @@
       },
       "attendanceByStatus": {
         "title": "الحضور حسب الحالة",
-        "emptyTitle": "لا توجد بيانات حضور",
-        "emptyDescription": "سيظهر توزيع الحضور هنا بمجرد وجود سجلات.",
-        "errorDescription": "تعذّر تحميل بيانات الحضور."
+        "emptyTitle": "مفيش بيانات حضور",
+        "emptyDescription": "توزيع الحضور هيظهر هنا لما يبقى فيه سجلات.",
+        "errorDescription": "مقدرناش نحمّل بيانات الحضور."
       },
       "checkInsOverTime": {
-        "title": "تسجيلات الحضور عبر الزمن",
-        "countLabel": "تسجيلات الحضور",
-        "emptyTitle": "لا توجد بيانات حضور",
-        "emptyDescription": "سيظهر نشاط تسجيل الحضور الشهري هنا بمجرد وجود سجلات.",
-        "errorDescription": "تعذّر تحميل بيانات الحضور."
+        "title": "تسجيلات الحضور عبر الوقت",
+        "countLabel": "التسجيلات",
+        "emptyTitle": "مفيش بيانات حضور",
+        "emptyDescription": "نشاط تسجيل الحضور الشهري هيظهر هنا لما يبقى فيه سجلات.",
+        "errorDescription": "مقدرناش نحمّل بيانات الحضور."
       },
       "quickActions": {
         "newEmployee": "موظف جديد",
-        "viewLeaveRequests": "عرض طلبات الإجازة",
+        "viewLeaveRequests": "عرض طلبات الإجازات",
         "viewEmployees": "عرض الموظفين"
       }
     }
   },
   "organization": {
     "overview": {
-      "pageTitle": "نظرة عامة على المؤسسة",
-      "pageSubtitle": "شركتك وفروعك وهيكل أقسامك في لمحة واحدة.",
-      "categoryNavLabel": "تنقل المؤسسة",
-      "unassigned": "غير مُعيَّن",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات المؤسسة.",
+      "pageTitle": "نظرة عامة على الهيكل التنظيمي",
+      "pageSubtitle": "شركتك وفروعك وهيكل الأقسام في لمحة واحدة.",
+      "categoryNavLabel": "تنقل الهيكل التنظيمي",
+      "unassigned": "غير معيّن",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات الهيكل التنظيمي.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أضف أول فرع أو قسم لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول فرع أو قسم عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
         "branches": "الفروع",
         "departments": "الأقسام"
       },
       "company": {
-        "noLegalName": "لا يوجد اسم قانوني مسجل",
+        "noLegalName": "مفيش اسم قانوني مسجل",
         "country": "الدولة",
         "currency": "العملة",
         "taxNumber": "الرقم الضريبي",
         "active": "نشط",
         "inactive": "غير نشط",
         "edit": "تعديل",
-        "editNotAvailable": "تعديل إعدادات الشركة غير متاح بعد",
-        "errorDescription": "تعذّر تحميل بيانات الشركة."
+        "editNotAvailable": "تعديل إعدادات الشركة مش متاح لسه",
+        "errorDescription": "مقدرناش نحمّل بيانات الشركة."
       },
       "kpi": {
         "totalBranches": "إجمالي الفروع",
-        "totalBranchesCaption": "جميع سجلات الفروع",
+        "totalBranchesCaption": "كل سجلات الفروع",
         "activeBranches": "الفروع النشطة",
-        "activeBranchesCaption": "نشط حاليًا",
+        "activeBranchesCaption": "نشطة حاليًا",
         "totalDepartments": "إجمالي الأقسام",
-        "totalDepartmentsCaption": "جميع سجلات الأقسام",
+        "totalDepartmentsCaption": "كل سجلات الأقسام",
         "topLevelDepartments": "الأقسام الرئيسية",
         "topLevelDepartmentsCaption": "بدون قسم أب"
       },
@@ -2565,25 +2582,25 @@
       },
       "branchesByStatus": {
         "title": "الفروع حسب الحالة",
-        "emptyTitle": "لا توجد فروع بعد",
-        "emptyDescription": "سيظهر توزيع الحالة هنا بمجرد وجود فروع."
+        "emptyTitle": "لسه مفيش فروع",
+        "emptyDescription": "توزيع الحالات هيظهر هنا لما يبقى فيه فروع."
       },
       "departmentHierarchy": {
         "title": "التسلسل الهرمي للأقسام",
-        "emptyTitle": "لا توجد أقسام بعد",
-        "emptyDescription": "سيظهر توزيع التسلسل الهرمي هنا بمجرد وجود أقسام."
+        "emptyTitle": "لسه مفيش أقسام",
+        "emptyDescription": "توزيع التسلسل الهرمي هيظهر هنا لما يبقى فيه أقسام."
       },
       "departmentsByBranch": {
         "title": "الأقسام حسب الفرع",
         "countLabel": "الأقسام",
-        "emptyTitle": "لا توجد أقسام بعد",
-        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود أقسام."
+        "emptyTitle": "لسه مفيش أقسام",
+        "emptyDescription": "توزيع الفروع هيظهر هنا لما يبقى فيه أقسام."
       },
       "departmentsTreemap": {
         "title": "توزيع الأقسام",
         "countLabel": "الأقسام",
-        "emptyTitle": "لا توجد أقسام بعد",
-        "emptyDescription": "سيظهر عرض تناسبي للأقسام حسب الفرع هنا بمجرد وجود أقسام."
+        "emptyTitle": "لسه مفيش أقسام",
+        "emptyDescription": "عرض نسبي للأقسام في كل فرع هيظهر هنا لما يبقى فيه أقسام."
       },
       "branchesSnapshot": {
         "title": "الفروع",
@@ -2605,82 +2622,82 @@
   "administration": {
     "overview": {
       "pageTitle": "نظرة عامة على الإدارة",
-      "pageSubtitle": "المستخدمون والأدوار والصلاحيات عبر مؤسستك.",
+      "pageSubtitle": "المستخدمين والأدوار والصلاحيات في كل شركتك.",
       "categoryNavLabel": "تنقل الإدارة",
-      "unassigned": "غير مُعيَّن",
-      "errorTitle": "حدث خطأ أثناء تحميل بيانات الإدارة.",
+      "unassigned": "غير معيّن",
+      "errorTitle": "حصل خطأ أثناء تحميل بيانات الإدارة.",
       "retry": "إعادة المحاولة",
-      "emptyTitle": "لا يوجد شيء هنا بعد",
-      "emptyDescription": "أضف أول مستخدم أو دور لعرض النشاط.",
+      "emptyTitle": "لسه مفيش حاجة هنا",
+      "emptyDescription": "أضف أول مستخدم أو دور عشان تشوف النشاط.",
       "tabs": {
         "overview": "نظرة عامة",
-        "users": "المستخدمون",
+        "users": "المستخدمين",
         "roles": "الأدوار والصلاحيات"
       },
       "kpi": {
         "totalUsers": "إجمالي المستخدمين",
-        "totalUsersCaption": "جميع حسابات المستخدمين",
-        "activeUsers": "المستخدمون النشطون",
-        "activeUsersCaption": "نشط حاليًا",
+        "totalUsersCaption": "كل حسابات المستخدمين",
+        "activeUsers": "المستخدمين النشطين",
+        "activeUsersCaption": "نشطين حاليًا",
         "totalRoles": "إجمالي الأدوار",
-        "totalRolesCaption": "المعرَّفة في النظام",
+        "totalRolesCaption": "معرّفة في النظام",
         "totalPermissions": "إجمالي الصلاحيات",
-        "totalPermissionsCaption": "المتاحة في الدليل"
+        "totalPermissionsCaption": "متاحة في الكتالوج"
       },
       "status": {
         "active": "نشط",
         "inactive": "غير نشط"
       },
       "usersWithoutRoles": {
-        "title": "مستخدمون بدون أدوار",
+        "title": "مستخدمين بدون أدوار",
         "badge": "{{count}} مستخدم",
         "badge_other": "{{count}} مستخدمين",
-        "emptyDescription": "كل مستخدم لديه دور واحد على الأقل مُعيَّن.",
-        "viewAll": "عرض جميع المستخدمين بدون أدوار ({{count}})"
+        "emptyDescription": "كل المستخدمين عندهم دور واحد على الأقل معيّن.",
+        "viewAll": "عرض كل الـ {{count}} مستخدم بدون أدوار"
       },
       "rolesWithNoUsers": {
         "title": "أدوار بدون مستخدمين",
         "badge": "{{count}} دور",
         "badge_other": "{{count}} أدوار",
-        "emptyDescription": "كل دور مُعرَّف مُعيَّن لمستخدم واحد على الأقل."
+        "emptyDescription": "كل الأدوار المعرّفة معينة لمستخدم واحد على الأقل."
       },
       "usersByRole": {
-        "title": "المستخدمون حسب الدور",
-        "countLabel": "المستخدمون",
-        "emptyTitle": "لا توجد تعيينات أدوار بعد",
-        "emptyDescription": "سيظهر توزيع الأدوار هنا بمجرد تعيين أدوار للمستخدمين."
+        "title": "المستخدمين حسب الدور",
+        "countLabel": "المستخدمين",
+        "emptyTitle": "لسه مفيش أدوار معينة",
+        "emptyDescription": "توزيع الأدوار هيظهر هنا لما المستخدمين ياخدوا أدوار."
       },
       "usersByStatus": {
-        "title": "المستخدمون حسب الحالة",
-        "emptyTitle": "لا يوجد مستخدمون بعد",
-        "emptyDescription": "سيظهر توزيع الحالة هنا بمجرد وجود مستخدمين."
+        "title": "المستخدمين حسب الحالة",
+        "emptyTitle": "لسه مفيش مستخدمين",
+        "emptyDescription": "توزيع الحالات هيظهر هنا لما يبقى فيه مستخدمين."
       },
       "usersByBranch": {
-        "title": "المستخدمون حسب الفرع",
-        "countLabel": "المستخدمون",
-        "emptyTitle": "لا يوجد مستخدمون بعد",
-        "emptyDescription": "سيظهر توزيع الفروع هنا بمجرد وجود مستخدمين."
+        "title": "المستخدمين حسب الفرع",
+        "countLabel": "المستخدمين",
+        "emptyTitle": "لسه مفيش مستخدمين",
+        "emptyDescription": "توزيع الفروع هيظهر هنا لما يبقى فيه مستخدمين."
       },
       "usersByDepartment": {
-        "title": "المستخدمون حسب القسم",
-        "countLabel": "المستخدمون",
-        "emptyTitle": "لا يوجد مستخدمون بعد",
-        "emptyDescription": "سيظهر توزيع الأقسام هنا بمجرد وجود مستخدمين."
+        "title": "المستخدمين حسب القسم",
+        "countLabel": "المستخدمين",
+        "emptyTitle": "لسه مفيش مستخدمين",
+        "emptyDescription": "توزيع الأقسام هيظهر هنا لما يبقى فيه مستخدمين."
       },
       "rolesByPermissionCount": {
         "title": "الأدوار حسب عدد الصلاحيات",
         "countLabel": "الصلاحيات",
-        "emptyTitle": "لا توجد أدوار بعد",
-        "emptyDescription": "سيظهر ترتيب الأدوار حسب عدد الصلاحيات هنا بمجرد وجود أدوار."
+        "emptyTitle": "لسه مفيش أدوار",
+        "emptyDescription": "ترتيب الأدوار حسب عدد الصلاحيات هيظهر هنا لما يبقى فيه أدوار."
       },
       "permissionsByModule": {
         "title": "الصلاحيات حسب الوحدة",
-        "emptyTitle": "لا توجد بيانات دليل صلاحيات",
-        "emptyDescription": "سيظهر توزيع دليل الصلاحيات هنا بمجرد توفره.",
-        "errorDescription": "تعذّر تحميل دليل الصلاحيات."
+        "emptyTitle": "مفيش بيانات كتالوج صلاحيات",
+        "emptyDescription": "تفصيل كتالوج الصلاحيات هيظهر هنا لما يبقى متاح.",
+        "errorDescription": "مقدرناش نحمّل كتالوج الصلاحيات."
       },
       "usersSnapshot": {
-        "title": "المستخدمون",
+        "title": "المستخدمين",
         "manage": "إدارة المستخدمين",
         "total": "الإجمالي",
         "active": "نشط",
@@ -2695,115 +2712,115 @@
     }
   },
   "sidebar": {
-    "dashboard": "لوحة التحكم",
+    "dashboard": "الرئيسية",
     "sales": "المبيعات",
     "customers": "العملاء",
     "salesOrders": "أوامر البيع",
     "purchasing": "المشتريات",
-    "suppliers": "الموردون",
+    "suppliers": "الموردين",
     "purchaseOrders": "أوامر الشراء",
     "inventory": "المخزون",
     "warehouses": "المخازن",
-    "categories": "الفئات",
+    "categories": "التصنيفات",
     "products": "المنتجات",
-    "stock": "الأصناف بالمخزون",
+    "stock": "المخزون",
     "accounting": "المحاسبة",
     "chartOfAccounts": "دليل الحسابات",
     "journalEntries": "قيود اليومية",
-    "hr": "الموارد البشرية ",
-    "employees": "الموظفون",
+    "hr": "الموارد البشرية والرواتب",
+    "employees": "الموظفين",
     "attendance": "الحضور والانصراف",
-    "myAttendance": "حضوري الشخصي",
+    "myAttendance": "حضوري",
     "leaveRequests": "طلبات الإجازات",
-    "myRequests": "أجازاتي الشخصيه",
+    "myRequests": "طلباتي",
     "organization": "الهيكل التنظيمي",
     "branches": "الفروع",
     "departments": "الأقسام",
     "administration": "الإدارة",
-    "users": "المستخدمون",
+    "users": "المستخدمين",
     "rolesAndPermissions": "الأدوار والصلاحيات",
     "companySettings": "إعدادات الشركة"
   },
   "dashboard": {
     "overview": {
-      "pageTitle": "نظرة عامة على الأعمال",
-      "pageSubtitle": "لمحة عبر جميع الفئات — انقر على أي بطاقة لعرض الصورة الكاملة.",
+      "pageTitle": "نظرة عامة على النشاط",
+      "pageSubtitle": "لقطة شاملة لكل الأقسام — اضغط على أي كارت عشان تشوف الصورة كاملة.",
       "refreshAll": "تحديث الكل",
       "lastRefreshed": "آخر تحديث {{time}}",
       "categories": {
         "sales": "المبيعات",
         "purchasing": "المشتريات",
         "inventory": "المخزون",
-        "accounting": "الحسابات",
+        "accounting": "المحاسبة",
         "hr": "الموارد البشرية",
-        "organization": "المؤسسة",
+        "organization": "الهيكل التنظيمي",
         "administration": "الإدارة"
       },
       "sections": {
         "revenueSupply": "الإيرادات والتوريد",
         "finance": "المالية",
-        "peopleStructure": "الأفراد والهيكل"
+        "peopleStructure": "الموظفين والهيكل التنظيمي"
       },
       "attention": {
-        "title": "يتطلب اهتمامًا",
-        "allClear": "لا شيء يتطلب اهتمامًا الآن.",
-        "purchasingOverdue": "{{count}} طلب شراء متأخر",
-        "purchasingOverdue_other": "{{count}} طلبات شراء متأخرة",
-        "inventoryOutOfStock": "{{count}} منتج نافد المخزون",
-        "inventoryOutOfStock_other": "{{count}} منتجات نافدة المخزون",
+        "title": "يحتاج مراجعة",
+        "allClear": "مفيش حاجة محتاجة مراجعة دلوقتي.",
+        "purchasingOverdue": "{{count}} أمر شراء متأخر",
+        "purchasingOverdue_other": "{{count}} أوامر شراء متأخرة",
+        "inventoryOutOfStock": "{{count}} منتج نافذ من المخزون",
+        "inventoryOutOfStock_other": "{{count}} منتجات نافذة من المخزون",
         "accountingUnbalanced": "ميزان المراجعة غير متوازن",
-        "hrPendingLeave": "{{count}} طلب إجازة بانتظار القرار",
-        "hrPendingLeave_other": "{{count}} طلبات إجازة بانتظار القرار",
+        "hrPendingLeave": "{{count}} طلب إجازة في انتظار القرار",
+        "hrPendingLeave_other": "{{count}} طلبات إجازات في انتظار القرار",
         "adminUsersWithoutRoles": "{{count}} مستخدم بدون دور",
         "adminUsersWithoutRoles_other": "{{count}} مستخدمين بدون دور",
-        "adminRolesWithNoUsers": "{{count}} دور بدون مستخدمين معيّنين",
-        "adminRolesWithNoUsers_other": "{{count}} أدوار بدون مستخدمين معيّنين"
+        "adminRolesWithNoUsers": "{{count}} دور بدون مستخدمين معينين",
+        "adminRolesWithNoUsers_other": "{{count}} أدوار بدون مستخدمين معينين"
       },
       "kpi": {
-        "totalOrders": "الطلبات",
+        "totalOrders": "الأوامر",
         "totalValue": "القيمة",
-        "overdue": "متأخر",
+        "overdue": "المتأخر",
         "totalCustomers": "العملاء",
-        "activeCustomers": "العملاء النشطون",
-        "totalSuppliers": "الموردون",
-        "activeSuppliers": "الموردون النشطون",
+        "activeCustomers": "العملاء النشطين",
+        "totalSuppliers": "الموردين",
+        "activeSuppliers": "الموردين النشطين",
         "totalProducts": "المنتجات",
         "activeProducts": "المنتجات النشطة",
         "inventoryValue": "قيمة المخزون",
-        "outOfStock": "نافد المخزون",
+        "outOfStock": "نافذ من المخزون",
         "totalAccounts": "الحسابات",
         "journalEntries": "القيود",
         "postedEntries": "القيود المرحّلة",
         "totalDebits": "إجمالي المدين",
         "totalCredits": "إجمالي الدائن",
-        "totalEmployees": "الموظفون",
-        "activeEmployees": "الموظفون النشطون",
-        "pendingLeave": "إجازات معلّقة",
-        "totalLeaveRequests": "طلبات الإجازة",
+        "totalEmployees": "الموظفين",
+        "activeEmployees": "الموظفين النشطين",
+        "pendingLeave": "الإجازات المعلقة",
+        "totalLeaveRequests": "طلبات الإجازات",
         "totalBranches": "الفروع",
         "activeBranches": "الفروع النشطة",
         "totalDepartments": "الأقسام",
         "topLevelDepartments": "الأقسام الرئيسية",
-        "totalUsers": "المستخدمون",
-        "activeUsers": "المستخدمون النشطون",
+        "totalUsers": "المستخدمين",
+        "activeUsers": "المستخدمين النشطين",
         "totalRoles": "الأدوار",
         "totalPermissions": "الصلاحيات"
       },
       "badges": {
-        "attention": "يتطلب اهتمامًا",
-        "outOfStock": "{{count}} نافد المخزون",
-        "outOfStock_other": "{{count}} نافدة المخزون",
+        "attention": "يحتاج مراجعة",
+        "outOfStock": "{{count}} نافذ من المخزون",
+        "outOfStock_other": "{{count}} نافذ من المخزون",
         "balanced": "متوازن",
         "unbalanced": "غير متوازن"
       }
     }
   },
   "errors": {
-    "actionNotAllowed": "هذا الفعل غير مسموح لك",
+    "actionNotAllowed": "معندكش صلاحية تنفيذ الإجراء ده.",
     "notFound": {
       "title": "الصفحة غير موجودة",
-      "description": "الصفحة التي تبحث عنها غير موجودة، أو تم نقلها، أو قد لا تملك صلاحية الوصول إليها.",
-      "backToDashboard": "العودة إلى لوحة التحكم",
+      "description": "الصفحة اللي بتدور عليها مش موجودة، أو اتنقلت، أو ممكن معندكش صلاحية الوصول ليها.",
+      "backToDashboard": "رجوع للرئيسية",
       "goBack": "رجوع"
     }
   }

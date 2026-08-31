@@ -80,6 +80,7 @@ export function UsersByDepartmentChart({
             />
 
             <YAxis
+              direction={"ltr"}
               type="category"
               dataKey="label"
               width={110}
