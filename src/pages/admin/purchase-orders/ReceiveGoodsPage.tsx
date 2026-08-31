@@ -85,7 +85,7 @@ export function ReceiveGoodsPage() {
     }
 
     try {
-      console.log("receivedLines", receivedLines);
+      
       await receiveGoods.mutateAsync({ lines: receivedLines });
       toast.success(t("purchaseOrders.toasts.received"));
       navigate(`/purchasing/purchase-orders/${order.id}`);

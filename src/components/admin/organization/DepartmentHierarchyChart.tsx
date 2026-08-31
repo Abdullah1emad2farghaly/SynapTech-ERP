@@ -32,7 +32,6 @@ export function DepartmentHierarchyChart({
 }: Props) {
   const { t } = useTranslation();
 
-  console.log(data)
   return (
     <div className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
       <h3 className="text-sm font-medium text-ink-primary mb-3">

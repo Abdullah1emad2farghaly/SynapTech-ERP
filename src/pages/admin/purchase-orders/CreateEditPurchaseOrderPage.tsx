@@ -173,7 +173,7 @@ export function CreateEditPurchaseOrderPage() {
   };
 
   const onSubmit = async (values: PurchaseOrderFormValues) => {
-    console.log(values)
+    
     try {
       if (isEdit && id) {
         await updateOrder.mutateAsync(values);

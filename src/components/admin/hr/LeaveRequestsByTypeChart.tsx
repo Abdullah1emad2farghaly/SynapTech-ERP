@@ -39,7 +39,6 @@ export function LeaveRequestsByTypeChart({ data, isLoading }: Props) {
   
     return isRtl ? [...translated].reverse() : translated;
   }, [data, t, isRtl]);
-  console.log(chartData)
 
   return (
     <div className="bg-panel border border-hairline rounded-lg p-4 shadow-elevation-1">
