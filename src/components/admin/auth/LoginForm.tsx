@@ -76,7 +76,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       </Button>
 
       <p className="text-center text-[0.8125rem] text-ink-secondary">
-        {t("auth.login.noAccount")} <Link to={ROUTES.REGISTER}>{t("auth.login.signUp")}</Link>
+        {/* {t("auth.login.noAccount")} <Link to={ROUTES.REGISTER}>{t("auth.login.signUp")}</Link> */}
       </p>
     </form>
   );

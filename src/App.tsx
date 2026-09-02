@@ -111,9 +111,9 @@ export default function App() {
             <Route
               path={ROUTES.LOGIN} // "/"
               element={<LoginPage />} />
-            <Route
+            {/* <Route
               path={ROUTES.REGISTER} // "/register"
-              element={<RegisterPage />} />
+              element={<RegisterPage />} /> */}
             <Route
               path={ROUTES.FORGOT_PASSWORD} // "/forgot-password"
               element={<ForgotPasswordPage />} />
