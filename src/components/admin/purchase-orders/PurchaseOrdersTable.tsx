@@ -118,20 +118,20 @@ export function PurchaseOrdersTable({
     {
       id: "totalAmount",
       header: t("purchaseOrders.table.total"),
-      cell: (order) => <span className="text-sm font-medium text-[--ink-primary]">{order.totalAmount.toFixed(2)}</span>,
+      cell: (order) => <span className="text-sm font-medium text-[--success]">{order.totalAmount.toFixed(2)}</span>,
     },
-    {
-      id: "receiving",
-      header: t("purchaseOrders.table.receiving"),
-      cell: (order) => (
-        <div className="flex items-center gap-2">
-          <div className="h-1.5 w-16 overflow-hidden rounded-full bg-[--sunken]">
-            <div className="h-full bg-[--signal]" style={{ width: `${receivingProgress(order)}%` }} />
-          </div>
-          <span className="text-xs text-[--ink-tertiary]">{receivingProgress(order)}%</span>
-        </div>
-      ),
-    },
+    // {
+    //   id: "receiving",
+    //   header: t("purchaseOrders.table.receiving"),
+    //   cell: (order) => (
+    //     <div className="flex items-center gap-2">
+    //       <div className="h-1.5 w-16 overflow-hidden rounded-full bg-[--sunken]">
+    //         <div className="h-full bg-[--signal]" style={{ width: `${receivingProgress(order)}%` }} />
+    //       </div>
+    //       <span className="text-xs text-[--ink-tertiary]">{receivingProgress(order)}%</span>
+    //     </div>
+    //   ),
+    // },
     {
       id: "warnings",
       header: t("purchaseOrders.table.warnings"),
