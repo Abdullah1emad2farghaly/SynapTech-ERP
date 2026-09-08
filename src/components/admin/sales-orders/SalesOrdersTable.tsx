@@ -113,7 +113,7 @@ export function SalesOrdersTable({
     {
       id: "totalAmount",
       header: t("salesOrders.table.total"),
-      cell: (order) => <span className="text-sm font-medium text-[--ink-primary]">{order.totalAmount.toFixed(2)}</span>,
+      cell: (order) => <span className="text-sm font-medium text-[--success]">{order.totalAmount.toFixed(2)}</span>,
     },
     // {
     //   id: "shipping",
