@@ -69,7 +69,7 @@ export default function InventoryOverviewPage() {
 
           <InventoryKpiCards stats={stats} isLoading={isLoading} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 h-fit gap-6">
             <StockByWarehouseChart data={stats?.stockByWarehouse} isLoading={isLoading || isStockLoading} />
             <ProductsByCategoryChart data={stats?.productsByCategory} isLoading={isLoading} />
           </div>
