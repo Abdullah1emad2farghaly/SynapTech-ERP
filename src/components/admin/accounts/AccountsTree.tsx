@@ -202,7 +202,7 @@ export function AccountsTree({
   }
 
   return (
-    <div role="tree" className="overflow-hidden rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)]">
+    <div role="tree" className="overflow-hidden h-fit rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)]">
       {visibleTree.map((node) => renderNode(node, 0))}
     </div>
   );
