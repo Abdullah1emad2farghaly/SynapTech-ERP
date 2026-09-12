@@ -57,7 +57,7 @@ export function SalesOrdersDashboard({ orders, isLoading, onCardClick }: SalesOr
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="h-[68px] animate-pulse rounded-lg bg-[--sunken]" />
         ))}
@@ -70,7 +70,7 @@ export function SalesOrdersDashboard({ orders, isLoading, onCardClick }: SalesOr
   const totalValue = orders.reduce((sum, o) => sum + o.totalAmount, 0);
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
       <Card icon={<FileText size={18} />} label={t("salesOrders.stats.total")} value={String(orders.length)} onClick={() => onCardClick?.(null)} />
       <Card icon={<FileEdit size={18} />} label={t("salesOrders.status.Draft")} value={String(countByStatus("Draft"))} onClick={() => onCardClick?.("Draft")} />
       <Card icon={<Send size={18} />} label={t("salesOrders.status.Submitted")} value={String(countByStatus("Submitted"))} onClick={() => onCardClick?.("Submitted")} />

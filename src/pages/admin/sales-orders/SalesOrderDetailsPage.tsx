@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Printer, Clock, ShieldQuestion } from "lucide-react";
+import { ArrowLeft, Printer } from "lucide-react";
 import { useSalesOrder } from "../../../hooks/useSalesOrders";
 import { SalesOrderStatusBadge } from "../../../components/admin/sales-orders/SalesOrderStatusBadge";
 import { SalesOrderStatusTracker } from "../../../components/admin/sales-orders/SalesOrderStatusTracker";
@@ -128,7 +128,7 @@ export function SalesOrderDetailsPage() {
 
       <SalesOrderStatusTracker order={order} />
 
-      <StockWarningsPanel warnings={order.stockWarnings} />
+      <StockWarningsPanel warnings={order.warnings} />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-lg border border-[--hairline] bg-[--panel] p-4">

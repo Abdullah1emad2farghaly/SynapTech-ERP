@@ -28,17 +28,8 @@ interface PurchaseOrdersTableProps {
   onApprove: (order: PurchaseOrderResponse) => void;
   onReceive: (order: PurchaseOrderResponse) => void;
   onCancel: (order: PurchaseOrderResponse) => void;
-  onPrint: (order: PurchaseOrderResponse) => void;
-  onDuplicate: (order: PurchaseOrderResponse) => void;
   onBulkCancel: (ids: string[]) => void;
   onCreate: () => void;
-}
-
-function receivingProgress(order: PurchaseOrderResponse): number {
-  const totalOrdered = order.lines.reduce((s, l) => s + l.quantity, 0);
-  const totalReceived = order.lines.reduce((s, l) => s + l.receivedQuantity, 0);
-  if (totalOrdered === 0) return 0;
-  return Math.round((totalReceived / totalOrdered) * 100);
 }
 
 export function PurchaseOrdersTable({
@@ -51,8 +42,6 @@ export function PurchaseOrdersTable({
   onApprove,
   onReceive,
   onCancel,
-  onPrint,
-  onDuplicate,
   onBulkCancel,
   onCreate,
 }: PurchaseOrdersTableProps) {
@@ -149,8 +138,6 @@ export function PurchaseOrdersTable({
           onApprove={onApprove}
           onReceive={onReceive}
           onCancel={onCancel}
-          onPrint={onPrint}
-          onDuplicate={onDuplicate}
         />
       ),
     },

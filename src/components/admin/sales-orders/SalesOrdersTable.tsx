@@ -25,18 +25,10 @@ interface SalesOrdersTableProps {
   onApprove: (order: SalesOrderResponse) => void;
   onShip: (order: SalesOrderResponse) => void;
   onCancel: (order: SalesOrderResponse) => void;
-  onPrint: (order: SalesOrderResponse) => void;
-  onDuplicate: (order: SalesOrderResponse) => void;
   onBulkCancel: (ids: string[]) => void;
   onCreate: () => void;
 }
 
-function shippingProgress(order: SalesOrderResponse): number {
-  const totalOrdered = order.lines.reduce((s, l) => s + l.quantity, 0);
-  const totalShipped = order.lines.reduce((s, l) => s + l.shippedQuantity, 0);
-  if (totalOrdered === 0) return 0;
-  return Math.round((totalShipped / totalOrdered) * 100);
-}
 
 export function SalesOrdersTable({
   orders,
@@ -48,8 +40,6 @@ export function SalesOrdersTable({
   onApprove,
   onShip,
   onCancel,
-  onPrint,
-  onDuplicate,
   onBulkCancel,
   onCreate,
 }: SalesOrdersTableProps) {
@@ -130,7 +120,7 @@ export function SalesOrdersTable({
     {
       id: "warnings",
       header: t("salesOrders.table.warnings"),
-      cell: (order) => <StockWarningsBadge warnings={order.stockWarnings} />,
+      cell: (order) => <StockWarningsBadge warnings={order.warnings} />,
     },
     {
       id: "actions",
@@ -144,8 +134,6 @@ export function SalesOrdersTable({
           onApprove={onApprove}
           onShip={onShip}
           onCancel={onCancel}
-          onPrint={onPrint}
-          onDuplicate={onDuplicate}
         />
       ),
     },

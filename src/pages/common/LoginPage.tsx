@@ -71,14 +71,7 @@ export default function LoginPage() {
         >
           <LoginForm
             onSuccess={async () => {
-              // ASSUMPTION: by the time this callback runs, useLogin()'s own
-              // mutation onSuccess (inside hooks/useAuth.ts) has already
-              // written the token + user to localStorage under
-              // "currentUser" — this onSuccess is the one passed to
-              // login.mutate(), which React Query calls AFTER the hook's
-              // own onSuccess. If useAuth.ts doesn't persist the user
-              // before calling this, role will read as empty below and
-              // isAdmin will always be false. Worth a quick check.
+              console.log("first")
               const rawUser = window.localStorage.getItem("currentUser");
               let role = "";
               try {
@@ -87,6 +80,7 @@ export default function LoginPage() {
                 role = "";
               }
               const isAdmin = role.toLowerCase() === "admin";
+              // console.log(isAdmin)
 
               let permissions: string[] = [];
               try {

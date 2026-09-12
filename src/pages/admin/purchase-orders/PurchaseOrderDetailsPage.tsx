@@ -31,6 +31,7 @@ export function PurchaseOrderDetailsPage() {
   const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"], getUserPermissions())
   const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"], getUserPermissions())
 
+  console.log(order)
   const access = {
     canManageAccess,
     canCteateAccess,

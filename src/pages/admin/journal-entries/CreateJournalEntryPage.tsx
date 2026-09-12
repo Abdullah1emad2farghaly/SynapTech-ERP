@@ -107,7 +107,7 @@ export function CreateJournalEntryPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-      <div className="flex flex-col gap-6 p-6 pb-28">
+      <div className="flex flex-col gap-6 p-6  md:pb-28 pb-44">
         <button
           type="button"
           onClick={() => navigate("/accounting/journal-entries")}

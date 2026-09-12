@@ -68,23 +68,7 @@ export function SalesOrdersListPage() {
     return [...result].sort((a, b) => b.orderDate.localeCompare(a.orderDate));
   }, [orders, search, filters]);
 
-  const handleDuplicate = (order: SalesOrderResponse) => {
-    navigate("create", {
-      state: {
-        duplicateFrom: {
-          customerId: order.customerId,
-          warehouseId: order.warehouseId,
-          orderDate: new Date().toISOString().slice(0, 10),
-          notes: order.notes,
-          lines: order.lines.map((l) => ({
-            productId: l.productId,
-            quantity: l.quantity,
-            unitPrice: l.unitPrice,
-          })),
-        },
-      },
-    });
-  };
+  console.log(visibleOrders)
 
   const handleBulkCancel = async (ids: string[]) => {
     const result = await bulkCancel.mutateAsync(ids);
@@ -96,7 +80,7 @@ export function SalesOrdersListPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <div>
         <h1 className="text-2xl font-semibold text-[--ink-primary]">{t("salesOrders.page.title")}</h1>
         <p className="mt-1 text-sm text-[--ink-secondary]">{t("salesOrders.page.description")}</p>
@@ -135,8 +119,6 @@ export function SalesOrdersListPage() {
         onApprove={(order) => setDialog({ action: "approve", order })}
         onShip={(order) => navigate(`${order.id}/ship`)}
         onCancel={(order) => setDialog({ action: "cancel", order })}
-        onPrint={() => window.print()}
-        onDuplicate={handleDuplicate}
         onBulkCancel={handleBulkCancel}
         onCreate={() => navigate("create")}
         

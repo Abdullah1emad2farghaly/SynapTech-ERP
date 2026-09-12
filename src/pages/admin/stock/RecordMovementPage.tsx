@@ -1,22 +1,4 @@
-// Project path: src/pages/admin/stock/RecordMovementPage.tsx
-//
-// CHANGED: Product↔Warehouse cross-filtering added, using
-// useWarehouseStock/useProductStock — applied unconditionally, same as
-// Purchase/Sales Orders (previous version gated this to only "Out"/
-// "AdjustmentDecrease" movement types; removed per instruction to match
-// the same idea everywhere). Note this means for "In"/"AdjustmentIncrease"
-// movements, Product will also be narrowed to what's already stocked at
-// the chosen warehouse, which can make it impossible to record a first-time
-// stock-in for a brand-new product/warehouse pairing — flagged again here,
-// same as the Purchase Orders note.
-//
-// - Choosing a warehouse narrows Product to items with quantityOnHand > 0
-//   there.
-// - Choosing a product (before a warehouse is chosen) narrows Warehouse to
-//   ones stocking it.
-// - Changing warehouse/product in a way that invalidates the current
-//   pairing clears the now-invalid selection, mirroring the Purchase/Sales
-//   Orders line-clearing pattern.
+
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -81,18 +63,7 @@ export function RecordMovementPage() {
   const [successResult, setSuccessResult] =
     useState<MovementResponse | null>(null);
 
-  // Product driving the warehouse narrowing — only relevant while no
-  // warehouse has been chosen yet.
-  const productIdForWarehouseFilter = !form.warehouseId ? form.productId ?? undefined : undefined;
-
-  const { data: warehouseStockLevels, isLoading: warehouseStockLoading } = useWarehouseStock(
-    form.warehouseId ?? undefined
-  );
-
-  const { data: productStockLevels, isLoading: productStockLoading } = useProductStock(
-    productIdForWarehouseFilter
-  );
-
+    
   const rawProductOptions = useMemo(
     () => products.map((p) => ({ value: p.id, label: p.name, secondaryLabel: p.sku })),
     [products]
@@ -103,45 +74,7 @@ export function RecordMovementPage() {
     [warehouses]
   );
 
-  const warehouseFilteredProductOptions = useMemo(() => {
-    if (!warehouseStockLevels) return undefined;
-    return warehouseStockLevels
-      .filter((s) => s.quantityOnHand > 0)
-      .map((s) => ({ value: s.productId, label: s.productName, secondaryLabel: s.productSku }));
-  }, [warehouseStockLevels]);
 
-  const productFilteredWarehouseOptions = useMemo(() => {
-    if (!productStockLevels) return undefined;
-    return productStockLevels
-      .filter((s) => s.quantityOnHand > 0)
-      .map((s) => ({ value: s.warehouseId, label: s.warehouseName }));
-  }, [productStockLevels]);
-
-  const productOptions = form.warehouseId ? (warehouseFilteredProductOptions ?? []) : rawProductOptions;
-  const productOptionsLoading = Boolean(form.warehouseId) && warehouseStockLoading;
-
-  const warehouseOptions = productFilteredWarehouseOptions ?? rawWarehouseOptions;
-  const warehouseOptionsLoading = Boolean(productIdForWarehouseFilter) && productStockLoading;
-
-  // Clear the product if it's no longer valid for the current warehouse
-  // (user-driven changes only, not on initial mount from the prefilled
-  // searchParams).
-  const isFirstFilterRun = useRef(true);
-  useEffect(() => {
-    if (isFirstFilterRun.current) {
-      isFirstFilterRun.current = false;
-      return;
-    }
-    if (!form.warehouseId || !warehouseFilteredProductOptions) return;
-
-    const allowed = new Set(warehouseFilteredProductOptions.map((o) => o.value));
-    if (form.productId && !allowed.has(form.productId)) {
-      setForm((f) => ({ ...f, productId: null }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.warehouseId, warehouseFilteredProductOptions]);
-
-  const productOptionsFinal = productOptions;
 
   const quantityNumber = Number(form.quantity);
 
@@ -247,7 +180,7 @@ export function RecordMovementPage() {
               </label>
 
               <SearchableSelect
-                options={productOptionsFinal}
+                options={rawProductOptions}
                 value={form.productId}
                 onChange={(value) =>
                   setForm((f) => ({
@@ -255,13 +188,11 @@ export function RecordMovementPage() {
                     productId: value,
                   }))
                 }
-                placeholder={ productOptionsLoading ? t(
-                  "common.loading"
-                ): t("stock.movement.fields.productPlaceholder")}
+                placeholder={ t("stock.movement.fields.productPlaceholder")}
                 searchPlaceholder={t(
                   "stock.movement.fields.productPlaceholder"
                 )}
-                disabled={productOptionsLoading}
+                // disabled={productOptionsLoading}
               />
 
               {touched.productId && !form.productId && (
@@ -269,11 +200,7 @@ export function RecordMovementPage() {
                   {t("stock.movement.errors.required")}
                 </p>
               )}
-              {form.warehouseId && (
-                <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
-                  {t("stock.movement.warehouseFilteredHint")}
-                </p>
-              )}
+            
             </div>
 
             {/* Warehouse */}
@@ -283,7 +210,7 @@ export function RecordMovementPage() {
               </label>
 
               <SearchableSelect
-                options={warehouseOptions}
+                options={rawWarehouseOptions}
                 value={form.warehouseId}
                 onChange={(value) =>
                   setForm((f) => ({
@@ -291,25 +218,18 @@ export function RecordMovementPage() {
                     warehouseId: value,
                   }))
                 }
-                placeholder={ warehouseOptionsLoading ? t(
-                  "common.loading"
-                ):t(
+                placeholder={ t(
                   "stock.movement.fields.warehousePlaceholder"
                 )}
                 searchPlaceholder={t(
                   "stock.movement.fields.searchWarehouses"
                 )}
-                disabled={warehouseOptionsLoading}
+                // disabled={warehouseOptionsLoading}
               />
 
               {touched.warehouseId && !form.warehouseId && (
                 <p className="mt-1 text-xs text-[var(--error)]">
                   {t("stock.movement.errors.required")}
-                </p>
-              )}
-              {productIdForWarehouseFilter && (
-                <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
-                  {t("stock.movement.productFilteredHint")}
                 </p>
               )}
             </div>

@@ -39,6 +39,7 @@ export interface SalesOrderResponse {
   totalAmount: number;
   stockWarnings: StockWarning[];
   lines: SalesOrderLine[];
+  warnings: string[]
 }
 
 /** Body for POST/PUT /api/SalesOrders. NOTE: no expectedDate field — unlike

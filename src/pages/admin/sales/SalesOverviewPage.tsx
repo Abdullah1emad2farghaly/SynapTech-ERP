@@ -19,7 +19,7 @@ export default function SalesOverviewPage() {
   const isFullyEmpty = !isLoading && stats && stats.totalOrders === 0 && stats.totalCustomers === 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="md:p-6 md:px-6 px-2 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-1">
         <h1 className="text-2xl font-display font-semibold text-ink-primary">
           {t('sales.overview.pageTitle')}

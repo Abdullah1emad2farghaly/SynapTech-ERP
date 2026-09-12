@@ -10,6 +10,9 @@ import {
   filterNavByPermissions,
   getFirstAllowedRoute,
 } from "@/utils/permissions";
+import { getCurrentUser } from "@/App";
+import { getMyPermissions } from "@/services/api/roles.crud.api";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 function isItemActive(item: NavItem, pathname: string) {
   if (
@@ -52,20 +55,10 @@ export function Sidebar() {
   // GET CURRENT USER
   // =========================================================
 
-  const currentUser = window.localStorage.getItem("currentUser");
+  
 
-  let userRole = "";
-
-  if (currentUser) {
-    try {
-      const user = JSON.parse(currentUser);
-      userRole = user?.role ?? "";
-    } catch (error) {
-      console.error("Failed to parse currentUser:", error);
-    }
-  }
-
-  const isAdmin = userRole.toLowerCase() === "admin";
+  const isAdmin = getCurrentUser();
+  
 
   // =========================================================
   // GET MY PERMISSIONS
@@ -75,55 +68,30 @@ export function Sidebar() {
   // places risked them resolving at different times and disagreeing
   // about what the user can see.
 
-  const { permissions: myPermissions, isLoading: permissionsLoading } =
-    usePermissions();
+  const  myPermissions: string[] = getUserPermissions()
 
-  // =========================================================
-  // FILTER NAVIGATION
-  // =========================================================
-  // BUG FIX: the previous version called filterNavByPermissions(navItems,
-  // isAdmin) — myPermissions was never actually passed in, so non-admin
-  // filtering had nothing to filter against.
+    // =========================================================
+    // FILTER NAVIGATION
+    // =========================================================
+    // BUG FIX: the previous version called filterNavByPermissions(navItems,
+    // isAdmin) — myPermissions was never actually passed in, so non-admin
+    // filtering had nothing to filter against.
 
-  const visibleItems = filterNavByPermissions(
+    
+  const visibleItems = filterNavByPermissions (
     navItems,
     isAdmin,
     myPermissions
   );
 
+  console.log(myPermissions)
   // =========================================================
-  // AUTOMATICALLY OPEN FIRST ALLOWED PAGE
-  // =========================================================
-  // Reuses the shared getFirstAllowedRoute() from utils/permissions.ts
-  // instead of a local reimplementation — that local version read
-  // item.children[0] directly, which happened to be safe only because
-  // visibleItems' children are already permission-filtered, but it's
-  // one more place that could silently drift from the real logic.
 
   useEffect(() => {
-    // Don't redirect while permissions are still loading
-    if (permissionsLoading) {
-      return;
-    }
-
-    // Don't redirect if there are no visible pages
+    
     if (!visibleItems.length) {
       return;
     }
-
-    // -------------------------------------------------------
-    // Only redirect when user is at a root/empty location.
-    //
-    // This prevents the sidebar from redirecting the user
-    // every time they navigate to another page.
-    //
-    // NOTE: the previous version also special-cased "/sales" here.
-    // That looked like a leftover from testing a specific route rather
-    // than an intentional landing path — removed. If you do have
-    // multiple "empty landing" routes that should trigger this (e.g. a
-    // bare category route with no page of its own), list them
-    // explicitly here rather than hardcoding one module's path.
-    // -------------------------------------------------------
 
     const shouldRedirect = pathname === "/";
 
@@ -152,7 +120,7 @@ export function Sidebar() {
   }, [
     pathname,
     navigate,
-    permissionsLoading,
+    // permissionsLoading,
     visibleItems,
     navItems,
     isAdmin,
@@ -182,7 +150,7 @@ export function Sidebar() {
 
       <aside
         className={[
-          "fixed inset-y-0 left-0 flex flex-col",
+          "fixed inset-y-0 left-0 md:z-0 z-20 flex flex-col",
           "border-e border-hairline bg-panel shadow-xl",
           "transition-transform duration-300 ease-in-out",
 
@@ -200,10 +168,7 @@ export function Sidebar() {
             : "-translate-x-full lg:translate-x-0",
         ].join(" ")}
       >
-        {/* ================================================= */}
-        {/* LOGO */}
-        {/* ================================================= */}
-
+        
         <div className="flex h-16 items-center gap-2 border-b border-hairline px-4">
           <Logo size="sm" />
 
@@ -214,10 +179,6 @@ export function Sidebar() {
           )}
         </div>
 
-        {/* ================================================= */}
-        {/* NAVIGATION */}
-        {/* ================================================= */}
-
         <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-2">
           {visibleItems.map((item) => {
             const active = isItemActive(item, pathname);
@@ -226,11 +187,7 @@ export function Sidebar() {
 
             const Icon = item.icon;
 
-            // BUG FIX: item.to is typed optional, and for Admins the raw
-            // nav.config.ts entry may not define `to` on a parent at all
-            // (only its children do). filterNavByPermissions() rewrites
-            // `to` for non-admins, but Admins skip filtering entirely, so
-            // this fallback is what keeps the link valid for BOTH cases.
+          
             const parentTo = item.to ?? item.children?.[0]?.to ?? "#";
 
             return (
@@ -337,7 +294,7 @@ export function Sidebar() {
           {/* NO PERMISSION */}
           {/* ================================================= */}
 
-          {!permissionsLoading && visibleItems.length === 0 && (
+          {  visibleItems.length === 0 && (
             <div className="px-3 py-4 text-center text-sm text-ink-tertiary">
               No accessible pages
             </div>

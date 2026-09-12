@@ -27,8 +27,6 @@ interface PurchaseOrderActionMenuProps {
   onApprove: (order: PurchaseOrderResponse) => void;
   onReceive: (order: PurchaseOrderResponse) => void;
   onCancel: (order: PurchaseOrderResponse) => void;
-  onPrint: (order: PurchaseOrderResponse) => void;
-  onDuplicate: (order: PurchaseOrderResponse) => void;
 }
 
 export function PurchaseOrderActionMenu({
@@ -39,8 +37,6 @@ export function PurchaseOrderActionMenu({
   onApprove,
   onReceive,
   onCancel,
-  onPrint,
-  onDuplicate,
 }: PurchaseOrderActionMenuProps) {
   const { t } = useTranslation();
   const canManageAccess = hasAnyPermission(["purchasing.orders.manage"], getUserPermissions())
@@ -98,18 +94,6 @@ export function PurchaseOrderActionMenu({
       label: t("purchaseOrders.actions.receive"),
       icon: PackageOpen,
       onClick: onReceive,
-    },
-    {
-      key: "print",
-      label: t("purchaseOrders.actions.print"),
-      icon: Printer,
-      onClick: onPrint,
-    },
-    {
-      key: "duplicate",
-      label: t("purchaseOrders.actions.duplicate"),
-      icon: Copy,
-      onClick: onDuplicate,
     },
     {
       key: "cancel",

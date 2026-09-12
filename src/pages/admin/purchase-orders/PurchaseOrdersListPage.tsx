@@ -75,24 +75,6 @@ export function PurchaseOrdersListPage() {
     return [...result].sort((a, b) => b.orderDate.localeCompare(a.orderDate));
   }, [orders, search, filters]);
 
-  const handleDuplicate = (order: PurchaseOrderResponse) => {
-    navigate("create", {
-      state: {
-        duplicateFrom: {
-          supplierId: order.supplierId,
-          warehouseId: order.warehouseId,
-          orderDate: new Date().toISOString().slice(0, 10),
-          expectedDate: new Date().toISOString().slice(0, 10),
-          notes: order.notes,
-          lines: order.lines.map((l) => ({
-            productId: l.productId,
-            quantity: l.quantity,
-            unitPrice: l.unitPrice,
-          })),
-        },
-      },
-    });
-  };
 
   const handleBulkCancel = async (ids: string[]) => {
     const result = await bulkCancel.mutateAsync(ids);
@@ -142,8 +124,7 @@ export function PurchaseOrdersListPage() {
         onApprove={(order) => setDialog({ action: "approve", order })}
         onReceive={(order) => navigate(`${order.id}/receive`)}
         onCancel={(order) => setDialog({ action: "cancel", order })}
-        onPrint={() => window.print()}
-        onDuplicate={handleDuplicate}
+
         onBulkCancel={handleBulkCancel}
         onCreate={() => navigate("create")}
       />

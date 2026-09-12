@@ -9,6 +9,7 @@ export function useLogin() {
     mutationFn: (credentials: LoginCredentials) => authApi.login(credentials),
     onSuccess: (session) => {
       setSession(session); 
+      // console.log(session)
       window.localStorage.setItem('currentUser', JSON.stringify(session))
       window.localStorage.setItem('accessToken', session.accessToken);
     },

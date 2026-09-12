@@ -27,8 +27,6 @@ interface SalesOrderActionMenuProps {
   onApprove: (order: SalesOrderResponse) => void;
   onShip: (order: SalesOrderResponse) => void;
   onCancel: (order: SalesOrderResponse) => void;
-  onPrint: (order: SalesOrderResponse) => void;
-  onDuplicate: (order: SalesOrderResponse) => void;
 }
 
 export function SalesOrderActionMenu({
@@ -39,8 +37,6 @@ export function SalesOrderActionMenu({
   onApprove,
   onShip,
   onCancel,
-  onPrint,
-  onDuplicate,
 }: SalesOrderActionMenuProps) {
   const { t } = useTranslation();
 
@@ -96,13 +92,6 @@ export function SalesOrderActionMenu({
       icon: PackageOpen,
       onClick: onShip,
     },
-    {
-      key: "print",
-      label: t("salesOrders.actions.print"),
-      icon: Printer,
-      onClick: onPrint,
-    },
-  
     {
       key: "cancel",
       label: t("salesOrders.actions.cancel"),
