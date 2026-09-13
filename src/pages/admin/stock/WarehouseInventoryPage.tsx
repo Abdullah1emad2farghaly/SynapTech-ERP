@@ -7,7 +7,7 @@
 // nearly-identical table — the design spec calls this out explicitly as
 // a deliberate reuse decision.
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import { ArrowLeft, Search } from "lucide-react";
@@ -17,6 +17,7 @@ import {
 } from "../../../components/admin/stock/StockOverviewTable";
 import { StockRowActionMenu } from "../../../components/admin/stock/StockRowActionMenu";
 import { useWarehouseStock } from "../../../hooks/useStock";
+import { StockRowCard } from "@/components/admin/stock/StockRowCard";
 
 export function WarehouseInventoryPage() {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ export function WarehouseInventoryPage() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(null);
 
   const { data: stockLevels, isLoading, isError, refetch } = useWarehouseStock(warehouseId);
+
 
   const warehouseName = stockLevels?.[0]?.warehouseName ?? "";
   const totalQuantity = useMemo(
@@ -62,6 +64,7 @@ export function WarehouseInventoryPage() {
     });
   }, [filteredRows, sortColumnId, sortDirection]);
 
+  console.log(sortedRows)
   function renderRowActions(row: StockOverviewRow) {
     return (
       <StockRowActionMenu
@@ -135,20 +138,30 @@ export function WarehouseInventoryPage() {
         />
       </div>
 
-      <StockOverviewTable
-        rows={sortedRows}
-        isLoading={isLoading}
-        isFiltered={isFiltered}
-        onClearFilters={() => setSearchText("")}
-        showWarehouseColumn={false}
-        sortColumnId={sortColumnId}
-        sortDirection={sortDirection}
-        onSortChange={(columnId, direction) => {
-          setSortColumnId(direction ? columnId : null);
-          setSortDirection(direction);
-        }}
-        renderRowActions={renderRowActions}
-      />
+      <div className="hidden sm:block">
+        <StockOverviewTable
+          rows={sortedRows}
+          isLoading={isLoading}
+          isFiltered={isFiltered}
+          onClearFilters={() => setSearchText("")}
+          showWarehouseColumn={false}
+          sortColumnId={sortColumnId}
+          sortDirection={sortDirection}
+          onSortChange={(columnId, direction) => {
+            setSortColumnId(direction ? columnId : null);
+            setSortDirection(direction);
+          }}
+          renderRowActions={renderRowActions}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {sortedRows.map((row) => (
+          <StockRowCard
+            key={`${row.productId}-${row.warehouseId}`}
+            row={row}
+            renderActions={() => renderRowActions(row)} />
+        ))}
+      </div>
     </div>
   );
 }

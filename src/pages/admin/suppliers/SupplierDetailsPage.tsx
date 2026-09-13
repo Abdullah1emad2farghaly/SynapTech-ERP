@@ -37,7 +37,7 @@ export function SupplierDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 py-6 md:px-6 px-2">
         <div className="h-8 w-64 animate-pulse rounded bg-[--sunken]" />
         <div className="h-64 animate-pulse rounded-lg bg-[--sunken]" />
       </div>
@@ -53,7 +53,7 @@ export function SupplierDetailsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <button
         type="button"
         onClick={() => navigate("/inventory/suppliers")}

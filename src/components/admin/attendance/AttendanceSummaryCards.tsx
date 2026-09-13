@@ -28,7 +28,7 @@ export function AttendanceSummaryCards({ records }: AttendanceSummaryCardsProps)
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
       {cards.map((c) => (
         <div key={c.label} className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-4">
           <p className="text-xs font-medium text-[var(--ink-tertiary)]">{c.label}</p>

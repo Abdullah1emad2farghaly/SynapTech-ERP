@@ -1,21 +1,4 @@
-// src/pages/admin/categories/CategoriesPage.tsx
-//
-// The module's only page. Owns local UI state (search, filters, view
-// toggle, selection, drawer/dialog targets) and delegates
-// fetching/mutations to hooks over services/api — no direct API calls
-// here.
-//
-// Selected category for the split-view Details Panel is driven by a
-// ?categoryId= query param (via useSearchParams), not plain useState —
-// CategoryDetailsPanel's parent/child links navigate by changing this
-// param, so selection has to live in the URL for those links to work
-// and for selection to survive a refresh/share, per that component's
-// design note.
-//
-// Delete-blocked (has children) is computed client-side from the full
-// loaded list — no cross-module check the way Departments/Branches had,
-// since no Products API (or anything else with a categoryId field) is
-// confirmed anywhere in this project.
+
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -44,6 +27,7 @@ import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { CategoryCard } from "@/components/admin/categories/CategoryCard";
 
 type ViewMode = "tree" | "table";
 type DrawerTarget =
@@ -202,7 +186,7 @@ export function CategoriesPage() {
     try {
       if (id) {
         await updateMutation.mutateAsync({ id, ...values });
-        toast.success(t("categories.toast.updated" ,{
+        toast.success(t("categories.toast.updated", {
           name: values.name
         }))
       } else {
@@ -454,33 +438,39 @@ export function CategoriesPage() {
           <CategoryDetailsPanel category={detailsData} />
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
-          <BulkStatusToolbar
-            selectedCount={selectedIds.size}
-            onClearSelection={() => setSelectedIds(new Set())}
-            onActivateSelected={handleBulkActivate}
-            onDeactivateSelected={handleBulkDeactivate}
-          />
-          <CategoriesTable
-            rows={tableRows}
-            isLoading={isLoading}
-            hasError={isError}
-            onRetry={() => refetch()}
-            onClearFilters={handleClearFilters}
-            isFiltered={isFiltered}
-            sortColumnId={sortColumnId}
-            sortDirection={sortDirection}
-            onSortChange={(columnId, direction) => {
-              setSortColumnId(direction ? columnId : null);
-              setSortDirection(direction);
-            }}
-            selectedIds={selectedIds}
-            onSelectionChange={setSelectedIds}
-            onRowClick={(row) => handleSelect(row.id)}
-            renderRowActions={renderRowActions}
-            canManageAccess={canManageAccess}
-          />
-        </div>
+        <>
+          <div className="hidden sm:block">
+            <CategoriesTable
+              rows={tableRows}
+              isLoading={isLoading}
+              hasError={isError}
+              onRetry={() => refetch()}
+              onClearFilters={handleClearFilters}
+              isFiltered={isFiltered}
+              sortColumnId={sortColumnId}
+              sortDirection={sortDirection}
+              onSortChange={(columnId, direction) => {
+                setSortColumnId(direction ? columnId : null);
+                setSortDirection(direction);
+              }}
+              selectedIds={selectedIds}
+              onSelectionChange={setSelectedIds}
+              onRowClick={(row) => handleSelect(row.id)}
+              renderRowActions={renderRowActions}
+              canManageAccess={canManageAccess}
+            />
+          </div>
+          <div className="flex flex-col gap-3 sm:hidden">
+            {tableRows.map((row) => (
+              <CategoryCard
+                key={row.id}
+                row={row}
+                onClick={() => handleSelect(row.id)}
+                renderActions={() => renderRowActions(row)}
+              />
+            ))}
+          </div>
+        </>
       )}
 
       <CategoryDrawer

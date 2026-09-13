@@ -22,6 +22,8 @@ import {
 import type { SalesOrderResponse } from "../../../types/salesOrders.types";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { SalesOrderCard } from "./SalesOrderCard";
+import { SalesOrderActionMenu } from "@/components/admin/sales-orders/SalesOrderActionMenu";
 
 export function SalesOrdersListPage() {
   const { t } = useTranslation();
@@ -79,6 +81,20 @@ export function SalesOrdersListPage() {
     }
   };
 
+  function renderRowActions(order: SalesOrderResponse) {
+    return (
+      <SalesOrderActionMenu
+          order={order}
+          onView={(order) => navigate(`${order.id}`)}
+          onEdit={(order) => navigate(`${order.id}/edit`)}
+          onSubmit={(order) => setDialog({ action: "submit", order })}
+          onApprove={(order) => setDialog({ action: "approve", order })}
+          onShip={(order) => navigate(`${order.id}/ship`)}
+          onCancel={(order) => setDialog({ action: "cancel", order })}
+        />
+    )}
+
+
   return (
     <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <div>
@@ -109,21 +125,35 @@ export function SalesOrdersListPage() {
         statusCounts={statusCounts}
       />
 
-      <SalesOrdersTable
-        orders={visibleOrders}
-        isLoading={isLoading}
-        hasActiveFilters={hasActiveFilters}
-        onView={(order) => navigate(`${order.id}`)}
-        onEdit={(order) => navigate(`${order.id}/edit`)}
-        onSubmit={(order) => setDialog({ action: "submit", order })}
-        onApprove={(order) => setDialog({ action: "approve", order })}
-        onShip={(order) => navigate(`${order.id}/ship`)}
-        onCancel={(order) => setDialog({ action: "cancel", order })}
-        onBulkCancel={handleBulkCancel}
-        onCreate={() => navigate("create")}
-        
-      />
+      <div className="hidden sm:block">
+        <SalesOrdersTable
+          orders={visibleOrders}
+          isLoading={isLoading}
+          hasActiveFilters={hasActiveFilters}
+          renderActions={renderRowActions}
+          onBulkCancel={handleBulkCancel}
+          onCreate={() => navigate("create")}
+          onEdit={(order) => navigate(`${order.id}/edit`)}
+          onSubmit={(order) => setDialog({ action: "submit", order })}
+          onApprove={(order) => setDialog({ action: "approve", order })}
+          onShip={(order) => navigate(`${order.id}/ship`)}
+          onCancel={(order) => setDialog({ action: "cancel", order })}
+          onView={(order) => navigate(`${order.id}`)}
+        />
+      </div>
 
+      <div className="flex flex-col gap-3 sm:hidden">
+        {orders.map((order) => (
+          <SalesOrderCard
+            key={order.id}
+            order={order}
+            onClick={(id) =>{
+              navigate(`${id}`)
+            } }
+            renderActions={() => renderRowActions(order)}
+          />
+        ))}
+      </div>
       <SalesOrderActionDialog
         action={dialog?.action ?? null}
         order={dialog?.order ?? null}

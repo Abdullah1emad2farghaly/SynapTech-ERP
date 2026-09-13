@@ -27,6 +27,7 @@ interface SalesOrdersTableProps {
   onCancel: (order: SalesOrderResponse) => void;
   onBulkCancel: (ids: string[]) => void;
   onCreate: () => void;
+  renderActions?: (row: SalesOrderResponse) => React.ReactNode
 }
 
 
@@ -42,6 +43,7 @@ export function SalesOrdersTable({
   onCancel,
   onBulkCancel,
   onCreate,
+  renderActions
 }: SalesOrdersTableProps) {
   const canCancelAccess = hasAnyPermission(["sales.orders.cancel"], getUserPermissions());
   const canShipAccess = hasAnyPermission(["sales.orders.ship"], getUserPermissions());

@@ -130,15 +130,6 @@ export function PurchaseOrdersFilters({
           className="rounded-md border border-[--hairline] bg-[--sunken] px-2.5 py-1.5 text-xs outline-none focus:border-[--signal]"
         />
 
-        <select
-          value={filters.hasWarnings}
-          onChange={(e) => patch({ hasWarnings: e.target.value as PurchaseOrdersFiltersState["hasWarnings"] })}
-          className="rounded-md border border-[--hairline] bg-[--sunken] px-2.5 py-1.5 text-xs outline-none focus:border-[--signal]"
-        >
-          <option value="all">{t("purchaseOrders.filters.warningsAny")}</option>
-          <option value="yes">{t("purchaseOrders.filters.warningsYes")}</option>
-          <option value="no">{t("purchaseOrders.filters.warningsNo")}</option>
-        </select>
 
         {hasActiveFilters && (
           <button

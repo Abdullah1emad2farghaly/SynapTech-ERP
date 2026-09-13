@@ -47,7 +47,7 @@ export function AttendancePage() {
   }, [data]);
 
   return (
-    <div className="flex flex-col gap-6 p-4 md:p-6">
+    <div className="flex flex-col gap-6 p-4 md:p-6 md:px-6 px-2">
       <header className="flex sm:flex-row flex-col items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">{t("attendance.title")}</h1>

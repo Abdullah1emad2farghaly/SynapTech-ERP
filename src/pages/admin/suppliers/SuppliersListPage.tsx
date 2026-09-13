@@ -21,6 +21,8 @@ import { SupplierDeleteDialog } from "../../../components/admin/suppliers/Suppli
 import type { SupplierResponse } from "../../../types/suppliers.types";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { SupplierCard } from "@/components/admin/suppliers/SupplierCard";
+import { SupplierActionMenu } from "@/components/admin/suppliers/SupplierActionMenu";
 
 const DEFAULT_FILTERS: SuppliersFilters = { search: "", status: "all" };
 
@@ -36,7 +38,7 @@ export function SuppliersListPage() {
   const [sort, setSort] = useState<SuppliersSortOption>("nameAsc");
   const [drawer, setDrawer] = useState<DrawerState>(null);
   const [deleteTarget, setDeleteTarget] = useState<SupplierResponse | null>(null);
-  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"],getUserPermissions());
+  const canManageAccess = hasAnyPermission(["purchasing.suppliers.manage"], getUserPermissions());
 
   const hasActiveFilters = filters.search !== "" || filters.status !== "all";
 
@@ -79,7 +81,7 @@ export function SuppliersListPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <div>
         <h1 className="text-2xl font-semibold text-[--ink-primary]">
           {t("suppliers.page.title")}
@@ -100,17 +102,37 @@ export function SuppliersListPage() {
         canManageAccess={canManageAccess}
       />
 
-      <SuppliersTable
-        suppliers={visibleSuppliers}
-        isLoading={isLoading}
-        hasActiveFilters={hasActiveFilters}
-        onView={(supplier) => navigate(`${supplier.id}`)}
-        onEdit={(supplier) => setDrawer({ mode: "edit", supplier })}
-        onDelete={setDeleteTarget}
-        onBulkDelete={handleBulkDelete}
-        onCreate={() => setDrawer({ mode: "create", supplier: null })}
-      />
 
+      <div className="hidden sm:block">
+        <SuppliersTable
+          suppliers={visibleSuppliers}
+          isLoading={isLoading}
+          hasActiveFilters={hasActiveFilters}
+          onView={(supplier) => navigate(`${supplier.id}`)}
+          onEdit={(supplier) => setDrawer({ mode: "edit", supplier })}
+          onDelete={setDeleteTarget}
+          onBulkDelete={handleBulkDelete}
+          onCreate={() => setDrawer({ mode: "create", supplier: null })}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleSuppliers.map((supplier) => (
+          <SupplierCard
+            key={supplier.id}
+            supplier={supplier}
+            onClick={(id) => {
+              navigate(`${id}`)
+            }}
+            renderActions={() =>
+              <SupplierActionMenu
+                supplier={supplier}
+                onView={(supplier) => navigate(`${supplier.id}`)}
+                onEdit={(supplier) => setDrawer({ mode: "edit", supplier })}
+                onDelete={(supplier) => setDeleteTarget(supplier)}
+              />}
+          />
+        ))}
+      </div>
       <SupplierDrawer
         mode={drawer?.mode ?? "create"}
         supplier={drawer?.supplier ?? null}

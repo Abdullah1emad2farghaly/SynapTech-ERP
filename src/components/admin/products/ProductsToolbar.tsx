@@ -137,7 +137,7 @@ export function ProductsToolbar({
               className="flex h-10 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white transition-colors duration-150 ease-out hover:bg-[var(--signal-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40"
             >
               <Plus size={16} />
-              <span className="hidden sm:inline">
+              <span className="">
                 {t("products.toolbar.addProduct")}
               </span>
             </button>

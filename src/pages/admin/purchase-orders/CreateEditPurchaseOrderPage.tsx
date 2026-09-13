@@ -202,9 +202,8 @@ export function CreateEditPurchaseOrderPage() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit, (validationErrors) => {
-      console.log("FORM VALIDATION ERRORS:", validationErrors);
     })} className="flex flex-col">
-      <div className="flex flex-col gap-6 p-6 pb-28">
+      <div className="flex flex-col gap-6 py-6 md:px-6 px-2 pb-28">
         <button
           type="button"
           onClick={() => navigate(-1)}

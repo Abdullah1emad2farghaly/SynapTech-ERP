@@ -135,7 +135,7 @@ export function AccountDetailsPage() {
 
   if (isLoading || !form) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 py-6 md:px-6 px-2">
         <div className="h-16 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
         <div className="h-16 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
         <div className="h-48 animate-pulse rounded-[16px] bg-[var(--sunken)]" />
@@ -160,7 +160,7 @@ export function AccountDetailsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       {/* Hero header */}
       <div className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-5">
         <button

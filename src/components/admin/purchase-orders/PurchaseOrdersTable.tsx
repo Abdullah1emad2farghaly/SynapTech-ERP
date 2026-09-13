@@ -121,11 +121,11 @@ export function PurchaseOrdersTable({
     //     </div>
     //   ),
     // },
-    {
-      id: "warnings",
-      header: t("purchaseOrders.table.warnings"),
-      cell: (order) => <WarningsBadge warnings={order.warnings} />,
-    },
+    // {
+    //   id: "warnings",
+    //   header: t("purchaseOrders.table.warnings"),
+    //   cell: (order) => <WarningsBadge warnings={order.warnings} />,
+    // },
     {
       id: "actions",
       header: "",

@@ -18,19 +18,12 @@ export interface Product {
   sku: string;
   name: string;
   description: string | null;
-  // NOTE: Product.category is still stored/sent as a plain string (the category
-  // *name*, not an id/FK) even though the Create/Edit drawer now sources its options
-  // from a select box (see services/api/categories.api.ts + hooks/useCategories.ts).
-  // ASSUMPTION: unconfirmed whether the real Product API expects categoryId instead
-  // of category name — verify against the backend contract once confirmed.
+  
   categoryId: string;
-  // ASSUMPTION: same treatment as category — plain string, no confirmed UoM catalog.
   unitOfMeasure: string;
   costPrice: number;
   salePrice: number;
   isActive: boolean;
-  // ASSUMPTION: Departments/Branches confirmed no created/updated fields exist on
-  // those entities. Not assumed present here either — omitted until confirmed.
 }
 
 // export interface ProductListParams {

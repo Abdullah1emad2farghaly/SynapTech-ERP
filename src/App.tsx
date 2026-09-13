@@ -84,6 +84,8 @@ function DashboardLayout() {
     </>
   );
 }
+
+
 export const getCurrentUser = (): boolean => {
   const currentUser = window.localStorage.getItem("currentUser");
 

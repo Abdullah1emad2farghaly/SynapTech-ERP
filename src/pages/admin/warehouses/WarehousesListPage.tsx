@@ -22,6 +22,8 @@ import { DeleteWarehouseDialog } from "../../../components/admin/warehouses/Dele
 import type { WarehouseResponse } from "../../../types/warehouses.types";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { WarehouseActionMenu } from "@/components/admin/warehouses/WarehouseActionMenu";
+import { WarehouseCard } from "@/components/admin/warehouses/WarehouseCard";
 
 const DEFAULT_FILTERS: WarehousesFilters = {
   search: "",
@@ -98,40 +100,82 @@ export function WarehousesListPage() {
         canManageAccess={canManageAccess}
       />
 
-      <WarehousesDataTable
-        warehouses={visibleWarehouses}
-        branches={branches}
-        isLoading={isLoading}
-        hasActiveFilters={hasActiveFilters}
-        selectedIds={selectedIds}
-        onSelectionChange={setSelectedIds}
-        onView={(warehouse) => setDrawer({ mode: "view", warehouse })}
-        onEdit={(warehouse) => setDrawer({ mode: "edit", warehouse })}
-        onToggleActive={(warehouse) =>
-          toast.promise(
-            setActive.mutateAsync({
-              id: warehouse.id,
-              payload: {
-                name: warehouse.name,
-                code: warehouse.code,
-                branchId: warehouse.branchId,
-                isActive: !warehouse.isActive,
-              },
-            }),
-            {
-              loading: t("common.status.updating"),
-              success: warehouse.isActive
-                ? t("warehouses.toasts.deactivated")
-                : t("warehouses.toasts.activated"),
-              error: t("common.errors.actionFailed"),
+      <div className="hidden sm:block">
+        <WarehousesDataTable
+          warehouses={visibleWarehouses}
+          branches={branches}
+          isLoading={isLoading}
+          hasActiveFilters={hasActiveFilters}
+          selectedIds={selectedIds}
+          onSelectionChange={setSelectedIds}
+          onView={(warehouse) => setDrawer({ mode: "view", warehouse })}
+          onEdit={(warehouse) => setDrawer({ mode: "edit", warehouse })}
+          onToggleActive={(warehouse) =>
+            toast.promise(
+              setActive.mutateAsync({
+                id: warehouse.id,
+                payload: {
+                  name: warehouse.name,
+                  code: warehouse.code,
+                  branchId: warehouse.branchId,
+                  isActive: !warehouse.isActive,
+                },
+              }),
+              {
+                loading: t("common.status.updating"),
+                success: warehouse.isActive
+                  ? t("warehouses.toasts.deactivated")
+                  : t("warehouses.toasts.activated"),
+                error: t("common.errors.actionFailed"),
+              }
+            )
+          }
+          onDelete={setDeleteTarget}
+          onCreate={() => setDrawer({ mode: "create", warehouse: null })}
+          onResetFilters={() => setFilters(DEFAULT_FILTERS)}
+          canManageAccess={canManageAccess}
+        />
+      </div>
+
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleWarehouses.map((warehouse: WarehouseResponse) => (
+          <WarehouseCard
+            key={warehouse.id}
+            warehouse={warehouse}
+            branchName={warehouse.branchId ? branches.find((b) => b.value === warehouse.branchId)?.label : null}
+            onClick={(warehouse) => setDrawer({ mode: "view", warehouse })}
+            renderActions={() =>
+              <WarehouseActionMenu
+                warehouse={warehouse}
+                onView={(warehouse) => setDrawer({ mode: "view", warehouse })}
+                onEdit={(warehouse) => setDrawer({ mode: "edit", warehouse })}
+                onToggleActive={(warehouse) =>
+                  toast.promise(
+                    setActive.mutateAsync({
+                      id: warehouse.id,
+                      payload: {
+                        name: warehouse.name,
+                        code: warehouse.code,
+                        branchId: warehouse.branchId,
+                        isActive: !warehouse.isActive,
+                      },
+                    }),
+                    {
+                      loading: t("common.status.updating"),
+                      success: warehouse.isActive
+                        ? t("warehouses.toasts.deactivated")
+                        : t("warehouses.toasts.activated"),
+                      error: t("common.errors.actionFailed"),
+                    }
+                  )}
+                onDelete={setDeleteTarget}
+              />
             }
-          )
-        }
-        onDelete={setDeleteTarget}
-        onCreate={() => setDrawer({ mode: "create", warehouse: null })}
-        onResetFilters={() => setFilters(DEFAULT_FILTERS)}
-        canManageAccess={canManageAccess}
-      />
+          />
+        ))}
+      </div>
+
+
 
       <WarehouseDrawer
         mode={drawer?.mode ?? "create"}

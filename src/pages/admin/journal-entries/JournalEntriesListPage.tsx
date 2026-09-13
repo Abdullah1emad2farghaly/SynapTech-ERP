@@ -11,11 +11,12 @@ import {
   type JournalEntriesFilters,
   type JournalEntriesSortOption,
 } from "../../../components/admin/journal-entries/JournalEntriesToolbar";
-import { JournalEntriesTable } from "../../../components/admin/journal-entries/JournalEntriesTable";
+import { JournalEntriesTable, RowActions } from "../../../components/admin/journal-entries/JournalEntriesTable";
 import { PostJournalDialog } from "../../../components/admin/journal-entries/PostJournalDialog";
 import { ReverseJournalDialog } from "../../../components/admin/journal-entries/ReverseJournalDialog";
 import { DeleteJournalDialog } from "../../../components/admin/journal-entries/DeleteJournalDialog";
 import type { JournalEntryResponse } from "../../../types/journalEntries.types";
+import { JournalEntryCard } from "@/components/admin/journal-entries/JournalEntryCard";
 
 const DEFAULT_FILTERS: JournalEntriesFilters = {
   search: "",
@@ -39,7 +40,7 @@ export function JournalEntriesListPage() {
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [sort, setSort] = useState<JournalEntriesSortOption>("dateNewest");
   const [dialog, setDialog] = useState<DialogState>(null);
-  
+
 
 
   const visibleEntries = useMemo(() => {
@@ -99,14 +100,34 @@ export function JournalEntriesListPage() {
         onCreate={() => navigate("/accounting/journal-entries/create")}
       />
 
-      <JournalEntriesTable
-        entries={visibleEntries}
-        isLoading={isLoading}
-        onView={(entry) => navigate(`/accounting/journal-entries/${entry.id}`)}
-        onPost={(entry) => setDialog({ type: "post", entry })}
-        onReverse={(entry) => setDialog({ type: "reverse", entry })}
-        onDelete={(entry) => setDialog({ type: "delete", entry })}
-      />
+      <div className="hidden sm:block">
+        <JournalEntriesTable
+          entries={visibleEntries}
+          isLoading={isLoading}
+          onView={(entry) => navigate(`/accounting/journal-entries/${entry.id}`)}
+          onPost={(entry) => setDialog({ type: "post", entry })}
+          onReverse={(entry) => setDialog({ type: "reverse", entry })}
+          onDelete={(entry) => setDialog({ type: "delete", entry })}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleEntries.map((entry) => (
+          <JournalEntryCard
+            key={entry.id}
+            entry={entry}
+            onClick={() => navigate(`/accounting/journal-entries/${entry.id}`)}
+            renderActions={() => (
+              <RowActions
+                entry={entry}
+                onView={(e) => navigate(`/accounting/journal-entries/${e.id}`)}
+                onPost={(e) => setDialog({ type: "post", entry: e })}
+                onReverse={(e) => setDialog({ type: "reverse", entry: e })}
+                onDelete={(e) => setDialog({ type: "delete", entry: e })}
+              />
+            )}
+          />
+        ))}
+      </div>
 
       <PostJournalDialog
         entry={dialog?.type === "post" ? dialog.entry : null}

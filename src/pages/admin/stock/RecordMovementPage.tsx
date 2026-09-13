@@ -261,10 +261,6 @@ export function RecordMovementPage() {
                     {t("stock.movement.errors.required")}
                   </p>
                 )}
-
-              <p className="mt-1 text-xs text-[var(--ink-tertiary)]">
-                {t("stock.movement.movementTypeNote")}
-              </p>
             </div>
 
             {/* Quantity */}

@@ -15,6 +15,7 @@ import { StockRowActionMenu } from "../../../components/admin/stock/StockRowActi
 import { useStockOverview } from "../../../hooks/useStockOverview";
 import { useProducts } from "../../../hooks/useProducts";
 import { useWarehouses } from "../../../hooks/useWarehouses";
+import { StockRowCard } from "@/components/admin/stock/StockRowCard";
 
 export function StockOverviewPage() {
   const { t } = useTranslation();
@@ -202,26 +203,36 @@ export function StockOverviewPage() {
             className="flex h-10 items-center gap-2 rounded-md bg-[var(--signal)] px-4 text-sm font-medium text-white transition-colors duration-150 ease-out hover:bg-[var(--signal-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--synapse)]/40"
           >
             <Plus size={16} />
-            <span className="hidden sm:inline">
+            <span className="">
               {t("stock.new-movement")}
             </span>
           </button>
         </div>
       </div>
 
-      <StockOverviewTable
-        rows={sortedRows}
-        isLoading={isLoadingWarehouseList}
-        isFiltered={isFiltered}
-        onClearFilters={handleClearFilters}
-        sortColumnId={sortColumnId}
-        sortDirection={sortDirection}
-        onSortChange={(columnId, direction) => {
-          setSortColumnId(direction ? columnId : null);
-          setSortDirection(direction);
-        }}
-        renderRowActions={renderRowActions}
-      />
+      <div className="hidden sm:block">
+        <StockOverviewTable
+          rows={sortedRows}
+          isLoading={isLoadingWarehouseList}
+          isFiltered={isFiltered}
+          onClearFilters={handleClearFilters}
+          sortColumnId={sortColumnId}
+          sortDirection={sortDirection}
+          onSortChange={(columnId, direction) => {
+            setSortColumnId(direction ? columnId : null);
+            setSortDirection(direction);
+          }}
+          renderRowActions={renderRowActions}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {sortedRows.map((row) => (
+          <StockRowCard 
+            key={`${row.productId}-${row.warehouseId}`} 
+            row={row} 
+            renderActions={() => renderRowActions(row)} />
+        ))}
+      </div>
     </div>
   );
 }

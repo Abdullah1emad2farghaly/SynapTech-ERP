@@ -19,12 +19,16 @@ import { DataTablePagination } from "../../../components/common/DataTable";
 import type { Product } from "../../../services/api/products.api";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { ProductActionMenu } from "@/components/admin/products/ProductActionMenu";
+import { ProductCard } from "@/components/admin/products/ProductCard";
+import { useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 20;
 
 export function ProductsListPage() {
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState<"all" | "active" | "inactive">("all");
@@ -41,11 +45,11 @@ export function ProductsListPage() {
 
   const { data: products = [], isLoading, isFetching, isError, refetch } = useProducts();
 
-  
+
   const categoryOptions = useMemo(
-  () => Array.from(new Set(products?.map((product: Product) => product.categoryId))),
-  [products]
-);
+    () => Array.from(new Set(products?.map((product: Product) => product.categoryId))),
+    [products]
+  );
 
 
   const kpis = useMemo(
@@ -70,13 +74,7 @@ export function ProductsListPage() {
     setDrawerOpen(true);
   }
 
-  function openDuplicateDrawer(product: Product): void {
-    setActiveProduct(product);
-    setDrawerMode("duplicate");
-    setDrawerOpen(true);
-  }
 
-  
 
   function handleSortChange(columnId: string, direction: "asc" | "desc"): void {
     setSortColumnId(columnId);
@@ -85,7 +83,7 @@ export function ProductsListPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-[1600px] flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+    <div className="mx-auto flex max-w-[1600px] flex-col gap-6 py-6 sm:px-6 px-2 lg:px-8">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold text-[var(--ink-primary)]">
           {t("products.pageTitle")}
@@ -134,21 +132,40 @@ export function ProductsListPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.16, ease: "easeOut" }}
         >
-          <ProductsDataTable
-            products={products}
-            isLoading={isLoading}
-            hasError={isError}
-            onRetry={() => refetch()}
-            sortColumnId={sortColumnId}
-            sortDirection={sortDirection}
-            onSortChange={handleSortChange}
-            onEdit={openEditDrawer}
-            onDelete={() => {
-              
-            }}
-            canManageAccess={canManageAccess}
-          />
+          <div className="hidden sm:block">
+            <ProductsDataTable
+              products={products}
+              isLoading={isLoading}
+              hasError={isError}
+              onRetry={() => refetch()}
+              sortColumnId={sortColumnId}
+              sortDirection={sortDirection}
+              onSortChange={handleSortChange}
+              onEdit={openEditDrawer}
+              onDelete={() => { }}
+              canManageAccess={canManageAccess}
+            />
+          </div>
         </motion.div>
+        <div className="flex flex-col gap-3 p-4 sm:hidden">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => navigate(`${product.id}`)}
+              renderActions={() =>
+                canManageAccess && (
+                  <ProductActionMenu
+                    product={product}
+                    onEdit={() => openEditDrawer(product)}
+                    onDelete={() => { }}
+                    onViewDetails={() => navigate(`${product.id}`)}
+                  />
+                )
+              }
+            />
+          ))}
+        </div>
 
         {/* {data && data.total > PAGE_SIZE && (
           <div className="border-t border-[var(--hairline)] p-4">

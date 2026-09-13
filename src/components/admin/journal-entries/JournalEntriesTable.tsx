@@ -35,7 +35,7 @@ interface JournalEntriesTableProps {
   onDelete: (entry: JournalEntryResponse) => void;
 }
 
-function lineTotals(entry: JournalEntryResponse) {
+export function lineTotals(entry: JournalEntryResponse) {
   const debit = entry.lines.reduce((s, l) => s + l.debit, 0);
   const credit = entry.lines.reduce((s, l) => s + l.credit, 0);
 
@@ -54,7 +54,7 @@ interface RowActionsProps {
   onDelete: JournalEntriesTableProps["onDelete"];
 }
 
-function RowActions({
+export function RowActions({
   entry,
   onView,
   onPost,

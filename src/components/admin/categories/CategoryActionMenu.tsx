@@ -34,7 +34,7 @@ export function CategoryActionMenu({
   onDeactivateRequest,
   onDeleteRequest,
 }: CategoryActionMenuProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -57,7 +57,7 @@ export function CategoryActionMenu({
 
       setPosition({
         top: rect.bottom + 8,
-        left: rect.right - 208, // menu width (w-52 = 208px)
+        left: i18n.dir() === "rtl" ? rect.right - 28 : rect.right - 208, // menu width (w-52 = 208px)
       });
     }
 

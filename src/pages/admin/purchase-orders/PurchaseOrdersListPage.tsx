@@ -20,6 +20,8 @@ import {
   type PurchaseOrderDialogAction,
 } from "../../../components/admin/purchase-orders/PurchaseOrderActionDialog";
 import type { PurchaseOrderResponse } from "../../../types/purchaseOrders.types";
+import { PurchaseOrderCard } from "@/components/admin/purchase-orders/PurchaseOrderCard";
+import { PurchaseOrderActionMenu } from "@/components/admin/purchase-orders/PurchaseOrderActionMenu";
 
 export function PurchaseOrdersListPage() {
   const { t } = useTranslation();
@@ -86,7 +88,7 @@ export function PurchaseOrdersListPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <div>
         <h1 className="text-2xl font-semibold text-[--ink-primary]">{t("purchaseOrders.page.title")}</h1>
         <p className="mt-1 text-sm text-[--ink-secondary]">{t("purchaseOrders.page.description")}</p>
@@ -114,20 +116,43 @@ export function PurchaseOrdersListPage() {
         statusCounts={statusCounts}
       />
 
-      <PurchaseOrdersTable
-        orders={visibleOrders}
-        isLoading={isLoading}
-        hasActiveFilters={hasActiveFilters}
-        onView={(order) => navigate(`${order.id}`)}
-        onEdit={(order) => navigate(`${order.id}/edit`)}
-        onSubmit={(order) => setDialog({ action: "submit", order })}
-        onApprove={(order) => setDialog({ action: "approve", order })}
-        onReceive={(order) => navigate(`${order.id}/receive`)}
-        onCancel={(order) => setDialog({ action: "cancel", order })}
+      <div className="hidden sm:block">
+        <PurchaseOrdersTable
+          orders={visibleOrders}
+          isLoading={isLoading}
+          hasActiveFilters={hasActiveFilters}
+          onView={(order) => navigate(`${order.id}`)}
+          onEdit={(order) => navigate(`${order.id}/edit`)}
+          onSubmit={(order) => setDialog({ action: "submit", order })}
+          onApprove={(order) => setDialog({ action: "approve", order })}
+          onReceive={(order) => navigate(`${order.id}/receive`)}
+          onCancel={(order) => setDialog({ action: "cancel", order })}
+          onBulkCancel={handleBulkCancel}
+          onCreate={() => navigate("create")}
+        />
+      </div>
 
-        onBulkCancel={handleBulkCancel}
-        onCreate={() => navigate("create")}
-      />
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleOrders.map((order) => (
+          <PurchaseOrderCard
+            key={order.id}
+            order={order}
+            onClick={(id) => {
+              navigate(`${id}`)
+            }}
+            renderActions={() =>
+              <PurchaseOrderActionMenu
+                order={order}
+                onView={(order) => navigate(`${order.id}`)}
+                onEdit={(order) => navigate(`${order.id}/edit`)}
+                onSubmit={(order) => setDialog({ action: "submit", order })}
+                onApprove={(order) => setDialog({ action: "approve", order })}
+                onReceive={(order) => navigate(`${order.id}/receive`)}
+                onCancel={(order) => setDialog({ action: "cancel", order })}
+              />}
+          />
+        ))}
+      </div>
 
       <PurchaseOrderActionDialog
         action={dialog?.action ?? null}

@@ -17,6 +17,7 @@ import {
 import { canPerform } from "../../../utils/purchaseOrderWorkflow";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { LineItemsCardList } from "@/components/admin/purchase-orders/LineItemsCardList";
 
 export function PurchaseOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ export function PurchaseOrderDetailsPage() {
   const canCancelAccess = hasAnyPermission(["purchasing.orders.cancel"], getUserPermissions())
   const canReceiveAccess = hasAnyPermission(["purchasing.orders.receive"], getUserPermissions())
 
-  console.log(order)
+
   const access = {
     canManageAccess,
     canCteateAccess,
@@ -42,7 +43,7 @@ export function PurchaseOrderDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 py-6 md:px-6 px-2">
         <div className="h-8 w-64 animate-pulse rounded bg-[--sunken]" />
         <div className="h-40 animate-pulse rounded-lg bg-[--sunken]" />
       </div>
@@ -50,14 +51,14 @@ export function PurchaseOrderDetailsPage() {
   }
 
   if (!order) {
-    return <div className="p-6 text-center text-sm text-[--ink-secondary]">{t("purchaseOrders.details.notFound")}</div>;
+    return <div className="py-6 md:px-6 px-2 text-center text-sm text-[--ink-secondary]">{t("purchaseOrders.details.notFound")}</div>;
   }
 
   const totalOrdered = order.lines.reduce((s, l) => s + l.quantity, 0);
   const totalReceived = order.lines.reduce((s, l) => s + l.receivedQuantity, 0);
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2">
       <button
         type="button"
         onClick={() => navigate("/purchasing/purchase-orders")}
@@ -166,7 +167,12 @@ export function PurchaseOrderDetailsPage() {
 
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-[--ink-primary]">{t("purchaseOrders.details.lineItems")}</h2>
-        <LineItemsReadOnlyTable lines={order.lines} />
+        <div className="hidden sm:block">
+          <LineItemsReadOnlyTable lines={order.lines} />
+        </div>
+        <div className="sm:hidden">
+          <LineItemsCardList lines={order.lines} />
+        </div>
       </div>
 
       {/* <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">

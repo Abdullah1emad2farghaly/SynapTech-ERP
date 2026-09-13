@@ -19,6 +19,7 @@ import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { ReceiveLinesCardList } from "@/components/admin/purchase-orders/ReceiveLinesCardList";
 
 export function ReceiveGoodsPage() {
   const { id } = useParams<{ id: string }>();
@@ -57,7 +58,7 @@ export function ReceiveGoodsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 py-6 md:px-6 px-2">
         <div className="h-8 w-64 animate-pulse rounded bg-[--sunken]" />
         <div className="h-64 animate-pulse rounded-lg bg-[--sunken]" />
       </div>
@@ -85,7 +86,7 @@ export function ReceiveGoodsPage() {
     }
 
     try {
-      
+
       await receiveGoods.mutateAsync({ lines: receivedLines });
       toast.success(t("purchaseOrders.toasts.received"));
       navigate(`/purchasing/purchase-orders/${order.id}`);
@@ -98,7 +99,7 @@ export function ReceiveGoodsPage() {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6 pb-28">
+    <div className="flex flex-col gap-6 py-6 md:px-6 px-2 pb-28">
       <button
         type="button"
         onClick={() => navigate(`/purchasing/purchase-orders/${order.id}`)}
@@ -115,7 +116,7 @@ export function ReceiveGoodsPage() {
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-[--hairline]">
+      <div className="hidden sm:block overflow-hidden rounded-lg border border-[--hairline]">
         <table className="w-full text-sm">
           <thead className="bg-[--sunken] text-xs text-[--ink-secondary]">
             <tr>
@@ -158,6 +159,9 @@ export function ReceiveGoodsPage() {
             })}
           </tbody>
         </table>
+      </div>
+      <div className="sm:hidden">
+        <ReceiveLinesCardList lines={orders} receivingNow={receivingNow} onQuantityChange={setQuantity} />
       </div>
 
       <div className="fixed inset-x-0 bottom-0 flex flex-wrap items-center justify-between gap-3 border-t border-[--hairline] bg-[--panel] px-6 py-4">

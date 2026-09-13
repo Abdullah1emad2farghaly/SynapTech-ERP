@@ -33,7 +33,7 @@ export default function InventoryOverviewPage() {
   const isFullyEmpty = !isLoading && stats && stats.totalProducts === 0 && stats.totalWarehouses === 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="py-6 md:px-6 px-2 max-w-7xl mx-auto">
       <div className="mb-1">
         <h1 className="text-2xl font-display font-semibold text-ink-primary">
           {t('inventory.overview.pageTitle')}
@@ -44,7 +44,7 @@ export default function InventoryOverviewPage() {
       <InventoryCategoryNav />
 
       {isError ? (
-        <div className="bg-panel border border-error/30 rounded-lg p-6 text-center">
+        <div className="bg-panel border border-error/30 rounded-lg py-6 md:px-6 px-2 text-center">
           <p className="text-sm text-error mb-3">{t('inventory.overview.errorTitle')}</p>
           <button onClick={refetch} className="text-sm font-medium text-signal hover:text-signal-hover">
             {t('inventory.overview.retry')}

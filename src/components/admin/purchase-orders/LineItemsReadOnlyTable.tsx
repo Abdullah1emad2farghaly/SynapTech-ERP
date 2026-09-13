@@ -25,6 +25,7 @@ export function LineItemsReadOnlyTable({ lines }: LineItemsReadOnlyTableProps) {
         </thead>
         <tbody>
           {lines.map((line) => {
+            console.log(line)
             const remaining = line.quantity - line.receivedQuantity;
             return (
               <tr key={line.id} className="border-t border-[--hairline] hover:bg-[--sunken]">
@@ -32,7 +33,7 @@ export function LineItemsReadOnlyTable({ lines }: LineItemsReadOnlyTableProps) {
                 <td className="px-3 py-2 text-end text-[--ink-primary]">{line.quantity}</td>
                 <td className="px-3 py-2 text-end text-[--ink-primary]">{line.unitPrice.toFixed(2)}</td>
                 <td className="px-3 py-2 text-end font-medium text-[--ink-primary]">
-                  {line?.lineTotal?.toFixed(2)}
+                  {(line.unitPrice * line.quantity).toFixed(2)}
                 </td>
                 <td className="px-3 py-2 text-end text-[--ink-secondary]">{line.receivedQuantity}</td>
                 <td className={`px-3 py-2 text-end ${remaining > 0 ? "text-[--warning]" : "text-[--success]"}`}>

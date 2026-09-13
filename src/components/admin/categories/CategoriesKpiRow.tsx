@@ -41,7 +41,7 @@ export function CategoriesKpiRow({ total, root, child, active, inactive }: Categ
   const { t } = useTranslation();
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       <KpiCard icon={<FolderTree size={18} />} label={t("categories.kpi.total")} value={total} />
       <KpiCard icon={<GitBranch size={18} />} label={t("categories.kpi.root")} value={root} />
       <KpiCard icon={<Layers size={18} />} label={t("categories.kpi.child")} value={child} />

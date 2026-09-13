@@ -37,7 +37,7 @@ export default function HrOverviewPage() {
   const isFullyEmpty = !isLoading && stats && stats.totalEmployees === 0 && stats.totalLeaveRequests === 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="py-6 md:px-6 px-2 max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-1">
         <div>
           <h1 className="text-2xl font-display font-semibold text-ink-primary">{t('hr.overview.pageTitle')}</h1>
