@@ -97,10 +97,9 @@ export function CompanySettingsPage() {
     });
   });
 
-
   if (isLoading) {
     return (
-      <div className="mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <CompanySettingsSkeleton />
       </div>
     );
@@ -108,7 +107,7 @@ export function CompanySettingsPage() {
 
   if (isError || !company) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl py-6 md:px-6 px-2 sm:py-8 lg:px-8">
         <CompanyPageHeader />
         <ErrorState
           title={t('company.error.loadTitle')}
@@ -120,14 +119,14 @@ export function CompanySettingsPage() {
   }
 
   return (
-    <div className="mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-2 py-6 sm:px-6 sm:py-8 lg:px-8">
       <CompanyPageHeader />
 
       <form onSubmit={onSubmit} noValidate>
-        <div className="grid lg:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6">
           <CompanyProfileForm register={register} errors={errors} disabled={updateCompany.isPending} />
 
-          <div className='flex flex-col gap-3'>
+          <div className="flex flex-col gap-3">
             <CompanyStatusCard
               isActive={isActive}
               onChange={(checked) => setValue('isActive', checked, { shouldDirty: true })}
@@ -135,7 +134,8 @@ export function CompanySettingsPage() {
             />
 
             <CompanySystemInfoCard id={company.id} />
-            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+
+            <div className="mt-2 flex flex-col-reverse gap-3 sm:mt-6 sm:flex-row sm:justify-end">
               <button
                 type="submit"
                 disabled={!isDirty || updateCompany.isPending}
@@ -146,8 +146,6 @@ export function CompanySettingsPage() {
             </div>
           </div>
         </div>
-
-
       </form>
 
       {/* <ConfirmationDialog

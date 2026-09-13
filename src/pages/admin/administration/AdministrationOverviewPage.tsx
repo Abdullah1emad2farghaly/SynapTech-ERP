@@ -1,12 +1,4 @@
-// Intended path: src/pages/admin/administration/AdministrationOverviewPage.tsx
-// No hero card here, unlike Inventory/Accounting/HR — there's no natural
-// single "headline number" in this domain (no money, no one obvious
-// aggregate), so rather than force one, the page leads with two genuinely
-// actionable data-quality alerts instead (Users Without Roles, Roles With
-// No Users), both real cross-references, not invented metrics.
-// Also, like Organization, there is NO date/createdAt field anywhere in
-// this domain (User/Role/Permission) — no trend chart possible, no Recent
-// Activity section, same genuine limitation, not an oversight.
+
 
 import { useTranslation } from 'react-i18next';
 import { AdministrationCategoryNav } from '../../../components/admin/administration/AdministrationCategoryNav';
@@ -33,7 +25,7 @@ export default function AdministrationOverviewPage() {
   const hasAlerts = (stats?.usersWithoutRolesCount ?? 0) > 0 || (stats?.rolesWithNoUsers.length ?? 0) > 0;
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="py-6 md:px-6 px-2 max-w-7xl mx-auto">
       <div className="mb-1">
         <h1 className="text-2xl font-display font-semibold text-ink-primary">
           {t('administration.overview.pageTitle')}

@@ -1,15 +1,12 @@
 // src/components/admin/departments/DepartmentsTreeTable.tsx
 //
-// The default view for the Departments module. Built independently of the
-// generic DataTable — a tree doesn't fit a flat, server-paginated rows
-// model, and GET /api/Departments returns the full set with no documented
-// pagination anyway (org-structure data, not user-record scale). This
-// component owns expand/collapse state locally; the parent page owns
-// which department is "selected" for drawers/dialogs.
-//
-// Accessibility: proper ARIA tree semantics (role="tree"/"treeitem",
-// aria-expanded, aria-level) rather than relying on visual indentation
-// alone, per the design doc's accessibility notes.
+// Desktop keeps the original row layout untouched. Mobile gets a parallel
+// recursive render (renderMobileNode) — same tree data, same
+// collapsedIds/toggleCollapsed state, same onRowClick/renderRowActions
+// props — but each node renders as its own EntityCard-styled card
+// (chevron + name + status in the header, branch as a field row),
+// indented by depth via marginInlineStart, with children nested beneath
+// in their own gap-3 stack.
 
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -167,7 +164,77 @@ export function DepartmentsTreeTable({
     );
   }
 
-  
+  function renderMobileNode(node: TreeNode, level: number): React.ReactNode {
+    const hasChildren = node.children.length > 0;
+    const isCollapsed = collapsedIds.has(node.id);
+
+    return (
+      <div key={node.id} style={{ marginInlineStart: `${level * 16}px` }} className="flex flex-col gap-3">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => onRowClick?.(node)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onRowClick?.(node);
+            }
+          }}
+          className="flex cursor-pointer flex-col gap-3 rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-4 transition-colors duration-150 hover:bg-[var(--sunken)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--synapse)]"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-2">
+              {hasChildren ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleCollapsed(node.id);
+                  }}
+                  aria-label={isCollapsed ? "Expand" : "Collapse"}
+                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
+                >
+                  <ChevronRight
+                    size={14}
+                    className={`shrink-0 transition-transform duration-150 rtl:rotate-180 ${!isCollapsed ? "rotate-90 rtl:rotate-90" : ""
+                      }`}
+                  />
+                </button>
+              ) : (
+                <span className="h-5 w-5 shrink-0" aria-hidden="true" />
+              )}
+              <div className="min-w-0">
+                <p className="truncate font-medium text-[var(--ink-primary)]">{node.name}</p>
+                <div className="mt-1">
+                  <StatusBadge
+                    status={node.isActive ? "active" : "inactive"}
+                    label={node.isActive ? t("users.status.active") : t("users.status.inactive")}
+                  />
+                </div>
+              </div>
+            </div>
+            <div onClick={(e) => e.stopPropagation()} className="shrink-0">
+              {renderRowActions?.(node)}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-1.5 text-sm">
+            <div className="flex justify-between gap-2">
+              <span className="text-[var(--ink-tertiary)]">{t("departments.column.branch")}</span>
+              <span className="truncate text-[var(--ink-primary)]">{node.branchName}</span>
+            </div>
+          </div>
+        </div>
+
+        {hasChildren && !isCollapsed && (
+          <div className="flex flex-col gap-3">
+            {node.children.map((child) => renderMobileNode(child, level + 1))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (hasError) {
     return (
       <div className="rounded-[16px] border border-[var(--hairline)] px-4 py-10 text-center">
@@ -212,16 +279,22 @@ export function DepartmentsTreeTable({
   }
 
   return (
-    <div role="tree" className="overflow-y-auto  rounded-[16px] border border-[var(--hairline)]">
-      <div className="min-w-max">
-        <div className="flex items-center gap-3 bg-[var(--sunken)] px-4 py-3 text-xs font-medium text-[var(--ink-secondary)]">
-          <span className="flex-1">{t("departments.column.department")}</span>
-          <span className="w-32 shrink-0">{t("departments.column.branch")}</span>
-          <span className="w-24 shrink-0">{t("departments.column.status")}</span>
-          <span className="w-10 shrink-0" />
+    <>
+      <div role="tree" className="hidden sm:block overflow-y-auto rounded-[16px] border border-[var(--hairline)]">
+        <div className="min-w-max">
+          <div className="flex items-center gap-3 bg-[var(--sunken)] px-4 py-3 text-xs font-medium text-[var(--ink-secondary)]">
+            <span className="flex-1">{t("departments.column.department")}</span>
+            <span className="w-32 shrink-0">{t("departments.column.branch")}</span>
+            <span className="w-24 shrink-0">{t("departments.column.status")}</span>
+            <span className="w-10 shrink-0" />
+          </div>
+          {tree.map((node) => renderNode(node, 0))}
         </div>
-        {tree.map((node) => renderNode(node, 0))}
       </div>
-    </div>
+
+      <div className="flex flex-col gap-3 sm:hidden">
+        {tree.map((node) => renderMobileNode(node, 0))}
+      </div>
+    </>
   );
 }

@@ -26,6 +26,7 @@ import { useUsers } from "../../../hooks/useUsers"; // used only to check hasAss
 import toast from "react-hot-toast";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
+import { DepartmentCard } from "@/components/admin/departments/DepartmentCard";
 
 type ViewMode = "tree" | "flat";
 type DrawerTarget =
@@ -166,25 +167,25 @@ export function DepartmentsPage() {
 
   async function handleDrawerSubmit(values: DepartmentFormValues, id?: string) {
     try {
-       if (id) {
-      await updateMutation.mutateAsync({ id, ...values });
-      toast.success(t("departments.toast.updated",{
-        name: values.name
-      }))
-    } else {
-      await createMutation.mutateAsync({
-        name: values.name,
-        branchId: values.branchId,
-        parentDepartmentId: values.parentDepartmentId,
-      });
-      toast.success(t("departments.toast.created",{
-        name: values.name
-      }))
-    }
-    setDrawerTarget(null);
-    refetch();
+      if (id) {
+        await updateMutation.mutateAsync({ id, ...values });
+        toast.success(t("departments.toast.updated", {
+          name: values.name
+        }))
+      } else {
+        await createMutation.mutateAsync({
+          name: values.name,
+          branchId: values.branchId,
+          parentDepartmentId: values.parentDepartmentId,
+        });
+        toast.success(t("departments.toast.created", {
+          name: values.name
+        }))
+      }
+      setDrawerTarget(null);
+      refetch();
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors);
       }
       throw error
@@ -302,22 +303,20 @@ export function DepartmentsPage() {
             <button
               type="button"
               onClick={() => setViewMode("tree")}
-              className={`px-3 py-2 text-sm font-medium ${
-                viewMode === "tree"
+              className={`px-3 py-2 text-sm font-medium ${viewMode === "tree"
                   ? "bg-[var(--signal)] text-white"
                   : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
-              }`}
+                }`}
             >
               {t("departments.list.viewToggle.tree")}
             </button>
             <button
               type="button"
               onClick={() => setViewMode("flat")}
-              className={`px-3 py-2 text-sm font-medium ${
-                viewMode === "flat"
+              className={`px-3 py-2 text-sm font-medium ${viewMode === "flat"
                   ? "bg-[var(--signal)] text-white"
                   : "bg-[var(--panel)] text-[var(--ink-secondary)] hover:bg-[var(--sunken)]"
-              }`}
+                }`}
             >
               {t("departments.list.viewToggle.flat")}
             </button>
@@ -346,22 +345,36 @@ export function DepartmentsPage() {
           renderRowActions={renderRowActions}
         />
       ) : (
-        <DepartmentsFlatTable
-          rows={flatRows}
-          isLoading={isLoading}
-          hasError={isError}
-          onRetry={() => refetch()}
-          onClearFilters={handleClearFilters}
-          isFiltered={isFiltered}
-          sortColumnId={sortColumnId}
-          sortDirection={sortDirection}
-          onSortChange={(columnId, direction) => {
-            setSortColumnId(direction ? columnId : null);
-            setSortDirection(direction);
-          }}
-          onRowClick={(row) => setDrawerTarget({ kind: "details", id: row.id })}
-          renderRowActions={renderRowActions}
-        />
+        <>
+          <div className="hidden sm:block">
+            <DepartmentsFlatTable
+              rows={flatRows}
+              isLoading={isLoading}
+              hasError={isError}
+              onRetry={() => refetch()}
+              onClearFilters={handleClearFilters}
+              isFiltered={isFiltered}
+              sortColumnId={sortColumnId}
+              sortDirection={sortDirection}
+              onSortChange={(columnId, direction) => {
+                setSortColumnId(direction ? columnId : null);
+                setSortDirection(direction);
+              }}
+              onRowClick={(row) => setDrawerTarget({ kind: "details", id: row.id })}
+              renderRowActions={renderRowActions}
+            />
+          </div>
+          <div className="flex flex-col gap-3 sm:hidden">
+            {flatRows.map((row) => (
+              <DepartmentCard
+                key={row.id}
+                row={row}
+                onClick={() => setDrawerTarget({ kind: "details", id: row.id })}
+                renderActions={() => renderRowActions(row)}
+              />
+            ))}
+          </div>
+        </>
       )}
 
       <DepartmentDrawer
@@ -370,22 +383,22 @@ export function DepartmentsPage() {
         initialValues={
           editingDepartment
             ? {
-                id: editingDepartment.id,
-                name: editingDepartment.name,
-                branchId: editingDepartment.branchId,
-                parentDepartmentId: editingDepartment.parentDepartmentId,
-                isActive: editingDepartment.isActive,
-              }
+              id: editingDepartment.id,
+              name: editingDepartment.name,
+              branchId: editingDepartment.branchId,
+              parentDepartmentId: editingDepartment.parentDepartmentId,
+              isActive: editingDepartment.isActive,
+            }
             : null
         }
         duplicateFrom={
           duplicatingDepartment
             ? {
-                name: duplicatingDepartment.name,
-                branchId: duplicatingDepartment.branchId,
-                parentDepartmentId: duplicatingDepartment.parentDepartmentId,
-                isActive: duplicatingDepartment.isActive,
-              }
+              name: duplicatingDepartment.name,
+              branchId: duplicatingDepartment.branchId,
+              parentDepartmentId: duplicatingDepartment.parentDepartmentId,
+              isActive: duplicatingDepartment.isActive,
+            }
             : null
         }
         branchOptions={branchOptions}
@@ -411,22 +424,22 @@ export function DepartmentsPage() {
         department={
           detailsDepartment
             ? {
-                id: detailsDepartment.id,
-                name: detailsDepartment.name,
-                branchName: branchNameById.get(detailsDepartment.branchId) ?? "—",
-                parentDepartmentName: detailsDepartment.parentDepartmentId
-                  ? (departmentNameById.get(detailsDepartment.parentDepartmentId) ?? null)
-                  : null,
-                isActive: detailsDepartment.isActive,
-              }
+              id: detailsDepartment.id,
+              name: detailsDepartment.name,
+              branchName: branchNameById.get(detailsDepartment.branchId) ?? "—",
+              parentDepartmentName: detailsDepartment.parentDepartmentId
+                ? (departmentNameById.get(detailsDepartment.parentDepartmentId) ?? null)
+                : null,
+              isActive: detailsDepartment.isActive,
+            }
             : null
         }
         childDepartments={
           detailsDepartment
             ? (childIdsByParent.get(detailsDepartment.id) ?? []).map((childId) => ({
-                id: childId,
-                name: departmentNameById.get(childId) ?? "",
-              }))
+              id: childId,
+              name: departmentNameById.get(childId) ?? "",
+            }))
             : []
         }
         onEdit={(id) => setDrawerTarget({ kind: "edit", id })}

@@ -14,8 +14,8 @@ interface CompanyStatusCardProps {
 }
 
 export function CompanyStatusCard({ isActive, onChange, disabled }: CompanyStatusCardProps) {
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
   return (
     <section className="rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-6 shadow-sm">
       <h2 className="text-base font-semibold text-[var(--ink-primary)]">{t('company.status.title')}</h2>

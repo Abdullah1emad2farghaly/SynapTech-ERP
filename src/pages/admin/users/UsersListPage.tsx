@@ -32,6 +32,7 @@ import { User } from "@/types/users.types";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import toast from "react-hot-toast";
+import { UserCard } from "@/components/admin/users/UserCard";
 
 const DEFAULT_PAGE_SIZE = 25;
 
@@ -99,11 +100,11 @@ export function UsersListPage() {
       await createUserMutation.mutateAsync(values);
       setCreateOpen(false);
       refetch();
-      toast.success(t("users.create.success",{
+      toast.success(t("users.create.success", {
         name: values.fullName
       }))
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors);
       }
     }
@@ -134,7 +135,7 @@ export function UsersListPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-6">
+    <div className="flex flex-col gap-4 py-6 md:px-6 px-2">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold text-[var(--ink-primary)]">
@@ -207,34 +208,64 @@ export function UsersListPage() {
         onDeactivateSelected={handleDeactivateSelected}
       />
 
-      <UsersDataTable
-        rows={rows}
-        isLoading={isLoading}
-        hasError={isError}
-        onRetry={() => refetch()}
-        onClearFilters={handleClearFilters}
-        isFiltered={isFiltered}
-        sortColumnId={sortColumnId}
-        sortDirection={sortDirection}
-        onSortChange={(columnId, direction) => {
-          setSortColumnId(direction ? columnId : null);
-          setSortDirection(direction);
-        }}
-        selectedIds={selectedIds}
-        onSelectionChange={setSelectedIds}
-        onRowClick={(row) => navigate(`${row.id}`)}
-        hiddenColumnIds={hiddenColumnIds}
-        renderRowActions={(row) => (
-          <UserActionMenu
-            userId={row.id}
-            userName={row.fullName}
-            isActive={row}
-            onAssignRoles={() => setRoleDrawerUser(row)}
-            onSetActive={handleSetActive}
-            onDelete={handleDelete}
+      <div className="hidden sm:block">
+        <UsersDataTable
+          rows={rows}
+          isLoading={isLoading}
+          hasError={isError}
+          onRetry={() => refetch()}
+          onClearFilters={handleClearFilters}
+          isFiltered={isFiltered}
+          sortColumnId={sortColumnId}
+          sortDirection={sortDirection}
+          onSortChange={(columnId, direction) => {
+            setSortColumnId(direction ? columnId : null);
+            setSortDirection(direction);
+          }}
+          selectedIds={selectedIds}
+          onSelectionChange={setSelectedIds}
+          onRowClick={(row) => navigate(`${row.id}`)}
+          hiddenColumnIds={hiddenColumnIds}
+          renderRowActions={(row) => (
+            <UserActionMenu
+              userId={row.id}
+              userName={row.fullName}
+              isActive={row}
+              onAssignRoles={() => setRoleDrawerUser(row)}
+              onSetActive={handleSetActive}
+              onDelete={handleDelete}
+            />
+          )}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {rows.map((row) => (
+          <UserCard
+            key={row.id}
+            row={row}
+            onClick={() => navigate(`${row.id}`)}
+            selected={selectedIds.has(row.id)}
+            onSelectChange={(id, isSelected) => {
+              setSelectedIds((prev) => {
+                const next = new Set(prev);
+                if (isSelected) next.add(id);
+                else next.delete(id);
+                return next;
+              });
+            }}
+            renderActions={() => (
+              <UserActionMenu
+                userId={row.id}
+                userName={row.fullName}
+                isActive={row}
+                onAssignRoles={() => setRoleDrawerUser(row)}
+                onSetActive={handleSetActive}
+                onDelete={handleDelete}
+              />
+            )}
           />
-        )}
-      />
+        ))}
+      </div>
 
       <DataTablePagination
         page={page}

@@ -61,7 +61,7 @@ export function ManagePermissionsDrawer({
       subtitle={role?.name}
       widthClassName="w-full max-w-3xl"
     >
-      <div className="flex h-full flex-col gap-4">
+      <div className="flex h-full w-full flex-col gap-4">
         {catalogLoading ? (
           <div className="h-64 animate-pulse rounded-lg bg-[--sunken]" />
         ) : (

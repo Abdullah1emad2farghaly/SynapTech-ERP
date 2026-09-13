@@ -21,7 +21,6 @@ interface RoleActionMenuProps {
   onView: (role: RoleResponse) => void;
   onEdit: (role: RoleResponse) => void;
   onManagePermissions: (role: RoleResponse) => void;
-  onDuplicate: (role: RoleResponse) => void;
   onDelete: (role: RoleResponse) => void;
 }
 
@@ -30,7 +29,6 @@ export function RoleActionMenu({
   onView,
   onEdit,
   onManagePermissions,
-  onDuplicate,
   onDelete,
 }: RoleActionMenuProps) {
   const { t } = useTranslation();
@@ -60,11 +58,6 @@ export function RoleActionMenu({
       label: t("roles.actions.managePermissions"),
       icon: KeyRound,
       onClick: () => onManagePermissions(role),
-    },
-    {
-      label: t("roles.actions.duplicate"),
-      icon: Copy,
-      onClick: () => onDuplicate(role),
     },
     {
       label: t("roles.actions.delete"),

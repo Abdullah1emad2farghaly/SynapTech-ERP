@@ -20,6 +20,7 @@ import { useUsers } from "../../../hooks/useUsers";
 import axios from "axios";
 import { handleErrors } from "@/utils/HandleErrors";
 import toast from "react-hot-toast";
+import { BranchCard } from "@/components/admin/branches/BranchCard";
 
 type DrawerTarget =
   | { kind: "create" }
@@ -140,29 +141,29 @@ export function BranchesPage() {
   async function handleDrawerSubmit(values: BranchFormValues, id?: string) {
     try {
       if (id) {
-      await updateMutation.mutateAsync({ id, ...values });
-      toast.success(t("branches.toast.updated", {
-        name: values.name
-      }))
-    } else {
-      await createMutation.mutateAsync({
-        name: values.name,
-        code: values.code,
-        address: values.address,
-        phone: values.phone,
-        isMain: values.isMain,
-      });
-      toast.success(t("branches.toast.created", {
-        name: values.name
-      }))
-    }
-    setDrawerTarget(null);
-    refetch();
+        await updateMutation.mutateAsync({ id, ...values });
+        toast.success(t("branches.toast.updated", {
+          name: values.name
+        }))
+      } else {
+        await createMutation.mutateAsync({
+          name: values.name,
+          code: values.code,
+          address: values.address,
+          phone: values.phone,
+          isMain: values.isMain,
+        });
+        toast.success(t("branches.toast.created", {
+          name: values.name
+        }))
+      }
+      setDrawerTarget(null);
+      refetch();
     } catch (error) {
-      if(axios.isAxiosError(error)){
+      if (axios.isAxiosError(error)) {
         handleErrors(error.response?.data.errors);
       }
-      throw error      
+      throw error
     }
   }
 
@@ -179,7 +180,6 @@ export function BranchesPage() {
         hasUsers={hasUsers}
         onViewDetails={(id) => navigate(`/organization/branches/${id}`)}
         onEdit={(id) => setDrawerTarget({ kind: "edit", id })}
-        onDuplicate={(id) => setDrawerTarget({ kind: "duplicate", id })}
         onSetActive={handleSetActive}
         onDelete={handleDelete}
       />
@@ -251,22 +251,34 @@ export function BranchesPage() {
         </div>
       </div>
 
-      <BranchesTable
-        rows={rows}
-        isLoading={isLoading}
-        hasError={isError}
-        onRetry={() => refetch()}
-        onClearFilters={handleClearFilters}
-        isFiltered={isFiltered}
-        sortColumnId={sortColumnId}
-        sortDirection={sortDirection}
-        onSortChange={(columnId, direction) => {
-          setSortColumnId(direction ? columnId : null);
-          setSortDirection(direction);
-        }}
-        onRowClick={(row) => navigate(`/organization/branches/${row.id}`)}
-        renderRowActions={renderRowActions}
-      />
+      <div className="hidden sm:block">
+        <BranchesTable
+          rows={rows}
+          isLoading={isLoading}
+          hasError={isError}
+          onRetry={() => refetch()}
+          onClearFilters={handleClearFilters}
+          isFiltered={isFiltered}
+          sortColumnId={sortColumnId}
+          sortDirection={sortDirection}
+          onSortChange={(columnId, direction) => {
+            setSortColumnId(direction ? columnId : null);
+            setSortDirection(direction);
+          }}
+          onRowClick={(row) => navigate(`/organization/branches/${row.id}`)}
+          renderRowActions={renderRowActions}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {rows.map((row) => (
+          <BranchCard
+            key={row.id}
+            row={row}
+            onClick={() => navigate(`/organization/branches/${row.id}`)}
+            renderActions={() => renderRowActions(row)}
+          />
+        ))}
+      </div>
 
       <BranchDrawer
         open={
@@ -278,26 +290,26 @@ export function BranchesPage() {
         initialValues={
           editingBranch
             ? {
-                id: editingBranch.id,
-                name: editingBranch.name,
-                code: editingBranch.code,
-                address: editingBranch.address,
-                phone: editingBranch.phone,
-                isMain: editingBranch.isMain,
-                isActive: editingBranch.isActive,
-              }
+              id: editingBranch.id,
+              name: editingBranch.name,
+              code: editingBranch.code,
+              address: editingBranch.address,
+              phone: editingBranch.phone,
+              isMain: editingBranch.isMain,
+              isActive: editingBranch.isActive,
+            }
             : null
         }
         duplicateFrom={
           duplicatingBranch
             ? {
-                name: duplicatingBranch.name,
-                code: duplicatingBranch.code,
-                address: duplicatingBranch.address,
-                phone: duplicatingBranch.phone,
-                isMain: duplicatingBranch.isMain,
-                isActive: duplicatingBranch.isActive,
-              }
+              name: duplicatingBranch.name,
+              code: duplicatingBranch.code,
+              address: duplicatingBranch.address,
+              phone: duplicatingBranch.phone,
+              isMain: duplicatingBranch.isMain,
+              isActive: duplicatingBranch.isActive,
+            }
             : null
         }
         anotherBranchIsMain={

@@ -34,7 +34,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       >
         <span
           aria-hidden="true"
-          className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-[160ms] ease-out rtl:translate-x-0 ${
+          className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-sm transition-transform duration-[160ms] ease-out ${
             checked ? 'translate-x-6 rtl:-translate-x-6' : 'translate-x-1 rtl:-translate-x-1'
           }`}
         />

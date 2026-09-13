@@ -46,7 +46,7 @@ export function AdvancedSearchPanel({
   departmentOptions,
   roleOptions,
 }: AdvancedSearchPanelProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<UsersFilters>(value);
 
@@ -57,6 +57,7 @@ export function AdvancedSearchPanel({
   }, [value]);
 
   const activeCount = countActive(value);
+  const isRTL = i18n.language.startsWith("ar");
 
   function handleApply() {
     onApply(draft);
@@ -88,7 +89,11 @@ export function AdvancedSearchPanel({
       {open && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="absolute end-0 z-20 mt-2 w-72 rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-4 shadow-[var(--elevation-1)]">
+          <div
+            className={`absolute ${
+              isRTL ? "-right-[150%]" : "-right-[100%]"
+            } z-20 mt-2 w-72 rounded-[16px] border border-[var(--hairline)] bg-[var(--panel)] p-4 shadow-[var(--elevation-1)]`}
+          >
             <div className="flex flex-col gap-3">
               <div>
                 <label className="mb-1 block text-xs font-medium text-[var(--ink-secondary)]">

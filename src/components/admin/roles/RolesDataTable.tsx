@@ -17,7 +17,6 @@ interface RolesDataTableProps {
   onView: (role: RoleResponse) => void;
   onEdit: (role: RoleResponse) => void;
   onManagePermissions: (role: RoleResponse) => void;
-  onDuplicate: (role: RoleResponse) => void;
   onDelete: (role: RoleResponse) => void;
 }
 
@@ -27,7 +26,6 @@ export function RolesDataTable({
   onView,
   onEdit,
   onManagePermissions,
-  onDuplicate,
   onDelete,
 }: RolesDataTableProps) {
   const { t } = useTranslation();
@@ -83,7 +81,6 @@ export function RolesDataTable({
           onView={onView}
           onEdit={onEdit}
           onManagePermissions={onManagePermissions}
-          onDuplicate={onDuplicate}
           onDelete={onDelete}
         />
       ),

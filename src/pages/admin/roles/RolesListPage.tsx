@@ -15,6 +15,8 @@ import { EditRoleDrawer } from "../../../components/admin/roles/EditRoleDrawer";
 import { ManagePermissionsDrawer } from "../../../components/admin/roles/ManagePermissionsDrawer";
 import { DeleteRoleDialog } from "../../../components/admin/roles/DeleteRoleDialog";
 import type { RoleResponse } from "../../../types/roles.types";
+import { RoleCard } from "@/components/admin/roles/RoleCard";
+import { RoleActionMenu } from "@/components/admin/roles/RoleActionMenu";
 
 type DrawerState =
   | { type: "create" }
@@ -79,17 +81,34 @@ export function RolesListPage() {
         onCreateRole={() => setDrawer({ type: "create" })}
       />
 
-      <RolesDataTable
-        roles={visibleRoles}
-        isLoading={isLoading}
-        onView={(role) => navigate(`${role.id}`)}
-        onEdit={(role) => setDrawer({ type: "edit", role })}
-        onManagePermissions={(role) =>
-          setDrawer({ type: "managePermissions", role })
-        }
-        onDuplicate={(role) => setDrawer({ type: "duplicate", role })}
-        onDelete={(role) => setDrawer({ type: "delete", role })}
-      />
+      <div className="hidden sm:block">
+        <RolesDataTable
+          roles={visibleRoles}
+          isLoading={isLoading}
+          onView={(role) => navigate(`${role.id}`)}
+          onEdit={(role) => setDrawer({ type: "edit", role })}
+          onManagePermissions={(role) => setDrawer({ type: "managePermissions", role })}
+          onDelete={(role) => setDrawer({ type: "delete", role })}
+        />
+      </div>
+      <div className="flex flex-col gap-3 sm:hidden">
+        {visibleRoles.map((role) => (
+          <RoleCard
+            key={role.id}
+            role={role}
+            onClick={(r) => navigate(`${r.id}`)}
+            renderActions={() => (
+              <RoleActionMenu
+                role={role}
+                onView={(r) => navigate(`${r.id}`)}
+                onEdit={(r) => setDrawer({ type: "edit", role: r })}
+                onManagePermissions={(r) => setDrawer({ type: "managePermissions", role: r })}
+                onDelete={(r) => setDrawer({ type: "delete", role: r })}
+              />
+            )}
+          />
+        ))}
+      </div>
 
       <CreateRoleDrawer
         open={drawer?.type === "create" || drawer?.type === "duplicate"}

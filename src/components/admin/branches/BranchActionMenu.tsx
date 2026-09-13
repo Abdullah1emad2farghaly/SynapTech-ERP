@@ -43,7 +43,6 @@ export interface BranchActionMenuProps {
   hasUsers: boolean;
   onViewDetails: (id: string) => void;
   onEdit: (id: string) => void;
-  onDuplicate: (id: string) => void;
   onSetActive: (id: string, active: boolean) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
 }
@@ -61,7 +60,6 @@ export function BranchActionMenu({
   hasUsers,
   onViewDetails,
   onEdit,
-  onDuplicate,
   onSetActive,
   onDelete,
 }: BranchActionMenuProps) {
@@ -421,22 +419,6 @@ export function BranchActionMenu({
               <Pencil size={15} />
 
               {t("branches.actions.edit")}
-            </button>
-
-            <button
-              role="menuitem"
-              type="button"
-              onClick={() => {
-                closeMenu();
-                onDuplicate(branchId);
-              }}
-              className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm text-[var(--ink-primary)] hover:bg-[var(--sunken)] focus:bg-[var(--sunken)] focus:outline-none"
-            >
-              <Copy size={15} />
-
-              {t(
-                "branches.actions.duplicate"
-              )}
             </button>
 
             {isActive ? (

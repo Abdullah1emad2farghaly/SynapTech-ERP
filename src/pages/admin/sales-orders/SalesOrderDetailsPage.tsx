@@ -17,6 +17,7 @@ import {
 import { canPerform } from "../../../utils/salesOrderWorkflow";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { LineItemCard } from "@/components/admin/sales-orders/LineItemCard";
 
 export function SalesOrderDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -39,7 +40,7 @@ export function SalesOrderDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col gap-4 p-6">
+      <div className="flex flex-col gap-4 py-6 sm:px-6 px-2">
         <div className="h-8 w-64 animate-pulse rounded bg-[--sunken]" />
         <div className="h-40 animate-pulse rounded-lg bg-[--sunken]" />
       </div>
@@ -60,7 +61,7 @@ export function SalesOrderDetailsPage() {
   );
 
   return (
-    <div className="flex flex-col gap-6 p-6">
+    <div className="flex flex-col gap-6 py-6 sm:px-6 px-2">
       <button
         type="button"
         onClick={() => navigate("/sales/sales-orders")}
@@ -96,7 +97,7 @@ export function SalesOrderDetailsPage() {
               {t("salesOrders.actions.submit")}
             </button>
           )}
-          {(canPerform("approve", order.status, access))&& (
+          {(canPerform("approve", order.status, access)) && (
             <button type="button" onClick={() => setDialogAction("approve")} className="rounded-md bg-[--signal] px-3 py-2 text-sm font-medium text-white hover:bg-[--signal-hover]">
               {t("salesOrders.actions.approve")}
             </button>
@@ -168,7 +169,14 @@ export function SalesOrderDetailsPage() {
 
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-[--ink-primary]">{t("salesOrders.details.lineItems")}</h2>
-        <LineItemsReadOnlyTable lines={order.lines} />
+        <div className="hidden sm:block">
+          <LineItemsReadOnlyTable lines={order.lines} />
+        </div>
+        <div className="flex flex-col gap-3 sm:hidden">
+          {order.lines.map((line) => (
+            <LineItemCard key={line.id} line={line} />
+          ))}
+        </div>
       </div>
 
       {/* <div className="flex items-center gap-2 rounded-lg border border-dashed border-[--hairline] p-4 text-sm text-[--ink-tertiary]">
