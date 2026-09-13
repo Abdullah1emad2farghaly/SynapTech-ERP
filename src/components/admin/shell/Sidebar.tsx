@@ -13,6 +13,7 @@ import {
 import { getCurrentUser } from "@/App";
 import { getMyPermissions } from "@/services/api/roles.crud.api";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import { useTranslation } from "react-i18next";
 
 function isItemActive(item: NavItem, pathname: string) {
   if (
@@ -32,7 +33,7 @@ function isItemActive(item: NavItem, pathname: string) {
 
 export function Sidebar() {
   const { pathname } = useLocation();
-
+  const {t} = useTranslation()
   const navigate = useNavigate();
 
   const collapsed = useShellStore((s) => s.sidebarCollapsed);
@@ -49,16 +50,41 @@ export function Sidebar() {
   // NAVIGATION ITEMS
   // =========================================================
 
-  const navItems = useNavItems();
+  var navItems = useNavItems();
+  const globalNavigation = [{
+    id: "hr-my-attendance",
+    label: t("sidebar.myAttendance"),
+    to: "/hr/my-attendance",
+    permissions: [
+      "hr.my-attendance.view",
+    ],
+  },
+  {
+    id: "my-requests",
+    label: t("sidebar.myRequests"),
+    to: "/hr/my-requests",
+    permissions: [
+      "hr.myRequests",
+    ],
+  },]
+
 
   // =========================================================
   // GET CURRENT USER
   // =========================================================
 
-  
+
 
   const isAdmin = getCurrentUser();
-  
+  if(!isAdmin){
+    navItems.forEach((item)=>{
+      if(item.id === 'hr'){
+        const children = item.children || []
+        item.children = [...children, ...globalNavigation]
+      }
+    })
+  }
+
 
   // =========================================================
   // GET MY PERMISSIONS
@@ -68,27 +94,28 @@ export function Sidebar() {
   // places risked them resolving at different times and disagreeing
   // about what the user can see.
 
-  const  myPermissions: string[] = getUserPermissions()
+  const myPermissions: string[] = getUserPermissions()
 
-    // =========================================================
-    // FILTER NAVIGATION
-    // =========================================================
-    // BUG FIX: the previous version called filterNavByPermissions(navItems,
-    // isAdmin) — myPermissions was never actually passed in, so non-admin
-    // filtering had nothing to filter against.
+  // =========================================================
+  // FILTER NAVIGATION
+  // =========================================================
+  // BUG FIX: the previous version called filterNavByPermissions(navItems,
+  // isAdmin) — myPermissions was never actually passed in, so non-admin
+  // filtering had nothing to filter against.
 
-    
-  const visibleItems = filterNavByPermissions (
+
+  const visibleItems = filterNavByPermissions(
     navItems,
     isAdmin,
     myPermissions
   );
+  
 
-  console.log(myPermissions)
+  console.log(visibleItems)
   // =========================================================
 
   useEffect(() => {
-    
+
     if (!visibleItems.length) {
       return;
     }
@@ -168,7 +195,7 @@ export function Sidebar() {
             : "-translate-x-full lg:translate-x-0",
         ].join(" ")}
       >
-        
+
         <div className="flex h-16 items-center gap-2 border-b border-hairline px-4">
           <Logo size="sm" />
 
@@ -187,7 +214,7 @@ export function Sidebar() {
 
             const Icon = item.icon;
 
-          
+
             const parentTo = item.to ?? item.children?.[0]?.to ?? "#";
 
             return (
@@ -294,7 +321,7 @@ export function Sidebar() {
           {/* NO PERMISSION */}
           {/* ================================================= */}
 
-          {  visibleItems.length === 0 && (
+          {visibleItems.length === 0 && (
             <div className="px-3 py-4 text-center text-sm text-ink-tertiary">
               No accessible pages
             </div>

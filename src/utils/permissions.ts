@@ -27,13 +27,14 @@ export function isAdminRole(role: string | null | undefined): boolean {
  * de-duplicated. Safe against undefined/null input.
  */
 export function mergeWithGlobalPermissions(
+  isAdmin: boolean,
   userPermissions: readonly string[] | null | undefined,
 ): string[] {
   const base = userPermissions ?? [];
-  return Array.from(new Set<string>([...base]));
-  // if(isAdmin)
-  // else 
-  //   return Array.from(new Set<string>([...GLOBAL_PERMISSIONS, ...base]));
+  if(isAdmin)
+    return Array.from(new Set<string>([...base]));
+  else 
+    return Array.from(new Set<string>([...GLOBAL_PERMISSIONS, ...base]));
 
 }
 
@@ -62,7 +63,6 @@ export function canAccessNavChild(
   child: NavChild,
   userPermissions: readonly string[] | null | undefined,
 ): boolean {
-  console.log(userPermissions)
   return hasAnyPermission(child.permissions, userPermissions);
 }
 
@@ -82,8 +82,7 @@ export function filterNavByPermissions(
   if (isAdmin) {
     return [...items];
   }
-
-  const userPermissions = mergeWithGlobalPermissions(rawUserPermissions);
+  const userPermissions = mergeWithGlobalPermissions(isAdmin, rawUserPermissions);
 
   return items.reduce<NavItem[]>((visible, item) => {
     if (!item.children || item.children.length === 0) {

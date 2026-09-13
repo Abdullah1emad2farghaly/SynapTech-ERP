@@ -239,28 +239,12 @@ export const useNavItems = (): NavItem[] => {
           ],
         },
         {
-          id: "hr-my-attendance",
-          label: t("sidebar.myAttendance"),
-          to: "/hr/my-attendance",
-          permissions: [
-            "hr.my-attendance.view",
-          ],
-        },
-        {
           id: "leave-requests",
           label: t("sidebar.leaveRequests"),
           to: "/hr/leave-requests",
           permissions: [
             "hr.leaves.view",
             "hr.leaves.approve",
-          ],
-        },
-        {
-          id: "my-requests",
-          label: t("sidebar.myRequests"),
-          to: "/hr/my-requests",
-          permissions: [
-            "hr.myRequests",
           ],
         },
       ],
