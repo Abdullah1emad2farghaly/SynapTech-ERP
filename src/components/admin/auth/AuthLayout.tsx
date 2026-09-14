@@ -11,7 +11,7 @@ interface AuthLayoutProps {
 // spec §8.
 export function AuthLayout({ tagline, children }: AuthLayoutProps) {
   return (
-    <div className="flex min-h-screen w-full bg-canvas">
+    <div className="flex min-h-screen bg-canvas">
       <SynapseFieldPanel tagline={tagline} />
       {children}
     </div>

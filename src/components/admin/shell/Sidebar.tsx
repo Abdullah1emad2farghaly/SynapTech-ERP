@@ -51,6 +51,8 @@ export function Sidebar() {
   // =========================================================
 
   var navItems = useNavItems();
+
+
   const globalNavigation = [{
     id: "hr-my-attendance",
     label: t("sidebar.myAttendance"),
@@ -75,6 +77,15 @@ export function Sidebar() {
 
 
 
+  
+  
+  // =========================================================
+  // GET MY PERMISSIONS
+  // =========================================================
+  // Extracted to hooks/usePermissions.ts — RouteGuard (elsewhere in the
+
+  const myPermissions: string[] = getUserPermissions()
+
   const isAdmin = getCurrentUser();
   if(!isAdmin){
     navItems.forEach((item)=>{
@@ -84,18 +95,6 @@ export function Sidebar() {
       }
     })
   }
-
-
-  // =========================================================
-  // GET MY PERMISSIONS
-  // =========================================================
-  // Extracted to hooks/usePermissions.ts — RouteGuard (elsewhere in the
-  // app) needs the exact same data, and duplicating this fetch in two
-  // places risked them resolving at different times and disagreeing
-  // about what the user can see.
-
-  const myPermissions: string[] = getUserPermissions()
-
   // =========================================================
   // FILTER NAVIGATION
   // =========================================================
@@ -111,7 +110,6 @@ export function Sidebar() {
   );
   
 
-  console.log(visibleItems)
   // =========================================================
 
   useEffect(() => {

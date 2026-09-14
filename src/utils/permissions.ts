@@ -1,17 +1,9 @@
-// Intended path: src/utils/permissions.ts
-//
-// Pure functions only. Every function takes permissions/isAdmin as
-// parameters — nothing here calls a data-fetching hook, useState,
-// useEffect, or reads localStorage. Safe to unit-test without a React
-// renderer, and safe to call from anywhere (utils, hooks, server code).
+
 
 import { getCurrentUser } from "@/App";
 import type { NavChild, NavItem } from "@/types/nav.types";
 
-/**
- * Permissions every authenticated non-admin user always has, regardless
- * of what their role's permission set returns from the API.
- */
+
 export const GLOBAL_PERMISSIONS: readonly string[] = [
   "hr.my-attendance.view",
   "hr.myRequests",
@@ -22,10 +14,7 @@ export function isAdminRole(role: string | null | undefined): boolean {
   return (role ?? "").trim().toLowerCase() === "admin";
 }
 
-/**
- * Merges API-provided permissions with the always-on global permissions,
- * de-duplicated. Safe against undefined/null input.
- */
+
 export function mergeWithGlobalPermissions(
   isAdmin: boolean,
   userPermissions: readonly string[] | null | undefined,
@@ -38,14 +27,7 @@ export function mergeWithGlobalPermissions(
 
 }
 
-/**
- * True when `userPermissions` contains at least one entry from
- * `requiredPermissions`. An item with no required permissions (undefined
- * or empty array) is treated as public and always passes.
- *
- * Never calls .includes() on a possibly-undefined array — both inputs
- * are guarded.
- */
+
 export function hasAnyPermission(
   requiredPermissions: readonly string[] | undefined,
   userPermissions: readonly string[] | null | undefined,

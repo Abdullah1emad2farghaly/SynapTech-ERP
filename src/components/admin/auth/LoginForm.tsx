@@ -16,7 +16,7 @@ import { useState } from "react";
 
 // Presentation + form-wiring only. Navigation-on-success and error mapping
 // live in the mutation hook / page, not here.
-export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+export function LoginForm({ onSuccess, loading }: { onSuccess: () => void; loading: boolean }) {
   const { t } = useTranslation();
   const login = useLogin();
   const [apiErrors, setApiErrors] = useState([])
@@ -47,7 +47,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 ">
       <TextInput
         label={t("auth.login.emailLabel")}
         type="email"
@@ -71,7 +71,7 @@ export function LoginForm({ onSuccess }: { onSuccess: () => void }) {
             {ele}
           </Alert>
         ))}
-      <Button type="submit" fullWidth isLoading={login.isPending}>
+      <Button type="submit" fullWidth isLoading={login.isPending || loading}>
         {t("auth.login.submit")}
       </Button>
 

@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from "react";
 import { getMyPermissions } from "@/services/api/roles.crud.api";
+import { getUserPermissions } from "@/pages/common/LoginPage";
 
 export interface UsePermissionsResult {
   permissions: string[];
@@ -24,8 +25,7 @@ export function usePermissions(): UsePermissionsResult {
       try {
         setIsLoading(true);
 
-        const result = await getMyPermissions();
-
+        const result = await getUserPermissions();
         if (!mounted) return;
 
         setPermissions(Array.isArray(result) ? result : []);

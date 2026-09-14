@@ -15,6 +15,7 @@ import { usePermissions } from "@/hooks/usePermissions";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useNavItems } from "@/constants/navigation";
 import { getAllowedRoutes, getFirstAllowedRoute } from "@/utils/permissions";
+import { useTranslation } from "react-i18next";
 
 export interface UseAllowedRoutesResult {
   isAdmin: boolean;
@@ -28,8 +29,34 @@ export function useAllowedRoutes(): UseAllowedRoutesResult {
   const currentUser = useCurrentUser();
   const isAdmin = (currentUser?.role ?? "").toLowerCase() === "admin";
   const { permissions, isLoading } = usePermissions();
+  const {t} = useTranslation()
+  
   const navItems = useNavItems();
+  const globalNavigation = [{
+    id: "hr-my-attendance",
+    label: t("sidebar.myAttendance"),
+    to: "/hr/my-attendance",
+    permissions: [
+      "hr.my-attendance.view",
+    ],
+  },
+  {
+    id: "my-requests",
+    label: t("sidebar.myRequests"),
+    to: "/hr/my-requests",
+    permissions: [
+      "hr.myRequests",
+    ],
+  },]
 
+  if(!isAdmin){
+    navItems.forEach((item)=>{
+      if(item.id === 'hr'){
+        const children = item.children || []
+        item.children = [...children, ...globalNavigation]
+      }
+    })
+  }
   const allowedRoutes = useMemo(
     () => getAllowedRoutes(navItems, isAdmin, permissions),
     [navItems, isAdmin, permissions],

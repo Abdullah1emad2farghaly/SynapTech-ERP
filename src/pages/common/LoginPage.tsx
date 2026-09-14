@@ -8,6 +8,7 @@ import { useNavItems } from "@/constants/navigation";
 import { getMyPermissions } from "@/services/api/roles.crud.api";
 import { Seo } from "@/components/common/Seo";
 import { StructuredData } from "@/components/common/StructuredData";
+import { useState } from "react";
 
 // src/utils/permissions.ts
 
@@ -30,6 +31,11 @@ export default function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const navItems = useNavItems();
+  const globalPermissions = [
+    'hr.my-attendance.view',
+    'hr.myRequests'
+  ];
+  const [loading, setLoading] = useState(false);
   const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -71,7 +77,7 @@ export default function LoginPage() {
         >
           <LoginForm
             onSuccess={async () => {
-              console.log("first")
+              setLoading(true);
               const rawUser = window.localStorage.getItem("currentUser");
               let role = "";
               try {
@@ -80,21 +86,25 @@ export default function LoginPage() {
                 role = "";
               }
               const isAdmin = role.toLowerCase() === "admin";
-              // console.log(isAdmin)
-
+              
               let permissions: string[] = [];
               try {
-                const result = await getMyPermissions();
-                window.localStorage.setItem('userPermissions', JSON.stringify(result));
-                permissions = Array.isArray(result) ? result : [];
+                permissions = await getMyPermissions();
+                if(!isAdmin){
+                  permissions.push(...globalPermissions);
+                }
+                window.localStorage.setItem('userPermissions', JSON.stringify(permissions));
+                permissions = Array.isArray(permissions) ? permissions : [];
               } catch (error) {
                 console.error("Failed to load permissions after login:", error);
+              }finally{
+                setLoading(false);
               }
 
               const destination = getFirstAllowedRoute(
                 navItems,
                 isAdmin,
-                permissions
+                permissions,
               );
 
               // No accessible routes at all (a real possibility for a
@@ -103,6 +113,7 @@ export default function LoginPage() {
               // "no access" page, swap this for that route instead.
               navigate(destination ?? "/", { replace: true });
             }}
+            loading={loading}
           />
         </AuthContainer>
       </AuthLayout>
