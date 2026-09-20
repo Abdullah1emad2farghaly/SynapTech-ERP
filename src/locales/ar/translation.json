@@ -3013,7 +3013,9 @@
       "salesByCategory": "المبيعات حسب الفئة",
       "voidedOrders": "الطلبات الملغاة",
       "discounts": "الخصومات",
-      "customers": "العملاء"
+      "customers": "العملاء",
+      "amount":"المبلغ",
+      "revenue": "المبلغ"
     },
     "topProducts": {
       "qtySold": "الكمية المباعة",

@@ -62,6 +62,7 @@ export const TopProductsChart = ({
               />
 
               <YAxis
+                direction={"ltr"}
                 type="category"
                 dataKey="productName"
                 tick={{

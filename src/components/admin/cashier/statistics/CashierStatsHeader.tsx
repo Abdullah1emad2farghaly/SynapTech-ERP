@@ -9,7 +9,6 @@ interface CashierStatsHeaderProps {
 
 export const CashierStatsHeader = ({ onRefresh, isRefreshing }: CashierStatsHeaderProps) => {
   const { t } = useTranslation();
-
   return (
     <div className="flex flex-wrap items-start justify-between gap-3">
       <div>
@@ -19,15 +18,15 @@ export const CashierStatsHeader = ({ onRefresh, isRefreshing }: CashierStatsHead
         <p className="mt-0.5 text-sm text-[var(--ink-tertiary)]">{t("cashierStats.subtitle")}</p>
       </div>
 
-      <button
+      {/* <button
         type="button"
         onClick={onRefresh}
         disabled={isRefreshing}
         className="flex items-center gap-1.5 rounded-md border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-[var(--ink-secondary)] transition hover:border-[var(--signal)] hover:text-[var(--ink-primary)] disabled:opacity-60"
       >
-        <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
+        <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : undefined}`} />
         {t("cashierStats.refresh")}
-      </button>
+      </button> */}
     </div>
   );
 };
