@@ -131,7 +131,8 @@
       "viewDetails": "View Details",
       "duplicate": "Duplicate",
       "export": "Export"
-    }
+    },
+    "cancel": "Cancel"
   },
   "users": {
     "status": {
@@ -2739,7 +2740,11 @@
     "administration": "Administration",
     "users": "Users",
     "rolesAndPermissions": "Roles & Permissions",
-    "companySettings": "Company Settings"
+    "companySettings": "Company Settings",
+    "cashier": "Cashier",
+    "pointOfSale": "Point of Sale",
+    "cashierOrders": "Orders",
+    "cashierShifts": "Shifts"
   },
   "dashboard": {
     "overview": {
@@ -2823,5 +2828,224 @@
       "backToDashboard": "Back to Dashboard",
       "goBack": "Go Back"
     }
+  },
+
+  "cashier": {
+    "validation": {
+      "reasonRequired": "Reason is required"
+    },
+    "pos": {
+      "searchProducts": "Search products by name or SKU",
+      "noProductsFound": "No products found",
+      "emptyCart": "Cart is empty",
+      "emptyCartHint": "Select a product to start the sale",
+      "increaseQuantity": "Increase quantity",
+      "decreaseQuantity": "Decrease quantity",
+      "currentSale": "Current Sale",
+      "goToPayment": "Go to Payment",
+      "checkout": "Checkout",
+      "completeSale": "Complete Sale",
+      "saleFailed": "Couldn't complete the sale. Please try again.",
+      "items": "items",
+      "noShiftTitle": "No open shift",
+      "noShiftBody": "Open a shift to start selling."
+    },
+    "cart": {
+      "product": "Product",
+      "sku": "SKU",
+      "quantity": "Qty",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "lineTotal": "Line Total"
+    },
+    "summary": {
+      "title": "Financial Summary",
+      "subTotal": "Subtotal",
+      "discount": "Discount",
+      "tax": "Tax",
+      "total": "Total",
+      "paid": "Paid",
+      "change": "Change"
+    },
+    "customer": {
+      "title": "Customer",
+      "registered": "Registered Customer",
+      "walkIn": "Walk-in Customer",
+      "selectCustomer": "Select a customer",
+      "walkInNamePlaceholder": "Walk-in customer name (optional)",
+      "searchCustomer": "Search customers...",
+      "noCustomersFound": "No customers found"
+    },
+    "payment": {
+      "title": "Payment",
+      "addPaymentMethod": "Add payment method",
+      "referenceOptional": "Reference (optional)",
+      "remaining": "Remaining"
+    },
+    "paymentMethods": {
+      "cash": "Cash",
+      "card": "Card",
+      "other": "Other"
+    },
+    "success": {
+      "title": "Sale Completed",
+      "viewInvoice": "View Invoice",
+      "newSale": "New Sale"
+    },
+    "shift": {
+      "openShift": "Open Shift",
+      "openShiftSubtitle": "Start a new cashier shift for a warehouse.",
+      "openedSuccess": "Shift opened.",
+      "openFailed": "Couldn't open the shift. Please try again.",
+      "warehouse": "Warehouse",
+      "selectWarehouse": "Select a warehouse",
+      "openingCashBalance": "Opening Cash Balance",
+      "notesOptional": "Notes (optional)",
+      "shiftNumber": "Shift Number",
+      "cashMovement": "Cash Movement",
+      "closeShift": "Close Shift",
+      "closedSuccess": "Shift closed.",
+      "closeFailed": "Couldn't close the shift. Please try again.",
+      "expectedCash": "Expected Cash",
+      "countedCash": "Counted Cash",
+      "discrepancy": "Discrepancy"
+    },
+    "cashMovement": {
+      "title": "Record Cash Movement",
+      "type": "Movement Type",
+      "amount": "Amount",
+      "reasonOptional": "Reason",
+      "amountRequired": "Amount must be greater than 0",
+      "record": "Record Movement",
+      "recordedSuccess": "Cash movement recorded.",
+      "recordFailed": "Couldn't record the cash movement. Please try again."
+    },
+    "movementTypes": {
+      "cashIn": "Cash In",
+      "cashOut": "Cash Out"
+    },
+    "orders": {
+      "title": "Orders",
+      "subtitle": "All cashier orders from this workstation.",
+      "empty": "No orders yet.",
+      "orderNumber": "Order #",
+      "date": "Date",
+      "customer": "Customer",
+      "status": "Status",
+      "total": "Total"
+    },
+    "orderDetails": {
+      "orderInformation": "Order Information",
+      "shift": "Shift",
+      "items": "Items",
+      "payments": "Payments",
+      "noPayments": "No payments recorded.",
+      "warnings": "Warnings",
+      "notFound": "Order not found.",
+      "viewInvoice": "View Invoice"
+    },
+    "void": {
+      "action": "Void Order",
+      "title": "Void this order?",
+      "body": "Order {{orderNumber}} will be marked as voided. This cannot be undone.",
+      "reasonOptional": "Reason",
+      "confirm": "Void Order",
+      "success": "Order voided.",
+      "failed": "Couldn't void the order. Please try again."
+    },
+    "invoice": {
+      "title": "Invoice",
+      "number": "Invoice #",
+      "date": "Date"
+    },
+    "shiftHistory": {
+      "title": "Shift History",
+      "subtitle": "Your past cashier shifts.",
+      "empty": "No shifts yet.",
+      "opened": "Opened",
+      "closed": "Closed"
+    },
+    "closingReport": {
+      "orders": "Orders",
+      "completedOrders": "Completed Orders",
+      "voidedOrders": "Voided Orders",
+      "sales": "Sales",
+      "cashSales": "Cash Sales",
+      "cardSales": "Card Sales",
+      "otherSales": "Other Sales",
+      "cashDrawer": "Cash Drawer",
+      "openingCash": "Opening Cash",
+      "cashIn": "Cash In",
+      "cashOut": "Cash Out"
+    }
+  },
+  "cashierStats": {
+    "title": "Cashier Statistics",
+    "subtitle": "Monitor sales performance, transactions, payments, and cashier activity.",
+    "refresh": "Refresh",
+    "noDataForPeriod": "No data for the selected period.",
+    "loadError": "Couldn't load cashier orders for statistics.",
+    "retry": "Retry",
+    "filters": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "thisWeek": "This Week",
+      "lastWeek": "Last Week",
+      "thisMonth": "This Month",
+      "lastMonth": "Last Month",
+      "thisYear": "This Year",
+      "customRange": "Custom Range",
+      "allPaymentMethods": "All Payment Methods"
+    },
+    "kpi": {
+      "totalSales": "Total Sales",
+      "totalTransactions": "Total Transactions",
+      "averageTransactionValue": "Average Transaction Value",
+      "itemsSold": "Items Sold",
+      "voided": "Voided",
+      "discounts": "Discounts",
+      "netSales": "Net Sales"
+    },
+    "charts": {
+      "salesTrend": "Sales Over Time",
+      "salesByHour": "Sales by Hour",
+      "paymentMethods": "Payment Methods",
+      "topProducts": "Top Selling Products",
+      "salesByCategory": "Sales by Category",
+      "voidedOrders": "Voided Orders",
+      "discounts": "Discounts",
+      "customers": "Customers"
+    },
+    "topProducts": {
+      "qtySold": "Qty Sold",
+      "sales": "Sales",
+      "share": "Share"
+    },
+    "voided": {
+      "amount": "Voided Amount",
+      "count": "Voided Count",
+      "rate": "Void Rate",
+      "mostVoidedProducts": "Most Voided Products",
+      "noneInPeriod": "No voided orders in this period."
+    },
+    "discounts": {
+      "total": "Total Discounts",
+      "average": "Average Discount",
+      "rate": "Discount Rate"
+    },
+    "customers": {
+      "served": "Customers Served",
+      "registered": "Registered",
+      "walkIn": "Walk-in",
+      "topCustomers": "Top Customers",
+      "transactions": "Transactions"
+    },
+    "transactions": {
+      "title": "Transaction Activity",
+      "search": "Search order, invoice, or customer",
+      "allStatuses": "All Statuses",
+      "tryAnotherRange": "Try another date range."
+    }
   }
+
 }

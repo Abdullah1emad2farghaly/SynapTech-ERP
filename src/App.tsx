@@ -2,7 +2,6 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import LoginPage from "@/pages/common/LoginPage";
-import RegisterPage from "@/pages/common/RegisterPage";
 import ForgotPasswordPage from "@/pages/common/ForgotPasswordPage";
 import ResetPasswordPage from "@/pages/common/ResetPasswordPage";
 import EmailConfirmationPage from "@/pages/common/EmailConfirmationPage";
@@ -64,6 +63,11 @@ import { RouteGuard } from "./components/common/RouteGuard";
 import { NotFoundPage } from "./pages/common/NotFoundPage";
 import { ProtectedRoute, PublicOnlyRoute } from "./components/common/AuthGuard";
 import { Seo } from "./components/common/Seo";
+import { POSPage } from "./pages/admin/cashier/POSPage";
+import { CashierOrdersPage } from "./pages/admin/cashier/CashierOrdersPage";
+import { CashierOrderDetailsPage } from "./pages/admin/cashier/CashierOrderDetailsPage";
+import { ShiftHistoryPage } from "./pages/admin/cashier/ShiftHistoryPage";
+import { CashierStatisticsPage } from "./pages/admin/cashier/CashierStatisticsPage";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -84,6 +88,7 @@ function DashboardLayout() {
     </>
   );
 }
+
 
 
 export const getCurrentUser = (): boolean => {
@@ -158,6 +163,14 @@ export default function App() {
                 <Route path="journal-entries" element={<JournalEntriesListPage />} />
                 <Route path="journal-entries/create" element={<CreateJournalEntryPage />} />
                 <Route path="journal-entries/:id" element={<JournalEntryDetailsPage />} />
+              </Route>
+              <Route path="/cashier">
+                <Route path="/cashier"  element={<CashierStatisticsPage />} />
+                <Route path="point-of-sale" element={<POSPage />} />
+                <Route path="orders" element={<CashierOrdersPage />} />
+                <Route path="orders/:id" element={<CashierOrderDetailsPage />} />
+                <Route path="shifts" element={<ShiftHistoryPage />} />
+                <Route path="shifts/:id" element={<ShiftHistoryPage />} />
               </Route>
 
               <Route path="/inventory">

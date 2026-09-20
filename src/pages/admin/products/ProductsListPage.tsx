@@ -83,7 +83,7 @@ export function ProductsListPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-[1600px] flex-col gap-6 py-6 sm:px-6 px-2 lg:px-8">
+    <div className="flex w-full flex-col gap-6 py-6 sm:px-6 px-2 ">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold text-[var(--ink-primary)]">
           {t("products.pageTitle")}

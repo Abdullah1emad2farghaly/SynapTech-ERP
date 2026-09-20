@@ -11,6 +11,7 @@ import {
   GitBranch,
   Settings,
   ShieldCheck,
+  CreditCard,
 } from "lucide-react";
 
 import type { NavItem } from "@/types/nav.types";
@@ -46,6 +47,48 @@ export const useNavItems = (): NavItem[] => {
     //   to: "/dashboard",
     //   icon: LayoutDashboard,
     // },
+
+    // =========================================================
+    // CASHIER / POS
+    // =========================================================
+    {
+      id: "cashier",
+      label: t("sidebar.cashier"),
+      to: "/cashier",
+      icon: CreditCard,
+      children: [
+        {
+          id: "cashier-pos",
+          label: t("sidebar.pointOfSale"),
+          to: "/cashier/point-of-sale",
+          permissions: [
+            "cashier.orders.create",
+            "cashier.orders.view",
+          ],
+        },
+        {
+          id: "cashier-orders",
+          label: t("sidebar.cashierOrders"),
+          to: "/cashier/orders",
+          permissions: [
+            "cashier.orders.view",
+            "cashier.orders.void",
+            "cashier.invoices.view",
+          ],
+        },
+        {
+          id: "cashier-shifts",
+          label: t("sidebar.cashierShifts"),
+          to: "/cashier/shifts",
+          permissions: [
+            "cashier.shifts.open",
+            "cashier.shifts.view",
+            "cashier.shifts.close",
+            "cashier.shifts.cashmovement",
+          ],
+        },
+      ],
+    },
 
     // =========================================================
     // SALES

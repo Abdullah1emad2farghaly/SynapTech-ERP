@@ -20,6 +20,7 @@ export interface Product {
   description: string | null;
   
   categoryId: string;
+  categoryName: string | null;
   unitOfMeasure: string;
   costPrice: number;
   salePrice: number;

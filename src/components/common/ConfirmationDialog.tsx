@@ -14,7 +14,7 @@
 // press can't trigger the action. Focus is trapped while open and
 // returned to the triggering element on close.
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export type ConfirmationDialogTone =
@@ -26,7 +26,7 @@ export interface ConfirmationDialogProps {
   open: boolean;
   tone: ConfirmationDialogTone;
   title: string;
-  body: string;
+  body: React.ReactNode;
   confirmLabel: string;
   cancelLabel: string;
   isSubmitting?: boolean;

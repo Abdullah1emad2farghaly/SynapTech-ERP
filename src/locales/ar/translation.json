@@ -131,7 +131,8 @@
       "viewDetails": "عرض التفاصيل",
       "duplicate": "نسخ",
       "export": "تصدير"
-    }
+    },
+    "cancel": "إلغاء"
   },
   "users": {
     "status": {
@@ -2739,7 +2740,11 @@
     "administration": "الإدارة",
     "users": "المستخدمين",
     "rolesAndPermissions": "الأدوار والصلاحيات",
-    "companySettings": "إعدادات الشركة"
+    "companySettings": "إعدادات الشركة",
+    "cashier": "الكاشير",
+    "pointOfSale": "نقطة البيع",
+    "cashierOrders": "الطلبات",
+    "cashierShifts": "الورديات"
   },
   "dashboard": {
     "overview": {
@@ -2823,5 +2828,223 @@
       "backToDashboard": "رجوع للرئيسية",
       "goBack": "رجوع"
     }
+  },
+  "cashier": {
+    "validation": {
+      "reasonRequired": "السبب مطلوب"
+    },
+    "pos": {
+      "searchProducts": "ابحث عن منتج بالاسم أو رمز المنتج",
+      "noProductsFound": "لا توجد منتجات",
+      "emptyCart": "السلة فارغة",
+      "emptyCartHint": "اختر منتجًا لبدء عملية البيع",
+      "increaseQuantity": "زيادة الكمية",
+      "decreaseQuantity": "تقليل الكمية",
+      "currentSale": "عملية البيع الحالية",
+      "goToPayment": "الانتقال للدفع",
+      "checkout": "إتمام الدفع",
+      "completeSale": "إتمام البيع",
+      "saleFailed": "تعذّر إتمام عملية البيع. حاول مرة أخرى.",
+      "items": "عناصر",
+      "noShiftTitle": "لا توجد وردية مفتوحة",
+      "noShiftBody": "افتح وردية لبدء البيع."
+    },
+    "cart": {
+      "product": "المنتج",
+      "sku": "رمز المنتج",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "discount": "الخصم",
+      "lineTotal": "إجمالي السطر"
+    },
+    "summary": {
+      "title": "الملخص المالي",
+      "subTotal": "المجموع الفرعي",
+      "discount": "الخصم",
+      "tax": "الضريبة",
+      "total": "الإجمالي",
+      "paid": "المدفوع",
+      "change": "الباقي"
+    },
+    "customer": {
+      "title": "العميل",
+      "registered": "عميل مسجّل",
+      "walkIn": "عميل زائر",
+      "selectCustomer": "اختر عميلًا",
+      "walkInNamePlaceholder": "اسم العميل الزائر (اختياري)",
+      "noCustomersFound": "لم يتم العثور على عملاء",
+      "searchCustomer": "ابحث عن عميل..."
+    },
+    "payment": {
+      "title": "الدفع",
+      "addPaymentMethod": "إضافة طريقة دفع",
+      "referenceOptional": "الرقم المرجعي (اختياري)",
+      "remaining": "المتبقي"
+    },
+    "paymentMethods": {
+      "cash": "نقدًا",
+      "card": "بطاقة",
+      "other": "أخرى"
+    },
+    "success": {
+      "title": "تمت عملية البيع",
+      "viewInvoice": "عرض الفاتورة",
+      "newSale": "عملية بيع جديدة"
+    },
+    "shift": {
+      "openShift": "فتح وردية",
+      "openShiftSubtitle": "ابدأ وردية جديدة لأحد المستودعات.",
+      "openedSuccess": "تم فتح الوردية.",
+      "openFailed": "تعذّر فتح الوردية. حاول مرة أخرى.",
+      "warehouse": "المستودع",
+      "selectWarehouse": "اختر مستودعًا",
+      "openingCashBalance": "رصيد النقدية الافتتاحي",
+      "notesOptional": "ملاحظات (اختياري)",
+      "shiftNumber": "رقم الوردية",
+      "cashMovement": "حركة نقدية",
+      "closeShift": "إغلاق الوردية",
+      "closedSuccess": "تم إغلاق الوردية.",
+      "closeFailed": "تعذّر إغلاق الوردية. حاول مرة أخرى.",
+      "expectedCash": "النقدية المتوقعة",
+      "countedCash": "النقدية المعدودة",
+      "discrepancy": "الفرق"
+    },
+    "cashMovement": {
+      "title": "تسجيل حركة نقدية",
+      "type": "نوع الحركة",
+      "amount": "المبلغ",
+      "reasonOptional": "السبب",
+      "amountRequired": "المبلغ يجب أن يكون أكبر من الصفر.",
+      "record": "تسجيل الحركة",
+      "recordedSuccess": "تم تسجيل الحركة النقدية.",
+      "recordFailed": "تعذّر تسجيل الحركة النقدية. حاول مرة أخرى."
+    },
+    "movementTypes": {
+      "cashIn": "إيداع نقدي",
+      "cashOut": "سحب نقدي"
+    },
+    "orders": {
+      "title": "الطلبات",
+      "subtitle": "جميع طلبات الكاشير من نقطة البيع هذه.",
+      "empty": "لا توجد طلبات بعد.",
+      "orderNumber": "رقم الطلب",
+      "date": "التاريخ",
+      "customer": "العميل",
+      "status": "الحالة",
+      "total": "الإجمالي"
+    },
+    "orderDetails": {
+      "orderInformation": "معلومات الطلب",
+      "shift": "الوردية",
+      "items": "العناصر",
+      "payments": "المدفوعات",
+      "noPayments": "لا توجد مدفوعات مسجّلة.",
+      "warnings": "تنبيهات",
+      "notFound": "الطلب غير موجود.",
+      "viewInvoice": "عرض الفاتورة"
+    },
+    "void": {
+      "action": "إلغاء الطلب",
+      "title": "هل تريد إلغاء هذا الطلب؟",
+      "body": "سيتم تعليم الطلب {{orderNumber}} كملغى. لا يمكن التراجع عن هذا الإجراء.",
+      "reasonOptional": "السبب",
+      "confirm": "إلغاء الطلب",
+      "success": "تم إلغاء الطلب.",
+      "failed": "تعذّر إلغاء الطلب. حاول مرة أخرى."
+    },
+    "invoice": {
+      "title": "الفاتورة",
+      "number": "رقم الفاتورة",
+      "date": "التاريخ"
+    },
+    "shiftHistory": {
+      "title": "سجل الورديات",
+      "subtitle": "ورديات الكاشير السابقة.",
+      "empty": "لا توجد ورديات بعد.",
+      "opened": "وقت الفتح",
+      "closed": "وقت الإغلاق"
+    },
+    "closingReport": {
+      "orders": "الطلبات",
+      "completedOrders": "الطلبات المكتملة",
+      "voidedOrders": "الطلبات الملغاة",
+      "sales": "المبيعات",
+      "cashSales": "مبيعات نقدية",
+      "cardSales": "مبيعات بالبطاقة",
+      "otherSales": "مبيعات أخرى",
+      "cashDrawer": "درج النقدية",
+      "openingCash": "النقدية الافتتاحية",
+      "cashIn": "إيداع نقدي",
+      "cashOut": "سحب نقدي"
+    }
+  },
+  "cashierStats": {
+    "title": "إحصائيات الكاشير",
+    "subtitle": "تابع أداء المبيعات والمعاملات والمدفوعات ونشاط الكاشير.",
+    "refresh": "تحديث",
+    "noDataForPeriod": "لا توجد بيانات للفترة المحددة.",
+    "loadError": "تعذّر تحميل طلبات الكاشير لعرض الإحصائيات.",
+    "retry": "إعادة المحاولة",
+    "filters": {
+      "today": "اليوم",
+      "yesterday": "أمس",
+      "thisWeek": "هذا الأسبوع",
+      "lastWeek": "الأسبوع الماضي",
+      "thisMonth": "هذا الشهر",
+      "lastMonth": "الشهر الماضي",
+      "thisYear": "هذا العام",
+      "customRange": "فترة مخصصة",
+      "allPaymentMethods": "جميع طرق الدفع"
+    },
+    "kpi": {
+      "totalSales": "إجمالي المبيعات",
+      "totalTransactions": "إجمالي المعاملات",
+      "averageTransactionValue": "متوسط قيمة المعاملة",
+      "itemsSold": "العناصر المباعة",
+      "voided": "الملغاة",
+      "discounts": "الخصومات",
+      "netSales": "صافي المبيعات"
+    },
+    "charts": {
+      "salesTrend": "المبيعات عبر الزمن",
+      "salesByHour": "المبيعات حسب الساعة",
+      "paymentMethods": "طرق الدفع",
+      "topProducts": "أفضل المنتجات مبيعًا",
+      "salesByCategory": "المبيعات حسب الفئة",
+      "voidedOrders": "الطلبات الملغاة",
+      "discounts": "الخصومات",
+      "customers": "العملاء"
+    },
+    "topProducts": {
+      "qtySold": "الكمية المباعة",
+      "sales": "المبيعات",
+      "share": "النسبة"
+    },
+    "voided": {
+      "amount": "قيمة الطلبات الملغاة",
+      "count": "عدد الطلبات الملغاة",
+      "rate": "معدل الإلغاء",
+      "mostVoidedProducts": "أكثر المنتجات إلغاءً",
+      "noneInPeriod": "لا توجد طلبات ملغاة في هذه الفترة."
+    },
+    "discounts": {
+      "total": "إجمالي الخصومات",
+      "average": "متوسط الخصم",
+      "rate": "معدل الخصم"
+    },
+    "customers": {
+      "served": "العملاء الذين تم خدمتهم",
+      "registered": "مسجّلون",
+      "walkIn": "زائرون",
+      "topCustomers": "أفضل العملاء",
+      "transactions": "المعاملات"
+    },
+    "transactions": {
+      "title": "نشاط المعاملات",
+      "search": "ابحث برقم الطلب أو الفاتورة أو اسم العميل",
+      "allStatuses": "جميع الحالات",
+      "tryAnotherRange": "جرّب فترة زمنية أخرى."
+    }
   }
+
 }

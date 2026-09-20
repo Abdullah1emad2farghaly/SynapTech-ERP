@@ -31,7 +31,6 @@ export function ProductDetailsPage() {
 
   const { data: product, isLoading, isError, refetch } = useProduct(id);
   const deleteProduct = useDeleteProduct();
-
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [drawerMode] = useState<ProductDrawerMode>("edit");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -117,7 +116,7 @@ export function ProductDetailsPage() {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--ink-secondary)]">
             <span className="font-mono text-xs">{product.sku}</span>
             <span aria-hidden="true">·</span>
-            <span>{product.categoryId}</span>
+            <span>{product.categoryName || "__"}</span>
           </div>
         </div>
 
@@ -167,7 +166,7 @@ export function ProductDetailsPage() {
                 {t("products.form.category")}
               </dt>
               <dd className="font-medium text-[var(--ink-primary)]">
-                {product.categoryId}
+                {product.categoryName || "__"}
               </dd>
             </div>
             <div className="flex items-center justify-between">

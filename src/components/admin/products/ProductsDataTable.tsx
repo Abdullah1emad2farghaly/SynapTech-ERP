@@ -78,7 +78,7 @@ export function ProductsDataTable({
       header: t("products.table.category"),
       sortable: true,
       cell: (row) => (
-        <span className="text-[var(--ink-secondary)]">{row.categoryId || "__"}</span>
+        <span className="text-[var(--ink-secondary)]">{row.categoryName || "__"}</span>
       ),
     },
     {
