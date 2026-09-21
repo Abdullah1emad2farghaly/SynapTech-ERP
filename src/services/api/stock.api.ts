@@ -27,6 +27,7 @@ export interface StockLevel {
   warehouseId: string;
   warehouseName: string;
   quantityOnHand: number;
+  salePrice: number;
 }
 
 export interface MovementResponse {

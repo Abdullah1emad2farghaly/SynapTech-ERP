@@ -15,6 +15,11 @@ export const PERMISSION_DEPENDENCIES: PermissionDependency[] = [
         reason: "Need to see the supplier list to manage entries in it",
     },
     {
+        code: "cashier.orders.create",
+        requires: ["sales.customers.view", "inventory.stock.view"],
+        reason: "Need to see the customer and the warehouses stock list to create orders",
+    },
+    {
         code: "purchasing.orders.create",
         requires: [
             "purchasing.orders.view",

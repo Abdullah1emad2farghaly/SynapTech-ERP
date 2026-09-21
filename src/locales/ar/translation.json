@@ -2834,6 +2834,9 @@
       "reasonRequired": "السبب مطلوب"
     },
     "pos": {
+      "remainingQuantity": "متبقي {{count}}",
+      "outOfStock": "نفدت الكمية",
+      "notEnoughStock": "المتاح فقط {{available}} في المخزون",
       "searchProducts": "ابحث عن منتج بالاسم أو رمز المنتج",
       "noProductsFound": "لا توجد منتجات",
       "emptyCart": "السلة فارغة",

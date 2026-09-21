@@ -2,30 +2,34 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Search, PackageSearch } from "lucide-react";
-import type { Product } from "../../../services/api/products.api"; // ASSUMPTION: existing confirmed Products module export path
+import type { StockLevel } from "../../../services/api/stock.api";
 
 interface ProductGridProps {
-  products: Product[];
+  stock: StockLevel[];
   isLoading: boolean;
-  onSelect: (product: Product) => void;
+  // How much of each product is already sitting in the cart, keyed by
+  // productId — used to show *remaining* quantity (on-hand minus what's
+  // already been added to this sale), not just the raw stock figure.
+  quantityInCart: Record<string, number>;
+  onSelect: (item: StockLevel) => void;
 }
 
-// Reuses the already-confirmed Products API (see project memory — full CRUD,
-// ProductResponse: id, sku, name, description, unitOfMeasure, categoryId,
-// costPrice, salePrice, isActive). No Cashier-specific product fields
-// invented — salePrice is the price shown/used here.
-export const ProductGrid = ({ products, isLoading, onSelect }: ProductGridProps) => {
+// Driven by GET /api/Stock/warehouses/{warehouseId} (StockLevel[]) instead
+// of the flat product catalog, so this only ever shows products that
+// actually have a stock record at the cashier's own warehouse, with a real
+// quantityOnHand — no invented "in stock" boolean.
+export const ProductGrid = ({ stock, isLoading, quantityInCart, onSelect }: ProductGridProps) => {
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
-    const active = products.filter((p) => p.isActive);
-    if (!query.trim()) return active;
+    if (!query.trim()) return stock;
     const q = query.trim().toLowerCase();
-    return active.filter(
-      (p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q)
+    return stock.filter(
+      (item) =>
+        item.productName.toLowerCase().includes(q) || item.productSku.toLowerCase().includes(q)
     );
-  }, [products, query]);
+  }, [stock, query]);
 
   return (
     <div className="flex h-full flex-col">
@@ -43,10 +47,7 @@ export const ProductGrid = ({ products, isLoading, onSelect }: ProductGridProps)
       {isLoading ? (
         <div className="grid grid-cols-2 gap-3 overflow-y-auto sm:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-28 animate-pulse rounded-lg bg-[var(--sunken)]"
-            />
+            <div key={i} className="h-28 animate-pulse rounded-lg bg-[var(--sunken)]" />
           ))}
         </div>
       ) : filtered.length === 0 ? (
@@ -55,23 +56,48 @@ export const ProductGrid = ({ products, isLoading, onSelect }: ProductGridProps)
           <p className="text-sm">{t("cashier.pos.noProductsFound")}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 overflow-y-auto pb-2 sm:grid-cols-3 lg:grid-cols-4">
-          {filtered.map((product) => (
-            <button
-              key={product.id}
-              type="button"
-              onClick={() => onSelect(product)}
-              className="group flex flex-col items-start gap-1 rounded-lg border border-[var(--hairline)] bg-[var(--panel)] p-3 text-start shadow-elevation-1 transition hover:border-[var(--signal)] active:scale-[0.98]"
-            >
-              <span className="line-clamp-2 text-sm font-medium text-[var(--ink-primary)]">
-                {product.name}
-              </span>
-              <span className="font-mono text-xs text-[var(--ink-tertiary)]">{product.sku}</span>
-              <span className="mt-auto pt-1 text-sm font-semibold text-[var(--signal)]">
-                {product.salePrice.toFixed(2)}
-              </span>
-            </button>
-          ))}
+        <div className="grid grid-cols-2 gap-3 overflow-y-auto pb-2 lg:grid-cols-3">
+          {filtered.map((item) => {
+            const inCart = quantityInCart[item.productId] ?? 0;
+            const remaining = item.quantityOnHand - inCart;
+            const outOfStock = remaining <= 0;
+
+            return (
+              <button
+                key={item.productId}
+                type="button"
+                disabled={outOfStock}
+                onClick={() => onSelect(item)}
+                className="group flex flex-col items-start gap-1 rounded-lg border border-[var(--hairline)] bg-[var(--panel)] p-3 text-start shadow-elevation-1 transition hover:border-[var(--signal)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-[var(--hairline)] disabled:active:scale-100"
+              >
+                <span className="line-clamp-2 text-sm font-medium text-[var(--ink-primary)]">
+                  {item.productName}
+                </span>
+                <span className="font-mono text-xs text-[var(--ink-tertiary)]">
+                  {item.productSku}
+                </span>
+
+                <div className="mt-auto flex w-full items-center justify-between pt-1">
+                  <span className="text-sm font-semibold text-[var(--signal)]">
+                    {item.salePrice.toFixed(2)}
+                  </span>
+                  <span
+                    className={`text-xs font-medium ${
+                      outOfStock
+                        ? "text-[var(--error)]"
+                        : remaining <= 5
+                          ? "text-[var(--warning)]"
+                          : "text-[var(--ink-tertiary)]"
+                    }`}
+                  >
+                    {outOfStock
+                      ? t("cashier.pos.outOfStock")
+                      : t("cashier.pos.remainingQuantity", { count: remaining })}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

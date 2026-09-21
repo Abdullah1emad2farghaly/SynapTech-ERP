@@ -19,22 +19,22 @@ import {
   useCreateCashierOrder,
   useMyCurrentShift,
 } from "../../../hooks/useCashier";
-import { useProducts } from "../../../hooks/useProducts"; // existing, confirmed Products module hook
+import { useWarehouseStock } from "../../../hooks/useStock";
 import type { CashierOrderResponse, CashierPaymentRequest } from "../../../services/api/cashier.api";
+import type { StockLevel } from "../../../services/api/stock.api";
 import type { CashierCartLine } from "../../../components/admin/cashier/cashierCart.types";
 import { cartLineToRequest } from "../../../components/admin/cashier/cashierCart.types";
-import type { Product } from "@/services/api/products.api";
-import { hasAnyPermission } from "@/utils/permissions";
-import { getUserPermissions } from "@/pages/common/LoginPage";
-import axios from "axios";
-import { handleErrors } from "@/utils/HandleErrors";
 
 export const POSPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const { data: shift, isLoading: shiftLoading } = useMyCurrentShift();
-  const { data: products = [], isLoading: productsLoading } = useProducts();
+  // Product data now comes from real per-warehouse stock, scoped to the
+  // warehouse the current shift was opened against — GET
+  // /api/Stock/warehouses/{warehouseId}, not the flat product catalog.
+  // Only enabled once a shift (and therefore a warehouseId) exists.
+  const { data: stock = [], isLoading: stockLoading } = useWarehouseStock(shift?.warehouseId);
   const createOrder = useCreateCashierOrder();
 
   const [cartLines, setCartLines] = useState<CashierCartLine[]>([]);
@@ -50,6 +50,19 @@ export const POSPage = () => {
   const [closeShiftOpen, setCloseShiftOpen] = useState(false);
   const [paymentDrawerOpen, setPaymentDrawerOpen] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<CashierOrderResponse | null>(null);
+
+  // productId → quantityOnHand, for clamping cart quantities to real stock.
+  const stockByProductId = useMemo(
+    () => new Map(stock.map((s) => [s.productId, s.quantityOnHand])),
+    [stock]
+  );
+
+  // productId → quantity already in the cart, for ProductGrid's "remaining"
+  // display (on-hand minus what's already been added to this sale).
+  const quantityInCart = useMemo(
+    () => Object.fromEntries(cartLines.map((l) => [l.productId, l.quantity])),
+    [cartLines]
+  );
 
   const subTotal = useMemo(
     () => cartLines.reduce((sum, l) => sum + l.quantity * l.unitPrice - l.discountAmount, 0),
@@ -68,22 +81,28 @@ export const POSPage = () => {
     setPaymentDrawerOpen(false);
   };
 
-  const handleAddProduct = (product: Product ) => {
+  const handleAddProduct = (item: StockLevel) => {
     setCartLines((prev) => {
-      const existing = prev.find((l) => l.productId === product.id);
+      const existing = prev.find((l) => l.productId === item.productId);
+      const maxQuantity = item.quantityOnHand;
+
       if (existing) {
+        if (existing.quantity >= maxQuantity) return prev; // already at stock limit
         return prev.map((l) =>
-          l.productId === product.id ? { ...l, quantity: l.quantity + 1 } : l
+          l.productId === item.productId ? { ...l, quantity: l.quantity + 1 } : l
         );
       }
+
+      if (maxQuantity <= 0) return prev; // defensive — grid already disables this case
+
       return [
         ...prev,
         {
-          productId: product.id,
-          productName: product.name,
-          productSku: product.sku,
+          productId: item.productId,
+          productName: item.productName,
+          productSku: item.productSku,
           quantity: 1,
-          unitPrice: product.salePrice,
+          unitPrice: item.salePrice,
           discountAmount: 0,
         },
       ];
@@ -91,7 +110,15 @@ export const POSPage = () => {
   };
 
   const handleQuantityChange = (productId: string, quantity: number) => {
-    setCartLines((prev) => prev.map((l) => (l.productId === productId ? { ...l, quantity } : l)));
+    const maxQuantity = stockByProductId.get(productId);
+    const clamped =
+      maxQuantity != null ? Math.min(Math.max(1, quantity), maxQuantity) : Math.max(1, quantity);
+
+    if (maxQuantity != null && quantity > maxQuantity) {
+      toast.error(t("cashier.pos.notEnoughStock", { available: maxQuantity }));
+    }
+
+    setCartLines((prev) => prev.map((l) => (l.productId === productId ? { ...l, quantity: clamped } : l)));
   };
 
   const handleRemoveLine = (productId: string) => {
@@ -113,11 +140,7 @@ export const POSPage = () => {
       });
       setCompletedOrder(order);
       resetSale();
-    } catch(errors) {
-      if(axios.isAxiosError(errors)){
-        console.log(errors.response?.data.errors);
-        handleErrors(errors.response?.data.errors)
-      }
+    } catch {
       toast.error(t("cashier.pos.saleFailed"));
     }
   };
@@ -135,19 +158,13 @@ export const POSPage = () => {
             {t("cashier.pos.noShiftBody")}
           </p>
         </div>
-
-        {
-          // hasAnyPermission(["cashier.shifts.open"], getUserPermissions()) && (
-            <button
+        <button
           type="button"
           onClick={() => setOpenShiftDrawerOpen(true)}
           className="rounded-md bg-[var(--signal)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--signal-hover)]"
         >
           {t("cashier.shift.openShift")}
         </button>
-          // )
-        }
-
         <OpenShiftDrawer
           open={openShiftDrawerOpen}
           onClose={() => setOpenShiftDrawerOpen(false)}
@@ -170,7 +187,12 @@ export const POSPage = () => {
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[1fr_380px]">
         {/* Product area */}
         <div className="min-h-0 rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] p-4">
-          <ProductGrid products={products} isLoading={productsLoading} onSelect={handleAddProduct} />
+          <ProductGrid
+            stock={stock}
+            isLoading={stockLoading}
+            quantityInCart={quantityInCart}
+            onSelect={handleAddProduct}
+          />
         </div>
 
         {/* Cart area — desktop/tablet sidebar, mobile drawer trigger */}

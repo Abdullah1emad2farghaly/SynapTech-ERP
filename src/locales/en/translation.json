@@ -2835,6 +2835,9 @@
       "reasonRequired": "Reason is required"
     },
     "pos": {
+      "remainingQuantity": "{{count}} left",
+      "outOfStock": "Out of stock",
+      "notEnoughStock": "Only {{available}} left in stock",
       "searchProducts": "Search products by name or SKU",
       "noProductsFound": "No products found",
       "emptyCart": "Cart is empty",
@@ -2980,6 +2983,7 @@
     }
   },
   "cashierStats": {
+    
     "title": "Cashier Statistics",
     "subtitle": "Monitor sales performance, transactions, payments, and cashier activity.",
     "refresh": "Refresh",
