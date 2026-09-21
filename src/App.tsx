@@ -68,6 +68,8 @@ import { CashierOrdersPage } from "./pages/admin/cashier/CashierOrdersPage";
 import { CashierOrderDetailsPage } from "./pages/admin/cashier/CashierOrderDetailsPage";
 import { ShiftHistoryPage } from "./pages/admin/cashier/ShiftHistoryPage";
 import { CashierStatisticsPage } from "./pages/admin/cashier/CashierStatisticsPage";
+import { ShiftReportPage } from "./pages/admin/cashier/ShiftReportPage";
+import { ShiftDetailsPage } from "./pages/admin/cashier/ShiftDetailsPage";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -170,7 +172,8 @@ export default function App() {
                 <Route path="orders" element={<CashierOrdersPage />} />
                 <Route path="orders/:id" element={<CashierOrderDetailsPage />} />
                 <Route path="shifts" element={<ShiftHistoryPage />} />
-                <Route path="shifts/:id" element={<ShiftHistoryPage />} />
+                <Route path="shifts/:id" element={<ShiftDetailsPage />} />
+                <Route path="shifts/:id/report" element={<ShiftReportPage />} />
               </Route>
 
               <Route path="/inventory">

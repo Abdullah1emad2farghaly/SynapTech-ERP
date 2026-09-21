@@ -36,7 +36,7 @@ export function Drawer({
   title,
   subtitle,
   children,
-  widthClassName = "w-full max-w-md",
+  widthClassName = "w-full max-w-md print:max-w-full",
 }: DrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedElement = useRef<HTMLElement | null>(null);

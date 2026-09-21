@@ -93,6 +93,7 @@
     "passwordSymbol": "ضيف رمز"
   },
   "common": {
+    "print":"طباعة",
     "none": "بدون",
     "back": " رجوع",
     "optional": "اختياري",
@@ -2965,7 +2966,9 @@
       "subtitle": "ورديات الكاشير السابقة.",
       "empty": "لا توجد ورديات بعد.",
       "opened": "وقت الفتح",
-      "closed": "وقت الإغلاق"
+      "closed": "وقت الإغلاق",
+      "viewReport": "عرض التقرير",
+      "reportUnavailable": "لم يتم الإغلاق بعد"
     },
     "closingReport": {
       "orders": "الطلبات",
@@ -2979,6 +2982,18 @@
       "openingCash": "النقدية الافتتاحية",
       "cashIn": "إيداع نقدي",
       "cashOut": "سحب نقدي"
+    },
+    "shiftReport": {
+      "title": "تقرير إغلاق الوردية",
+      "period": "الفترة",
+      "ordersSection": "الطلبات",
+      "loadError": "تعذّر تحميل تقرير الإغلاق لهذه الوردية."
+    },
+    "status": {
+      "open": "مفتوحة",
+      "closed": "مغلقة",
+      "completed":"مكتملة",
+      "voided": "ملغاة"
     }
   },
   "cashierStats": {

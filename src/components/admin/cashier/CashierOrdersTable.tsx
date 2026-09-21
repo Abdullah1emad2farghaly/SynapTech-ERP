@@ -78,10 +78,10 @@ export const CashierOrdersTable = ({ orders, isLoading }: CashierOrdersTableProp
                     }`}
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-current" />
-                    {order.status ?? "—"}
+                    {t(`cashier.status.${order.status?.toLocaleLowerCase()}`) ?? "—"}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-end font-semibold tabular-nums text-[var(--ink-primary)]">
+                <td className="px-4 py-3 text-end font-semibold tabular-nums text-[var(--success)]">
                   {order.totalAmount.toFixed(2)}
                 </td>
                 <td className="px-4 py-3 font-mono text-[var(--ink-tertiary)]">

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { TriangleAlert } from "lucide-react";
 import { FinancialSummary } from "./FinancialSummary";
 import type { CashierOrderResponse } from "../../../services/api/cashier.api";
+import { CASHIER_ORDER_STATUS_TONE } from "@/constants/cashierConfig";
 
 interface CashierOrderDetailsPanelsProps {
   order: CashierOrderResponse;
@@ -15,6 +16,7 @@ interface CashierOrderDetailsPanelsProps {
 // fetch here, since the order response doesn't include shift metadata).
 export const CashierOrderDetailsPanels = ({ order }: CashierOrderDetailsPanelsProps) => {
   const { t } = useTranslation();
+  const tone = order.status ? CASHIER_ORDER_STATUS_TONE[order.status] ?? "neutral" : "neutral";
 
   const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -37,7 +39,20 @@ export const CashierOrderDetailsPanels = ({ order }: CashierOrderDetailsPanelsPr
           </div>
           <div>
             <p className="text-xs text-[var(--ink-tertiary)]">{t("cashier.orders.status")}</p>
-            <p className="text-[var(--ink-primary)]">{order.status ?? "—"}</p>
+            <p className="text-[var(--ink-primary)]"><span
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium ${
+                      tone === "success"
+                        ? "bg-[color-mix(in_srgb,var(--success)_15%,transparent)] text-[var(--success)]"
+                        : tone === "error"
+                          ? "bg-[color-mix(in_srgb,var(--error)_15%,transparent)] text-[var(--error)]"
+                          : tone === "warning"
+                            ? "bg-[color-mix(in_srgb,var(--warning)_15%,transparent)] text-[var(--warning)]"
+                            : "bg-[var(--sunken)] text-[var(--ink-secondary)]"
+                    }`}
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                    {t(`cashier.status.${order.status?.toLocaleLowerCase()}`) ?? "—"}
+                  </span></p>
           </div>
           <div>
             <p className="text-xs text-[var(--ink-tertiary)]">{t("cashier.orders.customer")}</p>
