@@ -74,16 +74,16 @@ export const CustomerSelector = ({
 
       {/* Registered Customer */}
       {mode === "registered" ? (
-        // <SearchableSelect
-        //   value={customerId}
-        //   onChange={onCustomerIdChange}
-        //   options={customerOptions}
-        //   searchPlaceholder={t("cashier.customer.searchCustomer")}
-        //   placeholder={t("cashier.customer.selectCustomer")}
-        //   emptyResultsLabel={t("cashier.customer.noCustomersFound")}
-        //   disabled={isLoading}
-        // />
-        <></>
+        <SearchableSelect
+          value={customerId}
+          onChange={onCustomerIdChange}
+          options={customerOptions}
+          searchPlaceholder={t("cashier.customer.searchCustomer")}
+          placeholder={t("cashier.customer.selectCustomer")}
+          emptyResultsLabel={t("cashier.customer.noCustomersFound")}
+          disabled={isLoading}
+        />
+        // <></>
       ) : (
         /* Walk-in Customer */
         <input

@@ -26,6 +26,8 @@ import { cartLineToRequest } from "../../../components/admin/cashier/cashierCart
 import type { Product } from "@/services/api/products.api";
 import { hasAnyPermission } from "@/utils/permissions";
 import { getUserPermissions } from "@/pages/common/LoginPage";
+import axios from "axios";
+import { handleErrors } from "@/utils/HandleErrors";
 
 export const POSPage = () => {
   const { t } = useTranslation();
@@ -111,7 +113,11 @@ export const POSPage = () => {
       });
       setCompletedOrder(order);
       resetSale();
-    } catch {
+    } catch(errors) {
+      if(axios.isAxiosError(errors)){
+        console.log(errors.response?.data.errors);
+        handleErrors(errors.response?.data.errors)
+      }
       toast.error(t("cashier.pos.saleFailed"));
     }
   };

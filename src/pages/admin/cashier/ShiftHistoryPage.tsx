@@ -18,6 +18,7 @@ export const ShiftHistoryPage = () => {
   const { data: shift } = useShift(id);
   const { data: report, isLoading: reportLoading } = useShiftClosingReport(id);
 
+  console.log(report)
   if (id) {
     return (
       <div className="space-y-4 p-4">
