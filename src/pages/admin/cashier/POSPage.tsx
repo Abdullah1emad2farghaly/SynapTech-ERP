@@ -1,5 +1,5 @@
 // Intended project path: src/pages/admin/cashier/POSPage.tsx
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
@@ -21,6 +21,7 @@ import {
   useMyCurrentShift,
 } from "../../../hooks/useCashier";
 import { useWarehouseStock } from "../../../hooks/useStock";
+import { useScannerConnection } from "../../../hooks/useScannerConnection";
 import type { CashierOrderResponse, CashierPaymentRequest } from "../../../services/api/cashier.api";
 import type { StockLevel } from "../../../services/api/stock.api";
 import type { CashierCartLine } from "../../../components/admin/cashier/cashierCart.types";
@@ -37,6 +38,14 @@ export const POSPage = () => {
   // Only enabled once a shift (and therefore a warehouseId) exists.
   const { data: stock = [], isLoading: stockLoading } = useWarehouseStock(shift?.warehouseId);
   const createOrder = useCreateCashierOrder();
+
+  // Owned HERE, not inside ConnectMobileScannerCard — this is the fix.
+  // POSPage's mount lifetime is the whole POS session; the Scan Product
+  // Drawer below is just a visibility toggle over this same, single,
+  // persistent connection. Opening/closing the drawer never calls
+  // startPairing/disconnect itself — only the card's own buttons do, via
+  // the handlers passed down.
+  const scanner = useScannerConnection();
 
   const [cartLines, setCartLines] = useState<CashierCartLine[]>([]);
   const [customerMode, setCustomerMode] = useState<"registered" | "walkIn">("walkIn");
@@ -135,6 +144,21 @@ export const POSPage = () => {
     toast.success(t("cashier.pos.scannedAdded", { name: match.productName }));
   };
 
+  // Fires once per newly-received barcode message, regardless of whether
+  // the Scan Product drawer is currently open or closed — the mobile
+  // keeps scanning and the laptop keeps receiving even with the drawer
+  // shut, per the required behavior. Replaces the old onSkuScanned prop
+  // callback now that the card is presentational and doesn't own the
+  // connection itself.
+  const lastForwardedRef = useRef<typeof scanner.lastMessage>(null);
+  useEffect(() => {
+    if (scanner.lastMessage && scanner.lastMessage !== lastForwardedRef.current) {
+      lastForwardedRef.current = scanner.lastMessage;
+      handleScannedSku(scanner.lastMessage.sku);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scanner.lastMessage]);
+
   const handleQuantityChange = (productId: string, quantity: number) => {
     const maxQuantity = stockByProductId.get(productId);
     const clamped =
@@ -213,7 +237,13 @@ export const POSPage = () => {
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[1fr_380px]">
         {/* Product area */}
         <div className="flex min-h-0 flex-col rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] p-4">
-          <div className="mb-3 flex shrink-0 justify-end">
+          <div className="mb-3 flex shrink-0 items-center justify-end gap-2">
+            {scanner.state === "connected" && (
+              <span className="flex items-center gap-1.5 text-xs font-medium text-[var(--success)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                {t("barcodeScanner.status.connected")}
+              </span>
+            )}
             <button
               type="button"
               onClick={() => setScannerDrawerOpen(true)}
@@ -270,22 +300,26 @@ export const POSPage = () => {
         </button>
       )}
 
-      {/* Scan Product drawer — the connection lives only while this is open:
-          the card is only mounted when scannerDrawerOpen is true, so
-          closing the drawer unmounts it and useScannerConnection's own
-          cleanup effect tears the pairing down. Reopening starts fresh. */}
+      {/* Scan Product drawer — visibility ONLY. The card is always mounted
+          here (not conditionally on scannerDrawerOpen); `scanner` itself
+          lives above, in POSPage, so opening/closing this Drawer can never
+          create a second connection or tear down an existing one. Whatever
+          the Drawer component does internally (unmount its children on
+          close, or just hide them) no longer matters either way — the
+          WebRTC/Firebase state isn't inside what it might unmount. */}
       <Drawer
         open={scannerDrawerOpen}
         onClose={() => setScannerDrawerOpen(false)}
         title={t("cashier.pos.scanProduct")}
       >
-        {scannerDrawerOpen && (
-          <ConnectMobileScannerCard
-            onSkuScanned={(sku) => {
-              handleScannedSku(sku);
-            }}
-          />
-        )}
+        <ConnectMobileScannerCard
+          state={scanner.state}
+          sessionId={scanner.sessionId}
+          lastMessage={scanner.lastMessage}
+          error={scanner.error}
+          onConnect={() => void scanner.startPairing()}
+          onDisconnect={scanner.disconnect}
+        />
       </Drawer>
 
       {/* Payment / checkout drawer — shared desktop+mobile so the flow is identical */}

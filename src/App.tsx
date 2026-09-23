@@ -171,9 +171,9 @@ export default function App() {
 
               
               <Route path="/cashier">
-                <Route path="scanner" element={<ScannerMobilePage />} />
-                {/* <Route path="tools/barcode-scanner" element={<BarcodeScannerPage />} /> */}
                 <Route path="/cashier"  element={<CashierStatisticsPage />} />
+                <Route path="scanner" element={<ScannerMobilePage />} />
+                <Route path="barcode-scanner" element={<BarcodeScannerPage />} />
                 <Route path="point-of-sale" element={<POSPage />} />
                 <Route path="orders" element={<CashierOrdersPage />} />
                 <Route path="orders/:id" element={<CashierOrderDetailsPage />} />

@@ -3088,7 +3088,8 @@
       "waitingForMobile": "امسح هذا الرمز من صفحة الماسح على الهاتف.",
       "lastReceivedSku": "آخر رمز مستلم",
       "noneYet": "لا يوجد بعد",
-      "newSession": "بدء جلسة جديدة"
+      "newSession": "بدء جلسة جديدة",
+      "disconnectButton": "فصل ماسح الهاتف"
     },
     "mobile": {
       "pageTitle": "ماسح الهاتف",
