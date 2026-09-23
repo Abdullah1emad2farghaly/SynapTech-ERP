@@ -30,7 +30,7 @@ export const BarcodeCameraView = ({
   const audioContextRef = useRef<AudioContext | null>(null);
 
   /**
-   * Play a short barcode-scanner beep.
+   * Plays a loud, short barcode-scanner beep.
    */
   const playScanBeep = () => {
     try {
@@ -46,73 +46,86 @@ export const BarcodeCameraView = ({
         return;
       }
 
-      // Reuse the same AudioContext instead of creating
-      // a new one for every barcode.
+      // Reuse the same AudioContext.
       if (!audioContextRef.current) {
         audioContextRef.current = new AudioContextClass();
       }
 
       const audioContext = audioContextRef.current;
 
-      // Mobile browsers can suspend AudioContext.
+      // Mobile browsers may suspend the AudioContext.
       if (audioContext.state === "suspended") {
         void audioContext.resume();
       }
 
+      const now = audioContext.currentTime;
+
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
-      // Hardware-scanner-like sound.
+      /*
+       * Barcode scanner sound:
+       * - Square wave gives it a hardware-scanner character.
+       * - 2000Hz makes it easy to hear.
+       */
       oscillator.type = "square";
-      oscillator.frequency.setValueAtTime(
-        1800,
-        audioContext.currentTime
-      );
+      oscillator.frequency.setValueAtTime(2000, now);
 
-      // Keep the beep short and not too loud.
-      gainNode.gain.setValueAtTime(
-        0.08,
-        audioContext.currentTime
-      );
+      /*
+       * Louder volume.
+       *
+       * 0.3 = clearly noticeable
+       * 0.5 = very loud
+       */
+      gainNode.gain.setValueAtTime(0.3, now);
 
+      // Short fade-out to avoid an unpleasant click.
       gainNode.gain.exponentialRampToValueAtTime(
         0.001,
-        audioContext.currentTime + 0.08
+        now + 0.12
       );
 
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
 
-      oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.08);
+      oscillator.start(now);
+      oscillator.stop(now + 0.12);
     } catch {
-      // Audio must never break barcode scanning.
+      // Audio failure must never break barcode scanning.
     }
   };
 
   /**
-   * Start camera automatically when the component mounts.
+   * Start the camera automatically.
    */
   useEffect(() => {
     void start();
   }, [start]);
 
   /**
-   * Handle successful barcode detection.
+   * Handle barcode detection.
    */
   useEffect(() => {
     if (!lastResult) {
       return;
     }
 
-    // 🔊 Play beep whenever a barcode detection reaches this component.
+    /*
+     * 🔊 Play the beep every time a barcode result
+     * reaches this component.
+     */
     playScanBeep();
 
     const now = Date.now();
     const last = lastSentRef.current;
 
-    // Prevent sending the same barcode repeatedly
-    // to the laptop within the suppression window.
+    /*
+     * Prevent sending the same barcode repeatedly
+     * to the laptop within 2 seconds.
+     *
+     * The beep still plays because it happens BEFORE
+     * this suppression check.
+     */
     if (
       last &&
       last.value === lastResult &&
@@ -126,12 +139,15 @@ export const BarcodeCameraView = ({
       at: now,
     };
 
-    // Send the SKU through the existing WebRTC flow.
+    /*
+     * Existing WebRTC flow.
+     * Nothing changes here.
+     */
     onDetected(lastResult);
   }, [lastResult, onDetected]);
 
   /**
-   * Cleanup audio context when the scanner is unmounted.
+   * Cleanup AudioContext when component unmounts.
    */
   useEffect(() => {
     return () => {
