@@ -2714,6 +2714,7 @@
     }
   },
   "sidebar": {
+    "mobileScanner": "ماسح الباركود المحمول",
     "dashboard": "الرئيسية",
     "sales": "المبيعات",
     "customers": "العملاء",
@@ -2835,6 +2836,9 @@
       "reasonRequired": "السبب مطلوب"
     },
     "pos": {
+      "scanProduct": "مسح منتج",
+      "skuNotFound": "لا يوجد منتج بالرمز {{sku}} في مخزون هذا المستودع.",
+      "scannedAdded": "تمت إضافة {{name}}",
       "remainingQuantity": "متبقي {{count}}",
       "outOfStock": "نفدت الكمية",
       "notEnoughStock": "المتاح فقط {{available}} في المخزون",
@@ -3064,6 +3068,39 @@
       "search": "ابحث برقم الطلب أو الفاتورة أو اسم العميل",
       "allStatuses": "جميع الحالات",
       "tryAnotherRange": "جرّب فترة زمنية أخرى."
+    }
+  },
+
+  "barcodeScanner": {
+    "status": {
+      "idle": "غير متصل",
+      "waiting": "بانتظار الهاتف...",
+      "connecting": "جارٍ الاتصال...",
+      "connected": "تم توصيل ماسح الهاتف",
+      "disconnected": "انقطع اتصال ماسح الهاتف",
+      "failed": "فشل الاتصال"
+    },
+    "laptop": {
+      "pageTitle": "ماسح الباركود عبر الهاتف",
+      "pageSubtitle": "اربط هاتفك كماسح باركود لاسلكي لهذه الجلسة.",
+      "title": "توصيل ماسح الهاتف",
+      "connectButton": "توصيل ماسح الهاتف",
+      "waitingForMobile": "امسح هذا الرمز من صفحة الماسح على الهاتف.",
+      "lastReceivedSku": "آخر رمز مستلم",
+      "noneYet": "لا يوجد بعد",
+      "newSession": "بدء جلسة جديدة"
+    },
+    "mobile": {
+      "pageTitle": "ماسح الهاتف",
+      "scanQrButton": "مسح رمز QR",
+      "scanQrHint": "امسح رمز QR الظاهر على جهاز الكمبيوتر للاتصال.",
+      "requestingCamera": "جارٍ طلب إذن الكاميرا...",
+      "pointAtQr": "وجّه الكاميرا نحو رمز QR.",
+      "pointAtBarcode": "وجّه الكاميرا نحو الباركود.",
+      "cameraScannerTitle": "ماسح الكاميرا",
+      "connecting": "جارٍ الاتصال...",
+      "sent": "تم الإرسال",
+      "startNewPairing": "بدء اقتران جديد"
     }
   }
 

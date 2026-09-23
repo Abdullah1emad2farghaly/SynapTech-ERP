@@ -70,6 +70,8 @@ import { ShiftHistoryPage } from "./pages/admin/cashier/ShiftHistoryPage";
 import { CashierStatisticsPage } from "./pages/admin/cashier/CashierStatisticsPage";
 import { ShiftReportPage } from "./pages/admin/cashier/ShiftReportPage";
 import { ShiftDetailsPage } from "./pages/admin/cashier/ShiftDetailsPage";
+import { BarcodeScannerPage } from "./pages/admin/barcode-scanner/BarcodeScannerPage";
+import { ScannerMobilePage } from "./pages/mobile/ScannerMobilePage";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -166,7 +168,11 @@ export default function App() {
                 <Route path="journal-entries/create" element={<CreateJournalEntryPage />} />
                 <Route path="journal-entries/:id" element={<JournalEntryDetailsPage />} />
               </Route>
+
+              
               <Route path="/cashier">
+                <Route path="scanner" element={<ScannerMobilePage />} />
+                {/* <Route path="tools/barcode-scanner" element={<BarcodeScannerPage />} /> */}
                 <Route path="/cashier"  element={<CashierStatisticsPage />} />
                 <Route path="point-of-sale" element={<POSPage />} />
                 <Route path="orders" element={<CashierOrdersPage />} />

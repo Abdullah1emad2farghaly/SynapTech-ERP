@@ -2714,6 +2714,7 @@
     }
   },
   "sidebar": {
+    "mobileScanner": "Mobile Barcode Scanner",
     "dashboard": "Dashboard",
     "sales": "Sales",
     "customers": "Customers",
@@ -2836,6 +2837,9 @@
       "reasonRequired": "Reason is required"
     },
     "pos": {
+      "scanProduct": "Scan Product",
+      "skuNotFound": "No product with SKU {{sku}} found in this warehouse's stock.",
+      "scannedAdded": "Added {{name}}",
       "remainingQuantity": "{{count}} left",
       "outOfStock": "Out of stock",
       "notEnoughStock": "Only {{available}} left in stock",
@@ -3066,6 +3070,39 @@
       "search": "Search order, invoice, or customer",
       "allStatuses": "All Statuses",
       "tryAnotherRange": "Try another date range."
+    }
+  },
+
+  "barcodeScanner": {
+    "status": {
+      "idle": "Not connected",
+      "waiting": "Waiting for mobile...",
+      "connecting": "Connecting...",
+      "connected": "Mobile Scanner Connected",
+      "disconnected": "Mobile Scanner Disconnected",
+      "failed": "Connection Failed"
+    },
+    "laptop": {
+      "pageTitle": "Mobile Barcode Scanner",
+      "pageSubtitle": "Pair a phone as a wireless barcode scanner for this session.",
+      "title": "Connect Mobile Scanner",
+      "connectButton": "Connect Mobile Scanner",
+      "waitingForMobile": "Scan this code with the mobile scanner page.",
+      "lastReceivedSku": "Last Received SKU",
+      "noneYet": "None yet",
+      "newSession": "Start a new session"
+    },
+    "mobile": {
+      "pageTitle": "Mobile Scanner",
+      "scanQrButton": "Scan QR",
+      "scanQrHint": "Scan the QR code shown on your laptop to connect.",
+      "requestingCamera": "Requesting camera access...",
+      "pointAtQr": "Point your camera at the QR code.",
+      "pointAtBarcode": "Point your camera at a barcode.",
+      "cameraScannerTitle": "Camera Scanner",
+      "connecting": "Connecting...",
+      "sent": "Sent",
+      "startNewPairing": "Start New Pairing"
     }
   }
 

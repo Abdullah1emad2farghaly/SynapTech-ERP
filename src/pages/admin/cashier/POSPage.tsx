@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { ShoppingBag, X } from "lucide-react";
+import { ScanLine, ShoppingBag, X } from "lucide-react";
 import { ProductGrid } from "../../../components/admin/cashier/ProductGrid";
 import { CartPanel } from "../../../components/admin/cashier/CartPanel";
 import { FinancialSummary } from "../../../components/admin/cashier/FinancialSummary";
@@ -14,6 +14,7 @@ import { OpenShiftDrawer } from "../../../components/admin/cashier/OpenShiftDraw
 import { CashMovementDrawer } from "../../../components/admin/cashier/CashMovementDrawer";
 import { CloseShiftDrawer } from "../../../components/admin/cashier/CloseShiftDrawer";
 import { SaleSuccessDialog } from "../../../components/admin/cashier/SaleSuccessDialog";
+import { ConnectMobileScannerCard } from "../../../components/admin/barcode-scanner/ConnectMobileScannerCard";
 import { Drawer } from "../../../components/common/Drawer";
 import {
   useCreateCashierOrder,
@@ -49,6 +50,7 @@ export const POSPage = () => {
   const [cashMovementOpen, setCashMovementOpen] = useState(false);
   const [closeShiftOpen, setCloseShiftOpen] = useState(false);
   const [paymentDrawerOpen, setPaymentDrawerOpen] = useState(false);
+  const [scannerDrawerOpen, setScannerDrawerOpen] = useState(false);
   const [completedOrder, setCompletedOrder] = useState<CashierOrderResponse | null>(null);
 
   // productId → quantityOnHand, for clamping cart quantities to real stock.
@@ -107,6 +109,30 @@ export const POSPage = () => {
         },
       ];
     });
+  };
+
+  // Scan Product integration: a scanned SKU is matched against the SAME
+  // warehouse-scoped `stock` list ProductGrid already uses — not a global
+  // product search. A real product that just isn't stocked at this
+  // warehouse correctly reports "not found here", same as it would if you
+  // searched for it in the grid instead of scanning it.
+  const handleScannedSku = (rawSku: string) => {
+    const sku = rawSku.trim();
+    const match = stock.find((item) => item.productSku.trim().toLowerCase() === sku.toLowerCase());
+
+    if (!match) {
+      toast.error(t("cashier.pos.skuNotFound", { sku }));
+      return;
+    }
+
+    const inCart = quantityInCart[match.productId] ?? 0;
+    if (inCart >= match.quantityOnHand) {
+      toast.error(t("cashier.pos.notEnoughStock", { available: match.quantityOnHand }));
+      return;
+    }
+
+    handleAddProduct(match);
+    toast.success(t("cashier.pos.scannedAdded", { name: match.productName }));
   };
 
   const handleQuantityChange = (productId: string, quantity: number) => {
@@ -186,7 +212,17 @@ export const POSPage = () => {
 
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-[1fr_380px]">
         {/* Product area */}
-        <div className="min-h-0 rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] p-4">
+        <div className="flex min-h-0 flex-col rounded-lg border border-[var(--hairline)] bg-[var(--canvas)] p-4">
+          <div className="mb-3 flex shrink-0 justify-end">
+            <button
+              type="button"
+              onClick={() => setScannerDrawerOpen(true)}
+              className="flex items-center gap-1.5 rounded-md border border-[var(--hairline)] px-3 py-1.5 text-sm font-medium text-[var(--ink-secondary)] transition hover:border-[var(--signal)] hover:text-[var(--ink-primary)]"
+            >
+              <ScanLine className="h-4 w-4" />
+              {t("cashier.pos.scanProduct")}
+            </button>
+          </div>
           <ProductGrid
             stock={stock}
             isLoading={stockLoading}
@@ -233,6 +269,24 @@ export const POSPage = () => {
           <span className="font-semibold tabular-nums">{totalAmount.toFixed(2)}</span>
         </button>
       )}
+
+      {/* Scan Product drawer — the connection lives only while this is open:
+          the card is only mounted when scannerDrawerOpen is true, so
+          closing the drawer unmounts it and useScannerConnection's own
+          cleanup effect tears the pairing down. Reopening starts fresh. */}
+      <Drawer
+        open={scannerDrawerOpen}
+        onClose={() => setScannerDrawerOpen(false)}
+        title={t("cashier.pos.scanProduct")}
+      >
+        {scannerDrawerOpen && (
+          <ConnectMobileScannerCard
+            onSkuScanned={(sku) => {
+              handleScannedSku(sku);
+            }}
+          />
+        )}
+      </Drawer>
 
       {/* Payment / checkout drawer — shared desktop+mobile so the flow is identical */}
       <Drawer

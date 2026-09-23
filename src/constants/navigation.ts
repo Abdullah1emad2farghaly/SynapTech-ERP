@@ -58,6 +58,15 @@ export const useNavItems = (): NavItem[] => {
       icon: CreditCard,
       children: [
         {
+          id: "mobile-scanner",
+          label: t("sidebar.mobileScanner"),
+          to: "/cashier/scanner",
+          permissions: [
+            "cashier.orders.create",
+            "cashier.orders.view",
+          ],
+        },
+        {
           id: "cashier-pos",
           label: t("sidebar.pointOfSale"),
           to: "/cashier/point-of-sale",

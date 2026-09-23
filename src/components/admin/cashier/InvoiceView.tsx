@@ -22,20 +22,46 @@ export const InvoiceView = ({ invoice }: InvoiceViewProps) => {
   return (
     <div>
       <style>{`
-        @media print {
-          body * { visibility: hidden; }
-          #cashier-invoice-print, #cashier-invoice-print * { visibility: visible; }
-          #cashier-invoice-print {
-            position: absolute;
-            inset: 0;
-            
-            margin: 0;
-            padding: 24px;
-            border: none;
-            box-shadow: none;
-          }
-        }
-      `}</style>
+  @media print {
+    @page {
+      size: 105mm 148mm;
+      margin: 0;
+    }
+
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    body * {
+      visibility: hidden;
+    }
+
+    #cashier-invoice-print,
+    #cashier-invoice-print * {
+      visibility: visible;
+    }
+
+    #cashier-invoice-print {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+
+      margin: 0 !important;
+      padding: 24px !important;
+
+      border: none !important;
+      box-shadow: none !important;
+
+      box-sizing: border-box;
+    }
+  }
+`}</style>
 
       <div className="mb-3 flex justify-end print:hidden">
         <button
