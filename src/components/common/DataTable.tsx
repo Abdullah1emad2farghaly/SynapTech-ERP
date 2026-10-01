@@ -169,14 +169,14 @@ export function DataTable<User>({
             Array.from({ length: skeletonRowCount }).map((_, i) => (
               <SkeletonRow key={i} columnCount={columnCount} />
             ))
-          ) : rows.length === 0 ? (
+          ) : rows?.length === 0 ? (
             <tr>
               <td colSpan={columnCount} className="px-4 py-10">
                 {emptyState}
               </td>
             </tr>
           ) : (
-            rows.map((row) => {
+            rows?.map((row) => {
               const id = getRowId(row);
               return (
                 <tr

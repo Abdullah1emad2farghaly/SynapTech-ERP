@@ -3105,6 +3105,100 @@
       "sent": "Sent",
       "startNewPairing": "Start New Pairing"
     }
+  },
+
+  "reports": {
+    "asOfDate": "As of date",
+    "periodStart": "Period start",
+    "periodEnd": "Period end",
+    "balanced": "Balanced",
+    "outOfBalance": "Out of balance",
+    "columns": {
+      "code": "Code",
+      "name": "Name",
+      "balance": "Balance",
+      "date": "Date",
+      "description": "Description",
+      "debit": "Debit",
+      "credit": "Credit"
+    }
+  },
+  "balanceSheet": {
+    "title": "Balance Sheet",
+    "description": "Assets, liabilities and equity as of a given date.",
+    "assets": "Assets",
+    "liabilities": "Liabilities",
+    "equity": "Equity",
+    "totalAssets": "Total Assets",
+    "totalLiabilities": "Total Liabilities",
+    "totalEquity": "Total Equity",
+    "currentEarnings": "Current Earnings",
+    "noAssets": "No asset accounts to show",
+    "noLiabilities": "No liability accounts to show",
+    "noEquity": "No equity accounts to show"
+  },
+  "incomeStatement": {
+    "title": "Income Statement",
+    "description": "Revenue and expenses over a reporting period.",
+    "revenue": "Revenue",
+    "expenses": "Expenses",
+    "totalRevenue": "Total Revenue",
+    "totalExpenses": "Total Expenses",
+    "netIncome": "Net Income",
+    "noRevenue": "No revenue accounts to show",
+    "noExpenses": "No expense accounts to show"
+  },
+  "cashFlow": {
+    "title": "Cash Flow",
+    "description": "Cash movements over a reporting period.",
+    "openingBalance": "Opening Cash Balance",
+    "closingBalance": "Closing Cash Balance",
+    "netChange": "Net Change",
+    "movements": "Movements",
+    "runningBalance": "Running Balance",
+    "noMovements": "No cash movements in this period"
+  },
+  "accountingSettings": {
+    "title": "Accounting Settings",
+    "description": "Default accounts used across the system for inventory, receivables, payables, revenue, cost of goods sold and cash.",
+    "selectAccount": "Select an account",
+    "fields": {
+      "inventoryAccount": "Inventory Account",
+      "accountsPayableAccount": "Accounts Payable Account",
+      "accountsReceivableAccount": "Accounts Receivable Account",
+      "revenueAccount": "Revenue Account",
+      "costOfGoodsSoldAccount": "Cost of Goods Sold Account",
+      "cashAccount": "Cash Account"
+    },
+    "toast": {
+      "updated": "Accounting settings updated",
+      "updateFailed": "Failed to update accounting settings"
+    }
+  },
+  "notifications": {
+    "bell": {
+      "ariaLabel": "Notifications, {{count}} unread"
+    },
+    "panel": {
+      "ariaLabel": "Notifications",
+      "title": "Notifications",
+      "markAllRead": "Mark all as read",
+      "error": "Couldn't load notifications. Try again in a moment.",
+      "emptyTitle": "You're all caught up",
+      "emptyBody": "New notifications will show up here."
+    },
+    "item": {
+      "untitled": "Notification",
+      "delete": "Delete notification"
+    },
+    "toast": {
+      "new": "You have a new notification"
+    },
+    "errors": {
+      "markReadFailed": "Couldn't mark that as read. Try again.",
+      "markAllReadFailed": "Couldn't mark all as read. Try again.",
+      "deleteFailed": "Couldn't delete that notification. Try again."
+    }
   }
 
 }

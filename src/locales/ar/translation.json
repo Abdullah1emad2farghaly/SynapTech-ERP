@@ -3103,6 +3103,99 @@
       "sent": "تم الإرسال",
       "startNewPairing": "بدء اقتران جديد"
     }
+  },
+  "reports": {
+    "asOfDate": "حتى تاريخ",
+    "periodStart": "بداية الفترة",
+    "periodEnd": "نهاية الفترة",
+    "balanced": "متوازن",
+    "outOfBalance": "غير متوازن",
+    "columns": {
+      "code": "الرمز",
+      "name": "الاسم",
+      "balance": "الرصيد",
+      "date": "التاريخ",
+      "description": "الوصف",
+      "debit": "مدين",
+      "credit": "دائن"
+    }
+  },
+  "balanceSheet": {
+    "title": "الميزانية العمومية",
+    "description": "الأصول والخصوم وحقوق الملكية حتى تاريخ معين.",
+    "assets": "الأصول",
+    "liabilities": "الخصوم",
+    "equity": "حقوق الملكية",
+    "totalAssets": "إجمالي الأصول",
+    "totalLiabilities": "إجمالي الخصوم",
+    "totalEquity": "إجمالي حقوق الملكية",
+    "currentEarnings": "أرباح الفترة الحالية",
+    "noAssets": "لا توجد حسابات أصول لعرضها",
+    "noLiabilities": "لا توجد حسابات خصوم لعرضها",
+    "noEquity": "لا توجد حسابات حقوق ملكية لعرضها"
+  },
+  "incomeStatement": {
+    "title": "قائمة الدخل",
+    "description": "الإيرادات والمصروفات خلال فترة التقرير.",
+    "revenue": "الإيرادات",
+    "expenses": "المصروفات",
+    "totalRevenue": "إجمالي الإيرادات",
+    "totalExpenses": "إجمالي المصروفات",
+    "netIncome": "صافي الدخل",
+    "noRevenue": "لا توجد حسابات إيرادات لعرضها",
+    "noExpenses": "لا توجد حسابات مصروفات لعرضها"
+  },
+  "cashFlow": {
+    "title": "التدفق النقدي",
+    "description": "حركة النقدية خلال فترة التقرير.",
+    "openingBalance": "الرصيد الافتتاحي",
+    "closingBalance": "الرصيد الختامي",
+    "netChange": "صافي التغير",
+    "movements": "الحركات",
+    "runningBalance": "الرصيد الجاري",
+    "noMovements": "لا توجد حركات نقدية خلال هذه الفترة"
+  },
+  "accountingSettings": {
+    "title": "إعدادات الحسابات",
+    "description": "الحسابات الافتراضية المستخدمة في النظام للمخزون والذمم المدينة والدائنة والإيرادات وتكلفة البضاعة المباعة والنقدية.",
+    "selectAccount": "اختر حسابًا",
+    "fields": {
+      "inventoryAccount": "حساب المخزون",
+      "accountsPayableAccount": "حساب الذمم الدائنة",
+      "accountsReceivableAccount": "حساب الذمم المدينة",
+      "revenueAccount": "حساب الإيرادات",
+      "costOfGoodsSoldAccount": "حساب تكلفة البضاعة المباعة",
+      "cashAccount": "حساب النقدية"
+    },
+    "toast": {
+      "updated": "تم تحديث إعدادات الحسابات",
+      "updateFailed": "فشل تحديث إعدادات الحسابات"
+    }
+  },
+  "notifications": {
+    "bell": {
+      "ariaLabel": "الإشعارات، {{count}} غير مقروءة"
+    },
+    "panel": {
+      "ariaLabel": "الإشعارات",
+      "title": "الإشعارات",
+      "markAllRead": "تحديد الكل كمقروء",
+      "error": "تعذّر تحميل الإشعارات. حاول مرة أخرى بعد قليل.",
+      "emptyTitle": "لا توجد إشعارات جديدة",
+      "emptyBody": "ستظهر الإشعارات الجديدة هنا."
+    },
+    "item": {
+      "untitled": "إشعار",
+      "delete": "حذف الإشعار"
+    },
+    "toast": {
+      "new": "لديك إشعار جديد"
+    },
+    "errors": {
+      "markReadFailed": "تعذّر تحديد الإشعار كمقروء. حاول مرة أخرى.",
+      "markAllReadFailed": "تعذّر تحديد الكل كمقروء. حاول مرة أخرى.",
+      "deleteFailed": "تعذّر حذف الإشعار. حاول مرة أخرى."
+    }
   }
 
 }

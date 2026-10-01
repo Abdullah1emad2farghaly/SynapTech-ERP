@@ -15,7 +15,7 @@ export interface AccountResponse {
   code: string | null;
   name: string | null;
   accountType: string | null;
-  parentAccountId: string | null;
+  parentAccountId: string | null; 
   isActive: boolean;
 }
 
@@ -85,5 +85,4 @@ export const accountsApi = {
 
   getTrialBalance: () =>
     apiClient.get<TrialBalanceResponse>('/Accounts/trial-balance').then(r => r.data),
-  
 };

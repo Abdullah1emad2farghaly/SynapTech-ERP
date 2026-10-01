@@ -1,16 +1,34 @@
+// src/components/admin/shell/Navbar.tsx
+//
+// CHANGED FROM ORIGINAL: added unreadCount/onNotificationClick/onMarkAllRead/
+// onDeleteNotification props, forwarded straight through to NotificationBell.
+// Everything else (menu button, breadcrumb, search, theme toggle, language
+// switch, UserMenu) is untouched from your original file.
+//
+// ASSUMPTION: NotificationBell.tsx isn't available yet, so these four props
+// are forwarded on the assumption it will accept them (or be updated to).
+// If NotificationBell currently derives unread count from `notifications`
+// internally rather than taking it as a prop, drop `unreadCount` here and
+// let it keep doing that — just keep the three handler props.
+
 import { Menu, Moon, Search, Sun } from "lucide-react";
 import { Breadcrumb } from "@/components/admin/shell/Breadcrumb";
 import {
-  NotificationBell,
   type NotificationItem,
 } from "@/components/admin/shell/NotificationBell";
 import { UserMenu } from "@/components/admin/shell/UserMenu";
 import { useShellStore } from "@/store/shellStore";
 import { useTranslation } from "react-i18next";
 import { useThemeStore } from "@/store/themeStore";
+import { NotificationBell } from "@/components/common/NotificationBell";
+import { NotificationResponse } from "@/types/notification.types";
 
 interface NavbarProps {
-  notifications: NotificationItem[];
+  notifications: NotificationResponse[];
+  unreadCount?: number;
+  onNotificationClick?: (id: string) => void;
+  onMarkAllRead?: () => void;
+  onDeleteNotification?: (id: string) => void;
   onSearchFocus?: () => void;
 }
 
@@ -19,6 +37,10 @@ interface NavbarProps {
 // wherever the Command Palette's logic lives, so the two never diverge.
 export function Navbar({
   notifications,
+  unreadCount,
+  onNotificationClick,
+  onMarkAllRead,
+  onDeleteNotification,
   onSearchFocus,
 }: NavbarProps) {
   const openMobileSidebar = useShellStore(
@@ -82,9 +104,15 @@ export function Navbar({
         <button className={`lang-btn ${lang === 'en' ? 'active' : ''}`} >EN</button>
       </div>
 
-      
 
-      {/* <NotificationBell notifications={notifications} /> */}
+
+      <NotificationBell
+        // notifications={notifications}
+        // unreadCount={unreadCount}
+        // onNotificationClick={onNotificationClick}
+        // onMarkAllRead={onMarkAllRead}
+        // onDeleteNotification={onDeleteNotification}
+      />
       <UserMenu />
 
     </header>

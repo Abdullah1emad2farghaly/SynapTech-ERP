@@ -72,6 +72,7 @@ import { ShiftReportPage } from "./pages/admin/cashier/ShiftReportPage";
 import { ShiftDetailsPage } from "./pages/admin/cashier/ShiftDetailsPage";
 import { BarcodeScannerPage } from "./pages/admin/barcode-scanner/BarcodeScannerPage";
 import { ScannerMobilePage } from "./pages/mobile/ScannerMobilePage";
+import { lazy } from "react";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -84,7 +85,7 @@ function DashboardLayout() {
         title="SynapTech ERP"
         robots="noindex, nofollow"
       />
-      <AppShell notifications={[]} onSearchFocus={() => {/* wire in step 2 */ }}>
+      <AppShell onSearchFocus={() => {/* wire in step 2 */ }}>
         <RouteGuard>
           <Outlet />
         </RouteGuard>
@@ -113,7 +114,6 @@ export const getCurrentUser = (): boolean => {
 };
 
 export default function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -160,18 +160,24 @@ export default function App() {
 
               <Route path="/accounting">
                 <Route path="/accounting" element={<AccountingOverviewPage />} />
+
                 <Route path="accounts" element={<AccountsListPage />} />
                 <Route path="accounts/new" element={<AccountFormPage />} />
                 <Route path="accounts/:id" element={<AccountDetailsPage />} />
+
+                {/* <Route path="balance-sheet" element={<BalanceSheetPage />} />
+                <Route path="income-statement" element={<IncomeStatementPage />} />
+                <Route path="cash-flow" element={<CashFlowPage />} />
+                <Route path="accounting-settings" element={<AccountingSettingsPage />} /> */}
 
                 <Route path="journal-entries" element={<JournalEntriesListPage />} />
                 <Route path="journal-entries/create" element={<CreateJournalEntryPage />} />
                 <Route path="journal-entries/:id" element={<JournalEntryDetailsPage />} />
               </Route>
 
-              
+
               <Route path="/cashier">
-                <Route path="/cashier"  element={<CashierStatisticsPage />} />
+                <Route path="/cashier" element={<CashierStatisticsPage />} />
                 <Route path="scanner" element={<ScannerMobilePage />} />
                 <Route path="barcode-scanner" element={<BarcodeScannerPage />} />
                 <Route path="point-of-sale" element={<POSPage />} />

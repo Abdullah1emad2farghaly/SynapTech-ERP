@@ -4,8 +4,11 @@ import { Bell } from "lucide-react";
 export interface NotificationItem {
   id: string;
   title: string;
-  timestampLabel: string;
-  read: boolean;
+  body: string;
+  type: string;
+  isRead: string;
+  link: string;
+  createdAt: string;
   onClick?: () => void;
 }
 
@@ -19,7 +22,7 @@ interface NotificationBellProps {
 export function NotificationBell({ notifications }: NotificationBellProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const unreadCount = notifications.filter((n) => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
 
   useEffect(() => {
     function onClickOutside(event: MouseEvent) {
@@ -73,12 +76,12 @@ export function NotificationBell({ notifications }: NotificationBellProps) {
                     onClick={item.onClick}
                     className={[
                       "flex w-full items-start gap-2 border-s-2 px-3.5 py-2.5 text-start text-[0.8125rem] hover:bg-sunken",
-                      item.read ? "border-transparent text-ink-secondary" : "border-signal text-ink-primary",
+                      item.isRead ? "border-transparent text-ink-secondary" : "border-signal text-ink-primary",
                     ].join(" ")}
                   >
                     <span className="flex-1">{item.title}</span>
                     <span className="shrink-0 whitespace-nowrap text-[0.75rem] text-ink-tertiary">
-                      {item.timestampLabel}
+                      {item.createdAt}
                     </span>
                   </button>
                 </li>

@@ -1,18 +1,26 @@
-// Intended path: src/services/api/accountingSettings.api.ts
-// NEW FILE. Only GET is used by the Overview page; PUT exists on the
-// confirmed contract too but there's no settings-editing UI being built
-// here — that's a separate task from this statistics page.
+// Project path: src/services/api/accountingSettings.api.ts
 
-import {apiClient} from './axiosClient';
-
-export interface AccountingSettingsResponse {
-  inventoryAccountId: string | null;
-  accountsPayableAccountId: string | null;
-  accountsReceivableAccountId: string | null;
-  revenueAccountId: string | null;
-  costOfGoodsSoldAccountId: string | null;
-}
+import { apiClient } from './axiosClient';
+import type {
+  AccountingSettingsResponse,
+  UpdateAccountingSettingsRequest,
+} from '../../types/accounting-settings.types';
 
 export const accountingSettingsApi = {
-  get: () => apiClient.get<AccountingSettingsResponse>('/AccountingSettings').then(r => r.data),
+  get: async (): Promise<AccountingSettingsResponse> => {
+    const { data } = await apiClient.get<AccountingSettingsResponse>(
+      '/AccountingSettings',
+    );
+    return data;
+  },
+
+  update: async (
+    payload: UpdateAccountingSettingsRequest,
+  ): Promise<AccountingSettingsResponse> => {
+    const { data } = await apiClient.put<AccountingSettingsResponse>(
+      '/AccountingSettings',
+      payload,
+    );
+    return data;
+  },
 };
