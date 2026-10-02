@@ -15,7 +15,7 @@ export function PeriodRangeControl({
   onChangeStart,
   onChangeEnd,
 }: PeriodRangeControlProps) {
-  const { t } = useTranslation('accounting');
+  const { t } = useTranslation('');
 
   return (
     <div className="flex flex-wrap items-center gap-3">

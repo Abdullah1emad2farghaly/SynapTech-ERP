@@ -2714,6 +2714,12 @@
     }
   },
   "sidebar": {
+    "invoicesByUser": "Invoices by User",
+    "cashFlow": "Cash Flow",
+    "myInvoices": "My Invoices",
+    "incomeStatement": "Income Statement",
+    "balanceSheet": "Balance Sheet",
+    "accountingSettings": "Accounting Settings",
     "mobileScanner": "Mobile Barcode Scanner",
     "dashboard": "Dashboard",
     "sales": "Sales",
@@ -3123,6 +3129,7 @@
       "credit": "Credit"
     }
   },
+
   "balanceSheet": {
     "title": "Balance Sheet",
     "description": "Assets, liabilities and equity as of a given date.",
@@ -3198,6 +3205,63 @@
       "markReadFailed": "Couldn't mark that as read. Try again.",
       "markAllReadFailed": "Couldn't mark all as read. Try again.",
       "deleteFailed": "Couldn't delete that notification. Try again."
+    }
+  },
+
+  "invoices": {
+    "unnumbered": "Unnumbered",
+    "registeredCustomer": "Registered customer",
+    "walkInCustomer": "Walk-in customer",
+    "statusUnknown": "Unknown",
+    "noResultsForFilters": "No invoices match your filters",
+    "columns": {
+      "invoiceNumber": "Invoice #",
+      "date": "Date",
+      "customer": "Customer",
+      "status": "Status",
+      "total": "Total",
+      "amountPaid": "Amount Paid",
+      "actions": "Actions"
+    },
+    "actions": {
+      "view": "View",
+      "print": "Print"
+    },
+    "filters": {
+      "searchPlaceholder": "Search invoice #, customer, phone...",
+      "allStatuses": "All statuses",
+      "clear": "Clear filters"
+    },
+    "details": {
+      "title": "Invoice Details",
+      "orderRef": "Order",
+      "customer": "Customer",
+      "items": "Items",
+      "noLines": "No line items on this invoice",
+      "product": "Product",
+      "sku": "SKU",
+      "quantity": "Qty",
+      "unitPrice": "Unit Price",
+      "discount": "Discount",
+      "lineTotal": "Line Total",
+      "subTotal": "Subtotal",
+      "tax": "Tax",
+      "total": "Total",
+      "amountPaid": "Amount Paid",
+      "changeDue": "Change Due"
+    },
+    "myInvoices": {
+      "title": "My Invoices",
+      "description": "Invoices you've issued.",
+      "empty": "You haven't issued any invoices yet"
+    },
+    "byUser": {
+      "title": "Invoices By User",
+      "description": "Look up invoices issued by a specific user.",
+      "selectUser": "Select a user",
+      "searchUser": "Find a User",
+      "selectUserPrompt": "Select a user to view their invoices",
+      "empty": "This user has no invoices"
     }
   }
 

@@ -73,6 +73,12 @@ import { ShiftDetailsPage } from "./pages/admin/cashier/ShiftDetailsPage";
 import { BarcodeScannerPage } from "./pages/admin/barcode-scanner/BarcodeScannerPage";
 import { ScannerMobilePage } from "./pages/mobile/ScannerMobilePage";
 import { lazy } from "react";
+import { BalanceSheetPage } from "./pages/admin/accounting/BalanceSheetPage";
+import { IncomeStatementPage } from "./pages/admin/accounting/IncomeStatementPage";
+import { CashFlowPage } from "./pages/admin/accounting/CashFlowPage";
+import { AccountingSettingsPage } from "./pages/admin/accounting/AccountingSettingsPage";
+import { InvoicesByUserPage } from "./pages/admin/cashier/invoices/InvoicesByUserPage";
+import { MyInvoicesPage } from "./pages/admin/cashier/invoices/MyInvoicesPage";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -165,10 +171,10 @@ export default function App() {
                 <Route path="accounts/new" element={<AccountFormPage />} />
                 <Route path="accounts/:id" element={<AccountDetailsPage />} />
 
-                {/* <Route path="balance-sheet" element={<BalanceSheetPage />} />
+                <Route path="balance-sheet" element={<BalanceSheetPage />} />
                 <Route path="income-statement" element={<IncomeStatementPage />} />
                 <Route path="cash-flow" element={<CashFlowPage />} />
-                <Route path="accounting-settings" element={<AccountingSettingsPage />} /> */}
+                <Route path="accounting-settings" element={<AccountingSettingsPage />} />
 
                 <Route path="journal-entries" element={<JournalEntriesListPage />} />
                 <Route path="journal-entries/create" element={<CreateJournalEntryPage />} />
@@ -186,6 +192,9 @@ export default function App() {
                 <Route path="shifts" element={<ShiftHistoryPage />} />
                 <Route path="shifts/:id" element={<ShiftDetailsPage />} />
                 <Route path="shifts/:id/report" element={<ShiftReportPage />} />
+                
+                <Route path="invoices/my-invoices" element={<MyInvoicesPage />} />
+                <Route path="invoices/by-user" element={<InvoicesByUserPage />} />
               </Route>
 
               <Route path="/inventory">

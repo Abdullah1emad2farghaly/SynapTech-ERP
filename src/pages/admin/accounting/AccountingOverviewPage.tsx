@@ -1,11 +1,3 @@
-// Intended path: src/pages/admin/accounting/AccountingOverviewPage.tsx
-// The most detailed Overview page in the series so far, per the request:
-// trial balance hero, 4 distinct charts (2 bar, 1 donut, 1 new line/area
-// trend), KPI row, recent entries list, and a snapshot card — versus 1-3
-// charts on the earlier three pages. Journal Entries (Module 5) is already
-// fully built, so "View all"/entry links here are real, unlike the
-// Accounts-management links which are flagged 404s (see
-// AccountsSnapshotCard.tsx).
 
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';

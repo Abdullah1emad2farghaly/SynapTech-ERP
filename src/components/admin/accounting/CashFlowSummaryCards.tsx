@@ -14,7 +14,7 @@ export function CashFlowSummaryCards({
   closingCashBalance,
   netChange,
 }: CashFlowSummaryCardsProps) {
-  const { t } = useTranslation('accounting');
+  const { t } = useTranslation('');
   const isPositive = netChange >= 0;
 
   return (

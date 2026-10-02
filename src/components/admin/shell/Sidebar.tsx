@@ -53,7 +53,7 @@ export function Sidebar() {
   var navItems = useNavItems();
 
 
-  const globalNavigation = [{
+  const globalAttendanceNavigation = [{
     id: "hr-my-attendance",
     label: t("sidebar.myAttendance"),
     to: "/hr/my-attendance",
@@ -69,6 +69,15 @@ export function Sidebar() {
       "hr.myRequests",
     ],
   },]
+  
+  const globalInvoicesNavigation = [{
+    id: "hr-my-attendance",
+    label: t("sidebar.myAttendance"),
+    to: "/hr/my-attendance",
+    permissions: [
+      "hr.my-attendance.view",
+    ],
+  }]
 
 
   // =========================================================
@@ -91,7 +100,7 @@ export function Sidebar() {
     navItems.forEach((item)=>{
       if(item.id === 'hr'){
         const children = item.children || []
-        item.children = [...children, ...globalNavigation]
+        item.children = [...children, ...globalAttendanceNavigation]
       }
     })
   }

@@ -96,7 +96,7 @@ export function SearchableSelect({
       {open && !disabled && (
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="absolute z-20 mt-1 w-full rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] shadow-[var(--elevation-1)]">
+          <div className="absolute z-20 mt-1 w-fit left-0 rounded-[10px] border border-[var(--hairline)] bg-[var(--panel)] shadow-[var(--elevation-1)]">
             <div className="relative border-b border-[var(--hairline)] p-2">
               <Search
                 size={14}

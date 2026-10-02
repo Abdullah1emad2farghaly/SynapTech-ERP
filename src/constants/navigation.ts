@@ -66,15 +66,6 @@ export const useNavItems = (): NavItem[] => {
             "cashier.orders.view",
           ],
         },
-        // {
-        //   id: "mobile-scanner",
-        //   label: t("sidebar.mobileScanner"),
-        //   to: "/cashier/barcode-scanner",
-        //   permissions: [
-        //     // "cashier.orders.create",
-        //     // "cashier.orders.view",
-        //   ],
-        // },
         {
           id: "cashier-pos",
           label: t("sidebar.pointOfSale"),
@@ -103,6 +94,22 @@ export const useNavItems = (): NavItem[] => {
             "cashier.shifts.view",
             "cashier.shifts.close",
             "cashier.shifts.cashmovement",
+          ],
+        },
+        {
+          id: "my-invoices",
+          label: t("sidebar.myInvoices"),
+          to: "/cashier/invoices/my-invoices",
+          permissions: [
+            "cashier.orders.create",
+          ],
+        },
+        {
+          id: "invoices-by-user",
+          label: t("sidebar.invoicesByUser"),
+          to: "/cashier/invoices/by-user",
+          permissions: [
+            "cashier.invoices.viewall",
           ],
         },
       ],
@@ -262,14 +269,38 @@ export const useNavItems = (): NavItem[] => {
             "accounting.journal.reverse",
           ],
         },
-        // {
-        //   id: "accounting-settings",
-        //   label: t("sidebar.accountingSettings"),
-        //   to: "/accounting/settings",
-        //   permissions: [
-        //     "accounting.settings.manage",
-        //   ],
-        // },
+        {
+          id: "cash-flow",
+          label: t("sidebar.cashFlow"),
+          to: "/accounting/cash-flow",
+          permissions: [
+            "accounting.accounts.manage",
+          ],
+        },
+        {
+          id: "income-statement",
+          label: t("sidebar.incomeStatement"),
+          to: "/accounting/income-statement",
+          permissions: [
+            "accounting.accounts.manage",
+          ],
+        },
+        {
+          id: "balance-sheet",
+          label: t("sidebar.balanceSheet"),
+          to: "/accounting/balance-sheet",
+          permissions: [
+            "accounting.accounts.manage",
+          ],
+        },
+        {
+          id: "accounting-settings",
+          label: t("sidebar.accountingSettings"),
+          to: "/accounting/accounting-settings",
+          permissions: [
+            "accounting.settings.manage",
+          ],
+        },
       ],
     },
 

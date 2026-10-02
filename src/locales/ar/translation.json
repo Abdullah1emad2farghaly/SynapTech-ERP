@@ -108,6 +108,9 @@
     "theme": "المظهر",
     "light": "فاتح",
     "dark": "غامق",
+    "saveChanges":"حفظ التغييرات",
+    "saving":"جاري الحفظ...",
+    "reset":"إعادة",
     "copyright": "© {{year}} Synaptech",
     "errors": {
       "loadFailed": "مقدرناش نحمّل البيانات",
@@ -2714,6 +2717,12 @@
     }
   },
   "sidebar": {
+    "myInvoices": "فواتيري",
+    "invoicesByUser": "الفواتير حسب المستخدم",
+    "cashFlow": "التدفقات النقدية",
+    "incomeStatement": "قائمة الدخل",
+    "balanceSheet": "الميزانية العمومية",
+    "accountingSettings": "إعدادات المحاسبة",
     "mobileScanner": "ماسح الباركود المحمول",
     "dashboard": "الرئيسية",
     "sales": "المبيعات",
@@ -3134,6 +3143,8 @@
     "noLiabilities": "لا توجد حسابات خصوم لعرضها",
     "noEquity": "لا توجد حسابات حقوق ملكية لعرضها"
   },
+
+
   "incomeStatement": {
     "title": "قائمة الدخل",
     "description": "الإيرادات والمصروفات خلال فترة التقرير.",
@@ -3145,6 +3156,7 @@
     "noRevenue": "لا توجد حسابات إيرادات لعرضها",
     "noExpenses": "لا توجد حسابات مصروفات لعرضها"
   },
+
   "cashFlow": {
     "title": "التدفق النقدي",
     "description": "حركة النقدية خلال فترة التقرير.",
@@ -3155,6 +3167,7 @@
     "runningBalance": "الرصيد الجاري",
     "noMovements": "لا توجد حركات نقدية خلال هذه الفترة"
   },
+
   "accountingSettings": {
     "title": "إعدادات الحسابات",
     "description": "الحسابات الافتراضية المستخدمة في النظام للمخزون والذمم المدينة والدائنة والإيرادات وتكلفة البضاعة المباعة والنقدية.",
@@ -3172,6 +3185,7 @@
       "updateFailed": "فشل تحديث إعدادات الحسابات"
     }
   },
+
   "notifications": {
     "bell": {
       "ariaLabel": "الإشعارات، {{count}} غير مقروءة"
@@ -3195,6 +3209,63 @@
       "markReadFailed": "تعذّر تحديد الإشعار كمقروء. حاول مرة أخرى.",
       "markAllReadFailed": "تعذّر تحديد الكل كمقروء. حاول مرة أخرى.",
       "deleteFailed": "تعذّر حذف الإشعار. حاول مرة أخرى."
+    }
+  },
+
+  "invoices": {
+    "unnumbered": "بدون رقم",
+    "registeredCustomer": "عميل مسجل",
+    "walkInCustomer": "عميل زائر",
+    "statusUnknown": "غير معروف",
+    "noResultsForFilters": "لا توجد فواتير مطابقة لعوامل التصفية",
+    "columns": {
+      "invoiceNumber": "رقم الفاتورة",
+      "date": "التاريخ",
+      "customer": "العميل",
+      "status": "الحالة",
+      "total": "الإجمالي",
+      "amountPaid": "المبلغ المدفوع",
+      "actions": "الإجراءات"
+    },
+    "actions": {
+      "view": "عرض",
+      "print": "طباعة"
+    },
+    "filters": {
+      "searchPlaceholder": "بحث برقم الفاتورة، العميل، الهاتف...",
+      "allStatuses": "كل الحالات",
+      "clear": "مسح عوامل التصفية"
+    },
+    "details": {
+      "title": "تفاصيل الفاتورة",
+      "orderRef": "الطلب",
+      "customer": "العميل",
+      "items": "الأصناف",
+      "noLines": "لا توجد أصناف في هذه الفاتورة",
+      "product": "المنتج",
+      "sku": "رمز المنتج",
+      "quantity": "الكمية",
+      "unitPrice": "سعر الوحدة",
+      "discount": "الخصم",
+      "lineTotal": "إجمالي السطر",
+      "subTotal": "الإجمالي الفرعي",
+      "tax": "الضريبة",
+      "total": "الإجمالي",
+      "amountPaid": "المبلغ المدفوع",
+      "changeDue": "الباقي للعميل"
+    },
+    "myInvoices": {
+      "title": "فواتيري",
+      "description": "الفواتير التي أصدرتها.",
+      "empty": "لم تصدر أي فواتير بعد"
+    },
+    "byUser": {
+      "title": "الفواتير حسب المستخدم",
+      "description": "عرض الفواتير الصادرة عن مستخدم معين.",
+      "selectUser": "اختر مستخدمًا",
+      "selectUserPrompt": "اختر مستخدمًا لعرض فواتيره",
+      "searchUser": "ابحث عن مستخدم",
+      "empty": "لا توجد فواتير لهذا المستخدم"
     }
   }
 
