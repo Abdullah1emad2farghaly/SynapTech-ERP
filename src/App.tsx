@@ -79,6 +79,7 @@ import { CashFlowPage } from "./pages/admin/accounting/CashFlowPage";
 import { AccountingSettingsPage } from "./pages/admin/accounting/AccountingSettingsPage";
 import { InvoicesByUserPage } from "./pages/admin/cashier/invoices/InvoicesByUserPage";
 import { MyInvoicesPage } from "./pages/admin/cashier/invoices/MyInvoicesPage";
+import { NotificationsPage } from "./pages/admin/notifications/NotificationsPage";
 // import DashboardHomePage from "./pages/admin/dashboard/DashboardHomePage";
 
 const queryClient = new QueryClient();
@@ -146,7 +147,7 @@ export default function App() {
           {/* Shelled pages — everything nested here renders inside AppShell */}
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
-
+              <Route path="/notifications" element={<NotificationsPage />} />
               <Route path="/settings" element={<CompanySettingsPage />} />
               <Route path="/organization">
                 <Route path="/organization" element={<OrganizationOverviewPage />} />

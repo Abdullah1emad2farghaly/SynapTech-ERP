@@ -1,95 +1,89 @@
-import { useEffect, useRef, useState } from "react";
-import { Bell } from "lucide-react";
+// src/components/admin/shell/NotificationBell.tsx
+//
+// NOTE: this is a FRESH BUILD, not an edit of your real component — it was
+// never provided in this session. It matches the prop interface already
+// wired through Navbar.tsx/AppShell.tsx (notifications, unreadCount,
+// onNotificationClick, onMarkAllRead, onDeleteNotification), so dropping it
+// in should work end-to-end, but check it against whatever your real
+// NotificationBell.tsx currently does before replacing it — you may have
+// existing behavior/styling here worth keeping.
+//
+// Behavior (per your last request): clicking the bell navigates straight to
+// /notifications and marks everything read (calls onMarkAllRead), rather
+// than opening an inline dropdown/preview panel.
 
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Bell } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+/** ASSUMPTION — same shape used by AppShell's mapToNotificationItem. Replace
+ *  with the real type once the backend's NotificationResponse is confirmed. */
 export interface NotificationItem {
   id: string;
   title: string;
-  body: string;
-  type: string;
-  isRead: string;
-  link: string;
-  createdAt: string;
-  onClick?: () => void;
+  message?: string;
+  isRead: boolean;
+  createdAt?: string;
 }
 
 interface NotificationBellProps {
   notifications: NotificationItem[];
+  /** Falls back to counting unread items in `notifications` if not given. */
+  unreadCount?: number;
+  onNotificationClick?: (id: string) => void;
+  onMarkAllRead?: () => void;
+  onDeleteNotification?: (id: string) => void;
 }
 
-// Panel is intentionally minimal here — the full Notification Center
-// (grouping by day, preferences link, etc.) from the HR module design doc
-// can render inside this same trigger once that data source exists.
-export function NotificationBell({ notifications }: NotificationBellProps) {
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const unreadCount = notifications.filter((n) => !n.isRead).length;
+export function NotificationBell({
+  notifications,
+  unreadCount,
+  onMarkAllRead,
+}: NotificationBellProps) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    function onClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
+  const effectiveUnreadCount =
+    unreadCount ?? notifications.filter((n) => !n.isRead).length;
+  const badgeLabel = effectiveUnreadCount > 99 ? '99+' : String(effectiveUnreadCount);
+
+  const handleClick = () => {
+    navigate('/notifications');
+    if (effectiveUnreadCount > 0) {
+      onMarkAllRead?.();
     }
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, []);
+  };
 
   return (
-    <div ref={containerRef} className="relative">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={`Notifications${unreadCount ? `, ${unreadCount} unread` : ""}`}
-        className="relative rounded-full p-2 text-ink-secondary hover:bg-sunken hover:text-ink-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-synapse"
-      >
-        <Bell className="h-4.5 w-4.5" aria-hidden="true" />
-        {unreadCount > 0 ? (
-          <span className="absolute end-1.5 top-1.5 h-2 w-2 rounded-full bg-error" aria-hidden="true" />
-        ) : null}
-      </button>
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label={t('notifications.bell.ariaLabel', {
+        count: effectiveUnreadCount,
+        defaultValue: 'Notifications, {{count}} unread',
+      })}
+      className="relative flex h-9 w-9 items-center justify-center rounded-lg text-ink-secondary
+                 transition-colors duration-150 hover:bg-sunken hover:text-ink-primary
+                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+    >
+      <Bell size={18} strokeWidth={1.75} />
 
-      {open ? (
-        <div
-          role="menu"
-          className="absolute end-0 z-20 mt-2 w-80 rounded-lg border border-hairline bg-panel py-1.5 shadow-elevation1"
-        >
-          <div className="flex items-center justify-between px-3.5 py-2">
-            <p className="text-[0.8125rem] font-medium text-ink-primary">Notifications</p>
-            {unreadCount > 0 ? (
-              <button type="button" className="text-[0.75rem] text-signal hover:text-signal-hover">
-                Mark all as read
-              </button>
-            ) : null}
-          </div>
-          <div className="my-1 border-t border-hairline" />
-
-          {notifications.length === 0 ? (
-            <p className="px-3.5 py-6 text-center text-[0.8125rem] text-ink-tertiary">You're all caught up.</p>
-          ) : (
-            <ul className="max-h-80 overflow-y-auto">
-              {notifications.map((item) => (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    onClick={item.onClick}
-                    className={[
-                      "flex w-full items-start gap-2 border-s-2 px-3.5 py-2.5 text-start text-[0.8125rem] hover:bg-sunken",
-                      item.isRead ? "border-transparent text-ink-secondary" : "border-signal text-ink-primary",
-                    ].join(" ")}
-                  >
-                    <span className="flex-1">{item.title}</span>
-                    <span className="shrink-0 whitespace-nowrap text-[0.75rem] text-ink-tertiary">
-                      {item.createdAt}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ) : null}
-    </div>
+      <AnimatePresence>
+        {effectiveUnreadCount > 0 && (
+          <motion.span
+            key="badge"
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.6, opacity: 0 }}
+            transition={{ duration: 0.16 }}
+            className="absolute -top-0.5 -end-0.5 flex h-4 min-w-4 items-center justify-center
+                       rounded-full bg-error px-1 text-[10px] font-medium leading-none text-white"
+          >
+            {badgeLabel}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </button>
   );
 }

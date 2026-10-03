@@ -93,6 +93,8 @@
     "passwordSymbol": "ضيف رمز"
   },
   "common": {
+     "clear": "مسح",
+    "retry": "إعادة المحاولة",
     "print":"طباعة",
     "none": "بدون",
     "back": " رجوع",
@@ -3187,6 +3189,19 @@
   },
 
   "notifications": {
+    "page": {
+      "title": "الإشعارات",
+      "subtitleUnread": "{{count}} غير مقروءة",
+      "subtitleCaughtUp": "لا توجد إشعارات جديدة",
+      "markAllRead": "تحديد الكل كمقروء",
+      "tabAll": "الكل",
+      "tabUnread": "غير مقروءة",
+      "searchPlaceholder": "ابحث في الإشعارات",
+      "error": "تعذّر تحميل الإشعارات. حاول مرة أخرى بعد قليل.",
+      "emptyTitle": "لا توجد إشعارات بعد",
+      "emptyBody": "عند وجود ما يستحق انتباهك، سيظهر هنا.",
+      "noMatches": "لا توجد إشعارات مطابقة لعوامل التصفية"
+    },
     "bell": {
       "ariaLabel": "الإشعارات، {{count}} غير مقروءة"
     },

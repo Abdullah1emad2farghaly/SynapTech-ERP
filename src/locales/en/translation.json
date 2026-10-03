@@ -93,6 +93,8 @@
     "passwordSymbol": "Add a symbol"
   },
   "common": {
+    "clear": "Clear",
+    "retry": "Retry",
     "print": "Print",
     "none": "None",
     "back": " Back",
@@ -3183,6 +3185,19 @@
     }
   },
   "notifications": {
+    "page": {
+      "title": "Notifications",
+      "subtitleUnread": "{{count}} unread",
+      "subtitleCaughtUp": "You're all caught up",
+      "markAllRead": "Mark all as read",
+      "tabAll": "All",
+      "tabUnread": "Unread",
+      "searchPlaceholder": "Search notifications",
+      "error": "Couldn't load notifications. Try again in a moment.",
+      "emptyTitle": "No notifications yet",
+      "emptyBody": "When something needs your attention, it'll show up here.",
+      "noMatches": "No notifications match your filters"
+    },
     "bell": {
       "ariaLabel": "Notifications, {{count}} unread"
     },

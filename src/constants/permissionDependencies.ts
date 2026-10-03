@@ -14,10 +14,51 @@ export const PERMISSION_DEPENDENCIES: PermissionDependency[] = [
         requires: ["purchasing.suppliers.view"],
         reason: "Need to see the supplier list to manage entries in it",
     },
+    
     {
-        code: "cashier.orders.create",
-        requires: ["sales.customers.view", "inventory.stock.view"],
-        reason: "Need to see the customer and the warehouses stock list to create orders",
+      "code": "cashier.shifts.open",
+      "requires": [
+        "inventory.warehouses.view"
+      ],
+      "reason": "The open-shift form needs a warehouse picker — a shift is tied to one stock-holding warehouse"
+    },
+    {
+      "code": "cashier.shifts.close",
+      "requires": [
+        "cashier.shifts.view"
+      ],
+      "reason": "Closing should show the closing report preview (expected cash, totals) first, which requires the view permission to call"
+    },
+    {
+      "code": "cashier.shifts.cashmovement",
+      "requires": [
+        "cashier.shifts.view"
+      ],
+      "reason": "Need to find/open a shift (especially a supervisor logging a movement on someone else's shift) before adding a cash-in/cash-out entry to it"
+    },
+    {
+      "code": "cashier.orders.create",
+      "requires": [
+        "cashier.shifts.open",
+        "cashier.orders.view",
+        "inventory.products.view",
+        "sales.customers.view"
+      ],
+      "reason": "A user who can create orders but can never open a shift is permanently blocked (NoOpenShift error on every attempt); the order form also needs a product picker for lines, an optional customer picker, and order-view to see the order list at all"
+    },
+    {
+      "code": "cashier.orders.void",
+      "requires": [
+        "cashier.orders.view"
+      ],
+      "reason": "Must be able to see and open an order before voiding it"
+    },
+    {
+      "code": "cashier.invoices.view",
+      "requires": [
+        "cashier.orders.view"
+      ],
+      "reason": "There's no 'list all invoices' endpoint — invoices are only reachable by order, by ID, or by user, so browsing orders is practically the only way to discover which invoice to open"
     },
     {
         code: "purchasing.orders.create",

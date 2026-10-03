@@ -1,15 +1,4 @@
-// src/components/admin/shell/Navbar.tsx
-//
-// CHANGED FROM ORIGINAL: added unreadCount/onNotificationClick/onMarkAllRead/
-// onDeleteNotification props, forwarded straight through to NotificationBell.
-// Everything else (menu button, breadcrumb, search, theme toggle, language
-// switch, UserMenu) is untouched from your original file.
-//
-// ASSUMPTION: NotificationBell.tsx isn't available yet, so these four props
-// are forwarded on the assumption it will accept them (or be updated to).
-// If NotificationBell currently derives unread count from `notifications`
-// internally rather than taking it as a prop, drop `unreadCount` here and
-// let it keep doing that — just keep the three handler props.
+
 
 import { Menu, Moon, Search, Sun } from "lucide-react";
 import { Breadcrumb } from "@/components/admin/shell/Breadcrumb";
@@ -107,11 +96,11 @@ export function Navbar({
 
 
       <NotificationBell
-        // notifications={notifications}
-        // unreadCount={unreadCount}
-        // onNotificationClick={onNotificationClick}
-        // onMarkAllRead={onMarkAllRead}
-        // onDeleteNotification={onDeleteNotification}
+        notifications={notifications}
+        unreadCount={unreadCount}
+        onNotificationClick={onNotificationClick}
+        onMarkAllRead={onMarkAllRead}
+        onDeleteNotification={onDeleteNotification}
       />
       <UserMenu />
 
