@@ -272,7 +272,7 @@ export const useNavItems = (): NavItem[] => {
         {
           id: "cash-flow",
           label: t("sidebar.cashFlow"),
-          to: "/accounting/cash-flow-summary",
+          to: "/accounting/cash-flow",
           permissions: [
             "accounting.accounts.manage",
           ],

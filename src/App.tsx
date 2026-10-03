@@ -174,7 +174,7 @@ export default function App() {
 
                 <Route path="balance-sheet" element={<BalanceSheetPage />} />
                 <Route path="income-statement" element={<IncomeStatementPage />} />
-                <Route path="cash-flow-sammary" element={<CashFlowPage />} />
+                <Route path="cash-flow" element={<CashFlowPage />} />
                 <Route path="accounting-settings" element={<AccountingSettingsPage />} />
 
                 <Route path="journal-entries" element={<JournalEntriesListPage />} />
