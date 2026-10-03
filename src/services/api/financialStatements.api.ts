@@ -41,7 +41,7 @@ export const financialStatementsApi = {
     periodEnd: string,
   ): Promise<CashFlowSummaryResponse> => {
     const { data } = await apiClient.get<CashFlowSummaryResponse>(
-      '/Accounts/cash-flow',
+      '/Accounts/cash-flow-summary',
       { params: { periodStart, periodEnd } },
     );
     return data;
