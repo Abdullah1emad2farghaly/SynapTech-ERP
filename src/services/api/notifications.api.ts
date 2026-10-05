@@ -1,14 +1,17 @@
 // src/services/api/notifications.api.ts
 
-// ASSUMPTION: real project's axios instance is exported as `apiClient` from
-// `services/api/axiosClient.ts` (per project history, this replaced the
-// earlier-assumed `client.ts`). Adjust the import path/name if it differs.
+// CONFIRMED: real file is `apiClient.ts`, exporting `apiClient`.
 import { apiClient } from './axiosClient';
 import type {
   GetNotificationsParams,
   NotificationResponse,
 } from '../../types/notification.types';
 
+// CONFIRMED (from apiClient.ts): baseURL is already
+// "https://synaptecherp.runasp.net/api" — it already ends in /api, so paths
+// here must NOT repeat it, or every call 404s against a nonexistent
+// /api/api/... route (this was the actual bug behind the mark-read/delete
+// errors — not an interceptor issue).
 const BASE = '/notifications';
 
 export const notificationsApi = {

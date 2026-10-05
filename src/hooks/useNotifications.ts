@@ -2,18 +2,37 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+
 import { notificationsApi } from '../services/api/notifications.api';
 import type {
   GetNotificationsParams,
   NotificationResponse,
 } from '../types/notification.types';
 
+// =====================================================
+// Query Keys
+// =====================================================
+
 export const notificationsKeys = {
+  // Root key for all notification-related queries
   all: ['notifications'] as const,
+
+  // Prefix for notification list queries only
+  lists: () => [...notificationsKeys.all, 'list'] as const,
+
+  // Specific notification list query
   list: (params?: GetNotificationsParams) =>
-    [...notificationsKeys.all, 'list', params] as const,
-  unreadCount: () => [...notificationsKeys.all, 'unread-count'] as const,
+    [...notificationsKeys.lists(), params] as const,
+
+  // Unread count query
+  unreadCount: () =>
+    [...notificationsKeys.all, 'unread-count'] as const,
 };
+
+// =====================================================
+// Get Notifications
+// =====================================================
 
 export function useNotifications(params?: GetNotificationsParams) {
   return useQuery({
@@ -22,6 +41,10 @@ export function useNotifications(params?: GetNotificationsParams) {
   });
 }
 
+// =====================================================
+// Get Unread Count
+// =====================================================
+
 export function useUnreadCount() {
   return useQuery({
     queryKey: notificationsKeys.unreadCount(),
@@ -29,105 +52,335 @@ export function useUnreadCount() {
   });
 }
 
+// =====================================================
+// Mark Single Notification as Read
+// =====================================================
+
 export function useMarkNotificationRead() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (id: string) => notificationsApi.markRead(id),
-    // Optimistic update: the brief asks for an instant UI response, not a
-    // spinner while waiting on the server.
-    onMutate: async (id: string) => {
-      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
 
-      const previousLists = queryClient.getQueriesData<NotificationResponse[]>(
-        { queryKey: notificationsKeys.all }
-      );
+    // -------------------------------------------------
+    // Optimistic Update
+    // -------------------------------------------------
+
+    onMutate: async (id: string) => {
+      // Cancel only notification LIST queries.
+      // Do not cancel unread-count here because it has
+      // a different data type (number).
+      await queryClient.cancelQueries({
+        queryKey: notificationsKeys.lists(),
+      });
+
+      // Keep previous list data for rollback.
+      const previousLists =
+        queryClient.getQueriesData<NotificationResponse[]>({
+          queryKey: notificationsKeys.lists(),
+        });
+
+      // Keep previous unread count for rollback.
       const previousCount = queryClient.getQueryData<number>(
         notificationsKeys.unreadCount()
       );
 
+      // Optimistically mark the notification as read.
       queryClient.setQueriesData<NotificationResponse[]>(
-        { queryKey: notificationsKeys.all },
-        (old) =>
-          old?.map((n) => (n.id === id ? { ...n, isRead: true } : n))
-      );
-      queryClient.setQueryData<number>(notificationsKeys.unreadCount(), (old) =>
-        old && old > 0 ? old - 1 : old
+        {
+          queryKey: notificationsKeys.lists(),
+        },
+        (old) => {  
+          if (!old) {
+            return old;
+          }
+
+          return old.map((notification) =>
+            notification.id === id
+              ? {
+                  ...notification,
+                  isRead: true,
+                }
+              : notification
+          );
+        }
       );
 
-      return { previousLists, previousCount };
+      // Optimistically decrease unread count.
+      if (previousCount !== undefined) {
+        queryClient.setQueryData<number>(
+          notificationsKeys.unreadCount(),
+          Math.max(0, previousCount - 1)
+        );
+      }
+
+      return {
+        previousLists,
+        previousCount,
+      };
     },
-    onError: (_err, _id, context) => {
+
+    // -------------------------------------------------
+    // Error / Rollback
+    // -------------------------------------------------
+
+    onError: (error, _id, context) => {
+      console.error('Mark notification as read failed:', error);
+
+      if (axios.isAxiosError(error)) {
+        console.error('Status:', error.response?.status);
+        console.error('Response:', error.response?.data);
+        console.error('URL:', error.config?.url);
+        console.error('Method:', error.config?.method);
+      }
+
+      // Restore previous notification lists.
       context?.previousLists?.forEach(([key, data]) => {
         queryClient.setQueryData(key, data);
       });
+
+      // Restore previous unread count.
       if (context?.previousCount !== undefined) {
-        queryClient.setQueryData(notificationsKeys.unreadCount(), context.previousCount);
+        queryClient.setQueryData(
+          notificationsKeys.unreadCount(),
+          context.previousCount
+        );
       }
+
       toast.error('notifications.errors.markReadFailed');
     },
+
+    // -------------------------------------------------
+    // Final Synchronization
+    // -------------------------------------------------
+
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+      // Refresh both notification lists and unread count.
+      queryClient.invalidateQueries({
+        queryKey: notificationsKeys.all,
+      });
     },
   });
 }
+
+// =====================================================
+// Mark All Notifications as Read
+// =====================================================
 
 export function useMarkAllNotificationsRead() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: () => notificationsApi.markAllRead(),
-    onSuccess: () => {
-      queryClient.setQueriesData<NotificationResponse[]>(
-        { queryKey: notificationsKeys.all },
-        (old) => old?.map((n) => ({ ...n, isRead: true }))
+
+    // -------------------------------------------------
+    // Optimistic Update
+    // -------------------------------------------------
+
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: notificationsKeys.lists(),
+      });
+
+      await queryClient.cancelQueries({
+        queryKey: notificationsKeys.unreadCount(),
+      });
+
+      const previousLists =
+        queryClient.getQueriesData<NotificationResponse[]>({
+          queryKey: notificationsKeys.lists(),
+        });
+
+      const previousCount = queryClient.getQueryData<number>(
+        notificationsKeys.unreadCount()
       );
-      queryClient.setQueryData(notificationsKeys.unreadCount(), 0);
+
+      // Optimistically mark every notification as read.
+      queryClient.setQueriesData<NotificationResponse[]>(
+        {
+          queryKey: notificationsKeys.lists(),
+        },
+        (old) => {
+          if (!old) {
+            return old;
+          }
+
+          return old.map((notification) => ({
+            ...notification,
+            isRead: true,
+          }));
+        }
+      );
+
+      // Optimistically set unread count to zero.
+      queryClient.setQueryData<number>(
+        notificationsKeys.unreadCount(),
+        0
+      );
+
+      return {
+        previousLists,
+        previousCount,
+      };
     },
-    onError: () => {
+
+    // -------------------------------------------------
+    // Error / Rollback
+    // -------------------------------------------------
+
+    onError: (error, _variables, context) => {
+      console.error('Mark all notifications as read failed:', error);
+
+      if (axios.isAxiosError(error)) {
+        console.error('Status:', error.response?.status);
+        console.error('Response:', error.response?.data);
+        console.error('URL:', error.config?.url);
+        console.error('Method:', error.config?.method);
+      }
+
+      // Restore notification lists.
+      context?.previousLists?.forEach(([key, data]) => {
+        queryClient.setQueryData(key, data);
+      });
+
+      // Restore unread count.
+      if (context?.previousCount !== undefined) {
+        queryClient.setQueryData(
+          notificationsKeys.unreadCount(),
+          context.previousCount
+        );
+      }
+
       toast.error('notifications.errors.markAllReadFailed');
-      queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+    },
+
+    // -------------------------------------------------
+    // Final Synchronization
+    // -------------------------------------------------
+
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: notificationsKeys.all,
+      });
     },
   });
 }
+
+// =====================================================
+// Delete Notification
+// =====================================================
 
 export function useDeleteNotification() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (id: string) => notificationsApi.remove(id),
-    onMutate: async (id: string) => {
-      await queryClient.cancelQueries({ queryKey: notificationsKeys.all });
 
-      const previousLists = queryClient.getQueriesData<NotificationResponse[]>(
-        { queryKey: notificationsKeys.all }
+    // -------------------------------------------------
+    // Optimistic Update
+    // -------------------------------------------------
+
+    onMutate: async (id: string) => {
+      // Cancel only list queries.
+      await queryClient.cancelQueries({
+        queryKey: notificationsKeys.lists(),
+      });
+
+      await queryClient.cancelQueries({
+        queryKey: notificationsKeys.unreadCount(),
+      });
+
+      // Store previous notification lists.
+      const previousLists =
+        queryClient.getQueriesData<NotificationResponse[]>({
+          queryKey: notificationsKeys.lists(),
+        });
+
+      // Store previous unread count.
+      const previousCount = queryClient.getQueryData<number>(
+        notificationsKeys.unreadCount()
       );
+
       let wasUnread = false;
 
+      // Optimistically remove notification from every cached list.
       queryClient.setQueriesData<NotificationResponse[]>(
-        { queryKey: notificationsKeys.all },
+        {
+          queryKey: notificationsKeys.lists(),
+        },
         (old) => {
-          const removed = old?.find((n) => n.id === id);
-          if (removed && removed.isRead === false) wasUnread = true;
-          return old?.filter((n) => n.id !== id);
+          if (!old) {
+            return old;
+          }
+
+          const notification = old.find(
+            (item) => item.id === id
+          );
+
+          if (notification?.isRead === false) {
+            wasUnread = true;
+          }
+
+          return old.filter(
+            (item) => item.id !== id
+          );
         }
       );
-      if (wasUnread) {
-        queryClient.setQueryData<number>(notificationsKeys.unreadCount(), (old) =>
-          old && old > 0 ? old - 1 : old
+
+      // If the deleted notification was unread,
+      // optimistically decrease unread count.
+      if (wasUnread && previousCount !== undefined) {
+        queryClient.setQueryData<number>(
+          notificationsKeys.unreadCount(),
+          Math.max(0, previousCount - 1)
         );
       }
 
-      return { previousLists };
+      return {
+        previousLists,
+        previousCount,
+      };
     },
-    onError: (_err, _id, context) => {
+
+    // -------------------------------------------------
+    // Error / Rollback
+    // -------------------------------------------------
+
+    onError: (error, _id, context) => {
+      console.error('Delete notification failed:', error);
+
+      if (axios.isAxiosError(error)) {
+        console.error('Status:', error.response?.status);
+        console.error('Response:', error.response?.data);
+        console.error('URL:', error.config?.url);
+        console.error('Method:', error.config?.method);
+      }
+
+      // Restore notification lists.
       context?.previousLists?.forEach(([key, data]) => {
         queryClient.setQueryData(key, data);
       });
+
+      // Restore unread count.
+      if (context?.previousCount !== undefined) {
+        queryClient.setQueryData(
+          notificationsKeys.unreadCount(),
+          context.previousCount
+        );
+      }
+
       toast.error('notifications.errors.deleteFailed');
     },
+
+    // -------------------------------------------------
+    // Final Synchronization
+    // -------------------------------------------------
+
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
+      queryClient.invalidateQueries({
+        queryKey: notificationsKeys.all,
+      });
     },
   });
 }
+

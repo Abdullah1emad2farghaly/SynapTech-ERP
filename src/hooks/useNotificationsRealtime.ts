@@ -84,7 +84,7 @@ export function useNotificationsRealtime() {
             /**
              * Prevent duplicate notifications.
              */
-            const alreadyPresent = old.some(
+            const alreadyPresent = old?.some(
               (notification) =>
                 notification.id === incoming.id
             );
